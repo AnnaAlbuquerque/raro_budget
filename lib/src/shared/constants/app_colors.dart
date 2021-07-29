@@ -12,8 +12,11 @@ class AppColors {
   static const Color yellow = Color(0xFFFAC736);
   static const Color darkYellow = Color(0xFFFFB400);
   static const Color red = Color(0xFFF44336);
+  static const Color grey = Color(0xFFC4C4C4);
   static const Color black = Color(0xFF000000);
+  static const Color black54 = Color.fromRGBO(0, 0, 0, 0.54);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color white60 = Color.fromRGBO(255, 255, 255, 0.6);
   static const Color backgorundWhite = Color(0xFFE5E5E5);
 
   static const LinearGradient cyanToPurple = LinearGradient(
