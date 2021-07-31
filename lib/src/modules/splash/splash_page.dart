@@ -12,7 +12,6 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    // Para garantir que a tela foi toda carregada antes de mover para próxima tela
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
       Future.delayed(Duration(seconds: 2)).then(
         (value) => Navigator.of(context).push(
