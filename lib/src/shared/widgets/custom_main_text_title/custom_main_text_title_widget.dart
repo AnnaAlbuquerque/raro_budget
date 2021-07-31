@@ -60,7 +60,7 @@ class CustomMainTextTitle extends StatelessWidget {
                   style: TextStyles.black5416w400Roboto,
                 ),
                 GestureDetector(
-                  onDoubleTap: () {},
+                  onTap: () {},
                   child: Text(
                     "Crie uma conta",
                     style: TextStyles.purple16w400Roboto,
