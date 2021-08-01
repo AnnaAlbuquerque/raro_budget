@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:raro_budget/src/modules/home/home_page.dart';
-import 'package:raro_budget/src/modules/template/template_page.dart';
+import 'modules/login/login_page.dart';
 
 class App extends StatelessWidget {
   @override
@@ -8,7 +7,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Raro Budget',
       debugShowCheckedModeBanner: false,
-      home: TemplatePage(),
+      home: LoginPage(),
     );
   }
 }
