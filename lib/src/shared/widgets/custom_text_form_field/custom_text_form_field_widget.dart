@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../constants/app_colors.dart';
 import '../../constants/app_text_styles.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -32,6 +33,9 @@ class CustomTextFormField extends StatelessWidget {
         labelText: name,
         labelStyle: TextStyles.black5416w400Roboto,
         suffixIcon: icon,
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.purple),
+        ),
       ),
       validator: validator,
     );
