@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../shared/widgets/custom_button/custom_button_widget.dart';
 import '../../shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
 import '../../shared/widgets/custom_social_login_button/custom_social_login_button_widget.dart';
 import '../../shared/constants/app_colors.dart';
@@ -38,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
                 Image(
                   width: 100.0,
                   height: 54.0,
-                  image: AssetImage('assets/images/2.0x/logo_budget_blue.png'),
+                  image: AssetImage('assets/images/logo_budget_blue.png'),
                 ),
                 SizedBox(height: 16.0),
                 CustomMainTextTitle(
@@ -54,19 +55,8 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 16.0),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Container(
-                    width: 114.0,
-                    height: 36.0,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
-                    child: Center(
-                      child: Text('CONTINUAR',
-                          style: TextStyles.white14w500Roboto),
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(34.0),
-                      gradient: AppColors.cyanToPurple,
-                    ),
+                  child: CustomButton(
+                    text: 'CONTINUAR',
                   ),
                 ),
                 SizedBox(height: 52.0),
@@ -77,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 9.0),
                 CustomSocialLoginButton(
                   text: 'CONTINUAR COM O GOOGLE',
-                  image: 'assets/images/2.0x/logo_google.png',
+                  image: 'assets/images/logo_google.png',
                   color: AppColors.white,
                   textStyle: TextStyles.black5414w500Roboto,
                   horizontal: 31.0,
@@ -86,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 16.0),
                 CustomSocialLoginButton(
                   text: 'CONTINUAR COM O FACEBOOK',
-                  image: 'assets/images/2.0x/logo_facebook.png',
+                  image: 'assets/images/logo_facebook.png',
                   color: AppColors.chambray,
                   borderColor: AppColors.chambray,
                   textStyle: TextStyles.white14w500Roboto,

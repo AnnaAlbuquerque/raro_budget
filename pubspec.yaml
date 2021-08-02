@@ -60,9 +60,11 @@ flutter:
     - assets/images/2.0x/onboarding_background.png
     - assets/images/3.0x/onboarding_background.png
     - assets/images/4.0x/onboarding_background.png
+    - assets/images/logo_google.png
     - assets/images/2.0x/logo_google.png
     - assets/images/3.0x/logo_google.png
     - assets/images/4.0x/logo_google.png
+    - assets/images/logo_facebook.png
     - assets/images/2.0x/logo_facebook.png
     - assets/images/3.0x/logo_facebook.png
     - assets/images/4.0x/logo_facebook.png
