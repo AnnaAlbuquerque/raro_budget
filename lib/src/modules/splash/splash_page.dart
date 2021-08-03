@@ -2,6 +2,7 @@ import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:raro_budget/src/modules/home/home_page.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
+import 'package:shimmer/shimmer.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -86,25 +87,30 @@ class _SplashPageState extends State<SplashPage> {
                   ),
                 ),
               ),
-              AnimatedCard(
-                direction: AnimatedCardDirection.bottom,
-                duration: Duration(milliseconds: 700),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                            image: AssetImage(
-                                'assets/images/powered_by_raro.png')),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30,
-                    )
-                  ],
+              Shimmer.fromColors(
+                period: Duration(milliseconds: 2000),
+                highlightColor: Colors.grey.shade400,
+                baseColor: Colors.white,
+                child: AnimatedCard(
+                  direction: AnimatedCardDirection.bottom,
+                  duration: Duration(milliseconds: 700),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                              image: AssetImage(
+                                  'assets/images/powered_by_raro.png')),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ],
