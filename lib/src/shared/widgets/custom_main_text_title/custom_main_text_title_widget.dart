@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
+import '../../constants/app_text_styles.dart';
 
 class CustomMainTextTitle extends StatelessWidget {
   final String titleFirstLine;
@@ -29,7 +29,6 @@ class CustomMainTextTitle extends StatelessWidget {
     }
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 60.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,6 +51,7 @@ class CustomMainTextTitle extends StatelessWidget {
               style: TextStyles.purple20w500Roboto,
             ),
           ),
+          SizedBox(height: 8.0),
           Visibility(
               visible: newUser,
               child: Row(children: [

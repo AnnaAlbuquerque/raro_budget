@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:raro_budget/src/modules/home/home_page.dart';
 import 'package:raro_budget/src/modules/splash/splash_page.dart';
-import 'package:raro_budget/src/modules/template/template_page.dart';
 
 class App extends StatelessWidget {
   @override
