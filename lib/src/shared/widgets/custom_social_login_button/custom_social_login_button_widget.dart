@@ -23,9 +23,10 @@ class CustomSocialLoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      borderRadius: BorderRadius.circular(20.0),
       onTap: () {},
-      child: Container(
+      child: Ink(
         height: 36.0,
         decoration: BoxDecoration(
             color: color,

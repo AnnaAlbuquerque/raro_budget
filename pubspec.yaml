@@ -55,6 +55,8 @@ flutter:
     - assets/images/budget_logo_text_only.png
     - assets/images/budget_subtitle_only.png
     - assets/images/powered_by_raro.png
+    - assets/images/logo_facebook.png
+    - assets/images/logo_google.png
 
 
     
