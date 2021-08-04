@@ -7,6 +7,7 @@ class CustomButton extends StatelessWidget {
   final IconData? iconLeft;
   final IconData? iconRight;
   final VoidCallback? onTap;
+  final bool? useGradientBackground;
 
   const CustomButton({
     Key? key,
@@ -14,6 +15,7 @@ class CustomButton extends StatelessWidget {
     this.iconLeft,
     this.iconRight,
     this.onTap,
+    this.useGradientBackground,
   }) : super(key: key);
 
   @override
@@ -65,10 +67,16 @@ class CustomButton extends StatelessWidget {
         padding: EdgeInsets.only(
             top: 10, bottom: 10, left: paddingLeft, right: paddingRight),
         //height: 40,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          gradient: AppColors.cyanToPurpleAppBar,
-        ),
+        decoration:
+            useGradientBackground != null && useGradientBackground == false
+                ? BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: AppColors.white,
+                  )
+                : BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    gradient: AppColors.cyanToPurpleAppBar,
+                  ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +88,10 @@ class CustomButton extends StatelessWidget {
                   Icon(
                     iconLeft,
                     size: 20,
-                    color: Colors.white,
+                    color: useGradientBackground != null &&
+                            useGradientBackground == false
+                        ? AppColors.black26
+                        : Colors.white,
                   ),
                   // SizedBox(width: 8),
                 ],
@@ -98,7 +109,10 @@ class CustomButton extends StatelessWidget {
                 children: [
                   Text(
                     textVisible ? text as String : "",
-                    style: TextStyles.white14w500Roboto,
+                    style: useGradientBackground != null &&
+                            useGradientBackground == false
+                        ? TextStyles.black2614w500Roboto
+                        : TextStyles.white14w500Roboto,
                   ),
                 ],
               ),
