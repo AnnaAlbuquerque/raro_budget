@@ -18,41 +18,73 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool iconLeftVisible = true;
+    bool iconRightVisible = true;
+    bool textVisible = true;
+
+    if (iconLeft == null) {
+      iconLeftVisible = false;
+    }
+
+    if (iconRight == null) {
+      iconRightVisible = false;
+    }
+
+    if (text == null) {
+      textVisible = false;
+    }
+
     return InkWell(
+      borderRadius: BorderRadius.circular(24),
       onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 2),
+      child: Ink(
+        padding: EdgeInsets.symmetric(horizontal: 4),
         height: 40,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(20),
           gradient: AppColors.cyanToPurpleAppBar,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            iconLeft != null
-                ? Icon(
+            Visibility(
+              visible: iconLeftVisible,
+              child: Row(
+                children: [
+                  Icon(
                     iconLeft,
                     size: 20,
                     color: Colors.white,
-                  )
-                : Container(),
-            SizedBox(width: 14),
-            text != null
-                ? Text(
+                  ),
+                  SizedBox(width: 8),
+                ],
+              ),
+            ),
+            Visibility(
+              visible: textVisible,
+              child: Row(
+                children: [
+                  Text(
                     text!,
                     style: TextStyles.white14w500Roboto,
-                  )
-                : Container(),
-            SizedBox(width: 14),
-            iconRight != null
-                ? Icon(
+                  ),
+                ],
+              ),
+            ),
+            Visibility(
+              visible: iconRightVisible,
+              child: Row(
+                children: [
+                  SizedBox(width: 8),
+                  Icon(
                     iconRight,
                     size: 20,
                     color: Colors.white,
-                  )
-                : Container(),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
