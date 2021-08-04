@@ -21,6 +21,11 @@ class CustomButton extends StatelessWidget {
     bool iconLeftVisible = true;
     bool iconRightVisible = true;
     bool textVisible = true;
+    bool leftSizedBoxVisible = false;
+    bool rightSizedBoxVisible = false;
+
+    double paddingLeft = 10;
+    double paddingRight = 10;
 
     if (iconLeft == null) {
       iconLeftVisible = false;
@@ -34,19 +39,39 @@ class CustomButton extends StatelessWidget {
       textVisible = false;
     }
 
+    if (textVisible && iconRightVisible) {
+      paddingRight = 3;
+      paddingLeft = 3;
+      rightSizedBoxVisible = true;
+    }
+
+    if (textVisible && iconLeftVisible) {
+      paddingRight = 3;
+      paddingLeft = 3;
+      leftSizedBoxVisible = true;
+    }
+
+    if (textVisible && iconLeftVisible && iconRightVisible) {
+      paddingRight = 3;
+      paddingLeft = 3;
+      rightSizedBoxVisible = true;
+      leftSizedBoxVisible = true;
+    }
+
     return InkWell(
       borderRadius: BorderRadius.circular(24),
       onTap: onTap,
       child: Ink(
-        padding: EdgeInsets.symmetric(horizontal: 4),
-        height: 40,
+        padding: EdgeInsets.only(
+            top: 10, bottom: 10, left: paddingLeft, right: paddingRight),
+        //height: 40,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(30),
           gradient: AppColors.cyanToPurpleAppBar,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Visibility(
               visible: iconLeftVisible,
@@ -57,8 +82,14 @@ class CustomButton extends StatelessWidget {
                     size: 20,
                     color: Colors.white,
                   ),
-                  SizedBox(width: 8),
+                  // SizedBox(width: 8),
                 ],
+              ),
+            ),
+            Visibility(
+              visible: leftSizedBoxVisible,
+              child: SizedBox(
+                width: 8,
               ),
             ),
             Visibility(
@@ -66,17 +97,23 @@ class CustomButton extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    text!,
+                    textVisible ? text as String : "",
                     style: TextStyles.white14w500Roboto,
                   ),
                 ],
               ),
             ),
             Visibility(
+              visible: rightSizedBoxVisible,
+              child: SizedBox(
+                width: 8,
+              ),
+            ),
+            Visibility(
               visible: iconRightVisible,
               child: Row(
                 children: [
-                  SizedBox(width: 8),
+                  // SizedBox(width: 8),
                   Icon(
                     iconRight,
                     size: 20,

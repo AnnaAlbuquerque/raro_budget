@@ -68,8 +68,9 @@ class _PhoneCPFWidgetState extends State<PhoneCPFWidget> {
       bottomNavigationBar: Row(
         children: [
           CustomButton(
+            //iconLeft: Icons.arrow_back,
             iconRight: Icons.arrow_forward,
-            text: 'CONTINUAR',
+            //text: 'CONTINUAR',
             onTap: () {
               if (_formKey.currentState!.validate()) {
                 showDialog(
