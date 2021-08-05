@@ -8,8 +8,8 @@ class TextStyles {
     color: AppColors.cyan,
   );
 
-  static const TextStyle cyan34w700Roboto = TextStyle(
-    fontSize: 34.0,
+  static const TextStyle cyan38w700Roboto = TextStyle(
+    fontSize: 38.0,
     fontWeight: FontWeight.w700,
     color: AppColors.cyan,
     letterSpacing: 0.25,
