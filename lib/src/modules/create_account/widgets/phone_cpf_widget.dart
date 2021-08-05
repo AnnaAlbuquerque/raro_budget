@@ -81,7 +81,7 @@ class _PhoneCPFWidgetState extends State<PhoneCPFWidget> {
                 ),
                 Text("2/4"),
                 CustomButton(
-                  iconRight: Icons.arrow_forward,
+                  iconRight: Icons.forward,
                   text: 'CONTINUAR',
                   useGradientBackground: true,
                   onTap: () {
