@@ -37,8 +37,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               scrollDirection: Axis.horizontal,
               controller: _pageViewController,
               children: [
-                // NameEmailWidget(),
-                // PhoneCPFWidget(),
+                NameEmailWidget(),
+                PhoneCPFWidget(),
               ],
             ),
           ),
