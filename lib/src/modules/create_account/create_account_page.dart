@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_mobx/flutter_mobx.dart';
-// import 'package:raro_budget/src/modules/create_account/create_account_controller.dart';
-// import 'package:raro_budget/src/modules/create_account/widgets/name_email_widget.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:raro_budget/src/modules/create_account/widgets/name_email_widget.dart';
 import 'package:raro_budget/src/modules/create_account/widgets/phone_cpf_widget.dart';
+import 'package:raro_budget/src/modules/create_account/create_account_controller.dart';
 import 'package:raro_budget/src/shared/widgets/custom_button/custom_button_widget.dart';
 
 class CreateAccountPage extends StatefulWidget {
@@ -13,7 +13,7 @@ class CreateAccountPage extends StatefulWidget {
 }
 
 class _CreateAccountPageState extends State<CreateAccountPage> {
-  //final CreateAccountController _controller = CreateAccountController();
+  final CreateAccountController _controller = CreateAccountController();
   final _pageViewController = PageController(
     initialPage: 0,
   );
@@ -37,8 +37,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               scrollDirection: Axis.horizontal,
               controller: _pageViewController,
               children: [
-                //NameEmailWidget(),
-                PhoneCPFWidget(),
+                // NameEmailWidget(),
+                // PhoneCPFWidget(),
               ],
             ),
           ),
@@ -56,16 +56,16 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                 text: 'VOLTAR',
                 useGradientBackground: false,
                 onTap: () {
-                  // _controller.pageNumberDecrement();
+                  _controller.decrementPageNumber();
                   _pageViewController.previousPage(
                     duration: Duration(milliseconds: 500),
                     curve: Curves.linear,
                   );
                 },
               ),
-              // Observer(builder: (_) {
-              //   return Text("${_controller.pageNumber}/4");
-              // }),
+              Observer(builder: (_) {
+                return Text("${_controller.pageNumber}/4");
+              }),
               CustomButton(
                 iconRight: Icons.forward,
                 text: 'CONTINUAR',
@@ -75,7 +75,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     duration: Duration(milliseconds: 500),
                     curve: Curves.linear,
                   );
-                  // _controller.pageNumberIncrement();
+                  _controller.incrementPageNumber();
 
                   // if (_formKey.currentState!.validate()) {
                   //   showDialog(
