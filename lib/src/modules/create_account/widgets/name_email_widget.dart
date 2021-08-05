@@ -14,6 +14,13 @@ class _NameEmailWidgetState extends State<NameEmailWidget> {
   TextEditingController _emailController = TextEditingController();
 
   @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
