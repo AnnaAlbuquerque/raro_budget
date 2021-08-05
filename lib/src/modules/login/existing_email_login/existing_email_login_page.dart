@@ -65,8 +65,13 @@ class _ExistingEmailLoginPageState extends State<ExistingEmailLoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('RECUPERAR SENHA',
-                        style: TextStyles.purple14w500Roboto),
+                    InkWell(
+                      onTap: () {},
+                      child: Ink(
+                        child: Text('RECUPERAR SENHA',
+                            style: TextStyles.purple14w500Roboto),
+                      ),
+                    ),
                     CustomButton(
                       text: 'CONTINUAR',
                     ),
