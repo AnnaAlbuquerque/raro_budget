@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/validators/validators.dart';
 import 'package:raro_budget/src/shared/widgets/custom_button/custom_button_widget.dart';
+import 'package:raro_budget/src/shared/widgets/custom_button_logged/custom_button_logged_widget.dart';
 import 'package:raro_budget/src/shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
 import 'package:raro_budget/src/shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
 
