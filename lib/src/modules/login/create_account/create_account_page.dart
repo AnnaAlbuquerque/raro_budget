@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:raro_budget/src/modules/create_account/widgets/name_email_widget.dart';
-import 'package:raro_budget/src/modules/create_account/widgets/phone_cpf_widget.dart';
-import 'package:raro_budget/src/modules/create_account/create_account_controller.dart';
+import 'package:raro_budget/src/modules/login/create_account/widgets/name_email_widget.dart';
+import 'package:raro_budget/src/modules/login/create_account/widgets/phone_cpf_widget.dart';
+import 'package:raro_budget/src/modules/login/create_account/create_account_controller.dart';
+
 import 'package:raro_budget/src/shared/widgets/custom_button/custom_button_widget.dart';
 
 class CreateAccountPage extends StatefulWidget {

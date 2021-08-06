@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:raro_budget/src/modules/create_account/create_account_page.dart';
-import 'package:raro_budget/src/modules/create_account/widgets/phone_cpf_widget.dart';
-import '../src/modules/login/existing_email_login/existing_email_login_page.dart';
-import 'package:raro_budget/src/modules/splash/splash_page.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class App extends StatelessWidget {
   @override
@@ -10,8 +7,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Raro Budget',
       debugShowCheckedModeBanner: false,
-      home: SplashPage(),
-      //home: CreateAccountPage(),
-    );
+      initialRoute: "/",
+    ).modular();
   }
 }
