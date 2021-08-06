@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/validators/validators.dart';
-import 'package:raro_budget/src/shared/widgets/custom_button/custom_button_widget.dart';
-import 'package:raro_budget/src/shared/widgets/custom_button_logged/custom_button_logged_widget.dart';
 import 'package:raro_budget/src/shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
 import 'package:raro_budget/src/shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
 
@@ -66,55 +64,6 @@ class _PhoneCPFWidgetState extends State<PhoneCPFWidget> {
               ),
             ),
           ),
-        ),
-        bottomNavigationBar: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                CustomButton(
-                  iconLeft: Icons.arrow_back,
-                  text: 'VOLTAR',
-                  useGradientBackground: false,
-                  onTap: () {},
-                ),
-                Text("2/4"),
-                CustomButton(
-                  iconRight: Icons.forward,
-                  text: 'CONTINUAR',
-                  useGradientBackground: true,
-                  onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                      showDialog(
-                          context: context,
-                          builder: (context) => Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Card(
-                                    color: Colors.green,
-                                    shadowColor: Color(0xFFCCCCCC),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Text(
-                                        "Para testar a validação! Neste caso, passou!",
-                                        style: TextStyle(
-                                            fontSize: 24, color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ));
-                    }
-                  },
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            )
-          ],
         ),
       ),
     );
