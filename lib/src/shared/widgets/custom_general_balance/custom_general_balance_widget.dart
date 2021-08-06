@@ -3,8 +3,8 @@ import '../../../shared/constants/app_colors.dart';
 import '../../../shared/constants/app_text_styles.dart';
 
 class CustomGeneralBalance extends StatefulWidget {
-  const CustomGeneralBalance({Key? key}) : super(key: key);
-
+  const CustomGeneralBalance({Key? key, this.balance}) : super(key: key);
+  final String? balance;
   @override
   _CustomGeneralBalanceState createState() => _CustomGeneralBalanceState();
 }
@@ -60,7 +60,7 @@ class _CustomGeneralBalanceState extends State<CustomGeneralBalance> {
                 ],
               ),
               Text(
-                'R\$ 3.000,00',
+                'R\$ ${widget.balance ?? '3.000,00'}',
                 style: TextStyles.black24w400Roboto,
               ),
             ],
