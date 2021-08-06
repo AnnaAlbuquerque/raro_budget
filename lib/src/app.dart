@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:raro_budget/src/modules/create_account/widgets/phone_cpf_widget.dart';
+import 'package:raro_budget/src/modules/create_account/widgets/terms_widget.dart';
 import 'package:raro_budget/src/modules/splash/splash_page.dart';
 
 class App extends StatelessWidget {
@@ -8,7 +9,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Raro Budget',
       debugShowCheckedModeBanner: false,
-      home: PhoneCPFWidget(),
+      home: TermsWidget(),
     );
   }
 }
