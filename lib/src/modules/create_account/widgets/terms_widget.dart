@@ -13,8 +13,6 @@ class TermsWidget extends StatefulWidget {
 }
 
 class _TermsWidgetState extends State<TermsWidget> {
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _cpfController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final validators = Validators();
