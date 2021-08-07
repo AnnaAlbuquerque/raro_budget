@@ -35,7 +35,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
           Flexible(
             flex: 1,
             child: PageView(
-              scrollDirection: Axis.horizontal,
+              physics: NeverScrollableScrollPhysics(),
               controller: _pageViewController,
               children: [
                 NameEmailWidget(),
