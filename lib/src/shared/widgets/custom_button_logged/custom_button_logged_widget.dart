@@ -65,7 +65,7 @@ class CustomButtonLoggedFlow extends StatelessWidget {
                     color: useGradientBackground != null &&
                             useGradientBackground == false
                         ? AppColors.black26
-                        : Colors.white,
+                        : AppColors.white,
                   ),
                   // SizedBox(width: 8),
                 ],
