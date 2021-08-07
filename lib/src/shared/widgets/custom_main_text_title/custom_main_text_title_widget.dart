@@ -6,6 +6,7 @@ class CustomMainTextTitle extends StatelessWidget {
   final String? titleSecondLine;
   final String? subtitle;
   final bool newUser;
+  final VoidCallback? function;
 
   const CustomMainTextTitle({
     Key? key,
@@ -13,6 +14,7 @@ class CustomMainTextTitle extends StatelessWidget {
     required this.newUser,
     this.titleSecondLine,
     this.subtitle,
+    this.function,
   }) : super(key: key);
 
   @override
@@ -60,7 +62,7 @@ class CustomMainTextTitle extends StatelessWidget {
                   style: TextStyles.black5416w400Roboto,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: function,
                   child: Text(
                     "Crie uma conta",
                     style: TextStyles.purple16w400Roboto,

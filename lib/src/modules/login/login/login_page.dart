@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../shared/widgets/custom_button/custom_button_widget.dart';
-import '../../shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
-import '../../shared/widgets/custom_social_login_button/custom_social_login_button_widget.dart';
-import '../../shared/constants/app_colors.dart';
-import '../../shared/constants/app_text_styles.dart';
-import '../../shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import '../../../shared/widgets/custom_button/custom_button_widget.dart';
+import '../../../shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
+import '../../../shared/widgets/custom_social_login_button/custom_social_login_button_widget.dart';
+import '../../../shared/constants/app_colors.dart';
+import '../../../shared/constants/app_text_styles.dart';
+import '../../../shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -46,6 +47,9 @@ class _LoginPageState extends State<LoginPage> {
                   titleFirstLine: 'Vamos',
                   titleSecondLine: 'Começar!',
                   newUser: true,
+                  function: () {
+                    Modular.to.navigate("/login/create_account");
+                  },
                 ),
                 SizedBox(height: 46.0),
                 CustomTextFormField(

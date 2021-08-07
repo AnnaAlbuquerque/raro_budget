@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:raro_budget/src/modules/splash/splash_page.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class App extends StatelessWidget {
   @override
@@ -7,8 +7,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Raro Budget',
       debugShowCheckedModeBanner: false,
-      home: SplashPage(),
-      //home: CreateAccountPage(),
-    );
+      initialRoute: "/",
+    ).modular();
   }
 }

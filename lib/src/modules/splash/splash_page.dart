@@ -1,6 +1,6 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
-import 'package:raro_budget/src/modules/home/home_page.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -14,15 +14,10 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    // WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
-    //   Future.delayed(Duration(seconds: 2)).then(
-    //     (value) => Navigator.of(context).push(
-    //       MaterialPageRoute(
-    //         builder: (BuildContext context) => HomePage(),
-    //       ),
-    //     ),
-    //   );
-    // });
+    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
+      Future.delayed(Duration(seconds: 2))
+          .then((_) => Modular.to.navigate("/login"));
+    });
     super.initState();
   }
 
