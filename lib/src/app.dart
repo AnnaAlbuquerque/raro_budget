@@ -7,7 +7,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Raro Budget',
       debugShowCheckedModeBanner: false,
-      initialRoute: "/",
+      initialRoute: "/login/create_account",
     ).modular();
   }
 }
