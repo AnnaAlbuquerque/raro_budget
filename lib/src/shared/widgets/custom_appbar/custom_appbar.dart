@@ -92,9 +92,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                       ],
                     )
                   : Container(),
-              iconDataLeft != null && iconDataRight == null && prefSize == 60
+              iconDataLeft != null && iconDataRight == null && prefSize == 80
                   ? Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
+                      padding: const EdgeInsets.fromLTRB(20, 40, 20, 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -103,6 +103,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                             icon: Icon(
                               iconDataLeft,
                               color: AppColors.white,
+                              size: 30,
                             ),
                           ),
                           Expanded(
