@@ -21,6 +21,7 @@ class AppColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color white60 = Color.fromRGBO(255, 255, 255, 0.6);
   static const Color backgorundWhite = Color(0xFFE5E5E5);
+  static const Color whitetransparent = Color.fromRGBO(255, 255, 255, 0.1);
 
   static const LinearGradient cyanToPurple = LinearGradient(
     colors: [cyan, purple],
