@@ -14,7 +14,6 @@ class PhoneCPFWidget extends StatefulWidget {
 class _PhoneCPFWidgetState extends State<PhoneCPFWidget> {
   TextEditingController _phoneController = TextEditingController();
   TextEditingController _cpfController = TextEditingController();
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final validators = Validators();
 
@@ -29,7 +28,7 @@ class _PhoneCPFWidgetState extends State<PhoneCPFWidget> {
           padding: const EdgeInsets.only(
               left: 48.0, top: 74.0, right: 48.0, bottom: 32.0),
           child: Form(
-            key: _formKey,
+            // key
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
