@@ -179,4 +179,11 @@ class TextStyles {
     color: AppColors.white60,
     letterSpacing: 0.15,
   );
+
+  static const TextStyle chambray16w400Roboto = TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.w400,
+    color: AppColors.chambray,
+    letterSpacing: 0.15,
+  );
 }
