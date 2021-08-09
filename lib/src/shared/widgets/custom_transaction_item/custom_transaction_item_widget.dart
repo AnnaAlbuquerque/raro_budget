@@ -40,7 +40,7 @@ class CustomTransactionItem extends StatelessWidget {
                     style: TextStyles.purple16w500Roboto,
                   ),
                   Text(
-                    DateFormat('dd/MM/yy').format(DateTime.now()),
+                    DateFormat('dd/MM/yyyy').format(DateTime.now()),
                     style: TextStyles.grey14w400Roboto,
                   ),
                 ],
