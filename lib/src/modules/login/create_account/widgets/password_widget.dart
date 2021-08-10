@@ -1,0 +1,101 @@
+import 'package:flutter/material.dart';
+import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
+import 'package:raro_budget/src/shared/validators/validators.dart';
+import 'package:raro_budget/src/shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
+import 'package:raro_budget/src/shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
+import 'package:raro_budget/src/shared/widgets/custom_visible/custom_visible_widget.dart';
+
+class PasswordWidget extends StatefulWidget {
+  PasswordWidget({Key? key}) : super(key: key);
+
+  @override
+  _PasswordWidgetState createState() => _PasswordWidgetState();
+}
+
+class _PasswordWidgetState extends State<PasswordWidget> {
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
+
+  final _validator = Validators();
+
+  bool passwordVisible = true;
+  bool confirmPasswordVisible = true;
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(40.0, 74.0, 48.0, 32.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image(
+              width: 100.0,
+              height: 54.0,
+              image: AssetImage('assets/images/logo_budget_blue.png'),
+            ),
+            CustomMainTextTitle(
+              titleFirstLine: "Bem-vindo!",
+              subtitle: "Agora crie sua senha contendo:",
+              newUser: false,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 40.0),
+              child: Form(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "•  pelo menos oito caracteres\n•  letras maiúsculas, letras \n   minúsculas, números e símbolos",
+                      style: TextStyles.black5416w400Roboto,
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    CustomTextFormField(
+                      name: 'Crie uma senha',
+                      obscureText: passwordVisible,
+                      validator: (value) => _validator.passwordValidator(value),
+                      controller: _passwordController,
+                      icon: VisibleWidget(
+                        visible: passwordVisible,
+                        onPressed: () {
+                          setState(() {
+                            passwordVisible = !passwordVisible;
+                          });
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    CustomTextFormField(
+                      name: 'Confirme sua senha',
+                      obscureText: confirmPasswordVisible,
+                      controller: _confirmPasswordController,
+                      icon: VisibleWidget(
+                        visible: confirmPasswordVisible,
+                        onPressed: () {
+                          setState(() {
+                            confirmPasswordVisible = !confirmPasswordVisible;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
