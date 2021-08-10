@@ -14,13 +14,15 @@ class AppColors {
   static const Color darkYellow = Color(0xFFFFB400);
   static const Color red = Color(0xFFF44336);
   static const Color grey = Color(0xFFC4C4C4);
+  static const Color grey88 = Color(0XFFE0E0E0);
   static const Color black = Color(0xFF000000);
   static const Color black26 = Color.fromRGBO(0, 0, 0, 0.26);
   static const Color black54 = Color.fromRGBO(0, 0, 0, 0.54);
-
+  static const Color black87 = Color.fromRGBO(0, 0, 0, 0.87);
   static const Color white = Color(0xFFFFFFFF);
   static const Color white60 = Color.fromRGBO(255, 255, 255, 0.6);
   static const Color backgorundWhite = Color(0xFFE5E5E5);
+  static const Color whitetransparent = Color.fromRGBO(255, 255, 255, 0.1);
 
   static const LinearGradient cyanToPurple = LinearGradient(
     colors: [cyan, purple],

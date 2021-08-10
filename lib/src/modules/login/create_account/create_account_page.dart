@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:raro_budget/src/modules/login/create_account/widgets/name_email_widget.dart';
+import 'package:raro_budget/src/modules/login/create_account/widgets/password_widget.dart';
 import 'package:raro_budget/src/modules/login/create_account/widgets/phone_cpf_widget.dart';
 import 'package:raro_budget/src/modules/login/create_account/create_account_controller.dart';
 import 'package:raro_budget/src/modules/login/create_account/widgets/terms_widget.dart';
@@ -42,6 +43,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                 NameEmailWidget(),
                 PhoneCPFWidget(),
                 TermsWidget(),
+                PasswordWidget()
               ],
             ),
           ),
