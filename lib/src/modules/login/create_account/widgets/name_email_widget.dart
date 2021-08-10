@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:raro_budget/src/modules/login/create_account/create_account_controller.dart';
+
 import 'package:raro_budget/src/shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
 import 'package:raro_budget/src/shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
 
 class NameEmailWidget extends StatefulWidget {
-  NameEmailWidget({Key? key}) : super(key: key);
+  CreateAccountController controller;
+  NameEmailWidget({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   _NameEmailWidgetState createState() => _NameEmailWidgetState();
 }
 
 class _NameEmailWidgetState extends State<NameEmailWidget> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _emailController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -46,14 +42,14 @@ class _NameEmailWidgetState extends State<NameEmailWidget> {
                   children: [
                     CustomTextFormField(
                       name: 'Nome',
-                      controller: _nameController,
+                      controller: widget.controller.nameController,
                     ),
                     SizedBox(
                       height: 20,
                     ),
                     CustomTextFormField(
                       name: 'E-mail',
-                      controller: _emailController,
+                      controller: widget.controller.emailController,
                     ),
                   ],
                 ),

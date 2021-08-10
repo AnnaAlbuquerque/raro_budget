@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+
+import 'package:raro_budget/src/modules/login/create_account/create_account_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 import 'package:raro_budget/src/shared/validators/validators.dart';
-import 'package:raro_budget/src/shared/widgets/custom_button/custom_button_widget.dart';
 import 'package:raro_budget/src/shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
 
 class TermsWidget extends StatefulWidget {
-  const TermsWidget({Key? key}) : super(key: key);
+  CreateAccountController controller;
+  TermsWidget({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   _TermsWidgetState createState() => _TermsWidgetState();

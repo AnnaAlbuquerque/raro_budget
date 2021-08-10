@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/login/create_account/widgets/name_email_widget.dart';
 import 'package:raro_budget/src/modules/login/create_account/widgets/password_widget.dart';
 import 'package:raro_budget/src/modules/login/create_account/widgets/phone_cpf_widget.dart';
@@ -15,8 +16,8 @@ class CreateAccountPage extends StatefulWidget {
   _CreateAccountPageState createState() => _CreateAccountPageState();
 }
 
-class _CreateAccountPageState extends State<CreateAccountPage> {
-  final CreateAccountController _controller = CreateAccountController();
+class _CreateAccountPageState
+    extends ModularState<CreateAccountPage, CreateAccountController> {
   final _pageViewController = PageController(
     initialPage: 0,
   );
@@ -40,10 +41,18 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               physics: NeverScrollableScrollPhysics(),
               controller: _pageViewController,
               children: [
-                NameEmailWidget(),
-                PhoneCPFWidget(),
-                TermsWidget(),
-                PasswordWidget()
+                NameEmailWidget(
+                  controller: controller,
+                ),
+                PhoneCPFWidget(
+                  controller: controller,
+                ),
+                TermsWidget(
+                  controller: controller,
+                ),
+                PasswordWidget(
+                  controller: controller,
+                )
               ],
             ),
           ),
@@ -61,7 +70,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                 text: 'VOLTAR',
                 useGradientBackground: false,
                 onTap: () {
-                  _controller.decrementPageNumber();
+                  controller.decrementPageNumber();
                   _pageViewController.previousPage(
                     duration: Duration(milliseconds: 500),
                     curve: Curves.linear,
@@ -69,7 +78,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                 },
               ),
               Observer(builder: (_) {
-                return Text("${_controller.pageNumber}/4");
+                return Text("${controller.pageNumber}/4");
               }),
               CustomButton(
                 iconRight: Icons.forward,
@@ -80,7 +89,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     duration: Duration(milliseconds: 500),
                     curve: Curves.linear,
                   );
-                  _controller.incrementPageNumber();
+                  controller.incrementPageNumber();
 
                   // if (_formKey.currentState!.validate()) {
                   //   showDialog(

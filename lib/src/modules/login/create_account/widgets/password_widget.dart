@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:raro_budget/src/modules/login/create_account/create_account_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 import 'package:raro_budget/src/shared/validators/validators.dart';
 import 'package:raro_budget/src/shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
@@ -6,27 +8,21 @@ import 'package:raro_budget/src/shared/widgets/custom_text_form_field/custom_tex
 import 'package:raro_budget/src/shared/widgets/custom_visible/custom_visible_widget.dart';
 
 class PasswordWidget extends StatefulWidget {
-  PasswordWidget({Key? key}) : super(key: key);
+  CreateAccountController controller;
+  PasswordWidget({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   _PasswordWidgetState createState() => _PasswordWidgetState();
 }
 
 class _PasswordWidgetState extends State<PasswordWidget> {
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
-
   final _validator = Validators();
 
   bool passwordVisible = true;
   bool confirmPasswordVisible = true;
-
-  @override
-  void dispose() {
-    _passwordController.dispose();
-
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +59,7 @@ class _PasswordWidgetState extends State<PasswordWidget> {
                       name: 'Crie uma senha',
                       obscureText: passwordVisible,
                       validator: (value) => _validator.passwordValidator(value),
-                      controller: _passwordController,
+                      controller: widget.controller.passwordController,
                       icon: VisibleWidget(
                         visible: passwordVisible,
                         onPressed: () {
@@ -79,7 +75,7 @@ class _PasswordWidgetState extends State<PasswordWidget> {
                     CustomTextFormField(
                       name: 'Confirme sua senha',
                       obscureText: confirmPasswordVisible,
-                      controller: _confirmPasswordController,
+                      controller: widget.controller.confirmPasswordController,
                       icon: VisibleWidget(
                         visible: confirmPasswordVisible,
                         onPressed: () {

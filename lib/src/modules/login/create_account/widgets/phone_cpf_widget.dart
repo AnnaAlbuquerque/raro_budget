@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+
+import 'package:raro_budget/src/modules/login/create_account/create_account_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/validators/validators.dart';
 import 'package:raro_budget/src/shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
 import 'package:raro_budget/src/shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
 
 class PhoneCPFWidget extends StatefulWidget {
-  const PhoneCPFWidget({Key? key}) : super(key: key);
+  CreateAccountController controller;
+  PhoneCPFWidget({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   _PhoneCPFWidgetState createState() => _PhoneCPFWidgetState();
 }
 
 class _PhoneCPFWidgetState extends State<PhoneCPFWidget> {
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _cpfController = TextEditingController();
-
   final validators = Validators();
 
   @override
@@ -47,14 +50,14 @@ class _PhoneCPFWidgetState extends State<PhoneCPFWidget> {
                   SizedBox(height: 46.0),
                   CustomTextFormField(
                     name: 'Telefone',
-                    controller: _phoneController,
+                    controller: widget.controller.phoneController,
                     textInputType: TextInputType.phone,
                   ),
                   SizedBox(height: 16.0),
                   CustomTextFormField(
                     validator: (value) => validators.cpfValidator(value),
                     name: 'CPF',
-                    controller: _cpfController,
+                    controller: widget.controller.cpfController,
                     textInputType: TextInputType.number,
                   ),
                   SizedBox(height: 16.0),

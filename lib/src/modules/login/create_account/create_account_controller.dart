@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
 part 'create_account_controller.g.dart';
@@ -22,4 +23,11 @@ abstract class CreateAccountBase with Store {
       pageNumber--;
     }
   }
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController cpfController = TextEditingController();
 }
