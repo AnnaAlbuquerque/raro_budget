@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:raro_budget/src/modules/home/widgets/custom_transaction_item/custom_transaction_item_widget.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
-import 'package:raro_budget/src/shared/widgets/custom_transaction_item/custom_transaction_item_widget.dart';
 
 class CustomLastTransactions extends StatelessWidget {
   const CustomLastTransactions({
