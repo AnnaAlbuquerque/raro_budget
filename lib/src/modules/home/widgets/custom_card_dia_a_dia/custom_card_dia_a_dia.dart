@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:raro_budget/src/modules/home/widgets/custom_card_dia_a_dia/custom_progress_bar.dart';
 
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
-import 'package:raro_budget/src/shared/widgets/custom_card_dia_a_dia/custom_progress_bar.dart';
+
 import 'package:raro_budget/src/shared/widgets/custom_drop_down_button/custom_drop_down.dart';
 
 class CustomCard extends StatefulWidget {
