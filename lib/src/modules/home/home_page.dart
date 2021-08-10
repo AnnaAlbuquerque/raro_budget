@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
               contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
               title: const Text(
                 'Cadastro',
-                style: TextStyles.black16w500Roboto,
+                style: TextStyles.black8716w500Roboto,
               ),
               onTap: () {},
             ),
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
               contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
               title: const Text(
                 'Gerenciar cartões',
-                style: TextStyles.black16w500Roboto,
+                style: TextStyles.black8716w500Roboto,
               ),
               onTap: () {},
             ),
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
               contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
               title: const Text(
                 'Investimentos',
-                style: TextStyles.black16w500Roboto,
+                style: TextStyles.black8716w500Roboto,
               ),
               onTap: () {},
             ),
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
               contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
               title: const Text(
                 'Alterar senha',
-                style: TextStyles.black16w500Roboto,
+                style: TextStyles.black8716w500Roboto,
               ),
               onTap: () {},
             ),
@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage> {
               visualDensity: VisualDensity(vertical: -2, horizontal: 0),
               title: const Text(
                 'Ajuda',
-                style: TextStyles.black16w500Roboto,
+                style: TextStyles.black8716w500Roboto,
               ),
               onTap: () {},
             ),

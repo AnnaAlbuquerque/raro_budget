@@ -18,7 +18,7 @@ class AppColors {
   static const Color black = Color(0xFF000000);
   static const Color black26 = Color.fromRGBO(0, 0, 0, 0.26);
   static const Color black54 = Color.fromRGBO(0, 0, 0, 0.54);
-
+  static const Color black87 = Color.fromRGBO(0, 0, 0, 0.87);
   static const Color white = Color(0xFFFFFFFF);
   static const Color white60 = Color.fromRGBO(255, 255, 255, 0.6);
   static const Color backgorundWhite = Color(0xFFE5E5E5);
