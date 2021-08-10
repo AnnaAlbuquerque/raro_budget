@@ -2,5 +2,5 @@ import 'package:raro_budget/src/core/entities/user.dart';
 
 class HomeController {
   User user = User(name: "José");
-  bool error = true;
+  bool error = false;
 }

@@ -40,7 +40,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                       button3 == null
                   ? Container(
                       margin: EdgeInsets.fromLTRB(24, 48, 24, 24),
-                      alignment: Alignment.centerLeft,
+                      alignment: Alignment.center,
                       child: Text(
                         title,
                         style: TextStyles.white26w700Roboto,
