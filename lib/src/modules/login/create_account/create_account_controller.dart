@@ -29,8 +29,9 @@ abstract class CreateAccountBase with Store {
 
   bool termsAccepted = false;
 
-  final formKeyNameEmail = GlobalKey<FormState>();
-  final formKeyPassword = GlobalKey<FormState>();
-  final formKeyPhoneCPF = GlobalKey<FormState>();
-  final formKeyTerms = GlobalKey<FormState>();
+  // final formKeyNameEmail = GlobalKey<FormState>();
+  // final formKeyPassword = GlobalKey<FormState>();
+  // final formKeyPhoneCPF = GlobalKey<FormState>();
+  // final formKeyTerms = GlobalKey<FormState>();
+
 }

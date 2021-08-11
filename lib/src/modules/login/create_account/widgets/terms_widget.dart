@@ -32,84 +32,81 @@ class _TermsWidgetState
         backgroundColor: AppColors.white,
         body: Padding(
           padding: const EdgeInsets.only(top: 74.0, bottom: 32.0),
-          child: Form(
-            key: controller.formKeyTerms,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 48.0,
-                    right: 48.0,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image(
-                        width: 100.0,
-                        height: 54.0,
-                        image: AssetImage('assets/images/logo_budget_blue.png'),
-                      ),
-                      SizedBox(height: 16.0),
-                      CustomMainTextTitle(
-                        titleFirstLine: 'Bem-vindo!',
-                        subtitle: 'Leia com atenção e aceite.',
-                        newUser: false,
-                      ),
-                    ],
-                  ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 48.0,
+                  right: 48.0,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 30.0,
-                    right: 30.0,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SizedBox(height: 30.0),
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.36,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                termMock,
-                                style: TextStyles.black5416w400Roboto,
-                              ),
-                            ],
-                          ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image(
+                      width: 100.0,
+                      height: 54.0,
+                      image: AssetImage('assets/images/logo_budget_blue.png'),
+                    ),
+                    SizedBox(height: 16.0),
+                    CustomMainTextTitle(
+                      titleFirstLine: 'Bem-vindo!',
+                      subtitle: 'Leia com atenção e aceite.',
+                      newUser: false,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 30.0,
+                  right: 30.0,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(height: 30.0),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.36,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              termMock,
+                              style: TextStyles.black5416w400Roboto,
+                            ),
+                          ],
                         ),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Checkbox(
-                            value: controller.termsAccepted,
-                            shape: CircleBorder(),
-                            onChanged: (value) {
-                              setState(() {
-                                controller.termsAccepted = value as bool;
-                              });
-                            },
-                          ),
-                          Text(
-                            "Eu li e aceito os termos e condições \ne a Política de privacidade do budget",
-                            style: TextStyles.black5416w400Roboto,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Checkbox(
+                          value: controller.termsAccepted,
+                          shape: CircleBorder(),
+                          onChanged: (value) {
+                            setState(() {
+                              controller.termsAccepted = value as bool;
+                            });
+                          },
+                        ),
+                        Text(
+                          "Eu li e aceito os termos e condições \ne a Política de privacidade do budget",
+                          style: TextStyles.black5416w400Roboto,
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),

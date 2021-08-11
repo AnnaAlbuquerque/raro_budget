@@ -30,40 +30,37 @@ class _PhoneCPFWidgetState
         body: Padding(
           padding: const EdgeInsets.only(
               left: 48.0, top: 74.0, right: 48.0, bottom: 32.0),
-          child: Form(
-            key: controller.formKeyPhoneCPF,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image(
-                    width: 100.0,
-                    height: 54.0,
-                    image: AssetImage('assets/images/logo_budget_blue.png'),
-                  ),
-                  SizedBox(height: 16.0),
-                  CustomMainTextTitle(
-                    titleFirstLine: 'Bem-vindo!',
-                    subtitle: 'Mais alguns dados.',
-                    newUser: false,
-                  ),
-                  SizedBox(height: 46.0),
-                  CustomTextFormField(
-                    name: 'Telefone',
-                    controller: controller.phoneController,
-                    textInputType: TextInputType.phone,
-                  ),
-                  SizedBox(height: 16.0),
-                  CustomTextFormField(
-                    validator: (value) => widget.validators.cpfValidator(value),
-                    name: 'CPF',
-                    controller: controller.cpfController,
-                    textInputType: TextInputType.number,
-                  ),
-                  SizedBox(height: 16.0),
-                  SizedBox(height: 52.0),
-                ],
-              ),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image(
+                  width: 100.0,
+                  height: 54.0,
+                  image: AssetImage('assets/images/logo_budget_blue.png'),
+                ),
+                SizedBox(height: 16.0),
+                CustomMainTextTitle(
+                  titleFirstLine: 'Bem-vindo!',
+                  subtitle: 'Mais alguns dados.',
+                  newUser: false,
+                ),
+                SizedBox(height: 46.0),
+                CustomTextFormField(
+                  name: 'Telefone',
+                  controller: controller.phoneController,
+                  textInputType: TextInputType.phone,
+                ),
+                SizedBox(height: 16.0),
+                CustomTextFormField(
+                  validator: (value) => widget.validators.cpfValidator(value),
+                  name: 'CPF',
+                  controller: controller.cpfController,
+                  textInputType: TextInputType.number,
+                ),
+                SizedBox(height: 16.0),
+                SizedBox(height: 52.0),
+              ],
             ),
           ),
         ),

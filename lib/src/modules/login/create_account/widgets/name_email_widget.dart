@@ -40,28 +40,25 @@ class _NameEmailWidgetState
             ),
             Padding(
               padding: const EdgeInsets.only(top: 100.0),
-              child: Form(
-                key: controller.formKeyNameEmail,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CustomTextFormField(
-                      name: 'Nome',
-                      controller: controller.nameController,
-                      validator: (value) =>
-                          widget.validators.nameValidator(value),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    CustomTextFormField(
-                      name: 'E-mail',
-                      controller: controller.emailController,
-                      validator: (value) =>
-                          widget.validators.emailValidator(value),
-                    ),
-                  ],
-                ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CustomTextFormField(
+                    name: 'Nome',
+                    controller: controller.nameController,
+                    validator: (value) =>
+                        widget.validators.nameValidator(value),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  CustomTextFormField(
+                    name: 'E-mail',
+                    controller: controller.emailController,
+                    validator: (value) =>
+                        widget.validators.emailValidator(value),
+                  ),
+                ],
               ),
             ),
           ],

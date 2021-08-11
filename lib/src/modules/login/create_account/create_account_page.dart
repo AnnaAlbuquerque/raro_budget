@@ -21,6 +21,7 @@ class CreateAccountPage extends StatefulWidget {
 class _CreateAccountPageState
     extends ModularState<CreateAccountPage, CreateAccountController> {
   final validators = Validators();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -44,76 +45,77 @@ class _CreateAccountPageState
     //   ),
     // );
 
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Flexible(
-            flex: 1,
-            child: PageView(
-              physics: NeverScrollableScrollPhysics(),
-              controller: controller.pageViewController,
+    return Form(
+      key: _formKey,
+      child: Scaffold(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              flex: 1,
+              child: PageView(
+                physics: NeverScrollableScrollPhysics(),
+                controller: controller.pageViewController,
+                children: [
+                  NameEmailWidget(
+                    validators: validators,
+                  ),
+                  PhoneCPFWidget(
+                    validators: validators,
+                  ),
+                  TermsWidget(
+                    validators: validators,
+                  ),
+                  PasswordWidget(
+                    validators: validators,
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+        bottomNavigationBar: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                NameEmailWidget(
-                  validators: validators,
+                CustomButton(
+                  iconLeft: Icons.arrow_back,
+                  text: 'VOLTAR',
+                  useGradientBackground: false,
+                  onTap: () async {
+                    await controller.pageViewController.previousPage(
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.linear,
+                    );
+                    controller.showCurrentPageNumber();
+                  },
                 ),
-                PhoneCPFWidget(
-                  validators: validators,
+                Observer(builder: (_) {
+                  return Text("${controller.pageNumber}/4");
+                }),
+                CustomButton(
+                  iconRight: Icons.forward,
+                  text: 'CONTINUAR',
+                  useGradientBackground: true,
+                  onTap: () async {
+                    await controller.pageViewController.nextPage(
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.linear,
+                    );
+                    controller.showCurrentPageNumber();
+                  },
                 ),
-                TermsWidget(
-                  validators: validators,
-                ),
-                PasswordWidget(
-                  validators: validators,
-                )
               ],
             ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              CustomButton(
-                iconLeft: Icons.arrow_back,
-                text: 'VOLTAR',
-                useGradientBackground: false,
-                onTap: () async {
-                  await controller.pageViewController.previousPage(
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.linear,
-                  );
-                  controller.showCurrentPageNumber();
-                  print(controller.pageViewController.page);
-                },
-              ),
-              Observer(builder: (_) {
-                return Text("${controller.pageNumber}/4");
-              }),
-              CustomButton(
-                iconRight: Icons.forward,
-                text: 'CONTINUAR',
-                useGradientBackground: true,
-                onTap: () async {
-                  await controller.pageViewController.nextPage(
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.linear,
-                  );
-                  controller.showCurrentPageNumber();
-                  print(controller.pageViewController.page);
-                },
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 15,
-          )
-        ],
+            SizedBox(
+              height: 15,
+            )
+          ],
+        ),
       ),
     );
   }

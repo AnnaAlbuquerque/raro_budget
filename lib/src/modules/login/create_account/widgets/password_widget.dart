@@ -44,51 +44,48 @@ class _PasswordWidgetState
             ),
             Padding(
               padding: const EdgeInsets.only(top: 40.0),
-              child: Form(
-                key: controller.formKeyPassword,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "•  pelo menos oito caracteres\n•  letras maiúsculas, letras \n   minúsculas, números e símbolos",
-                      style: TextStyles.black5416w400Roboto,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "•  pelo menos oito caracteres\n•  letras maiúsculas, letras \n   minúsculas, números e símbolos",
+                    style: TextStyles.black5416w400Roboto,
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  CustomTextFormField(
+                    name: 'Crie uma senha',
+                    obscureText: passwordVisible,
+                    validator: (value) =>
+                        widget.validators.passwordValidator(value),
+                    controller: controller.passwordController,
+                    icon: VisibleWidget(
+                      visible: passwordVisible,
+                      onPressed: () {
+                        setState(() {
+                          passwordVisible = !passwordVisible;
+                        });
+                      },
                     ),
-                    SizedBox(
-                      height: 30,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  CustomTextFormField(
+                    name: 'Confirme sua senha',
+                    obscureText: confirmPasswordVisible,
+                    controller: controller.confirmPasswordController,
+                    icon: VisibleWidget(
+                      visible: confirmPasswordVisible,
+                      onPressed: () {
+                        setState(() {
+                          confirmPasswordVisible = !confirmPasswordVisible;
+                        });
+                      },
                     ),
-                    CustomTextFormField(
-                      name: 'Crie uma senha',
-                      obscureText: passwordVisible,
-                      validator: (value) =>
-                          widget.validators.passwordValidator(value),
-                      controller: controller.passwordController,
-                      icon: VisibleWidget(
-                        visible: passwordVisible,
-                        onPressed: () {
-                          setState(() {
-                            passwordVisible = !passwordVisible;
-                          });
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    CustomTextFormField(
-                      name: 'Confirme sua senha',
-                      obscureText: confirmPasswordVisible,
-                      controller: controller.confirmPasswordController,
-                      icon: VisibleWidget(
-                        visible: confirmPasswordVisible,
-                        onPressed: () {
-                          setState(() {
-                            confirmPasswordVisible = !confirmPasswordVisible;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],
