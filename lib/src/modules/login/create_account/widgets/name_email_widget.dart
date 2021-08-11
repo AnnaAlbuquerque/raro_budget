@@ -18,8 +18,9 @@ class NameEmailWidget extends StatefulWidget {
   _NameEmailWidgetState createState() => _NameEmailWidgetState();
 }
 
-class _NameEmailWidgetState
-    extends ModularState<NameEmailWidget, CreateAccountController> {
+class _NameEmailWidgetState extends State<NameEmailWidget> {
+  final controller = Modular.get<CreateAccountController>();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

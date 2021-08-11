@@ -18,8 +18,8 @@ class CreateAccountPage extends StatefulWidget {
   _CreateAccountPageState createState() => _CreateAccountPageState();
 }
 
-class _CreateAccountPageState
-    extends ModularState<CreateAccountPage, CreateAccountController> {
+class _CreateAccountPageState extends State<CreateAccountPage> {
+  final controller = Modular.get<CreateAccountController>();
   final validators = Validators();
   final _formKey = GlobalKey<FormState>();
 

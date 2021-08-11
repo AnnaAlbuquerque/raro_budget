@@ -18,8 +18,9 @@ class PhoneCPFWidget extends StatefulWidget {
   _PhoneCPFWidgetState createState() => _PhoneCPFWidgetState();
 }
 
-class _PhoneCPFWidgetState
-    extends ModularState<PhoneCPFWidget, CreateAccountController> {
+class _PhoneCPFWidgetState extends State<PhoneCPFWidget> {
+  final controller = Modular.get<CreateAccountController>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

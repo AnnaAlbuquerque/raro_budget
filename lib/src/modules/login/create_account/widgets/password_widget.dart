@@ -19,8 +19,9 @@ class PasswordWidget extends StatefulWidget {
   _PasswordWidgetState createState() => _PasswordWidgetState();
 }
 
-class _PasswordWidgetState
-    extends ModularState<PasswordWidget, CreateAccountController> {
+class _PasswordWidgetState extends State<PasswordWidget> {
+  final controller = Modular.get<CreateAccountController>();
+
   bool passwordVisible = true;
   bool confirmPasswordVisible = true;
 

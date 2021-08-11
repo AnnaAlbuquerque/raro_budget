@@ -18,10 +18,11 @@ class TermsWidget extends StatefulWidget {
   _TermsWidgetState createState() => _TermsWidgetState();
 }
 
-class _TermsWidgetState
-    extends ModularState<TermsWidget, CreateAccountController> {
+class _TermsWidgetState extends State<TermsWidget> {
   static const termMock =
       "Lorem Ipsum neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. \n\nIpsum neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. Nque porro  est qui dolorem ipsum quia dolor sit amet, , adipisci velit. Quisquam est qui dolorem ipsum.Lorem Ipsum neque porro \n\nquisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. Ipsum neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. \n\nNque porro  est qui dolorem ipsum quia dolor sit amet, , adipisci velit. Quisquam est qui dolorem ipsum.";
+
+  final controller = Modular.get<CreateAccountController>();
 
   @override
   Widget build(BuildContext context) {
