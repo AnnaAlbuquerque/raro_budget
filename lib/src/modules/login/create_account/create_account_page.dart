@@ -102,11 +102,13 @@ class _CreateAccountPageState
                   text: 'CONTINUAR',
                   useGradientBackground: true,
                   onTap: () async {
-                    await controller.pageViewController.nextPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.linear,
-                    );
-                    controller.showCurrentPageNumber();
+                    if (_formKey.currentState!.validate()) {
+                      await controller.pageViewController.nextPage(
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.linear,
+                      );
+                      controller.showCurrentPageNumber();
+                    }
                   },
                 ),
               ],
