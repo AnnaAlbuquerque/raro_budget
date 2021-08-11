@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:raro_budget/src/modules/login/create_account/create_account_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
@@ -7,22 +8,20 @@ import 'package:raro_budget/src/shared/validators/validators.dart';
 import 'package:raro_budget/src/shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
 
 class TermsWidget extends StatefulWidget {
-  CreateAccountController controller;
+  final CreateAccountController controller;
+  final Validators? validators;
   TermsWidget({
     Key? key,
     required this.controller,
+    this.validators,
   }) : super(key: key);
 
   @override
   _TermsWidgetState createState() => _TermsWidgetState();
 }
 
-class _TermsWidgetState extends State<TermsWidget> {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  final validators = Validators();
-  bool _userTermOption = false;
-
+class _TermsWidgetState
+    extends ModularState<TermsWidget, CreateAccountController> {
   static const termMock =
       "Lorem Ipsum neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. \n\nIpsum neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. Nque porro  est qui dolorem ipsum quia dolor sit amet, , adipisci velit. Quisquam est qui dolorem ipsum.Lorem Ipsum neque porro \n\nquisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. Ipsum neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. \n\nNque porro  est qui dolorem ipsum quia dolor sit amet, , adipisci velit. Quisquam est qui dolorem ipsum.";
 
@@ -36,7 +35,7 @@ class _TermsWidgetState extends State<TermsWidget> {
         body: Padding(
           padding: const EdgeInsets.only(top: 74.0, bottom: 32.0),
           child: Form(
-            key: _formKey,
+            key: controller.formKeyTerms,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,11 +93,11 @@ class _TermsWidgetState extends State<TermsWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Checkbox(
-                            value: _userTermOption,
+                            value: widget.controller.termsAccepted,
                             shape: CircleBorder(),
                             onChanged: (value) {
                               setState(() {
-                                _userTermOption = value as bool;
+                                widget.controller.termsAccepted = value as bool;
                               });
                             },
                           ),

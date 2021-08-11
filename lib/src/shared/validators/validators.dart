@@ -1,6 +1,22 @@
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
 
 class Validators {
+  String? nameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Ops! Preencha!";
+    } else {
+      return null;
+    }
+  }
+
+  String? emailValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Ops! Preencha!";
+    } else {
+      return null;
+    }
+  }
+
   String? cpfValidator(String? value) {
     if (value == null || value.isEmpty) {
       return "O CPF é necessário para conectar suas contas";

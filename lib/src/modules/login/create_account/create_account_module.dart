@@ -6,7 +6,7 @@ import 'package:raro_budget/src/modules/login/create_account/on_boarding/onboard
 class CreateAccountModule extends Module {
   @override
   List<Bind<Object>> get binds => [
-        Bind.lazySingleton((i) => CreateAccountController),
+        Bind.singleton((i) => CreateAccountController()),
       ];
 
   @override

@@ -24,10 +24,21 @@ abstract class CreateAccountBase with Store {
     }
   }
 
+  final pageViewController = PageController(
+    initialPage: 0,
+  );
+
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController cpfController = TextEditingController();
+
+  bool termsAccepted = false;
+
+  final formKeyNameEmail = GlobalKey<FormState>();
+  final formKeyPassword = GlobalKey<FormState>();
+  final formKeyPhoneCPF = GlobalKey<FormState>();
+  final formKeyTerms = GlobalKey<FormState>();
 }

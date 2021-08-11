@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:raro_budget/src/modules/login/create_account/create_account_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
@@ -8,19 +9,20 @@ import 'package:raro_budget/src/shared/widgets/custom_text_form_field/custom_tex
 import 'package:raro_budget/src/shared/widgets/custom_visible/custom_visible_widget.dart';
 
 class PasswordWidget extends StatefulWidget {
-  CreateAccountController controller;
+  final CreateAccountController controller;
+  final Validators validators;
   PasswordWidget({
     Key? key,
     required this.controller,
+    required this.validators,
   }) : super(key: key);
 
   @override
   _PasswordWidgetState createState() => _PasswordWidgetState();
 }
 
-class _PasswordWidgetState extends State<PasswordWidget> {
-  final _validator = Validators();
-
+class _PasswordWidgetState
+    extends ModularState<PasswordWidget, CreateAccountController> {
   bool passwordVisible = true;
   bool confirmPasswordVisible = true;
 
@@ -45,6 +47,7 @@ class _PasswordWidgetState extends State<PasswordWidget> {
             Padding(
               padding: const EdgeInsets.only(top: 40.0),
               child: Form(
+                key: controller.formKeyPassword,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -58,7 +61,8 @@ class _PasswordWidgetState extends State<PasswordWidget> {
                     CustomTextFormField(
                       name: 'Crie uma senha',
                       obscureText: passwordVisible,
-                      validator: (value) => _validator.passwordValidator(value),
+                      validator: (value) =>
+                          widget.validators.passwordValidator(value),
                       controller: widget.controller.passwordController,
                       icon: VisibleWidget(
                         visible: passwordVisible,
