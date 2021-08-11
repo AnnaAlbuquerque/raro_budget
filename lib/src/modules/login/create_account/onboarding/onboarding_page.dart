@@ -2,7 +2,6 @@ import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
-import 'package:shimmer/shimmer.dart';
 
 class OnboardingPage extends StatefulWidget {
   OnboardingPage({Key? key}) : super(key: key);

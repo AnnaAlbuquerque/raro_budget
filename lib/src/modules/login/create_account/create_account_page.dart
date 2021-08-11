@@ -69,7 +69,7 @@ class _CreateAccountPageState
                   ),
                   PasswordWidget(
                     validators: validators,
-                  )
+                  ),
                 ],
               ),
             ),
@@ -108,6 +108,11 @@ class _CreateAccountPageState
                         curve: Curves.linear,
                       );
                       controller.showCurrentPageNumber();
+                    }
+
+                    if (_formKey.currentState!.validate() &&
+                        controller.pageNumber == 4) {
+                      Modular.to.pushNamed("/login/create_account/onboarding");
                     }
                   },
                 ),

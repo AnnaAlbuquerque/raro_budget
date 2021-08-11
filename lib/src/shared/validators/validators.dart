@@ -39,36 +39,38 @@ class Validators {
   // não testei, se não teria que arrumar toda a parte de estado do fluxo de cadastro,
   // achei melhor esperar
   String? passwordValidator(String? value) {
-    RegExp checkCharacteres = RegExp(
-        r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+    // RegExp checkCharacteres = RegExp(
+    //     r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
 
-    RegExp hasUpperLowerCaseLetters =
-        RegExp(r"^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{8,}$");
+    // RegExp hasUpperLowerCaseLetters =
+    //     RegExp(r"^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{8,}$");
 
-    RegExp hasNumbers = RegExp(r"^(?=.*\d)[\d]{8,}$");
+    // RegExp hasNumbers = RegExp(r"^(?=.*\d)[\d]{8,}$");
 
-    RegExp hasSymbols = RegExp(r"^(?=.*?[#?!@$%^&*-]){8,}$");
+    // RegExp hasSymbols = RegExp(r"^(?=.*?[#?!@$%^&*-]){8,}$");
 
-    if (value == null || value.isEmpty) {
-      return "Ops! Coloque uma senha!";
-    }
+    // if (value == null || value.isEmpty) {
+    //   return "Ops! Coloque uma senha!";
+    // }
 
-    if (value.length < 8) {
+    if (value!.length < 8) {
       return "Precisa ter pelo menos 8 caracteres!";
-    }
-
-    if (!checkCharacteres.hasMatch(value)) {
-      if (!hasUpperLowerCaseLetters.hasMatch(value)) {
-        return "Precisa ter letras maiúsculas e minúsculas";
-      } else if (!hasNumbers.hasMatch(value)) {
-        return "Precisa ter pelo menos um número";
-      } else if (!hasSymbols.hasMatch(value)) {
-        return "Precisa ter pelo menos um símbolo";
-      } else {
-        return null;
-      }
     } else {
       return null;
     }
+
+    // if (!checkCharacteres.hasMatch(value)) {
+    //   if (!hasUpperLowerCaseLetters.hasMatch(value)) {
+    //     return "Precisa ter letras maiúsculas e minúsculas";
+    //   } else if (!hasNumbers.hasMatch(value)) {
+    //     return "Precisa ter pelo menos um número";
+    //   } else if (!hasSymbols.hasMatch(value)) {
+    //     return "Precisa ter pelo menos um símbolo";
+    //   } else {
+    //     return null;
+    //   }
+    // } else {
+    //   return null;
+    // }
   }
 }
