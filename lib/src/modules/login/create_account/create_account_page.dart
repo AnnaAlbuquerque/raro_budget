@@ -59,15 +59,12 @@ class _CreateAccountPageState
                   validators: validators,
                 ),
                 PhoneCPFWidget(
-                  controller: controller,
                   validators: validators,
                 ),
                 TermsWidget(
-                  controller: controller,
                   validators: validators,
                 ),
                 PasswordWidget(
-                  controller: controller,
                   validators: validators,
                 )
               ],
@@ -86,12 +83,13 @@ class _CreateAccountPageState
                 iconLeft: Icons.arrow_back,
                 text: 'VOLTAR',
                 useGradientBackground: false,
-                onTap: () {
-                  controller.decrementPageNumber();
-                  controller.pageViewController.previousPage(
+                onTap: () async {
+                  await controller.pageViewController.previousPage(
                     duration: Duration(milliseconds: 500),
                     curve: Curves.linear,
                   );
+                  controller.showCurrentPageNumber();
+                  print(controller.pageViewController.page);
                 },
               ),
               Observer(builder: (_) {
@@ -101,44 +99,13 @@ class _CreateAccountPageState
                 iconRight: Icons.forward,
                 text: 'CONTINUAR',
                 useGradientBackground: true,
-                onTap: () {
-                  if (controller.pageNumber == 1 &&
-                      controller.formKeyNameEmail.currentState!.validate()) {
-                    controller.pageViewController.nextPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.linear,
-                    );
-                    controller.incrementPageNumber();
-                  }
-
-                  if (controller.pageNumber == 2 &&
-                      controller.formKeyPhoneCPF.currentState!.validate()) {
-                    controller.pageViewController.nextPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.linear,
-                    );
-                    controller.incrementPageNumber();
-                  }
-
-                  if (controller.pageNumber ==
-                          3 /*&&
-                      controller.formKeyTerms.currentState!.validate()*/
-                      ) {
-                    controller.pageViewController.nextPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.linear,
-                    );
-                    controller.incrementPageNumber();
-                  }
-
-                  if (controller.pageNumber == 4 &&
-                      controller.formKeyPassword.currentState!.validate()) {
-                    controller.pageViewController.nextPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.linear,
-                    );
-                    controller.incrementPageNumber();
-                  }
+                onTap: () async {
+                  await controller.pageViewController.nextPage(
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.linear,
+                  );
+                  controller.showCurrentPageNumber();
+                  print(controller.pageViewController.page);
                 },
               ),
             ],

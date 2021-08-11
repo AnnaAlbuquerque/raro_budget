@@ -9,11 +9,9 @@ import 'package:raro_budget/src/shared/widgets/custom_text_form_field/custom_tex
 import 'package:raro_budget/src/shared/widgets/custom_visible/custom_visible_widget.dart';
 
 class PasswordWidget extends StatefulWidget {
-  final CreateAccountController controller;
   final Validators validators;
   PasswordWidget({
     Key? key,
-    required this.controller,
     required this.validators,
   }) : super(key: key);
 
@@ -63,7 +61,7 @@ class _PasswordWidgetState
                       obscureText: passwordVisible,
                       validator: (value) =>
                           widget.validators.passwordValidator(value),
-                      controller: widget.controller.passwordController,
+                      controller: controller.passwordController,
                       icon: VisibleWidget(
                         visible: passwordVisible,
                         onPressed: () {
@@ -79,7 +77,7 @@ class _PasswordWidgetState
                     CustomTextFormField(
                       name: 'Confirme sua senha',
                       obscureText: confirmPasswordVisible,
-                      controller: widget.controller.confirmPasswordController,
+                      controller: controller.confirmPasswordController,
                       icon: VisibleWidget(
                         visible: confirmPasswordVisible,
                         onPressed: () {

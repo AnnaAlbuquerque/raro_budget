@@ -8,25 +8,17 @@ class CreateAccountController = CreateAccountBase
 
 abstract class CreateAccountBase with Store {
   @observable
+  PageController pageViewController = PageController(
+    initialPage: 0,
+  );
+
+  @observable
   int pageNumber = 1;
 
   @action
-  void incrementPageNumber() {
-    if (pageNumber < 4) {
-      pageNumber++;
-    }
+  void showCurrentPageNumber() {
+    pageNumber = pageViewController.page!.toInt() + 1;
   }
-
-  @action
-  void decrementPageNumber() {
-    if (pageNumber > 1) {
-      pageNumber--;
-    }
-  }
-
-  final pageViewController = PageController(
-    initialPage: 0,
-  );
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();

@@ -9,6 +9,22 @@ part of 'create_account_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CreateAccountController on CreateAccountBase, Store {
+  final _$pageViewControllerAtom =
+      Atom(name: 'CreateAccountBase.pageViewController');
+
+  @override
+  PageController get pageViewController {
+    _$pageViewControllerAtom.reportRead();
+    return super.pageViewController;
+  }
+
+  @override
+  set pageViewController(PageController value) {
+    _$pageViewControllerAtom.reportWrite(value, super.pageViewController, () {
+      super.pageViewController = value;
+    });
+  }
+
   final _$pageNumberAtom = Atom(name: 'CreateAccountBase.pageNumber');
 
   @override
@@ -28,22 +44,11 @@ mixin _$CreateAccountController on CreateAccountBase, Store {
       ActionController(name: 'CreateAccountBase');
 
   @override
-  void incrementPageNumber() {
+  void showCurrentPageNumber() {
     final _$actionInfo = _$CreateAccountBaseActionController.startAction(
-        name: 'CreateAccountBase.incrementPageNumber');
+        name: 'CreateAccountBase.showCurrentPageNumber');
     try {
-      return super.incrementPageNumber();
-    } finally {
-      _$CreateAccountBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void decrementPageNumber() {
-    final _$actionInfo = _$CreateAccountBaseActionController.startAction(
-        name: 'CreateAccountBase.decrementPageNumber');
-    try {
-      return super.decrementPageNumber();
+      return super.showCurrentPageNumber();
     } finally {
       _$CreateAccountBaseActionController.endAction(_$actionInfo);
     }
@@ -52,6 +57,7 @@ mixin _$CreateAccountController on CreateAccountBase, Store {
   @override
   String toString() {
     return '''
+pageViewController: ${pageViewController},
 pageNumber: ${pageNumber}
     ''';
   }

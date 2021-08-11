@@ -8,11 +8,9 @@ import 'package:raro_budget/src/shared/widgets/custom_main_text_title/custom_mai
 import 'package:raro_budget/src/shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
 
 class PhoneCPFWidget extends StatefulWidget {
-  final CreateAccountController controller;
   final Validators validators;
   PhoneCPFWidget({
     Key? key,
-    required this.controller,
     required this.validators,
   }) : super(key: key);
 
@@ -52,14 +50,14 @@ class _PhoneCPFWidgetState
                   SizedBox(height: 46.0),
                   CustomTextFormField(
                     name: 'Telefone',
-                    controller: widget.controller.phoneController,
+                    controller: controller.phoneController,
                     textInputType: TextInputType.phone,
                   ),
                   SizedBox(height: 16.0),
                   CustomTextFormField(
                     validator: (value) => widget.validators.cpfValidator(value),
                     name: 'CPF',
-                    controller: widget.controller.cpfController,
+                    controller: controller.cpfController,
                     textInputType: TextInputType.number,
                   ),
                   SizedBox(height: 16.0),

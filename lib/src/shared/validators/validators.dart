@@ -20,8 +20,8 @@ class Validators {
   String? cpfValidator(String? value) {
     if (value == null || value.isEmpty) {
       return "O CPF é necessário para conectar suas contas";
-    } else if (CPFValidator.isValid(value) == false) {
-      return "Não é um CPF valido!";
+      // } else if (CPFValidator.isValid(value) == false) {
+      //   return "Não é um CPF valido!";
     } else {
       return null;
     }

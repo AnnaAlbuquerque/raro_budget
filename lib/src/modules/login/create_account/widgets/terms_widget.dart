@@ -8,11 +8,9 @@ import 'package:raro_budget/src/shared/validators/validators.dart';
 import 'package:raro_budget/src/shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
 
 class TermsWidget extends StatefulWidget {
-  final CreateAccountController controller;
   final Validators? validators;
   TermsWidget({
     Key? key,
-    required this.controller,
     this.validators,
   }) : super(key: key);
 
@@ -93,11 +91,11 @@ class _TermsWidgetState
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Checkbox(
-                            value: widget.controller.termsAccepted,
+                            value: controller.termsAccepted,
                             shape: CircleBorder(),
                             onChanged: (value) {
                               setState(() {
-                                widget.controller.termsAccepted = value as bool;
+                                controller.termsAccepted = value as bool;
                               });
                             },
                           ),
