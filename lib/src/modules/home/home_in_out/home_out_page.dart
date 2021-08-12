@@ -5,7 +5,7 @@ import '../../../shared/constants/app_text_styles.dart';
 import '../../../shared/widgets/custom_appbar/custom_appbar.dart';
 import '../../../shared/widgets/custom_button_logged/custom_button_logged_widget.dart';
 import '../../../shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
-import './widgets/custom_dropdownbuttonform_widget.dart';
+import './widgets/custom_dropdownform/custom_dropdownbuttonform_widget.dart';
 
 class HomeOutPage extends StatefulWidget {
   const HomeOutPage({Key? key}) : super(key: key);
