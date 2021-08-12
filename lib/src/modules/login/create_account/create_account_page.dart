@@ -25,26 +25,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    // showDialog(
-    //   context: context,
-    //   builder: (context) => Column(
-    //     mainAxisAlignment: MainAxisAlignment.start,
-    //     children: [
-    //       Card(
-    //         color: Colors.green,
-    //         shadowColor: Color(0xFFCCCCCC),
-    //         child: Padding(
-    //           padding: const EdgeInsets.all(16.0),
-    //           child: Text(
-    //             "Para testar a validação! Neste caso, passou!",
-    //             style: TextStyle(fontSize: 24, color: Colors.white),
-    //           ),
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
-
     return Form(
       key: _formKey,
       child: Scaffold(

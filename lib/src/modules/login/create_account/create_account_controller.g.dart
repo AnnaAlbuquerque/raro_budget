@@ -40,6 +40,21 @@ mixin _$CreateAccountController on CreateAccountBase, Store {
     });
   }
 
+  final _$termsAcceptedAtom = Atom(name: 'CreateAccountBase.termsAccepted');
+
+  @override
+  bool get termsAccepted {
+    _$termsAcceptedAtom.reportRead();
+    return super.termsAccepted;
+  }
+
+  @override
+  set termsAccepted(bool value) {
+    _$termsAcceptedAtom.reportWrite(value, super.termsAccepted, () {
+      super.termsAccepted = value;
+    });
+  }
+
   final _$CreateAccountBaseActionController =
       ActionController(name: 'CreateAccountBase');
 
@@ -58,7 +73,8 @@ mixin _$CreateAccountController on CreateAccountBase, Store {
   String toString() {
     return '''
 pageViewController: ${pageViewController},
-pageNumber: ${pageNumber}
+pageNumber: ${pageNumber},
+termsAccepted: ${termsAccepted}
     ''';
   }
 }
