@@ -70,7 +70,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   PasswordWidget(
                     validators: validators,
                   ),
-                  Container(),
                 ],
               ),
             ),
@@ -102,23 +101,20 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   iconRight: Icons.forward,
                   text: 'CONTINUAR',
                   useGradientBackground: true,
-                  onTap: () async {
+                  onTap: () {
                     if (_formKey.currentState!.validate()) {
-                      await controller.pageViewController.nextPage(
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.linear,
-                      );
+                      controller.pageViewController
+                          .nextPage(
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.linear,
+                          )
+                          .then(
+                            (_) => controller.showCurrentPageNumber(),
+                          );
+                    }
 
-                      controller.showCurrentPageNumber();
-
-                      double? currentPageNumber =
-                          controller.pageViewController.page;
-
-                      if (currentPageNumber == 4.0) {
-                        Modular.to
-                            .pushNamed("/login/create_account/onboarding");
-                        print("FOI");
-                      }
+                    if (controller.pageNumber == 4) {
+                      Modular.to.pushNamed('/login/create_account/onboarding');
                     }
                   },
                 ),
