@@ -70,6 +70,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   PasswordWidget(
                     validators: validators,
                   ),
+                  Container(),
                 ],
               ),
             ),
@@ -107,12 +108,17 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                         duration: Duration(milliseconds: 500),
                         curve: Curves.linear,
                       );
-                      controller.showCurrentPageNumber();
-                    }
 
-                    if (_formKey.currentState!.validate() &&
-                        controller.pageNumber == 4) {
-                      Modular.to.pushNamed("/login/create_account/onboarding");
+                      controller.showCurrentPageNumber();
+
+                      double? currentPageNumber =
+                          controller.pageViewController.page;
+
+                      if (currentPageNumber == 4.0) {
+                        Modular.to
+                            .pushNamed("/login/create_account/onboarding");
+                        print("FOI");
+                      }
                     }
                   },
                 ),
