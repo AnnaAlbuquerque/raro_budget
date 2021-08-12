@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:raro_budget/src/shared/models/user_model.dart';
 
 part 'create_account_controller.g.dart';
 
@@ -26,5 +27,23 @@ abstract class CreateAccountBase with Store {
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController cpfController = TextEditingController();
+
   bool termsAccepted = false;
+
+  @observable
+  UserModel newUser = UserModel(
+      name: "", email: "", phone: "", cpf: "", terms: false, password: "");
+
+  @action
+  void saveNewUserData() {
+    var savedUser = newUser.copyWith(
+        name: nameController.text,
+        email: emailController.text,
+        phone: phoneController.text,
+        cpf: cpfController.text,
+        terms: termsAccepted,
+        password: passwordController.text);
+
+    print(savedUser);
+  }
 }

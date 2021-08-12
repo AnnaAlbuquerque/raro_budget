@@ -95,6 +95,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
                     if (controller.pageNumber == 4) {
                       Modular.to.pushNamed('/login/create_account/onboarding');
+                      controller.saveNewUserData();
                     }
                   },
                 ),

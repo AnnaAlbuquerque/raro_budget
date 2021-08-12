@@ -40,18 +40,18 @@ mixin _$CreateAccountController on CreateAccountBase, Store {
     });
   }
 
-  final _$termsAcceptedAtom = Atom(name: 'CreateAccountBase.termsAccepted');
+  final _$newUserAtom = Atom(name: 'CreateAccountBase.newUser');
 
   @override
-  bool get termsAccepted {
-    _$termsAcceptedAtom.reportRead();
-    return super.termsAccepted;
+  UserModel get newUser {
+    _$newUserAtom.reportRead();
+    return super.newUser;
   }
 
   @override
-  set termsAccepted(bool value) {
-    _$termsAcceptedAtom.reportWrite(value, super.termsAccepted, () {
-      super.termsAccepted = value;
+  set newUser(UserModel value) {
+    _$newUserAtom.reportWrite(value, super.newUser, () {
+      super.newUser = value;
     });
   }
 
@@ -70,11 +70,22 @@ mixin _$CreateAccountController on CreateAccountBase, Store {
   }
 
   @override
+  void saveNewUserData() {
+    final _$actionInfo = _$CreateAccountBaseActionController.startAction(
+        name: 'CreateAccountBase.saveNewUserData');
+    try {
+      return super.saveNewUserData();
+    } finally {
+      _$CreateAccountBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 pageViewController: ${pageViewController},
 pageNumber: ${pageNumber},
-termsAccepted: ${termsAccepted}
+newUser: ${newUser}
     ''';
   }
 }
