@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "219873858805",
+    "project_id": "raro-budget-298b1",
+    "storage_bucket": "raro-budget-298b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219873858805:android:e87a3ac5bb7cd812b1a1bc",
+        "android_client_info": {
+          "package_name": "com.example.raro_budget"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "219873858805-im0jlpe0rn2hs1st1bagufqs9rjm2o2h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.raro_budget",
+            "certificate_hash": "e3b9820b85fd2f269a689d5a2d1078d018fcfbaa"
+          }
+        },
+        {
+          "client_id": "219873858805-1i4744qrmm3n3ef7shjt2n9h7epnunaf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARvROECdvLZy5Md6y1EAZJgMZIznOY3HQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "219873858805-1i4744qrmm3n3ef7shjt2n9h7epnunaf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
