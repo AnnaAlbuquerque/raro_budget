@@ -6,9 +6,7 @@ import 'package:raro_budget/src/modules/splash/splash_module.dart';
 
 class AppModule extends Module {
   @override
-  List<Bind> get binds => [
-        Bind.singleton((i) => FirebaseAuth.instance),
-      ];
+  List<Bind> get binds => [];
 
   @override
   List<ModularRoute> get routes => [

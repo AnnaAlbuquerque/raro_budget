@@ -63,6 +63,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                   alignment: Alignment.centerRight,
                   child: CustomButton(
                     text: 'CONTINUAR',
+                    onTap: () {},
                   ),
                 ),
                 SizedBox(height: 52.0),

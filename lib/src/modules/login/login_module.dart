@@ -8,8 +8,10 @@ import 'package:raro_budget/src/modules/login/login/login_page.dart';
 
 class LoginModule extends Module {
   @override
-  List<Bind> get binds =>
-      [Bind.singleton((i) => LoginController(i.get<FirebaseAuth>()))];
+  List<Bind> get binds => [
+        Bind.singleton((i) => FirebaseAuth.instance),
+        Bind.singleton((i) => LoginController(i.get<FirebaseAuth>()))
+      ];
 
   @override
   List<ModularRoute> get routes => [
