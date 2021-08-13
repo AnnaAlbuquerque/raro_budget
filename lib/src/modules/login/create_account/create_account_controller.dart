@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:raro_budget/src/modules/login/create_account/create_account_repository.dart';
 import 'package:raro_budget/src/shared/models/user_model.dart';
 
 part 'create_account_controller.g.dart';
@@ -8,6 +9,9 @@ class CreateAccountController = CreateAccountBase
     with _$CreateAccountController;
 
 abstract class CreateAccountBase with Store {
+  final CreateAccountRepository repository;
+  CreateAccountBase({required this.repository});
+
   @observable
   PageController pageViewController = PageController(
     initialPage: 0,
@@ -45,5 +49,7 @@ abstract class CreateAccountBase with Store {
         password: passwordController.text);
 
     print(savedUser);
+
+    repository.addUser(savedUser);
   }
 }
