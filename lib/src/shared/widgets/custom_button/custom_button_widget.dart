@@ -60,83 +60,85 @@ class CustomButton extends StatelessWidget {
       leftSizedBoxVisible = true;
     }
 
-    return InkWell(
-      borderRadius: BorderRadius.circular(24),
-      onTap: onTap,
-      child: Ink(
-        padding: EdgeInsets.only(
-            top: 10, bottom: 10, left: paddingLeft, right: paddingRight),
-        //height: 40,
-        decoration:
-            useGradientBackground != null && useGradientBackground == false
-                ? BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: AppColors.white,
-                  )
-                : BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    gradient: AppColors.cyanToPurpleAppBar,
-                  ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Visibility(
-              visible: iconLeftVisible,
-              child: Row(
-                children: [
-                  Icon(
-                    iconLeft,
-                    size: 20,
-                    color: useGradientBackground != null &&
-                            useGradientBackground == false
-                        ? AppColors.black26
-                        : AppColors.white,
-                  ),
-                  // SizedBox(width: 8),
-                ],
+    return Material(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(24),
+        onTap: onTap,
+        child: Ink(
+          padding: EdgeInsets.only(
+              top: 10, bottom: 10, left: paddingLeft, right: paddingRight),
+          //height: 40,
+          decoration:
+              useGradientBackground != null && useGradientBackground == false
+                  ? BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: AppColors.white,
+                    )
+                  : BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      gradient: AppColors.cyanToPurpleAppBar,
+                    ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Visibility(
+                visible: iconLeftVisible,
+                child: Row(
+                  children: [
+                    Icon(
+                      iconLeft,
+                      size: 20,
+                      color: useGradientBackground != null &&
+                              useGradientBackground == false
+                          ? AppColors.black26
+                          : AppColors.white,
+                    ),
+                    // SizedBox(width: 8),
+                  ],
+                ),
               ),
-            ),
-            Visibility(
-              visible: leftSizedBoxVisible,
-              child: SizedBox(
-                width: 8,
+              Visibility(
+                visible: leftSizedBoxVisible,
+                child: SizedBox(
+                  width: 8,
+                ),
               ),
-            ),
-            Visibility(
-              visible: textVisible,
-              child: Row(
-                children: [
-                  Text(
-                    textVisible ? text as String : "",
-                    style: useGradientBackground != null &&
-                            useGradientBackground == false
-                        ? TextStyles.black2614w500Roboto
-                        : TextStyles.white14w500Roboto,
-                  ),
-                ],
+              Visibility(
+                visible: textVisible,
+                child: Row(
+                  children: [
+                    Text(
+                      textVisible ? text as String : "",
+                      style: useGradientBackground != null &&
+                              useGradientBackground == false
+                          ? TextStyles.black2614w500Roboto
+                          : TextStyles.white14w500Roboto,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Visibility(
-              visible: rightSizedBoxVisible,
-              child: SizedBox(
-                width: 8,
+              Visibility(
+                visible: rightSizedBoxVisible,
+                child: SizedBox(
+                  width: 8,
+                ),
               ),
-            ),
-            Visibility(
-              visible: iconRightVisible,
-              child: Row(
-                children: [
-                  // SizedBox(width: 8),
-                  Icon(
-                    iconRight,
-                    size: 20,
-                    color: AppColors.white,
-                  ),
-                ],
+              Visibility(
+                visible: iconRightVisible,
+                child: Row(
+                  children: [
+                    // SizedBox(width: 8),
+                    Icon(
+                      iconRight,
+                      size: 20,
+                      color: AppColors.white,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
