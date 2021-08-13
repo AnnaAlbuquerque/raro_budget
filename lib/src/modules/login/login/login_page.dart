@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/modules/login/login/login_controller.dart';
 import '../../../shared/widgets/custom_button/custom_button_widget.dart';
 import '../../../shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
 import '../../../shared/widgets/custom_social_login_button/custom_social_login_button_widget.dart';
@@ -14,7 +16,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ModularState<LoginPage, LoginController> {
   TextEditingController _emailController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
