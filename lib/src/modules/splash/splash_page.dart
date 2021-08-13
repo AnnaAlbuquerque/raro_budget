@@ -1,7 +1,9 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/modules/splash/splash_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
+import 'package:raro_budget/src/shared/enums/firebase_status.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SplashPage extends StatefulWidget {
@@ -11,13 +13,18 @@ class SplashPage extends StatefulWidget {
   _SplashPageState createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends ModularState<SplashPage, SplashController> {
   @override
   void initState() {
+    store.initializerFirebase();
+
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
+      //TODO adição de pagina de erroq uando o firebase não conectar corretamente
+      //TODO verificar se usuário está logado, se sim -> home, se não -> login
       Future.delayed(Duration(seconds: 2))
           .then((_) => Modular.to.navigate("/login"));
     });
+
     super.initState();
   }
 

@@ -11,7 +11,7 @@ class LoginModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute("/", child: (_, __) => LoginPage()),
-        ChildRoute("/create_account", child: (_, __) => FirebaseTests()),
+        ChildRoute("/create_account", child: (_, __) => CreateAccountPage()),
         ChildRoute("/existing_email",
             child: (_, __) => ExistingEmailLoginPage()),
       ];
