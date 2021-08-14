@@ -74,6 +74,10 @@ flutter:
     - assets/icons/trip_icon.png
     - assets/icons/payments_icon.png
     - assets/icons/others_icon.png
+    - assets/icons/bank_slip_icon.png
+    - assets/icons/doc_icon.png
+    - assets/icons/pix_icon.png
+    - assets/icons/ted_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
