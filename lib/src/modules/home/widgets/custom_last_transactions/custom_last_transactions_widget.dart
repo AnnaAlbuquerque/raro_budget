@@ -82,6 +82,7 @@ class CustomLastTransactions extends StatelessWidget {
                 title: 'Refeições',
                 transferredValue: '25,00',
                 icon: 'assets/icons/meal_icon.png',
+                textstyle: TextStyles.black8716w400Roboto,
               ),
               SizedBox(height: 24.0),
               CustomTransactionItem(
@@ -89,6 +90,7 @@ class CustomLastTransactions extends StatelessWidget {
                 title: 'Transporte',
                 transferredValue: '57,30',
                 icon: 'assets/icons/transport_icon.png',
+                textstyle: TextStyles.black8716w400Roboto,
               ),
               SizedBox(height: 24.0),
               CustomTransactionItem(
@@ -96,6 +98,7 @@ class CustomLastTransactions extends StatelessWidget {
                 title: 'Educação',
                 transferredValue: '316,00',
                 icon: 'assets/icons/education_icon.png',
+                textstyle: TextStyles.black8716w400Roboto,
               ),
             ],
           ),

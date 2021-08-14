@@ -35,63 +35,65 @@ class CustomButtonLoggedFlow extends StatelessWidget {
       sizedBoxVisible = true;
     }
 
-    return InkWell(
-      borderRadius: BorderRadius.circular(24),
-      onTap: onTap,
-      child: Ink(
-        padding: EdgeInsets.only(top: 12, bottom: 12, left: 15, right: 15),
-        height: 50,
-        decoration:
-            useGradientBackground != null && useGradientBackground == false
-                ? BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: AppColors.white,
-                  )
-                : BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    gradient: AppColors.cyanToPurpleAppBar,
-                  ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Visibility(
-              visible: useIconAddVisible,
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.add,
-                    size: 20,
-                    color: useGradientBackground != null &&
-                            useGradientBackground == false
-                        ? AppColors.black26
-                        : AppColors.white,
-                  ),
-                  // SizedBox(width: 8),
-                ],
+    return Material(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(24),
+        onTap: onTap,
+        child: Ink(
+          padding: EdgeInsets.only(top: 12, bottom: 12, left: 15, right: 15),
+          height: 50,
+          decoration:
+              useGradientBackground != null && useGradientBackground == false
+                  ? BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: AppColors.white,
+                    )
+                  : BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      gradient: AppColors.cyanToPurpleAppBar,
+                    ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Visibility(
+                visible: useIconAddVisible,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.add,
+                      size: 20,
+                      color: useGradientBackground != null &&
+                              useGradientBackground == false
+                          ? AppColors.black26
+                          : AppColors.white,
+                    ),
+                    // SizedBox(width: 8),
+                  ],
+                ),
               ),
-            ),
-            Visibility(
-              visible: sizedBoxVisible,
-              child: SizedBox(
-                width: 8,
+              Visibility(
+                visible: sizedBoxVisible,
+                child: SizedBox(
+                  width: 8,
+                ),
               ),
-            ),
-            Visibility(
-              visible: textVisible,
-              child: Row(
-                children: [
-                  Text(
-                    textVisible ? text as String : "",
-                    style: useGradientBackground != null &&
-                            useGradientBackground == false
-                        ? TextStyles.black2614w500Roboto
-                        : TextStyles.white14w500Roboto,
-                  ),
-                ],
+              Visibility(
+                visible: textVisible,
+                child: Row(
+                  children: [
+                    Text(
+                      textVisible ? text as String : "",
+                      style: useGradientBackground != null &&
+                              useGradientBackground == false
+                          ? TextStyles.black2614w500Roboto
+                          : TextStyles.white14w500Roboto,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

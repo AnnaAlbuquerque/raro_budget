@@ -10,6 +10,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String? button1;
   final String? button2;
   final String? button3;
+  final Function()? b1onPressed;
+  final Function()? b2onPressed;
+  final Function()? b3onPressed;
 
   const CustomAppBar({
     Key? key,
@@ -20,6 +23,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     this.button2,
     this.button3,
     this.iconDataRight,
+    this.b1onPressed,
+    this.b2onPressed,
+    this.b3onPressed,
   }) : super(key: key);
 
   @override
@@ -155,7 +161,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextButton(
-                            onPressed: () {},
+                            onPressed: b1onPressed,
                             child: Text(
                               '$button1',
                               style: TextStyles.white16w400Roboto,
@@ -167,7 +173,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                             width: 2,
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: b2onPressed,
                             child: Text(
                               '$button2',
                               style: TextStyles.white16w400Roboto,
@@ -179,7 +185,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                             width: 2,
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: b3onPressed,
                             child: Text(
                               '$button3',
                               style: TextStyles.white16w400Roboto,
