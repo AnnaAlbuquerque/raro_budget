@@ -51,5 +51,11 @@ abstract class CreateAccountBase with Store {
     print(savedUser);
 
     repository.addUser(savedUser);
+
+    print("USUÁRIO CRIADO!!!!");
+
+    repository.loginUser(savedUser);
+
+    print("USUÁRIO FAZENDO LOGIN!");
   }
 }

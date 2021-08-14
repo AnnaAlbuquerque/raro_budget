@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:raro_budget/src/shared/models/user_model.dart';
 
-class CreateAccountRepository {
+abstract class CreateAccountRepository {
+  Future<void> addUser(UserModel user);
+  Future<void> loginUser(UserModel user);
+}
+
+class CreateAccountRepositoryImpl implements CreateAccountRepository {
   CollectionReference users = FirebaseFirestore.instance.collection("users");
 
   Future<void> addUser(UserModel user) async {
@@ -37,15 +41,16 @@ class CreateAccountRepository {
     }
   }
 
-  // Future<void> addUserData(UserModel user) async {
-  //   await users.add({
-  //     'name': user.name,
-  //     'email': user.email,
-  //     'phone': user.phone,
-  //     'cpf': user.cpf,
-  //     'terms': user.terms,
-  //   });
-
-  //   print("User added");
-  // }
+  Future<void> loginUser(UserModel user) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: user.email, password: user.password);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+  }
 }

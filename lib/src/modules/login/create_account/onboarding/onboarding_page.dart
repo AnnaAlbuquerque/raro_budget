@@ -1,5 +1,6 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 
@@ -24,7 +25,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             image: DecorationImage(
                 image: AssetImage(
                     'assets/images/onboarding_background_novector.png'),
-                fit: BoxFit.fitWidth),
+                fit: BoxFit.cover),
           ),
           child: Stack(
             children: [
@@ -96,7 +97,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             ),
                           ),
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          Modular.to.navigate('/login');
+                        },
                       ),
                     ),
                     SizedBox(

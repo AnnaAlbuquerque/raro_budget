@@ -20,7 +20,7 @@ class CreateAccountPage extends StatefulWidget {
 
 class _CreateAccountPageState extends State<CreateAccountPage> {
   final controller = Modular.get<CreateAccountController>();
-  final validators = Validators();
+  final validators = Modular.get<Validators>();
   final _formKey = GlobalKey<FormState>();
 
   @override
