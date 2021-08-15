@@ -19,10 +19,12 @@ class _SplashPageState extends ModularState<SplashPage, SplashController> {
     controller.initializerFirebase().then((value) => {
           WidgetsFlutterBinding.ensureInitialized()
               .addPostFrameCallback((timeStamp) {
-            //TODO adição de pagina de erroq uando o firebase não conectar corretamente
+            //TODO adição de pagina de erro quando o firebase não conectar corretamente
             //TODO verificar se usuário está logado, se sim -> home, se não -> login
-            Future.delayed(Duration(seconds: 2))
-                .then((_) => Modular.to.navigate("/login"));
+            if (controller.status == ConnectionStatus.success) {
+              Future.delayed(Duration(seconds: 2))
+                  .then((_) => controller.NavigationLogin());
+            }
           })
         });
 
@@ -105,8 +107,9 @@ class _SplashPageState extends ModularState<SplashPage, SplashController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image(
-                              image: AssetImage(
-                                  'assets/images/powered_by_raro.png')),
+                            image:
+                                AssetImage('assets/images/powered_by_raro.png'),
+                          ),
                         ],
                       ),
                       SizedBox(

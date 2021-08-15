@@ -1,3 +1,4 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:raro_budget/src/shared/auth/auth_controller.dart';
 import 'package:raro_budget/src/shared/enums/firebase_status.dart';
@@ -18,5 +19,11 @@ abstract class SplashBase with Store {
   Future<void> initializerFirebase() async {
     await authController.initilizer();
     status = authController.getConnectionStatus();
+  }
+
+  void NavigationLogin() {
+    if (status == ConnectionStatus.success) {
+      Modular.to.navigate("/login");
+    }
   }
 }
