@@ -4,7 +4,8 @@ import 'package:raro_budget/src/shared/models/user_model.dart';
 
 abstract class CreateAccountRepository {
   Future<void> addUser(UserModel user);
-  Future<void> loginUser(UserModel user);
+  // Future<void> loginUser(UserModel user);
+  bool checkUserLogin();
 }
 
 class CreateAccountRepositoryImpl implements CreateAccountRepository {
@@ -41,16 +42,28 @@ class CreateAccountRepositoryImpl implements CreateAccountRepository {
     }
   }
 
-  Future<void> loginUser(UserModel user) async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: user.email, password: user.password);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
+  // Future<void> loginUser(UserModel user) async {
+  //   try {
+  //     await FirebaseAuth.instance.signInWithEmailAndPassword(
+  //         email: user.email, password: user.password);
+  //   } on FirebaseAuthException catch (e) {
+  //     if (e.code == 'user-not-found') {
+  //       print('No user found for that email.');
+  //     } else if (e.code == 'wrong-password') {
+  //       print('Wrong password provided for that user.');
+  //     }
+  //   }
+  // }
+
+  bool checkUserLogin() {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      print("USUÁRIO LOGADO!");
+      return true;
+    } else {
+      print("USUÁRIO OFF");
+      return false;
     }
   }
 }

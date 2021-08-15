@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:raro_budget/src/modules/login/create_account/create_account_repository.dart';
 import 'package:raro_budget/src/shared/models/user_model.dart';
@@ -53,9 +55,10 @@ abstract class CreateAccountBase with Store {
     repository.addUser(savedUser);
 
     print("USUÁRIO CRIADO!!!!");
+  }
 
-    repository.loginUser(savedUser);
-
-    print("USUÁRIO FAZENDO LOGIN!");
+  @action
+  bool checkUserLogin() {
+    return repository.checkUserLogin();
   }
 }

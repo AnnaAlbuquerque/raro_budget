@@ -81,6 +81,17 @@ mixin _$CreateAccountController on CreateAccountBase, Store {
   }
 
   @override
+  bool checkUserLogin() {
+    final _$actionInfo = _$CreateAccountBaseActionController.startAction(
+        name: 'CreateAccountBase.checkUserLogin');
+    try {
+      return super.checkUserLogin();
+    } finally {
+      _$CreateAccountBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 pageViewController: ${pageViewController},
