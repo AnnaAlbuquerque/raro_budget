@@ -1,4 +1,4 @@
-enum FirebaseStatus {
+enum ConnectionStatus {
   success,
   error,
   loading,

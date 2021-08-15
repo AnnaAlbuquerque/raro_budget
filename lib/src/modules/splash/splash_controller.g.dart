@@ -9,18 +9,18 @@ part of 'splash_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SplashController on SplashBase, Store {
-  final _$firebaseStatusAtom = Atom(name: 'SplashBase.firebaseStatus');
+  final _$statusAtom = Atom(name: 'SplashBase.status');
 
   @override
-  FirebaseStatus get firebaseStatus {
-    _$firebaseStatusAtom.reportRead();
-    return super.firebaseStatus;
+  ConnectionStatus get status {
+    _$statusAtom.reportRead();
+    return super.status;
   }
 
   @override
-  set firebaseStatus(FirebaseStatus value) {
-    _$firebaseStatusAtom.reportWrite(value, super.firebaseStatus, () {
-      super.firebaseStatus = value;
+  set status(ConnectionStatus value) {
+    _$statusAtom.reportWrite(value, super.status, () {
+      super.status = value;
     });
   }
 
@@ -36,7 +36,7 @@ mixin _$SplashController on SplashBase, Store {
   @override
   String toString() {
     return '''
-firebaseStatus: ${firebaseStatus}
+status: ${status}
     ''';
   }
 }

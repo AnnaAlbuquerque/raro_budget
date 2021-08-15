@@ -16,7 +16,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends ModularState<SplashPage, SplashController> {
   @override
   void initState() {
-    store.initializerFirebase().then((value) => {
+    controller.initializerFirebase().then((value) => {
           WidgetsFlutterBinding.ensureInitialized()
               .addPostFrameCallback((timeStamp) {
             //TODO adição de pagina de erroq uando o firebase não conectar corretamente
