@@ -1,7 +1,7 @@
-class User {
+class UserModel {
   String name;
 
-  User({
+  UserModel({
     required this.name,
   });
 }
