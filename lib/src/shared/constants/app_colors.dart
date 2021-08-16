@@ -7,6 +7,7 @@ class AppColors {
   static const Color lightBlue = Color(0xFF2196F3);
   static const Color purple = Color(0xFF343090);
   static const Color chambray = Color(0xFF3A5B96);
+  static const Color selago = Color(0XFFF1F0FE);
   static const Color lilac = Color(0xFFA29EFF);
   static const Color green = Color(0xFF58B368);
   static const Color pink = Color(0xFFF5487F);
@@ -45,5 +46,11 @@ class AppColors {
     end: Alignment.bottomRight,
     stops: [0.0, 0.60],
     transform: GradientRotation(340 * pi / 180),
+  );
+
+  static const LinearGradient selagotowhite = LinearGradient(
+    colors: [white, selago],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
   );
 }
