@@ -1,4 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:raro_budget/src/modules/login/create_account/create_account_repository.dart';
+import 'package:raro_budget/src/shared/models/user_model.dart';
 
 part 'create_account_controller.g.dart';
 
@@ -6,20 +11,54 @@ class CreateAccountController = CreateAccountBase
     with _$CreateAccountController;
 
 abstract class CreateAccountBase with Store {
+  final CreateAccountRepository repository;
+  CreateAccountBase({required this.repository});
+
+  @observable
+  PageController pageViewController = PageController(
+    initialPage: 0,
+  );
+
   @observable
   int pageNumber = 1;
 
   @action
-  void incrementPageNumber() {
-    if (pageNumber < 4) {
-      pageNumber++;
-    }
+  void showCurrentPageNumber() {
+    pageNumber = pageViewController.page!.toInt() + 1;
+  }
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController cpfController = TextEditingController();
+
+  bool termsAccepted = false;
+
+  @observable
+  UserModel newUser = UserModel(
+      name: "", email: "", phone: "", cpf: "", terms: false, password: "");
+
+  @action
+  void saveNewUserData() {
+    var savedUser = newUser.copyWith(
+        name: nameController.text,
+        email: emailController.text,
+        phone: phoneController.text,
+        cpf: cpfController.text,
+        terms: termsAccepted,
+        password: passwordController.text);
+
+    print(savedUser);
+
+    repository.addUser(savedUser);
+
+    print("USUÁRIO CRIADO!!!!");
   }
 
   @action
-  void decrementPageNumber() {
-    if (pageNumber > 1) {
-      pageNumber--;
-    }
+  bool checkUserLogin() {
+    return repository.checkUserLogin();
   }
 }

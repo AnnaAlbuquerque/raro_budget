@@ -1,8 +1,9 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/modules/login/create_account/create_account_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
-import 'package:shimmer/shimmer.dart';
 
 class OnboardingPage extends StatefulWidget {
   OnboardingPage({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
+  final controller = Modular.get<CreateAccountController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,7 +27,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             image: DecorationImage(
                 image: AssetImage(
                     'assets/images/onboarding_background_novector.png'),
-                fit: BoxFit.fitWidth),
+                fit: BoxFit.cover),
           ),
           child: Stack(
             children: [
@@ -97,7 +99,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             ),
                           ),
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          if (controller.checkUserLogin()) {
+                            Modular.to.navigate('/home');
+                          } else {
+                            Modular.to.navigate('/login');
+                          }
+                        },
                       ),
                     ),
                     SizedBox(

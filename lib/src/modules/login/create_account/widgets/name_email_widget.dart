@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/modules/login/create_account/create_account_controller.dart';
+
+import 'package:raro_budget/src/shared/validators/validators.dart';
+
 import 'package:raro_budget/src/shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
 import 'package:raro_budget/src/shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
 
 class NameEmailWidget extends StatefulWidget {
-  NameEmailWidget({Key? key}) : super(key: key);
+  final Validators validators;
+  NameEmailWidget({
+    Key? key,
+    required this.validators,
+  }) : super(key: key);
 
   @override
   _NameEmailWidgetState createState() => _NameEmailWidgetState();
 }
 
 class _NameEmailWidgetState extends State<NameEmailWidget> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _emailController.dispose();
-    super.dispose();
-  }
+  final controller = Modular.get<CreateAccountController>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,23 +41,25 @@ class _NameEmailWidgetState extends State<NameEmailWidget> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 100.0),
-              child: Form(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CustomTextFormField(
-                      name: 'Nome',
-                      controller: _nameController,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    CustomTextFormField(
-                      name: 'E-mail',
-                      controller: _emailController,
-                    ),
-                  ],
-                ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CustomTextFormField(
+                    name: 'Nome',
+                    controller: controller.nameController,
+                    validator: (value) =>
+                        widget.validators.nameValidator(value),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  CustomTextFormField(
+                    name: 'E-mail',
+                    controller: controller.emailController,
+                    validator: (value) =>
+                        widget.validators.emailValidator(value),
+                  ),
+                ],
               ),
             ),
           ],
