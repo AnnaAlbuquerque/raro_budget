@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/login/login/login_controller.dart';
+import 'package:raro_budget/src/shared/validators/validators.dart';
 import '../../../shared/widgets/custom_button/custom_button_widget.dart';
 import '../../../shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
 import '../../../shared/widgets/custom_social_login_button/custom_social_login_button_widget.dart';
@@ -18,6 +18,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends ModularState<LoginPage, LoginController> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final validators = Modular.get<Validators>();
 
   @override
   void dispose() {
@@ -55,9 +56,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 CustomTextFormField(
                   name: 'E-mail',
                   controller: controller.emailController,
-                  validator: (value) {
-                    return controller.validateEmail();
-                  },
+                  validator: (value) => validators.emailValidator(value),
                 ),
                 SizedBox(height: 16.0),
                 Align(

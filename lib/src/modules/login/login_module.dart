@@ -4,11 +4,13 @@ import 'package:raro_budget/src/modules/login/login/existing_email_login_page.da
 import 'package:raro_budget/src/modules/login/login/login_controller.dart';
 import 'package:raro_budget/src/modules/login/login/login_page.dart';
 import 'package:raro_budget/src/shared/auth/auth_controller.dart';
+import 'package:raro_budget/src/shared/validators/validators.dart';
 
 class LoginModule extends Module {
   @override
   List<Bind> get binds => [
         Bind.singleton((i) => LoginController(i.get<AuthController>())),
+        Bind.lazySingleton((i) => Validators())
       ];
 
   @override

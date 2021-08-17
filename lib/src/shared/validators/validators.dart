@@ -1,6 +1,9 @@
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
 
 class Validators {
+  RegExp checkEmail = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
   String? nameValidator(String? value) {
     if (value == null || value.isEmpty) {
       return "Ops! Preencha!";
@@ -12,8 +15,10 @@ class Validators {
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
       return "Ops! Preencha!";
-    } else {
+    } else if (checkEmail.hasMatch(value)) {
       return null;
+    } else {
+      return "Email inválido!";
     }
   }
 
