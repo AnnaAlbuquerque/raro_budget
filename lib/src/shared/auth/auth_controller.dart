@@ -19,9 +19,13 @@ abstract class _AuthControllerBase with Store {
     await _firebaseRepository.initializer();
   }
 
+  Future<bool> hasEmail(String email) async {
+    bool hasEmail = await _firebaseRepository.hasEmail(email);
+    return hasEmail;
+  }
+
   //Remover depois de testar
   Future<void> createTest() async {
-    await _firebaseRepository.auth.createUserWithEmailAndPassword(
-        email: "teste@teste3.com", password: "123456");
+    await _firebaseRepository.hasEmail("teste@teste3.com");
   }
 }

@@ -17,12 +17,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends ModularState<LoginPage, LoginController> {
-  TextEditingController _emailController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    _emailController.dispose();
     super.dispose();
   }
 
@@ -56,14 +54,37 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 SizedBox(height: 46.0),
                 CustomTextFormField(
                   name: 'E-mail',
-                  controller: _emailController,
+                  controller: controller.emailController,
+                  validator: (value) {
+                    return controller.validateEmail(value);
+                  },
                 ),
                 SizedBox(height: 16.0),
                 Align(
                   alignment: Alignment.centerRight,
                   child: CustomButton(
                     text: 'CONTINUAR',
-                    onTap: () {},
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        controller
+                            .verifyEmail(controller.emailController.text)
+                            .then((value) => {
+                                  if (value)
+                                    {
+                                      Modular.to
+                                          .navigate("/login/existing_email")
+                                    }
+                                  else
+                                    {
+                                      //TODO colocar modal com mensagem de email não cadastrado
+                                      print("EMAIL NÃO ENCONTRADO")
+                                    }
+                                });
+                      } else {
+                        //TODO colocar modal com mensagem de email inválido
+                        print("NAO VALIDOU");
+                      }
+                    },
                   ),
                 ),
                 SizedBox(height: 52.0),
