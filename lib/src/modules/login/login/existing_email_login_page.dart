@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/modules/login/login/login_controller.dart';
 import '../../../shared/constants/app_text_styles.dart';
 import '../../../shared/widgets/custom_button/custom_button_widget.dart';
 import '../../../shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
@@ -11,16 +13,13 @@ class ExistingEmailLoginPage extends StatefulWidget {
   _ExistingEmailLoginPageState createState() => _ExistingEmailLoginPageState();
 }
 
-class _ExistingEmailLoginPageState extends State<ExistingEmailLoginPage> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+class _ExistingEmailLoginPageState
+    extends ModularState<ExistingEmailLoginPage, LoginController> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isObscure = true;
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
     super.dispose();
   }
 
@@ -47,17 +46,24 @@ class _ExistingEmailLoginPageState extends State<ExistingEmailLoginPage> {
                 const SizedBox(height: 82.0),
                 CustomTextFormField(
                   name: 'Email',
-                  controller: _emailController,
+                  controller: controller.emailController,
+                  validator: (_) {
+                    return controller.validateEmail();
+                  },
                 ),
                 const SizedBox(height: 50.0),
                 CustomTextFormField(
                   name: 'Senha',
                   obscureText: _isObscure,
-                  controller: _passwordController,
+                  controller: controller.passwordController,
+                  validator: (_) {
+                    return controller.validatePassword();
+                  },
                   icon: IconButton(
                     icon: Icon(
                       _isObscure ? Icons.visibility_off : Icons.visibility,
                     ),
+                    //TODO modificar isObscure com o mobx
                     onPressed: () => setState(() => _isObscure = !_isObscure),
                   ),
                 ),
@@ -74,6 +80,25 @@ class _ExistingEmailLoginPageState extends State<ExistingEmailLoginPage> {
                     ),
                     CustomButton(
                       text: 'CONTINUAR',
+                      onTap: () {
+                        if (_formKey.currentState!.validate()) {
+                          controller
+                              .login(controller.emailController.text,
+                                  controller.passwordController.text)
+                              .then((value) => {
+                                    if (value)
+                                      {Modular.to.navigate("/home")}
+                                    else
+                                      {
+                                        //TODO modal com mensagem de credenciais inválidas
+                                        print("NAO LOGOU")
+                                      }
+                                  });
+                        } else {
+                          //TODO colocar modal com mensagem de email inválido
+                          print("NAO LOGOU");
+                        }
+                      },
                     ),
                   ],
                 ),

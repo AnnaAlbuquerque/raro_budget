@@ -39,8 +39,15 @@ class FirebaseRepository {
     }
   }
 
-  Future getEmailPasswordLogin() {
-    // TODO: implement getEmailPasswordLogin
-    throw UnimplementedError();
+  Future<bool> getEmailPasswordLogin(String email, String password) async {
+    try {
+      await auth.signInWithEmailAndPassword(email: email, password: password);
+      if (auth.currentUser != null) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
   }
 }

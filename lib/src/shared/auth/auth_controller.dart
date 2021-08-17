@@ -1,13 +1,9 @@
 // import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mobx/mobx.dart';
 import 'package:raro_budget/src/shared/auth/repositories/firebase_repository.dart';
 import 'package:raro_budget/src/shared/enums/firebase_status.dart';
-part 'auth_controller.g.dart';
 
-class AuthController = _AuthControllerBase with _$AuthController;
-
-abstract class _AuthControllerBase with Store {
-  _AuthControllerBase(this._firebaseRepository);
+class AuthController {
+  AuthController(this._firebaseRepository);
 
   final FirebaseRepository _firebaseRepository;
 
@@ -24,8 +20,9 @@ abstract class _AuthControllerBase with Store {
     return hasEmail;
   }
 
-  //Remover depois de testar
-  Future<void> createTest() async {
-    await _firebaseRepository.hasEmail("teste@teste3.com");
+  Future<bool> getEmailPasswordLogin(String email, String password) async {
+    bool isLogged =
+        await _firebaseRepository.getEmailPasswordLogin(email, password);
+    return isLogged;
   }
 }

@@ -56,7 +56,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                   name: 'E-mail',
                   controller: controller.emailController,
                   validator: (value) {
-                    return controller.validateEmail(value);
+                    return controller.validateEmail();
                   },
                 ),
                 SizedBox(height: 16.0),

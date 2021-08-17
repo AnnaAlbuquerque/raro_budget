@@ -7,30 +7,38 @@ class LoginController {
   final AuthController authController;
 
   TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   Future<bool> verifyEmail(String email) async {
     final bool hasEmail = await authController.hasEmail(email);
     return hasEmail;
   }
 
-  String? validateEmail(String? email) {
-    print(email);
+  String? validateEmail() {
+    print(emailController.text);
 
-    if (email == null || email.isEmpty) {
+    if (emailController.text.isEmpty) {
       print("Email inválido");
       return "Email inválido";
     }
     if (RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(email)) {
+        .hasMatch(emailController.text)) {
       print("Email válido");
       return null;
     }
     return "Email inválido";
   }
 
-  //Remover depois de teste
-  Future<void> test() async {
-    await authController.createTest();
+  String? validatePassword() {
+    if (passwordController.text.isEmpty) {
+      return "Senha inválida";
+    }
+    return null;
+  }
+
+  Future<bool> login(String email, String password) async {
+    bool isLogged = await authController.getEmailPasswordLogin(email, password);
+    return isLogged;
   }
 }
