@@ -67,11 +67,15 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   text: 'VOLTAR',
                   useGradientBackground: false,
                   onTap: () async {
-                    await controller.pageViewController.previousPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.linear,
-                    );
-                    controller.showCurrentPageNumber();
+                    if (controller.pageNumber == 1) {
+                      Modular.to.navigate('/login');
+                    } else {
+                      await controller.pageViewController.previousPage(
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.linear,
+                      );
+                      controller.showCurrentPageNumber();
+                    }
                   },
                 ),
                 Observer(builder: (_) {
