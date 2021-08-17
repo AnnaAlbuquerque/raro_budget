@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/modules/login/login/login_controller.dart';
 import '../../../shared/widgets/custom_button/custom_button_widget.dart';
 import '../../../shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
 import '../../../shared/widgets/custom_social_login_button/custom_social_login_button_widget.dart';
@@ -14,13 +16,11 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  TextEditingController _emailController = TextEditingController();
+class _LoginPageState extends ModularState<LoginPage, LoginController> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    _emailController.dispose();
     super.dispose();
   }
 
@@ -54,13 +54,37 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 46.0),
                 CustomTextFormField(
                   name: 'E-mail',
-                  controller: _emailController,
+                  controller: controller.emailController,
+                  validator: (value) {
+                    return controller.validateEmail();
+                  },
                 ),
                 SizedBox(height: 16.0),
                 Align(
                   alignment: Alignment.centerRight,
                   child: CustomButton(
                     text: 'CONTINUAR',
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        controller
+                            .verifyEmail(controller.emailController.text)
+                            .then((value) => {
+                                  if (value)
+                                    {
+                                      Modular.to
+                                          .navigate("/login/existing_email")
+                                    }
+                                  else
+                                    {
+                                      //TODO colocar modal com mensagem de email não cadastrado
+                                      print("EMAIL NÃO ENCONTRADO")
+                                    }
+                                });
+                      } else {
+                        //TODO colocar modal com mensagem de email inválido
+                        print("NAO VALIDOU");
+                      }
+                    },
                   ),
                 ),
                 SizedBox(height: 52.0),

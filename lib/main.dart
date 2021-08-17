@@ -4,6 +4,7 @@ import 'package:raro_budget/src/app.dart';
 import 'package:raro_budget/src/app_module.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     ModularApp(
       module: AppModule(),
