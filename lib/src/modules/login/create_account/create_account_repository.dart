@@ -19,7 +19,6 @@ class CreateAccountRepositoryImpl implements CreateAccountRepository {
           )
           .then(
             (value) => {
-              print(value.user!.uid),
               users.doc(value.user!.uid).set({
                 "name": user.name,
                 "email": value.user!.email,

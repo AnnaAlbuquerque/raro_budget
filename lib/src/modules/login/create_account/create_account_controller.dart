@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -12,7 +11,9 @@ class CreateAccountController = CreateAccountBase
 
 abstract class CreateAccountBase with Store {
   final CreateAccountRepository repository;
-  CreateAccountBase({required this.repository});
+  CreateAccountBase({
+    required this.repository,
+  });
 
   @observable
   PageController pageViewController = PageController(
@@ -48,13 +49,11 @@ abstract class CreateAccountBase with Store {
         phone: phoneController.text,
         cpf: cpfController.text,
         terms: termsAccepted,
-        password: passwordController.text);
-
-    print(savedUser);
+        password: confirmPasswordController.text);
 
     repository.addUser(savedUser);
 
-    print("USUÁRIO CRIADO!!!!");
+    print("USER CREATED!");
   }
 
   @action

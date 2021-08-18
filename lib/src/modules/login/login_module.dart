@@ -9,7 +9,7 @@ import 'package:raro_budget/src/shared/validators/validators.dart';
 class LoginModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.singleton((i) => LoginController(i.get<AuthController>())),
+        Bind.singleton((i) => LoginController(i<AuthController>())),
         Bind.lazySingleton((i) => Validators())
       ];
 

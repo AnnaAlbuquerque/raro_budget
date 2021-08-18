@@ -21,11 +21,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
   final validators = Modular.get<Validators>();
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
