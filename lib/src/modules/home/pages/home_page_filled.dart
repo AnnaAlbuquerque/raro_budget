@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/home/pages/home_controller.dart';
 import 'package:raro_budget/src/modules/home/widgets/custom_transaction_item/custom_transaction_item_widget.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
+import 'package:raro_budget/src/shared/models/transaction_module.dart';
 import 'package:raro_budget/src/shared/widgets/custom_appbar/custom_appbar.dart';
 
 import 'package:raro_budget/src/shared/widgets/custom_button_logged/custom_button_logged_widget.dart';
@@ -15,8 +18,8 @@ class HomePageFilled extends StatefulWidget {
   _HomePageFilledState createState() => _HomePageFilledState();
 }
 
-class _HomePageFilledState extends State<HomePageFilled> {
-  final controller = HomeController();
+class _HomePageFilledState
+    extends ModularState<HomePageFilled, HomeController> {
   double total = -100;
   @override
   Widget build(BuildContext context) {
@@ -186,6 +189,7 @@ class _HomePageFilledState extends State<HomePageFilled> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomTransactionItem(
+                              date: DateTime.now(),
                               color: AppColors.yellow,
                               title: 'Refeições',
                               transferredValue: '25,00',
@@ -376,7 +380,14 @@ class _HomePageFilledState extends State<HomePageFilled> {
       floatingActionButton: CustomButtonLoggedFlow(
         useIconAdd: true,
         useGradientBackground: true,
-        onTap: () {},
+        onTap: () {
+          controller.fire.insert(TransactionModule(
+              category: 'pix',
+              date: DateTime.now(),
+              name: 'viagem',
+              type: 'entrada',
+              value: 300000.0));
+        },
       ),
     );
   }
