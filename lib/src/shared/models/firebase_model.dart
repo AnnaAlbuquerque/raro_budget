@@ -83,6 +83,26 @@ class FirebaseModel {
     }
   }
 
+  Future<List<Map<String, dynamic>>?> testeconsulta() async {
+    try {
+      firebaseRepository.store
+          .collection('users')
+          .doc(firebaseRepository.auth.currentUser!.uid)
+          .collection('transactions')
+          .get()
+          .then((querySnapshot) {
+        if (querySnapshot.docs.isNotEmpty) {
+          final list = querySnapshot.docs.map((doc) => doc.data()).toList();
+
+          print(list);
+          return list;
+        }
+      });
+    } catch (e) {
+      throw e;
+    }
+  }
+
   Future<List> read(String id) async {
     QuerySnapshot querySnapshot;
     List docs = [];

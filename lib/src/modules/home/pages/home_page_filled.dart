@@ -380,6 +380,8 @@ class _HomePageFilledState
         useIconAdd: true,
         useGradientBackground: true,
         onTap: () {
+          controller.fire.testeconsulta();
+
           /* controller.fire.insert(
             TransactionModule(
               category: 'pixies',
@@ -397,7 +399,7 @@ class _HomePageFilledState
               type: 'saida',
               value: 300,
             ),
-          );*/
+          );
           controller.fire.update(
             TransactionModule(
               category: 'pixies',
@@ -413,7 +415,7 @@ class _HomePageFilledState
               type: 'saida updated',
               value: 3000,
             ),
-          );
+          );*/
         },
       ),
     );

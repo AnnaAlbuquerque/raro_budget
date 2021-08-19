@@ -16,7 +16,6 @@ class TransactionModule {
   });
 
   TransactionModule copyWith({
-    String? userId,
     String? category,
     double? value,
     String? type,
