@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:raro_budget/src/modules/login/create_account/create_account_repository.dart';
+import 'package:raro_budget/src/shared/auth/auth_repository.dart';
 import 'package:raro_budget/src/shared/models/user_model.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 part 'create_account_controller.g.dart';
 
@@ -11,7 +11,10 @@ class CreateAccountController = CreateAccountBase
 
 abstract class CreateAccountBase with Store {
   final CreateAccountRepository repository;
+  final AuthRepository authRepository;
+
   CreateAccountBase({
+    required this.authRepository,
     required this.repository,
   });
 
@@ -27,16 +30,6 @@ abstract class CreateAccountBase with Store {
   void showCurrentPageNumber() {
     pageNumber = pageViewController.page!.toInt() + 1;
   }
-
-  // var phoneFormatter = new MaskTextInputFormatter(
-  //   mask: '(##) #####-####',
-  //   // filter: {"#": RegExp(r'[0-9]')},
-  // );
-
-  // var cpfFormatter = new MaskTextInputFormatter(
-  //   mask: '###.###.###-##',
-  //   // filter: {"#": RegExp(r'[0-9]')},
-  // );
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -69,6 +62,6 @@ abstract class CreateAccountBase with Store {
 
   @action
   bool checkUserLogin() {
-    return repository.checkUserLogin();
+    return authRepository.checkUserLogin();
   }
 }

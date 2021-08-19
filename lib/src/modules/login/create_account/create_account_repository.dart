@@ -4,7 +4,7 @@ import 'package:raro_budget/src/shared/models/user_model.dart';
 
 abstract class CreateAccountRepository {
   Future<void> addUser(UserModel user);
-  bool checkUserLogin();
+  // bool checkUserLogin();
 }
 
 class CreateAccountRepositoryImpl implements CreateAccountRepository {
@@ -29,26 +29,8 @@ class CreateAccountRepositoryImpl implements CreateAccountRepository {
               })
             },
           );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
     } catch (e) {
       print(e);
-    }
-  }
-
-  bool checkUserLogin() {
-    final user = FirebaseAuth.instance.currentUser;
-
-    if (user != null) {
-      print("USER LOGGED-IN");
-      return true;
-    } else {
-      print("USER NOT LOGGED");
-      return false;
     }
   }
 }

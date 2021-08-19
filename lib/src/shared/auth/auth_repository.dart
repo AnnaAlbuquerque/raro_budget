@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:raro_budget/src/shared/enums/firebase_status.dart';
 
-class FirebaseRepository {
+class AuthRepository {
   late final FirebaseAuth auth;
   late ConnectionStatus firebaseConnectionStatus;
   late final FirebaseFirestore store;
@@ -52,7 +52,7 @@ class FirebaseRepository {
   }
 
   bool checkUserLogin() {
-    final user = FirebaseAuth.instance.currentUser;
+    final user = auth.currentUser;
 
     if (user != null) {
       print("USER LOGGED-IN");
