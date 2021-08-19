@@ -16,4 +16,21 @@ class AuthController {
   }
 
   // removi do controller as funções que pertencem ao login e que pareciam reduntantes
+
+  bool checkUserLogged() {
+    final user = _firebaseRepository.auth.currentUser;
+
+    if (user != null) {
+      print("CHECKING USER LOGGED-IN");
+      return true;
+    } else {
+      print("USER NOT LOGGED");
+      return false;
+    }
+  }
+
+  Future<void> userLogout() async {
+    await _firebaseRepository.auth.signOut();
+    print("USER LOGGED OUT!!");
+  }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:raro_budget/src/modules/login/create_account/create_account_repository.dart';
-import 'package:raro_budget/src/shared/auth/auth_repository.dart';
+import 'package:raro_budget/src/shared/auth/auth_controller.dart';
 import 'package:raro_budget/src/shared/models/user_model.dart';
 
 part 'create_account_controller.g.dart';
@@ -11,10 +11,10 @@ class CreateAccountController = CreateAccountBase
 
 abstract class CreateAccountBase with Store {
   final CreateAccountRepository repository;
-  final AuthRepository authRepository;
+  final AuthController authController;
 
   CreateAccountBase({
-    required this.authRepository,
+    required this.authController,
     required this.repository,
   });
 
@@ -62,6 +62,6 @@ abstract class CreateAccountBase with Store {
 
   @action
   bool checkUserLogin() {
-    return authRepository.checkUserLogin();
+    return authController.checkUserLogged();
   }
 }

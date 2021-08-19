@@ -26,4 +26,12 @@ abstract class SplashBase with Store {
       Modular.to.navigate("/login");
     }
   }
+
+  bool hasUserLogged() {
+    return authController.checkUserLogged();
+  }
+
+  Future<void> logout() async {
+    await authController.userLogout();
+  }
 }

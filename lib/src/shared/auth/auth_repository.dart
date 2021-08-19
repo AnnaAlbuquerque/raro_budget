@@ -50,16 +50,4 @@ class AuthRepository {
       return false;
     }
   }
-
-  bool checkUserLogin() {
-    final user = auth.currentUser;
-
-    if (user != null) {
-      print("USER LOGGED-IN");
-      return true;
-    } else {
-      print("USER NOT LOGGED");
-      return false;
-    }
-  }
 }
