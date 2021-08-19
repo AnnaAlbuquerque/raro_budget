@@ -27,12 +27,27 @@ class FirebaseModel {
     }
   }
 
-  Future<void> delete(String id) async {
+  Future<void> delete(TransactionModule transaction) async {
     try {
       await firebaseRepository.store
+          .collection('users')
+          .doc(firebaseRepository.auth.currentUser!.uid)
           .collection('transactions')
-          .doc(id)
-          .delete();
+          .where('type', isEqualTo: transaction.type)
+          .where('valor', isEqualTo: transaction.value)
+          .where('category', isEqualTo: transaction.category)
+          .get()
+          .then((value) => value.docs.forEach((element) {
+                firebaseRepository.store
+                    .collection('users')
+                    .doc(firebaseRepository.auth.currentUser!.uid)
+                    .collection('transactions')
+                    .doc(element.id)
+                    .delete()
+                    .then((value) {
+                  print("Success!");
+                });
+              }));
     } catch (e) {
       print(e);
     }

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -381,12 +380,24 @@ class _HomePageFilledState
         useIconAdd: true,
         useGradientBackground: true,
         onTap: () {
-          controller.fire.insert(TransactionModule(
-              category: 'pix',
+          controller.fire.insert(
+            TransactionModule(
+              category: 'pixies',
               date: DateTime.now(),
               name: 'viagem',
-              type: 'entrada',
-              value: 300000.0));
+              type: 'saida',
+              value: 400,
+            ),
+          );
+          controller.fire.delete(
+            TransactionModule(
+              category: 'pixies',
+              date: DateTime.now(),
+              name: 'viagem',
+              type: 'saida',
+              value: 300,
+            ),
+          );
         },
       ),
     );
