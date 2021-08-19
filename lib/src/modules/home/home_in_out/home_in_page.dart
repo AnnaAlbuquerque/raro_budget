@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:raro_budget/src/shared/widgets/calendar/calendar.dart';
 import '../../../shared/constants/app_colors.dart';
-import '../../../shared/constants/app_text_styles.dart';
 import '../../../shared/widgets/custom_appbar/custom_appbar.dart';
 import '../../../shared/widgets/custom_button_logged/custom_button_logged_widget.dart';
 import '../../../shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
@@ -17,7 +16,7 @@ class HomeInPage extends StatefulWidget {
 class _HomeInPageState extends State<HomeInPage> {
   TextEditingController _valueController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
-  String date = DateFormat('dd/MM/yyyy').format(DateTime.now());
+
   DropdownMenuItemData? item;
 
   List<DropdownMenuItemData> items = [
@@ -147,12 +146,7 @@ class _HomeInPageState extends State<HomeInPage> {
                       controller: _nameController,
                     ),
                     const SizedBox(height: 30.0),
-                    InkWell(
-                      onTap: () {},
-                      child: Ink(
-                        child: Text(date, style: TextStyles.purple14w500Roboto),
-                      ),
-                    ),
+                    CalendarWidget(),
                     const SizedBox(height: 16.0),
                   ],
                 ),
