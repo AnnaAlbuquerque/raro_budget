@@ -53,15 +53,31 @@ class FirebaseModel {
     }
   }
 
-  Future<void> update(String id, String name, String type, DateTime date,
-      String category) async {
+  Future<void> update(TransactionModule transaction,
+      TransactionModule transactionupdated) async {
     try {
-      await firebaseRepository.store.collection('transactions').doc(id).update({
-        'category': category,
-        'type': type,
-        'name': name,
-        'date': date,
-      });
+      await firebaseRepository.store
+          .collection('users')
+          .doc(firebaseRepository.auth.currentUser!.uid)
+          .collection('transactions')
+          .where('type', isEqualTo: transaction.type)
+          .where('valor', isEqualTo: transaction.value)
+          .where('category', isEqualTo: transaction.category)
+          .get()
+          .then((value) => value.docs.forEach((element) {
+                firebaseRepository.store
+                    .collection('users')
+                    .doc(firebaseRepository.auth.currentUser!.uid)
+                    .collection('transactions')
+                    .doc(element.id)
+                    .update({
+                  'type': transactionupdated.type,
+                  'valor': transactionupdated.value,
+                  'category': transactionupdated.category
+                }).then((value) {
+                  print("Success!");
+                });
+              }));
     } catch (e) {
       print(e);
     }

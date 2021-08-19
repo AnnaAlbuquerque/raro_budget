@@ -380,7 +380,7 @@ class _HomePageFilledState
         useIconAdd: true,
         useGradientBackground: true,
         onTap: () {
-          controller.fire.insert(
+          /* controller.fire.insert(
             TransactionModule(
               category: 'pixies',
               date: DateTime.now(),
@@ -396,6 +396,22 @@ class _HomePageFilledState
               name: 'viagem',
               type: 'saida',
               value: 300,
+            ),
+          );*/
+          controller.fire.update(
+            TransactionModule(
+              category: 'pixies',
+              date: DateTime.now(),
+              name: 'viagem',
+              type: 'saida',
+              value: 400,
+            ),
+            TransactionModule(
+              category: 'pixies updated',
+              date: DateTime.now(),
+              name: 'viagem updated',
+              type: 'saida updated',
+              value: 3000,
             ),
           );
         },
