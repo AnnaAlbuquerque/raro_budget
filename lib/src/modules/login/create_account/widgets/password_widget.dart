@@ -79,7 +79,7 @@ class _PasswordWidgetState extends State<PasswordWidget> {
                     controller: controller.confirmPasswordController,
                     validator: (value) => widget.validators
                         .confirmPasswordValidator(
-                            value, controller.confirmPasswordController.text),
+                            value, controller.passwordController.text),
                     icon: VisibleWidget(
                       visible: confirmPasswordVisible,
                       onPressed: () {

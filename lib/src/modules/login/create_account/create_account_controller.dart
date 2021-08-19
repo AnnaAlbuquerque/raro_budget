@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:raro_budget/src/modules/login/create_account/create_account_repository.dart';
 import 'package:raro_budget/src/shared/models/user_model.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 part 'create_account_controller.g.dart';
 
@@ -27,6 +27,16 @@ abstract class CreateAccountBase with Store {
   void showCurrentPageNumber() {
     pageNumber = pageViewController.page!.toInt() + 1;
   }
+
+  // var phoneFormatter = new MaskTextInputFormatter(
+  //   mask: '(##) #####-####',
+  //   // filter: {"#": RegExp(r'[0-9]')},
+  // );
+
+  // var cpfFormatter = new MaskTextInputFormatter(
+  //   mask: '###.###.###-##',
+  //   // filter: {"#": RegExp(r'[0-9]')},
+  // );
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -54,6 +64,7 @@ abstract class CreateAccountBase with Store {
     repository.addUser(savedUser);
 
     print("USER CREATED!");
+    print(savedUser);
   }
 
   @action
