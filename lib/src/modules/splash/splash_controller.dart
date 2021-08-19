@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:raro_budget/src/shared/auth/auth_controller.dart';
@@ -21,9 +22,13 @@ abstract class SplashBase with Store {
     status = authController.getConnectionStatus();
   }
 
-  void NavigationLogin() {
-    if (status == ConnectionStatus.success) {
-      Modular.to.navigate("/login");
+  void navigation(User? user) {
+    if ((status == ConnectionStatus.success) && user == null) {
+      Future.delayed(Duration(seconds: 2))
+          .then((_) => Modular.to.navigate("/login"));
+    } else if ((status == ConnectionStatus.success) && user != null) {
+      Future.delayed(Duration(seconds: 2))
+          .then((_) => Modular.to.navigate("/home"));
     }
   }
 }
