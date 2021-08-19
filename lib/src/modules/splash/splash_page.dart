@@ -23,7 +23,7 @@ class _SplashPageState extends ModularState<SplashPage, SplashController> {
             //TODO verificar se usuário está logado, se sim -> home, se não -> login
             if (controller.status == ConnectionStatus.success) {
               Future.delayed(Duration(seconds: 2))
-                  .then((_) => controller.NavigationLogin());
+                  .then((_) => controller.navigationLogin());
             }
           })
         });
