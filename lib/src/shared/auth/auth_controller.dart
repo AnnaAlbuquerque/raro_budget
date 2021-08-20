@@ -19,10 +19,10 @@ class AuthController {
     final user = authRepository.auth.currentUser;
 
     if (user != null) {
-      print("CHECKING USER LOGGED-IN");
+      print("USER LOGGED");
       return true;
     } else {
-      print("USER NOT LOGGED");
+      print("NO USER LOGGED");
       return false;
     }
   }

@@ -32,12 +32,6 @@ abstract class SplashBase with Store {
     }
   }
 
-  void navigationLogin() {
-    if (status == ConnectionStatus.success) {
-      Modular.to.navigate("/login");
-    }
-  }
-
   bool hasUserLogged() {
     return authController.checkUserLogged();
   }

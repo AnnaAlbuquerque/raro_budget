@@ -12,12 +12,12 @@ class AuthRepository {
     try {
       await Firebase.initializeApp();
       firebaseConnectionStatus = ConnectionStatus.success;
-      print("CONEXÃO COM FIREBASE - SUCCESS");
+      print("FIREBASE CONNECTION - SUCCESS");
       auth = FirebaseAuth.instance;
       store = FirebaseFirestore.instance;
     } catch (e) {
       firebaseConnectionStatus = ConnectionStatus.error;
-      print("CONEXÃO COM FIREBASE - ERROR");
+      print("FIREBASE CONNECTION - ERROR");
     }
   }
 
