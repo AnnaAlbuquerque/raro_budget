@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/modules/home/widgets/custom_transaction_item/custom_transaction_item_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 
-class CustomTransactionItem extends StatelessWidget {
+class CustomTransactionItem extends StatefulWidget {
   const CustomTransactionItem(
-      {Key? key,
+      Key? key,
       this.title,
       this.category,
       this.icon,
@@ -14,7 +16,7 @@ class CustomTransactionItem extends StatelessWidget {
       this.textstyle,
       this.type,
       this.date,
-      required this.timestamp})
+      this.timestamp)
       : super(key: key);
 
   final String? type;
@@ -28,6 +30,12 @@ class CustomTransactionItem extends StatelessWidget {
   final DateTime? date;
 
   @override
+  _CustomTransactionItemState createState() => _CustomTransactionItemState();
+}
+
+class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
+    CustomTransactionItemController> {
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(8.0),
@@ -38,12 +46,12 @@ class CustomTransactionItem extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              type == 'saida'
+              widget.type == 'saida'
                   ? CircleAvatar(
-                      backgroundColor: color,
+                      backgroundColor: widget.color,
                       child: Image(
                           image: AssetImage(
-                              '${icon ?? 'assets/icons/transport.png'}')),
+                              '${widget.icon ?? 'assets/icons/transport.png'}')),
                     )
                   : Container(
                       width: 40,
@@ -54,18 +62,22 @@ class CustomTransactionItem extends StatelessWidget {
                       ),
                       child: Image(
                           image: AssetImage(
-                              '${icon ?? 'assets/icons/transport.png'}')),
+                              '${widget.icon ?? 'assets/icons/transport.png'}')),
                     ),
               SizedBox(width: 8.0),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '$category $title',
+                    '${widget.category} ${widget.title}',
                     style: TextStyles.purple16w500Roboto,
                   ),
                   Text(
-                    timestamp.toDate().toLocal().toString().split(' ')[0],
+                    widget.timestamp
+                        .toDate()
+                        .toLocal()
+                        .toString()
+                        .split(' ')[0],
                     style: TextStyles.grey14w400Roboto,
                   ),
                 ],
@@ -73,9 +85,9 @@ class CustomTransactionItem extends StatelessWidget {
             ],
           ),
           Text(
-            '$transferredValue',
-            style: transferredValue! <= 0
-                ? textstyle
+            '${widget.transferredValue}',
+            style: widget.transferredValue! <= 0
+                ? widget.textstyle
                 : TextStyles.purple16w500Roboto,
           ),
         ],
