@@ -27,6 +27,24 @@ class FirebaseModel {
     }
   }
 
+  Future<void> insertNewOutput(TransactionModule transaction) async {
+    try {
+      await firebaseRepository.store
+          .collection('users')
+          .doc(firebaseRepository.auth.currentUser!.uid)
+          .collection('transactions')
+          .add({
+        'category': transaction.category,
+        'type': '',
+        'name': '',
+        'date': transaction.date,
+        'value': transaction.value,
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<void> delete(TransactionModule transaction) async {
     try {
       await firebaseRepository.store
