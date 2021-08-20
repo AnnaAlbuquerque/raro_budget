@@ -83,7 +83,7 @@ class FirebaseModel {
     }
   }
 
-  Future<List<Map<String, dynamic>>?> testeconsulta() async {
+  Future<List<TransactionModule>?> testeconsulta() async {
     try {
       firebaseRepository.store
           .collection('users')
@@ -92,10 +92,20 @@ class FirebaseModel {
           .get()
           .then((querySnapshot) {
         if (querySnapshot.docs.isNotEmpty) {
-          final list = querySnapshot.docs.map((doc) => doc.data()).toList();
-
+          final List<TransactionModule> list = querySnapshot.docs
+              .map(
+                (doc) => TransactionModule.fromMap(
+                  doc.data(),
+                ),
+              )
+              .toList();
           print(list);
+          //doc.data()).toList();
+
+          // print(transactionList);
           return list;
+        } else {
+          return null;
         }
       });
     } catch (e) {

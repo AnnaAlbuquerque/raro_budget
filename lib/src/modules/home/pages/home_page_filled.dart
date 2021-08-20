@@ -154,113 +154,66 @@ class _HomePageFilledState
                       ),
                     )
                   : Container(),
-              controller.button1 == false &&
-                      controller.button2 == true &&
-                      controller.button3 == false
-                  ? Container(
-                      margin: EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(7.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.black.withOpacity(0.12),
-                            offset: Offset(0.0, 1.0),
-                            blurRadius: 8.0,
-                          ),
-                          BoxShadow(
-                            color: AppColors.black.withOpacity(0.14),
-                            offset: Offset(0.0, 3.0),
-                            blurRadius: 4.0,
-                          ),
-                          BoxShadow(
-                            color: AppColors.black.withOpacity(0.2),
-                            offset: Offset(0.0, 3.0),
-                            blurRadius: 3.0,
-                            spreadRadius: -2.0,
-                          ),
-                        ],
+              if (controller.button1 == false &&
+                  controller.button2 == true &&
+                  controller.button3 == false)
+                Container(
+                  margin: EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(7.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.black.withOpacity(0.12),
+                        offset: Offset(0.0, 1.0),
+                        blurRadius: 8.0,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 16.0, top: 9.0, right: 16.0, bottom: 16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      BoxShadow(
+                        color: AppColors.black.withOpacity(0.14),
+                        offset: Offset(0.0, 3.0),
+                        blurRadius: 4.0,
+                      ),
+                      BoxShadow(
+                        color: AppColors.black.withOpacity(0.2),
+                        offset: Offset(0.0, 3.0),
+                        blurRadius: 3.0,
+                        spreadRadius: -2.0,
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 16.0, top: 9.0, right: 16.0, bottom: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Divider(
+                          color: AppColors.white,
+                          height: MediaQuery.of(context).size.height / 4.6,
+                        ),
+                        Divider(
+                          height: 24,
+                          thickness: 2,
+                          color: AppColors.grey88,
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CustomTransactionItem(
-                              date: DateTime.now(),
-                              color: AppColors.yellow,
-                              title: 'Refeições',
-                              transferredValue: '25,00',
-                              icon: 'assets/icons/meal_icon.png',
-                              textstyle: TextStyles.purple16w500Roboto,
+                            Text(
+                              "Total saídas",
+                              style: TextStyles.purple16w500Roboto,
                             ),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height / 22),
-                            CustomTransactionItem(
-                              color: AppColors.green,
-                              title: 'Transporte',
-                              transferredValue: '57,30',
-                              icon: 'assets/icons/transport_icon.png',
-                              textstyle: TextStyles.purple16w500Roboto,
-                            ),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height / 22),
-                            CustomTransactionItem(
-                              color: AppColors.lightBlue,
-                              title: 'Educação',
-                              transferredValue: '316,00',
-                              icon: 'assets/icons/education_icon.png',
-                              textstyle: TextStyles.purple16w500Roboto,
-                            ),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height / 22),
-                            CustomTransactionItem(
-                              color: AppColors.green,
-                              title: 'Transporte',
-                              transferredValue: '57,30',
-                              icon: 'assets/icons/transport_icon.png',
-                              textstyle: TextStyles.purple16w500Roboto,
-                            ),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height / 22),
-                            CustomTransactionItem(
-                              color: AppColors.lightBlue,
-                              title: 'Educação',
-                              transferredValue: '316,00',
-                              icon: 'assets/icons/education_icon.png',
-                              textstyle: TextStyles.purple16w500Roboto,
-                            ),
-                            Divider(
-                              color: AppColors.white,
-                              height: MediaQuery.of(context).size.height / 4.6,
-                            ),
-                            Divider(
-                              height: 24,
-                              thickness: 2,
-                              color: AppColors.grey88,
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Total saídas",
-                                  style: TextStyles.purple16w500Roboto,
-                                ),
-                                Text("\$ -333333",
-                                    style: TextStyles.red14w500Roboto),
-                              ],
-                            ),
+                            Text("\$ -333333",
+                                style: TextStyles.red14w500Roboto),
                           ],
                         ),
-                      ),
-                    )
-                  : Container(),
+                      ],
+                    ),
+                  ),
+                )
+              else
+                Container(),
               controller.button1 == false &&
                       controller.button2 == false &&
                       controller.button3 == true
@@ -381,7 +334,6 @@ class _HomePageFilledState
         useGradientBackground: true,
         onTap: () {
           controller.fire.testeconsulta();
-
           /* controller.fire.insert(
             TransactionModule(
               category: 'pixies',

@@ -1,12 +1,13 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class TransactionModule {
-  String
-      category; //[pix, dinheiro, doc, ted, boleto] [refeicao, viagem, transporte, educação, pagamentos, outros]
-  double value;
-  String type; //[entrada, saida]
+  String category;
+  num value;
+  String type;
   String name;
-  DateTime date;
+  Timestamp date;
   TransactionModule({
     required this.category,
     required this.value,
@@ -20,7 +21,7 @@ class TransactionModule {
     double? value,
     String? type,
     String? name,
-    DateTime? date,
+    Timestamp? date,
   }) {
     return TransactionModule(
       category: category ?? this.category,
@@ -47,7 +48,7 @@ class TransactionModule {
       value: map['value'],
       type: map['type'],
       name: map['name'],
-      date: DateTime.fromMillisecondsSinceEpoch(map['date']),
+      date: (map['date']),
     );
   }
 
