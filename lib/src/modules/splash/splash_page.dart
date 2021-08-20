@@ -28,6 +28,18 @@ class _SplashPageState extends ModularState<SplashPage, SplashController> {
               },
             );
             //TODO adição de pagina de erro quando o firebase não conectar corretamente
+
+            //TODO verificar se usuário está logado, se sim -> home, se não -> login
+            // controller.logout(); // para testes de login/logout
+
+            if (controller.hasUserLogged()) {
+              print('IT HAS A USER LOGGED IN');
+            }
+
+            if (controller.status == ConnectionStatus.success) {
+              Future.delayed(Duration(seconds: 2))
+                  .then((_) => controller.navigationLogin());
+            }
           })
         });
 

@@ -15,13 +15,20 @@ class AuthController {
     await authRepository.initializer();
   }
 
-  Future<bool> hasEmail(String email) async {
-    bool hasEmail = await authRepository.hasEmail(email);
-    return hasEmail;
+  bool checkUserLogged() {
+    final user = authRepository.auth.currentUser;
+
+    if (user != null) {
+      print("CHECKING USER LOGGED-IN");
+      return true;
+    } else {
+      print("USER NOT LOGGED");
+      return false;
+    }
   }
 
-  Future<bool> getEmailPasswordLogin(String email, String password) async {
-    bool isLogged = await authRepository.getEmailPasswordLogin(email, password);
-    return isLogged;
+  Future<void> userLogout() async {
+    await authRepository.auth.signOut();
+    print("USER LOGGED OUT!!");
   }
 }

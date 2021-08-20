@@ -31,4 +31,18 @@ abstract class SplashBase with Store {
           .then((_) => Modular.to.navigate("/home"));
     }
   }
+
+  void navigationLogin() {
+    if (status == ConnectionStatus.success) {
+      Modular.to.navigate("/login");
+    }
+  }
+
+  bool hasUserLogged() {
+    return authController.checkUserLogged();
+  }
+
+  Future<void> logout() async {
+    await authController.userLogout();
+  }
 }

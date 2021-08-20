@@ -10,7 +10,7 @@ class AppModule extends Module {
   @override
   List<Bind> get binds => [
         Bind.singleton((i) => AuthRepository()),
-        Bind.singleton((i) => AuthController(i.get<AuthRepository>())),
+        Bind.singleton((i) => AuthController(i<AuthRepository>())),
       ];
 
   @override

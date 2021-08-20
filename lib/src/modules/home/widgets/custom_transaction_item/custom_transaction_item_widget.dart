@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
@@ -11,7 +12,8 @@ class CustomTransactionItem extends StatelessWidget {
       this.transferredValue,
       this.color,
       this.textstyle,
-      this.isGradient})
+      this.isGradient,
+      this.date})
       : super(key: key);
 
   final bool? isGradient;
@@ -20,6 +22,8 @@ class CustomTransactionItem extends StatelessWidget {
   final Color? color;
   final String? icon;
   final String? transferredValue;
+  final Timestamp? date;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,7 +61,7 @@ class CustomTransactionItem extends StatelessWidget {
                     style: TextStyles.purple16w500Roboto,
                   ),
                   Text(
-                    DateFormat('dd/MM/yyyy').format(DateTime.now()),
+                    '${date ?? DateFormat("dd/MM/yyyy").format(DateTime.now())}',
                     style: TextStyles.grey14w400Roboto,
                   ),
                 ],
