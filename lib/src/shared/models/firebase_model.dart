@@ -83,31 +83,26 @@ class FirebaseModel {
     }
   }
 
-  Future<List<TransactionModule>?> testeconsulta() async {
+  Future<List<TransactionModule>> testeconsulta() async {
+    List<TransactionModule> lista = [];
     try {
-      firebaseRepository.store
+      await firebaseRepository.store
           .collection('users')
           .doc(firebaseRepository.auth.currentUser!.uid)
           .collection('transactions')
           .get()
           .then((querySnapshot) {
         if (querySnapshot.docs.isNotEmpty) {
-          final List<TransactionModule> list = querySnapshot.docs
+          lista = querySnapshot.docs
               .map(
                 (doc) => TransactionModule.fromMap(
                   doc.data(),
                 ),
               )
               .toList();
-          print(list);
-          //doc.data()).toList();
-
-          // print(transactionList);
-          return list;
-        } else {
-          return null;
         }
       });
+      return lista;
     } catch (e) {
       throw e;
     }

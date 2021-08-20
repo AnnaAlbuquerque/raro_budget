@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
@@ -21,7 +22,7 @@ class CustomTransactionItem extends StatelessWidget {
   final Color? color;
   final String? icon;
   final String? transferredValue;
-  final DateTime? date;
+  final Timestamp? date;
 
   @override
   Widget build(BuildContext context) {
