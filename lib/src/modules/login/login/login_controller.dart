@@ -5,7 +5,6 @@ class LoginController {
   LoginController(this.authController);
 
   final AuthController authController;
-
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
