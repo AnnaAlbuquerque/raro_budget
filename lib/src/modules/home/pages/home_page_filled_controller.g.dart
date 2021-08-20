@@ -58,13 +58,13 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
       Atom(name: '_HomePageFilledControllerBase.listaTodos');
 
   @override
-  ObservableList<TransactionModule> get listaTodos {
+  ObservableList<TransactionModel> get listaTodos {
     _$listaTodosAtom.reportRead();
     return super.listaTodos;
   }
 
   @override
-  set listaTodos(ObservableList<TransactionModule> value) {
+  set listaTodos(ObservableList<TransactionModel> value) {
     _$listaTodosAtom.reportWrite(value, super.listaTodos, () {
       super.listaTodos = value;
     });
