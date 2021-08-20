@@ -21,9 +21,17 @@ abstract class SplashBase with Store {
     status = authController.getConnectionStatus();
   }
 
-  void NavigationLogin() {
+  void navigationLogin() {
     if (status == ConnectionStatus.success) {
       Modular.to.navigate("/login");
     }
+  }
+
+  bool hasUserLogged() {
+    return authController.checkUserLogged();
+  }
+
+  Future<void> logout() async {
+    await authController.userLogout();
   }
 }
