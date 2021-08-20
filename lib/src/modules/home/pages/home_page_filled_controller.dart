@@ -45,19 +45,17 @@ abstract class _HomePageFilledControllerBase with Store {
   Future getTransactions() async {
     listaTodos.clear();
     List<TransactionModule> responseList = await firebaseModel.testeconsulta();
-    print('RESPONSELIST');
+
     print(responseList);
     if (responseList.isNotEmpty) {
       responseList.forEach((element) {
         listaTodos.add(element);
-        print('PRINT ELEMENT');
+
         print(element);
       });
-      print('PRINT list');
-      print(listaTodos);
+
       return listaTodos;
     }
-    print('PRINT CAGOU TUDO');
   }
 
   @action

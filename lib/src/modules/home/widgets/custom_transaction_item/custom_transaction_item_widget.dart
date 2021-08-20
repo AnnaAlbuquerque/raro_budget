@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 
@@ -8,33 +7,38 @@ class CustomTransactionItem extends StatelessWidget {
   const CustomTransactionItem(
       {Key? key,
       this.title,
+      this.category,
       this.icon,
       this.transferredValue,
       this.color,
       this.textstyle,
-      this.isGradient,
-      this.date})
+      this.type,
+      this.date,
+      required this.timestamp})
       : super(key: key);
 
-  final bool? isGradient;
+  final String? type;
+  final String? category;
   final TextStyle? textstyle;
   final String? title;
   final Color? color;
   final String? icon;
-  final String? transferredValue;
-  final Timestamp? date;
+  final num? transferredValue;
+  final Timestamp timestamp;
+  final DateTime? date;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              isGradient == null
+              type == 'saida'
                   ? CircleAvatar(
                       backgroundColor: color,
                       child: Image(
@@ -57,11 +61,11 @@ class CustomTransactionItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${title ?? 'Transporte'}',
+                    '$category $title',
                     style: TextStyles.purple16w500Roboto,
                   ),
                   Text(
-                    '${date ?? DateFormat("dd/MM/yyyy").format(DateTime.now())}',
+                    timestamp.toDate().toLocal().toString().split(' ')[0],
                     style: TextStyles.grey14w400Roboto,
                   ),
                 ],
@@ -69,8 +73,10 @@ class CustomTransactionItem extends StatelessWidget {
             ],
           ),
           Text(
-            '-R\$ ${transferredValue ?? '25,00'}',
-            style: textstyle,
+            '$transferredValue',
+            style: transferredValue! <= 0
+                ? textstyle
+                : TextStyles.purple16w500Roboto,
           ),
         ],
       ),

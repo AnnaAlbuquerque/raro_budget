@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -63,7 +64,15 @@ class _HomePageFilledState
                           return ListView.builder(
                               itemCount: controller.listaTodos.length,
                               itemBuilder: (context, int index) {
-                                return Text(controller.listaTodos[index].name);
+                                return CustomTransactionItem(
+                                  title: controller.listaTodos[index].name,
+                                  transferredValue:
+                                      controller.listaTodos[index].value,
+                                  category:
+                                      controller.listaTodos[index].category,
+                                  type: controller.listaTodos[index].type,
+                                  timestamp: controller.listaTodos[index].date,
+                                );
                               });
                         }
                       }))
