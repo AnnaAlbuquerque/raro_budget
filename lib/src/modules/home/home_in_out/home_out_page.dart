@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/modules/home/home_in_out/home_out_page_controller.dart';
+import 'package:raro_budget/src/shared/models/transaction_module.dart';
 import 'package:raro_budget/src/shared/widgets/calendar/calendar.dart';
 import '../../../shared/constants/app_colors.dart';
 import '../../../shared/widgets/custom_appbar/custom_appbar.dart';
@@ -13,9 +17,8 @@ class HomeOutPage extends StatefulWidget {
   _HomeOutPageState createState() => _HomeOutPageState();
 }
 
-class _HomeOutPageState extends State<HomeOutPage> {
-  TextEditingController _valueController = TextEditingController();
-
+class _HomeOutPageState
+    extends ModularState<HomeOutPage, HomeOutPageController> {
   DropdownMenuItemData? item;
 
   List<DropdownMenuItemData> items = [
@@ -50,12 +53,6 @@ class _HomeOutPageState extends State<HomeOutPage> {
       color: AppColors.lilac,
     ),
   ];
-
-  @override
-  void dispose() {
-    _valueController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +100,7 @@ class _HomeOutPageState extends State<HomeOutPage> {
                     CustomTextFormField(
                       name: 'Valor em R\$',
                       textInputType: TextInputType.number,
-                      controller: _valueController,
+                      controller: controller.valueController,
                     ),
                     const SizedBox(height: 32.0),
                     CustomDropdownButtonForm(
@@ -158,7 +155,16 @@ class _HomeOutPageState extends State<HomeOutPage> {
         useGradientBackground: true,
         text: 'INSERIR',
         useIconAdd: true,
-        onTap: () {},
+        onTap: () {
+          controller.firebaseModel.insertNewOutput(TransactionModule(
+            name: '',
+            type: '',
+            category: 'Viagem',
+            value: double.parse(controller.valueController.text),
+            date: Timestamp.now(),
+          ));
+          Modular.to.navigate('/home/homefilled');
+        },
       ),
     );
   }
