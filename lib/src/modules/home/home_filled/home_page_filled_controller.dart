@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 
 import 'package:raro_budget/src/shared/models/firebase_model.dart';
-import 'package:raro_budget/src/shared/models/transaction_module.dart';
+import 'package:raro_budget/src/shared/models/transaction_model.dart';
 
 part 'home_page_filled_controller.g.dart';
 
@@ -38,13 +38,13 @@ abstract class _HomePageFilledControllerBase with Store {
   }
 
   @observable
-  ObservableList<TransactionModule> listaTodos =
-      ObservableList<TransactionModule>();
+  ObservableList<TransactionModel> listaTodos =
+      ObservableList<TransactionModel>();
 
   @action
   Future getTransactions() async {
     listaTodos.clear();
-    List<TransactionModule> responseList = await firebaseModel.testeconsulta();
+    List<TransactionModel> responseList = await firebaseModel.testeconsulta();
     print('RESPONSELIST');
     print(responseList);
     if (responseList.isNotEmpty) {

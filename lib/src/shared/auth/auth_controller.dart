@@ -3,34 +3,32 @@ import 'package:raro_budget/src/shared/auth/auth_repository.dart';
 import 'package:raro_budget/src/shared/enums/firebase_status.dart';
 
 class AuthController {
-  AuthController(this._firebaseRepository);
+  AuthController(this.authRepository);
 
-  final AuthRepository _firebaseRepository;
+  final AuthRepository authRepository;
 
   ConnectionStatus getConnectionStatus() {
-    return _firebaseRepository.getConnectionStatus();
+    return authRepository.getConnectionStatus();
   }
 
   Future<void> initilizer() async {
-    await _firebaseRepository.initializer();
+    await authRepository.initializer();
   }
 
-  // removi do controller as funções que pertencem ao login e que pareciam reduntantes
-
   bool checkUserLogged() {
-    final user = _firebaseRepository.auth.currentUser;
+    final user = authRepository.auth.currentUser;
 
     if (user != null) {
-      print("CHECKING USER LOGGED-IN");
+      print("USER LOGGED");
       return true;
     } else {
-      print("USER NOT LOGGED");
+      print("NO USER LOGGED");
       return false;
     }
   }
 
   Future<void> userLogout() async {
-    await _firebaseRepository.auth.signOut();
+    await authRepository.auth.signOut();
     print("USER LOGGED OUT!!");
   }
 }

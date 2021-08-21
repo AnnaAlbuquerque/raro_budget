@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
-import 'package:raro_budget/src/modules/home/pages/home_page_filled_controller.dart';
-import 'package:raro_budget/src/modules/home/widgets/custom_transaction_item/custom_transaction_item_widget.dart';
+import 'package:raro_budget/src/modules/home/home_filled/home_page_filled_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
-
 import 'package:raro_budget/src/shared/widgets/custom_appbar/custom_appbar.dart';
-
 import 'package:raro_budget/src/shared/widgets/custom_button_logged/custom_button_logged_widget.dart';
 
 class HomePageFilled extends StatefulWidget {
