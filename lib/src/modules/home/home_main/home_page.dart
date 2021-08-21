@@ -34,6 +34,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           registrationOnTap: () async => {
             await Modular.to.pushNamed('/home/homeregistration'),
           },
+          logoutOnTap: () {},
         ),
         body: 1 == 0 //store.error
             ? Center(

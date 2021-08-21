@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:raro_budget/src/modules/home/home_main/home_registration/home_registration_controller.dart';
-import 'package:raro_budget/src/modules/home/home_main/home_registration/widgets/custom_button_registration/custom_button_registration.dart';
+import 'package:raro_budget/src/modules/home/home_main/home_registration_drawer/home_registration_controller.dart';
+import 'package:raro_budget/src/modules/home/home_main/home_registration_drawer/widgets/custom_button_registration/custom_button_registration.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
+import 'package:raro_budget/src/shared/models/user_model.dart';
 import 'package:raro_budget/src/shared/validators/validators.dart';
 import 'package:raro_budget/src/shared/widgets/custom_appbar/custom_appbar.dart';
 import 'package:raro_budget/src/shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
@@ -17,7 +21,9 @@ class HomeRegistrationPage extends StatefulWidget {
 class _HomeRegistrationPageState extends State<HomeRegistrationPage> {
   final controller = Modular.get<HomeRegistrationController>();
   final validators = Modular.get<Validators>();
+
   final bool _hasChanges = false;
+
   @override
   void initState() {
     controller.loadUserData();
@@ -27,7 +33,6 @@ class _HomeRegistrationPageState extends State<HomeRegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //TODO: CustomAppBar ajustes?
       appBar: CustomAppBar(
         title: 'Cadastro',
         prefSize: 189,

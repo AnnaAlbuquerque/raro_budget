@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:raro_budget/src/shared/auth/auth_controller.dart';
 import 'package:raro_budget/src/shared/auth/auth_repository.dart';
 part 'home_registration_controller.g.dart';
 
@@ -9,7 +9,11 @@ class HomeRegistrationController = _HomeRegistrationControllerBase
 
 abstract class _HomeRegistrationControllerBase with Store {
   final AuthRepository authRepository;
-  _HomeRegistrationControllerBase({required this.authRepository});
+  final AuthController authController;
+  _HomeRegistrationControllerBase({
+    required this.authRepository,
+    required this.authController,
+  });
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -19,7 +23,7 @@ abstract class _HomeRegistrationControllerBase with Store {
   Future<void> loadUserData() async {
     final user = authRepository.auth.currentUser;
     final collection = authRepository.store.collection('users');
-    // final userData =
+
     await collection.doc(user!.uid).get().then(
       (value) {
         final userData = value.data();
@@ -30,5 +34,10 @@ abstract class _HomeRegistrationControllerBase with Store {
         cpfController.text = userData['cpf'];
       },
     );
+  }
+
+  //TODO: mover para home controller
+  Future<void> logout() async {
+    await authController.userLogout();
   }
 }
