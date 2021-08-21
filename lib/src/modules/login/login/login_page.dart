@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/login/login/login_controller.dart';
 import 'package:raro_budget/src/shared/validators/validators.dart';
+import 'package:raro_budget/src/shared/widgets/custom_dialog/custom_dialog.dart';
 import '../../../shared/widgets/custom_button/custom_button_widget.dart';
 import '../../../shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
 import '../../../shared/widgets/custom_social_login_button/custom_social_login_button_widget.dart';
@@ -70,7 +71,15 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                                     }
                                   else
                                     {
-                                      //TODO colocar modal com mensagem de email não cadastrado
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return CustomDialog(
+                                              title: "Email não cadastrado",
+                                              subtitle:
+                                                  "O email inserido não está cadastrado",
+                                            );
+                                          }),
                                       print("EMAIL NÃO ENCONTRADO")
                                     }
                                 });
