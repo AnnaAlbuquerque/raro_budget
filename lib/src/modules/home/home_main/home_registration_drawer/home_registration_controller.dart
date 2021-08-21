@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:raro_budget/src/shared/auth/auth_controller.dart';
@@ -49,6 +50,20 @@ abstract class _HomeRegistrationControllerBase with Store {
         );
       },
     );
+  }
+
+  @action
+  Future<void> saveUserData() async {
+    final user = authRepository.auth.currentUser;
+    final collection = authRepository.store.collection('users');
+
+    await collection.doc(user!.uid).set({
+      "name": nameController.text,
+      "email": emailController.text,
+      "phone": phoneController.text,
+      "cpf": cpfController.text,
+      "createdAt": FieldValue.serverTimestamp()
+    });
   }
 
   @observable

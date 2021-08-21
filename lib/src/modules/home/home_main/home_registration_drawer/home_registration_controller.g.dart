@@ -49,6 +49,14 @@ mixin _$HomeRegistrationController on _HomeRegistrationControllerBase, Store {
     return _$loadUserDataAsyncAction.run(() => super.loadUserData());
   }
 
+  final _$saveUserDataAsyncAction =
+      AsyncAction('_HomeRegistrationControllerBase.saveUserData');
+
+  @override
+  Future<void> saveUserData() {
+    return _$saveUserDataAsyncAction.run(() => super.saveUserData());
+  }
+
   final _$_HomeRegistrationControllerBaseActionController =
       ActionController(name: '_HomeRegistrationControllerBase');
 
