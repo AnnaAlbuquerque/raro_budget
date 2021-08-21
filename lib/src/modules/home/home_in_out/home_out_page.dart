@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/home/home_in_out/home_out_page_controller.dart';
-import 'package:raro_budget/src/shared/models/transaction_module.dart';
+import 'package:raro_budget/src/shared/models/transaction_model.dart';
 import 'package:raro_budget/src/shared/widgets/calendar/calendar.dart';
 import '../../../shared/constants/app_colors.dart';
 import '../../../shared/widgets/custom_appbar/custom_appbar.dart';
@@ -161,7 +161,7 @@ class _HomeOutPageState
         text: 'INSERIR',
         useIconAdd: true,
         onTap: () {
-          controller.firebaseModel.insertNewOutput(TransactionModule(
+          controller.firebaseModel.insertNewOutput(TransactionModel(
             name: controller.nameController.text,
             type: 'saída',
             category: item!.category,

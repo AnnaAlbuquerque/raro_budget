@@ -26,7 +26,7 @@ class FirebaseModel {
     }
   }
 
-  Future<void> insertNewOutput(TransactionModule transaction) async {
+  Future<void> insertNewOutput(TransactionModel transaction) async {
     try {
       await firebaseRepository.store
           .collection('users')
@@ -44,7 +44,7 @@ class FirebaseModel {
     }
   }
 
-  Future<void> insertNewInput(TransactionModule transaction) async {
+  Future<void> insertNewInput(TransactionModel transaction) async {
     try {
       await firebaseRepository.store
           .collection('users')

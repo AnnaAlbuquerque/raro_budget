@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:raro_budget/src/shared/models/transaction_module.dart';
+import 'package:raro_budget/src/shared/models/transaction_model.dart';
 import 'package:raro_budget/src/shared/widgets/calendar/calendar.dart';
 import '../../../shared/constants/app_colors.dart';
 import '../../../shared/widgets/custom_appbar/custom_appbar.dart';
@@ -155,7 +155,7 @@ class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
         text: 'INSERIR',
         useIconAdd: true,
         onTap: () {
-          controller.firebaseModel.insertNewInput(TransactionModule(
+          controller.firebaseModel.insertNewInput(TransactionModel(
             name: controller.nameController.text,
             type: 'entrada',
             category: item!.category,
