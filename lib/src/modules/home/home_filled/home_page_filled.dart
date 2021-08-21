@@ -212,7 +212,7 @@ class _HomePageFilledState
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Total entradas",
+                              "Total saídas",
                               style: TextStyles.purple16w500Roboto,
                             ),
                             Observer(builder: (_) {
@@ -301,7 +301,7 @@ class _HomePageFilledState
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Total entradas",
+                              "Total",
                               style: TextStyles.purple16w500Roboto,
                             ),
                             Observer(builder: (_) {
@@ -323,13 +323,26 @@ class _HomePageFilledState
       ),
       drawer: CustomDrawer(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: CustomButtonLoggedFlow(
-        useIconAdd: true,
-        useGradientBackground: true,
-        onTap: () {
-          Modular.to.navigate('/home/homeoutpage');
-        },
-      ),
+      floatingActionButton: Observer(builder: (_) {
+        return (controller.button1 == true ||
+                controller.button2 == true && controller.button3 == false)
+            ? CustomButtonLoggedFlow(
+                useIconAdd: true,
+                useGradientBackground: true,
+                onTap: () {
+                  if (controller.button1 == true &&
+                      controller.button2 == false &&
+                      controller.button3 == false) {
+                    Modular.to.navigate('/home/homeinpage');
+                  } else if (controller.button1 == false &&
+                      controller.button2 == true &&
+                      controller.button3 == false) {
+                    Modular.to.navigate('/home/homeoutpage');
+                  }
+                },
+              )
+            : Container();
+      }),
     );
   }
 }
