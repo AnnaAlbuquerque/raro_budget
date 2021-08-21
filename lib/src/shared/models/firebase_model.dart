@@ -20,7 +20,7 @@ class FirebaseModel {
         'type': transaction.type,
         'name': transaction.name,
         'date': transaction.date,
-        'valor': transaction.value,
+        'value': transaction.value,
       });
     } catch (e) {
       print(e);
@@ -35,8 +35,26 @@ class FirebaseModel {
           .collection('transactions')
           .add({
         'category': transaction.category,
-        'type': '',
-        'name': '',
+        'type': 'saída',
+        'name': transaction.name,
+        'date': transaction.date,
+        'value': transaction.value,
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> insertNewInput(TransactionModule transaction) async {
+    try {
+      await firebaseRepository.store
+          .collection('users')
+          .doc(firebaseRepository.auth.currentUser!.uid)
+          .collection('transactions')
+          .add({
+        'category': transaction.category,
+        'type': 'entrada',
+        'name': transaction.name,
         'date': transaction.date,
         'value': transaction.value,
       });
@@ -52,7 +70,7 @@ class FirebaseModel {
           .doc(firebaseRepository.auth.currentUser!.uid)
           .collection('transactions')
           .where('type', isEqualTo: transaction.type)
-          .where('valor', isEqualTo: transaction.value)
+          .where('value', isEqualTo: transaction.value)
           .where('category', isEqualTo: transaction.category)
           .get()
           .then((value) => value.docs.forEach((element) {
@@ -79,7 +97,7 @@ class FirebaseModel {
           .doc(firebaseRepository.auth.currentUser!.uid)
           .collection('transactions')
           .where('type', isEqualTo: transaction.type)
-          .where('valor', isEqualTo: transaction.value)
+          .where('value', isEqualTo: transaction.value)
           .where('category', isEqualTo: transaction.category)
           .get()
           .then((value) => value.docs.forEach((element) {
@@ -90,7 +108,7 @@ class FirebaseModel {
                     .doc(element.id)
                     .update({
                   'type': transactionupdated.type,
-                  'valor': transactionupdated.value,
+                  'value': transactionupdated.value,
                   'category': transactionupdated.category
                 }).then((value) {
                   print("Success!");

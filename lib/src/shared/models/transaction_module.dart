@@ -45,7 +45,7 @@ class TransactionModule {
   factory TransactionModule.fromMap(Map<String, dynamic> map) {
     return TransactionModule(
       category: map['category'],
-      value: map['value'],
+      value: map['value'] / 100,
       type: map['type'],
       name: map['name'],
       date: (map['date']),
