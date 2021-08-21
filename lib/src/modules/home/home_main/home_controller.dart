@@ -35,4 +35,8 @@ abstract class ControllerBase with Store {
       button3 = true;
     }
   }
+
+  Future<void> logout() async {
+    await fire.firebaseRepository.auth.signOut();
+  }
 }

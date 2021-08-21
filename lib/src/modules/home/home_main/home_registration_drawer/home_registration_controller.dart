@@ -35,9 +35,4 @@ abstract class _HomeRegistrationControllerBase with Store {
       },
     );
   }
-
-  //TODO: mover para home controller
-  Future<void> logout() async {
-    await authController.userLogout();
-  }
 }
