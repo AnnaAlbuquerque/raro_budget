@@ -21,7 +21,7 @@ class CustomDrawer extends StatelessWidget {
             Container(
               height: 120,
               child: DrawerHeader(
-                padding: EdgeInsets.fromLTRB(24, 10, 0, 20),
+                padding: EdgeInsets.fromLTRB(24, 30, 0, 20),
                 decoration: BoxDecoration(
                   gradient: AppColors.cyanToPurpleAppBar,
                 ),
@@ -43,7 +43,7 @@ class CustomDrawer extends StatelessWidget {
             ListTile(
               dense: true,
               visualDensity: VisualDensity(vertical: -2, horizontal: 0),
-              contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
+              contentPadding: EdgeInsets.fromLTRB(24, 5, 0, 5),
               title: const Text(
                 'Cadastro',
                 style: TextStyles.black8716w500Roboto,
@@ -51,7 +51,7 @@ class CustomDrawer extends StatelessWidget {
               onTap: () {},
             ),
             Divider(
-              height: 20,
+              height: 2,
               thickness: 2,
               color: AppColors.grey88,
             ),
@@ -62,11 +62,12 @@ class CustomDrawer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Divider(
-              height: 20,
+              height: 2,
               thickness: 2,
               color: AppColors.grey88,
             ),
             ListTile(
+              contentPadding: EdgeInsets.only(top: 10, bottom: 10),
               dense: true,
               visualDensity: VisualDensity(vertical: -4, horizontal: 0),
               title: Container(

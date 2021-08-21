@@ -21,49 +21,53 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends ModularState<HomePage, HomeController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: "Olá, ${'store.user.name'}",
-        prefSize: 80,
-      ),
-      drawer: CustomDrawer(),
-      body: 1 == 0 //store.error
-          ? Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Erro na conexão",
-                    style: TextStyles.cyan48w400Roboto,
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  CustomButton(
-                    useGradientBackground: true,
-                    text: "TENTAR NOVAMENTE",
-                  ),
-                ],
-              ),
-            )
-          : SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-                    child: CustomGeneralBalance(
-                      balance: 'store.balance',
+    return SafeArea(
+      top: false,
+      bottom: true,
+      child: Scaffold(
+        appBar: CustomAppBar(
+          title: "Olá, ${'store.user.name'}",
+          prefSize: 80,
+        ),
+        drawer: CustomDrawer(),
+        body: 1 == 0 //store.error
+            ? Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Erro na conexão",
+                      style: TextStyles.cyan48w400Roboto,
                     ),
-                  ),
-                  CustomCard(),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-                    child: CustomLastTransactions(),
-                  ),
-                ],
+                    SizedBox(
+                      height: 25,
+                    ),
+                    CustomButton(
+                      useGradientBackground: true,
+                      text: "TENTAR NOVAMENTE",
+                    ),
+                  ],
+                ),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                      child: CustomGeneralBalance(
+                        balance: 'store.balance',
+                      ),
+                    ),
+                    CustomCard(),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+                      child: CustomLastTransactions(),
+                    ),
+                  ],
+                ),
               ),
-            ),
+      ),
     );
   }
 }
