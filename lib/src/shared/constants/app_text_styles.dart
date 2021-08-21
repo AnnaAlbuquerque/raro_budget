@@ -167,6 +167,25 @@ class TextStyles {
     color: AppColors.white,
   );
 
+  static const TextStyle white26w700RobotoWithShadows = TextStyle(
+      fontSize: 26.0,
+      fontWeight: FontWeight.w700,
+      color: AppColors.white,
+      shadows: [
+        Shadow(
+            offset: Offset(0, 8),
+            blurRadius: 11,
+            color: Color.fromRGBO(0, 0, 0, 0.2)),
+        Shadow(
+            offset: Offset(0, 17),
+            blurRadius: 26,
+            color: Color.fromRGBO(0, 0, 0, 0.14)),
+        Shadow(
+            offset: Offset(0, 6),
+            blurRadius: 32,
+            color: Color.fromRGBO(0, 0, 0, 0.12)),
+      ]);
+
   static const TextStyle white24w400Roboto = TextStyle(
     fontSize: 24.0,
     fontWeight: FontWeight.w400,

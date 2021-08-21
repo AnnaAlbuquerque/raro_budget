@@ -27,7 +27,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 child: Text(
                   "Olá, Jose",
-                  style: TextStyles.white26w700Roboto,
+                  style: TextStyles.white26w700RobotoWithShadows,
                 ),
               ),
             ),
