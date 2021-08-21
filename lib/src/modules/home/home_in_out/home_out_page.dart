@@ -140,7 +140,12 @@ class _HomeOutPageState
                         );
                       }).toList(),
                     ),
-                    const SizedBox(height: 38.0),
+                    const SizedBox(height: 24.0),
+                    CustomTextFormField(
+                      name: 'Nome da saída',
+                      controller: controller.nameController,
+                    ),
+                    const SizedBox(height: 30.0),
                     CalendarWidget(),
                     const SizedBox(height: 16.0),
                   ],
@@ -157,11 +162,12 @@ class _HomeOutPageState
         useIconAdd: true,
         onTap: () {
           controller.firebaseModel.insertNewOutput(TransactionModule(
-            name: '',
-            type: '',
-            category: 'Viagem',
-            value: double.parse(controller.valueController.text),
-            date: Timestamp.now(),
+            name: controller.nameController.text,
+            type: 'saída',
+            category: item!.category,
+            value: double.parse(controller.valueController.text) * 100,
+            date:
+                Timestamp.fromDate(controller.calendarController.selectedDate),
           ));
           Modular.to.navigate('/home/homefilled');
         },
