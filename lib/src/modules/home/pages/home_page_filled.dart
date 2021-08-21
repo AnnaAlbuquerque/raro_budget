@@ -53,186 +53,261 @@ class _HomePageFilledState
               controller.button2 == false &&
               controller.button3 == false) {
             return Container(
-                margin: EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(7.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.black.withOpacity(0.12),
-                      offset: Offset(0.0, 1.0),
-                      blurRadius: 8.0,
-                    ),
-                    BoxShadow(
-                      color: AppColors.black.withOpacity(0.14),
-                      offset: Offset(0.0, 3.0),
-                      blurRadius: 4.0,
-                    ),
-                    BoxShadow(
-                      color: AppColors.black.withOpacity(0.2),
-                      offset: Offset(0.0, 3.0),
-                      blurRadius: 3.0,
-                      spreadRadius: -2.0,
-                    ),
-                  ],
-                ),
-                child: FutureBuilder(
-                    future: controller.getTransactions(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData &&
-                          snapshot.connectionState == ConnectionState.none) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else {
-                        return ListView.builder(
-                            itemCount: controller.listaTodos.length,
-                            itemBuilder: (context, int index) {
-                              return CustomTransactionItem(
-                                controller.listaTodos[index].name,
-                                controller.listaTodos[index].category,
-                                controller.listaTodos[index].value,
-                                controller.listaTodos[index].type,
-                                controller.listaTodos[index].date,
+              padding: EdgeInsets.all(16),
+              margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 40.0),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(7.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.black.withOpacity(0.12),
+                    offset: Offset(0.0, 1.0),
+                    blurRadius: 8.0,
+                  ),
+                  BoxShadow(
+                    color: AppColors.black.withOpacity(0.14),
+                    offset: Offset(0.0, 3.0),
+                    blurRadius: 4.0,
+                  ),
+                  BoxShadow(
+                    color: AppColors.black.withOpacity(0.2),
+                    offset: Offset(0.0, 3.0),
+                    blurRadius: 3.0,
+                    spreadRadius: -2.0,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Flexible(
+                    flex: 10,
+                    child: Container(
+                      child: FutureBuilder(
+                          future: controller.getTransactions(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData &&
+                                snapshot.connectionState ==
+                                    ConnectionState.none) {
+                              return Center(
+                                child: CircularProgressIndicator(),
                               );
-                            });
-                      }
-                    }));
+                            } else {
+                              return ListView.builder(
+                                itemCount: controller.listaTodos.length,
+                                itemBuilder: (context, int index) {
+                                  return CustomTransactionItem(
+                                    controller.listaTodos[index].name,
+                                    controller.listaTodos[index].category,
+                                    controller.listaTodos[index].value,
+                                    controller.listaTodos[index].type,
+                                    controller.listaTodos[index].date,
+                                  );
+                                },
+                              );
+                            }
+                          }),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        Divider(
+                          height: 24,
+                          thickness: 2,
+                          color: AppColors.grey88,
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Total entradas",
+                              style: TextStyles.purple16w500Roboto,
+                            ),
+                            Text("\$ 333333",
+                                style: TextStyles.green14w500Roboto),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
           } else if (controller.button1 == false &&
               controller.button2 == true &&
               controller.button3 == false) {
             return Container(
-                margin: EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(7.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.black.withOpacity(0.12),
-                      offset: Offset(0.0, 1.0),
-                      blurRadius: 8.0,
+              padding: EdgeInsets.all(16),
+              margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 40.0),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(7.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.black.withOpacity(0.12),
+                    offset: Offset(0.0, 1.0),
+                    blurRadius: 8.0,
+                  ),
+                  BoxShadow(
+                    color: AppColors.black.withOpacity(0.14),
+                    offset: Offset(0.0, 3.0),
+                    blurRadius: 4.0,
+                  ),
+                  BoxShadow(
+                    color: AppColors.black.withOpacity(0.2),
+                    offset: Offset(0.0, 3.0),
+                    blurRadius: 3.0,
+                    spreadRadius: -2.0,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Flexible(
+                    flex: 10,
+                    child: Container(
+                      child: FutureBuilder(
+                          future: controller.getTransactions(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData &&
+                                snapshot.connectionState ==
+                                    ConnectionState.none) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              return ListView.builder(
+                                itemCount: controller.listaTodos.length,
+                                itemBuilder: (context, int index) {
+                                  return CustomTransactionItem(
+                                    controller.listaTodos[index].name,
+                                    controller.listaTodos[index].category,
+                                    controller.listaTodos[index].value,
+                                    controller.listaTodos[index].type,
+                                    controller.listaTodos[index].date,
+                                  );
+                                },
+                              );
+                            }
+                          }),
                     ),
-                    BoxShadow(
-                      color: AppColors.black.withOpacity(0.14),
-                      offset: Offset(0.0, 3.0),
-                      blurRadius: 4.0,
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        Divider(
+                          height: 24,
+                          thickness: 2,
+                          color: AppColors.grey88,
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Total entradas",
+                              style: TextStyles.purple16w500Roboto,
+                            ),
+                            Text("\$ 333333",
+                                style: TextStyles.green14w500Roboto),
+                          ],
+                        ),
+                      ],
                     ),
-                    BoxShadow(
-                      color: AppColors.black.withOpacity(0.2),
-                      offset: Offset(0.0, 3.0),
-                      blurRadius: 3.0,
-                      spreadRadius: -2.0,
-                    ),
-                  ],
-                ),
-                child: FutureBuilder(
-                    future: controller.getTransactions(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData &&
-                          snapshot.connectionState == ConnectionState.none) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else {
-                        return ListView.builder(
-                            itemCount: controller.listaTodos.length + 1,
-                            itemBuilder: (context, int index) {
-                              if (index == controller.listaTodos.length) {
-                                return Container(
-                                  margin: EdgeInsets.all(16.0),
-                                  child: Column(
-                                    children: [
-                                      Divider(
-                                        color: AppColors.white,
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                2.2,
-                                      ),
-                                      Divider(
-                                        height: 24,
-                                        thickness: 2,
-                                        color: AppColors.grey88,
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Total entradas",
-                                            style:
-                                                TextStyles.purple16w500Roboto,
-                                          ),
-                                          Text("\$ 333333",
-                                              style:
-                                                  TextStyles.green14w500Roboto),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              } else {
-                                return CustomTransactionItem(
-                                  controller.listaTodos[index].name,
-                                  controller.listaTodos[index].category,
-                                  controller.listaTodos[index].value,
-                                  controller.listaTodos[index].type,
-                                  controller.listaTodos[index].date,
-                                );
-                              }
-                            });
-                      }
-                    }));
+                  ),
+                ],
+              ),
+            );
           }
           if (controller.button1 == false &&
               controller.button2 == false &&
               controller.button3 == true) {
             return Container(
-                margin: EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(7.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.black.withOpacity(0.12),
-                      offset: Offset(0.0, 1.0),
-                      blurRadius: 8.0,
-                    ),
-                    BoxShadow(
-                      color: AppColors.black.withOpacity(0.14),
-                      offset: Offset(0.0, 3.0),
-                      blurRadius: 4.0,
-                    ),
-                    BoxShadow(
-                      color: AppColors.black.withOpacity(0.2),
-                      offset: Offset(0.0, 3.0),
-                      blurRadius: 3.0,
-                      spreadRadius: -2.0,
-                    ),
-                  ],
-                ),
-                child: FutureBuilder(
-                    future: controller.getTransactions(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData &&
-                          snapshot.connectionState == ConnectionState.none) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else {
-                        return ListView.builder(
-                            itemCount: controller.listaTodos.length,
-                            itemBuilder: (context, int index) {
-                              return CustomTransactionItem(
-                                controller.listaTodos[index].name,
-                                controller.listaTodos[index].category,
-                                controller.listaTodos[index].value,
-                                controller.listaTodos[index].type,
-                                controller.listaTodos[index].date,
+              padding: EdgeInsets.all(16),
+              margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 40.0),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(7.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.black.withOpacity(0.12),
+                    offset: Offset(0.0, 1.0),
+                    blurRadius: 8.0,
+                  ),
+                  BoxShadow(
+                    color: AppColors.black.withOpacity(0.14),
+                    offset: Offset(0.0, 3.0),
+                    blurRadius: 4.0,
+                  ),
+                  BoxShadow(
+                    color: AppColors.black.withOpacity(0.2),
+                    offset: Offset(0.0, 3.0),
+                    blurRadius: 3.0,
+                    spreadRadius: -2.0,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Flexible(
+                    flex: 10,
+                    child: Container(
+                      child: FutureBuilder(
+                          future: controller.getTransactions(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData &&
+                                snapshot.connectionState ==
+                                    ConnectionState.none) {
+                              return Center(
+                                child: CircularProgressIndicator(),
                               );
-                            });
-                      }
-                    }));
+                            } else {
+                              return ListView.builder(
+                                itemCount: controller.listaTodos.length,
+                                itemBuilder: (context, int index) {
+                                  return CustomTransactionItem(
+                                    controller.listaTodos[index].name,
+                                    controller.listaTodos[index].category,
+                                    controller.listaTodos[index].value,
+                                    controller.listaTodos[index].type,
+                                    controller.listaTodos[index].date,
+                                  );
+                                },
+                              );
+                            }
+                          }),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        Divider(
+                          height: 24,
+                          thickness: 2,
+                          color: AppColors.grey88,
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Total entradas",
+                              style: TextStyles.purple16w500Roboto,
+                            ),
+                            Text("\$ 333333",
+                                style: TextStyles.green14w500Roboto),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
           } else {
             return Container();
           }

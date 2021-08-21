@@ -43,7 +43,7 @@ abstract class _HomePageFilledControllerBase with Store {
 
   @action
   Future getTransactions() async {
-    listaTodos.clear();
+    //listaTodos.clear();
     List<TransactionModule> responseList = await firebaseModel.testeconsulta();
 
     print(responseList);
