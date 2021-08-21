@@ -47,6 +47,7 @@ abstract class _HomePageFilledControllerBase with Store {
     List<TransactionModel> responseList = await firebaseModel.testeconsulta();
     if (responseList.isNotEmpty) {
       value = 0;
+      listaTodos.clear();
       responseList.forEach((element) {
         listaTodos.add(element);
         value += element.value;
