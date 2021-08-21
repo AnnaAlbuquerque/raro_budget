@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/modules/home/home_main/custom_drawer/custom_drawer_widget.dart';
 import 'package:raro_budget/src/modules/home/widgets/custom_transaction_item/custom_transaction_item_widget.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
@@ -17,11 +18,17 @@ class HomePageFilled extends StatefulWidget {
 
 class _HomePageFilledState
     extends ModularState<HomePageFilled, HomePageFilledController> {
+  var keyDrawerHomeFilled = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: keyDrawerHomeFilled,
       appBar: CustomAppBar(
         iconDataLeft: Icons.menu,
+        iconButtonOnPressed: () {
+          keyDrawerHomeFilled.currentState!.openDrawer();
+        },
         iconDataRight: Icons.ac_unit,
         title: 'title',
         prefSize: 120,
@@ -314,6 +321,7 @@ class _HomePageFilledState
           }
         }),
       ),
+      drawer: CustomDrawer(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CustomButtonLoggedFlow(
         useIconAdd: true,

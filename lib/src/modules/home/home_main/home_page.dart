@@ -18,12 +18,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
+  var keyDrawerHomePage = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: keyDrawerHomePage,
       appBar: CustomAppBar(
         title: "Olá, ${'store.user.name'}",
+        iconDataLeft: Icons.menu,
         prefSize: 80,
+        iconButtonOnPressed: () {
+          {
+            keyDrawerHomePage.currentState!.openDrawer();
+          }
+        },
       ),
       drawer: CustomDrawer(),
       body: 1 == 0 //store.error
