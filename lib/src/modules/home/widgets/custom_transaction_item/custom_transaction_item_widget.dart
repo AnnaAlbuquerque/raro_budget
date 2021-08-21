@@ -9,13 +9,12 @@ class CustomTransactionItem extends StatefulWidget {
   final String type;
   final String category;
   final String? title;
-  final Color? color;
-  final String? icon;
+
   final num? transferredValue;
   final Timestamp timestamp;
 
-  const CustomTransactionItem(this.title, this.category, this.icon,
-      this.transferredValue, this.color, this.type, this.timestamp);
+  const CustomTransactionItem(this.title, this.category, this.transferredValue,
+      this.type, this.timestamp);
 
   @override
   _CustomTransactionItemState createState() => _CustomTransactionItemState();

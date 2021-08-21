@@ -6,6 +6,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/home/pages/home_page_filled_controller.dart';
 import 'package:raro_budget/src/modules/home/widgets/custom_transaction_item/custom_transaction_item_widget.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
+import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 
 import 'package:raro_budget/src/shared/widgets/custom_appbar/custom_appbar.dart';
 
@@ -48,39 +49,194 @@ class _HomePageFilledState
           gradient: AppColors.selagotowhite,
         ),
         child: Observer(builder: (_) {
-          return controller.button1 == true &&
-                  controller.button2 == false &&
-                  controller.button3 == false
-              ? Container(
-                  child: FutureBuilder(
-                      future: controller.getTransactions(),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData &&
-                            snapshot.connectionState == ConnectionState.none) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        } else {
-                          return ListView.builder(
-                              itemCount: controller.listaTodos.length,
-                              itemBuilder: (context, int index) {
+          if (controller.button1 == true &&
+              controller.button2 == false &&
+              controller.button3 == false) {
+            return Container(
+                margin: EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(7.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.black.withOpacity(0.12),
+                      offset: Offset(0.0, 1.0),
+                      blurRadius: 8.0,
+                    ),
+                    BoxShadow(
+                      color: AppColors.black.withOpacity(0.14),
+                      offset: Offset(0.0, 3.0),
+                      blurRadius: 4.0,
+                    ),
+                    BoxShadow(
+                      color: AppColors.black.withOpacity(0.2),
+                      offset: Offset(0.0, 3.0),
+                      blurRadius: 3.0,
+                      spreadRadius: -2.0,
+                    ),
+                  ],
+                ),
+                child: FutureBuilder(
+                    future: controller.getTransactions(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData &&
+                          snapshot.connectionState == ConnectionState.none) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        return ListView.builder(
+                            itemCount: controller.listaTodos.length,
+                            itemBuilder: (context, int index) {
+                              return CustomTransactionItem(
+                                controller.listaTodos[index].name,
+                                controller.listaTodos[index].category,
+                                controller.listaTodos[index].value,
+                                controller.listaTodos[index].type,
+                                controller.listaTodos[index].date,
+                              );
+                            });
+                      }
+                    }));
+          } else if (controller.button1 == false &&
+              controller.button2 == true &&
+              controller.button3 == false) {
+            return Container(
+                margin: EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(7.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.black.withOpacity(0.12),
+                      offset: Offset(0.0, 1.0),
+                      blurRadius: 8.0,
+                    ),
+                    BoxShadow(
+                      color: AppColors.black.withOpacity(0.14),
+                      offset: Offset(0.0, 3.0),
+                      blurRadius: 4.0,
+                    ),
+                    BoxShadow(
+                      color: AppColors.black.withOpacity(0.2),
+                      offset: Offset(0.0, 3.0),
+                      blurRadius: 3.0,
+                      spreadRadius: -2.0,
+                    ),
+                  ],
+                ),
+                child: FutureBuilder(
+                    future: controller.getTransactions(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData &&
+                          snapshot.connectionState == ConnectionState.none) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        return ListView.builder(
+                            itemCount: controller.listaTodos.length + 1,
+                            itemBuilder: (context, int index) {
+                              if (index == controller.listaTodos.length) {
+                                return Container(
+                                  margin: EdgeInsets.all(16.0),
+                                  child: Column(
+                                    children: [
+                                      Divider(
+                                        color: AppColors.white,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                2.2,
+                                      ),
+                                      Divider(
+                                        height: 24,
+                                        thickness: 2,
+                                        color: AppColors.grey88,
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "Total entradas",
+                                            style:
+                                                TextStyles.purple16w500Roboto,
+                                          ),
+                                          Text("\$ 333333",
+                                              style:
+                                                  TextStyles.green14w500Roboto),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              } else {
                                 return CustomTransactionItem(
                                   controller.listaTodos[index].name,
                                   controller.listaTodos[index].category,
-                                  'icon',
                                   controller.listaTodos[index].value,
-                                  Colors.red,
                                   controller.listaTodos[index].type,
                                   controller.listaTodos[index].date,
                                 );
-                              });
-                        }
-                      }))
-              : Container(
-                  width: 500,
-                  height: 500,
-                  color: Colors.black,
-                );
+                              }
+                            });
+                      }
+                    }));
+          }
+          if (controller.button1 == false &&
+              controller.button2 == false &&
+              controller.button3 == true) {
+            return Container(
+                margin: EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(7.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.black.withOpacity(0.12),
+                      offset: Offset(0.0, 1.0),
+                      blurRadius: 8.0,
+                    ),
+                    BoxShadow(
+                      color: AppColors.black.withOpacity(0.14),
+                      offset: Offset(0.0, 3.0),
+                      blurRadius: 4.0,
+                    ),
+                    BoxShadow(
+                      color: AppColors.black.withOpacity(0.2),
+                      offset: Offset(0.0, 3.0),
+                      blurRadius: 3.0,
+                      spreadRadius: -2.0,
+                    ),
+                  ],
+                ),
+                child: FutureBuilder(
+                    future: controller.getTransactions(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData &&
+                          snapshot.connectionState == ConnectionState.none) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        return ListView.builder(
+                            itemCount: controller.listaTodos.length,
+                            itemBuilder: (context, int index) {
+                              return CustomTransactionItem(
+                                controller.listaTodos[index].name,
+                                controller.listaTodos[index].category,
+                                controller.listaTodos[index].value,
+                                controller.listaTodos[index].type,
+                                controller.listaTodos[index].date,
+                              );
+                            });
+                      }
+                    }));
+          } else {
+            return Container();
+          }
+
           // return Column(
           //   children: [
           //     controller.button1 == true &&
