@@ -104,6 +104,13 @@ class TextStyles {
     color: AppColors.black26,
   );
 
+  static const TextStyle black3815w500Roboto = TextStyle(
+    fontSize: 15.0,
+    fontWeight: FontWeight.w500,
+    color: AppColors.black38,
+    letterSpacing: 0.46,
+  );
+
   static const TextStyle black5424w400Roboto = TextStyle(
     fontSize: 24.0,
     fontWeight: FontWeight.w400,
@@ -197,6 +204,13 @@ class TextStyles {
     fontWeight: FontWeight.w500,
     color: AppColors.white,
     letterSpacing: 0.4,
+  );
+
+  static const TextStyle white15w500Roboto = TextStyle(
+    fontSize: 15.0,
+    fontWeight: FontWeight.w500,
+    color: AppColors.white,
+    letterSpacing: 0.46,
   );
 
   static const TextStyle white16w400Roboto = TextStyle(

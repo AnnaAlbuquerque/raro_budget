@@ -3,8 +3,13 @@ import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 
 class CustomDrawer extends StatelessWidget {
+  final void Function()? registrationOnTap;
+  final void Function()? logoutOnTap;
+
   const CustomDrawer({
     Key? key,
+    this.registrationOnTap,
+    this.logoutOnTap,
   }) : super(key: key);
 
   @override
@@ -48,7 +53,7 @@ class CustomDrawer extends StatelessWidget {
                 'Cadastro',
                 style: TextStyles.black8716w500Roboto,
               ),
-              onTap: () {},
+              onTap: registrationOnTap,
             ),
             Divider(
               height: 2,
@@ -77,7 +82,7 @@ class CustomDrawer extends StatelessWidget {
                   style: TextStyles.chambray16w400Roboto,
                 ),
               ),
-              onTap: () {},
+              onTap: logoutOnTap,
             ),
           ],
         )

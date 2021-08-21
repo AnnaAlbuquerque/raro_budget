@@ -29,7 +29,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           title: "Olá, ${'store.user.name'}",
           prefSize: 80,
         ),
-        drawer: CustomDrawer(),
+        drawer: CustomDrawer(
+          registrationOnTap: () async => {
+            await Modular.to.pushNamed('/home/homeregistration'),
+          },
+        ),
         body: 1 == 0 //store.error
             ? Center(
                 child: Column(

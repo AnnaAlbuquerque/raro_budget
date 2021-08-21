@@ -49,7 +49,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                       alignment: Alignment.center,
                       child: Text(
                         title,
-                        style: TextStyles.white26w700Roboto,
+                        style: TextStyles.white26w700RobotoWithShadows,
                       ),
                     )
                   : Container(),
@@ -92,7 +92,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                           margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                           child: Text(
                             title,
-                            style: TextStyles.white26w700Roboto,
+                            style: TextStyles.white26w700RobotoWithShadows,
                           ),
                         ),
                       ],
@@ -146,7 +146,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                             alignment: Alignment.center,
                             child: Text(
                               title,
-                              style: TextStyles.white26w700Roboto,
+                              style: TextStyles.white26w700RobotoWithShadows,
                             ),
                           ),
                         ],
