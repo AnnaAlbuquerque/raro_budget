@@ -84,7 +84,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                                     }
                                 });
                       } else {
-                        //TODO colocar modal com mensagem de email inválido
                         print("NAO VALIDOU");
                       }
                     },

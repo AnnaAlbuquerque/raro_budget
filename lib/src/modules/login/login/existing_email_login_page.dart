@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/login/login/login_controller.dart';
 import 'package:raro_budget/src/shared/validators/validators.dart';
+import 'package:raro_budget/src/shared/widgets/custom_dialog/custom_dialog.dart';
 import '../../../shared/constants/app_text_styles.dart';
 import '../../../shared/widgets/custom_button/custom_button_widget.dart';
 import '../../../shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
@@ -50,7 +51,8 @@ class _ExistingEmailLoginPageState
                   name: 'Senha',
                   obscureText: _isObscure,
                   controller: controller.passwordController,
-                  validator: (value) => validators.passwordValidator(value),
+                  validator: (value) =>
+                      validators.passwordValidatorEmailPage(value),
                   icon: IconButton(
                     icon: Icon(
                       _isObscure ? Icons.visibility_off : Icons.visibility,
@@ -82,12 +84,20 @@ class _ExistingEmailLoginPageState
                                       {Modular.to.navigate("/home")}
                                     else
                                       {
-                                        //TODO modal com mensagem de credenciais inválidas
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return CustomDialog(
+                                              title: "Credênciais inválidas",
+                                              subtitle:
+                                                  "Email ou senha incorreta",
+                                            );
+                                          },
+                                        ),
                                         print("NAO LOGOU")
                                       }
                                   });
                         } else {
-                          //TODO colocar modal com mensagem de email inválido
                           print("NAO LOGOU");
                         }
                       },
