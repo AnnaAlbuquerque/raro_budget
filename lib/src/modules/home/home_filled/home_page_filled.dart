@@ -356,6 +356,7 @@ class _HomePageFilledState
         useIconAdd: true,
         useGradientBackground: true,
         onTap: () {
+          Modular.to.navigate('/home/homeoutpage');
           /* controller.fire.insert(
             TransactionModule(
               category: 'pixies',

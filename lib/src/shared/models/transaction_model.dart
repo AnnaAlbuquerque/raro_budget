@@ -45,7 +45,7 @@ class TransactionModel {
   factory TransactionModel.fromMap(Map<String, dynamic> map) {
     return TransactionModel(
       category: map['category'],
-      value: map['value'],
+      value: map['value'] / 100,
       type: map['type'],
       name: map['name'],
       date: (map['date']),

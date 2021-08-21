@@ -36,6 +36,7 @@ class CustomButtonLoggedFlow extends StatelessWidget {
     }
 
     return Material(
+      color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(24),
         onTap: onTap,
