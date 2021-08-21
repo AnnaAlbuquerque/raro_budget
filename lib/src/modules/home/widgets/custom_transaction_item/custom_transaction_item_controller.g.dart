@@ -24,6 +24,18 @@ mixin _$CustomTransactionItemController
       ActionController(name: '_CustomTransactionItemControllerBase');
 
   @override
+  Color checkColor(String category) {
+    final _$actionInfo = _$_CustomTransactionItemControllerBaseActionController
+        .startAction(name: '_CustomTransactionItemControllerBase.checkColor');
+    try {
+      return super.checkColor(category);
+    } finally {
+      _$_CustomTransactionItemControllerBaseActionController
+          .endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String checkIcon(String category, String type) {
     final _$actionInfo = _$_CustomTransactionItemControllerBaseActionController
         .startAction(name: '_CustomTransactionItemControllerBase.checkIcon');

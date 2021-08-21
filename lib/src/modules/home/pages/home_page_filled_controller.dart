@@ -1,8 +1,6 @@
 import 'package:mobx/mobx.dart';
-
 import 'package:raro_budget/src/shared/models/firebase_model.dart';
 import 'package:raro_budget/src/shared/models/transaction_module.dart';
-
 part 'home_page_filled_controller.g.dart';
 
 class HomePageFilledController = _HomePageFilledControllerBase
@@ -38,40 +36,23 @@ abstract class _HomePageFilledControllerBase with Store {
   }
 
   @observable
+  num value = 0;
+
+  @observable
   ObservableList<TransactionModule> listaTodos =
       ObservableList<TransactionModule>();
 
   @action
   Future getTransactions() async {
-    //listaTodos.clear();
+    listaTodos.clear();
     List<TransactionModule> responseList = await firebaseModel.testeconsulta();
-
-    print(responseList);
     if (responseList.isNotEmpty) {
+      value = 0;
       responseList.forEach((element) {
         listaTodos.add(element);
-
-        print(element);
+        value += element.value;
       });
-
       return listaTodos;
     }
-  }
-
-  @action
-  void getTransactions2() {
-    firebaseModel.testeconsulta().then((responseList) => {
-          if (responseList.isNotEmpty)
-            {
-              responseList.forEach((element) {
-                print(element);
-                listaTodos.add(element);
-              })
-            }
-          else
-            {
-              print('ELSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE'),
-            }
-        });
   }
 }

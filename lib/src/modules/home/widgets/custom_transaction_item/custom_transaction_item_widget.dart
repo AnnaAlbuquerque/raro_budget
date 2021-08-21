@@ -9,7 +9,6 @@ class CustomTransactionItem extends StatefulWidget {
   final String type;
   final String category;
   final String? title;
-
   final num? transferredValue;
   final Timestamp timestamp;
 
@@ -71,7 +70,7 @@ class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
           ),
           Text(
             '${widget.transferredValue}',
-            style: widget.transferredValue! <= 0
+            style: widget.transferredValue! < 0
                 ? TextStyles.black16w500Roboto
                 : TextStyles.purple16w500Roboto,
           ),
