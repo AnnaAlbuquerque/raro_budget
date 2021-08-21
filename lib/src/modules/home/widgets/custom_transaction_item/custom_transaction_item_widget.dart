@@ -1,46 +1,43 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/modules/home/widgets/custom_transaction_item/custom_transaction_item_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 
-class CustomTransactionItem extends StatelessWidget {
-  const CustomTransactionItem(
-      {Key? key,
-      this.title,
-      this.icon,
-      this.transferredValue,
-      this.color,
-      this.textstyle,
-      this.isGradient,
-      this.date})
-      : super(key: key);
-
-  final bool? isGradient;
-  final TextStyle? textstyle;
+class CustomTransactionItem extends StatefulWidget {
+  final String type;
+  final String category;
   final String? title;
-  final Color? color;
-  final String? icon;
-  final String? transferredValue;
-  final Timestamp? date;
+  final num? transferredValue;
+  final Timestamp timestamp;
 
+  const CustomTransactionItem(this.title, this.category, this.transferredValue,
+      this.type, this.timestamp);
+
+  @override
+  _CustomTransactionItemState createState() => _CustomTransactionItemState();
+}
+
+class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
+    CustomTransactionItemController> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              isGradient == null
+              widget.type == 'saida'
                   ? CircleAvatar(
-                      backgroundColor: color,
+                      backgroundColor: controller.checkColor(widget.category),
                       child: Image(
-                          image: AssetImage(
-                              '${icon ?? 'assets/icons/transport.png'}')),
-                    )
+                          image: AssetImage(controller.checkIcon(
+                              widget.category, widget.type))))
                   : Container(
                       width: 40,
                       height: 40,
@@ -49,19 +46,22 @@ class CustomTransactionItem extends StatelessWidget {
                         gradient: AppColors.cyanToPurpleAppBar,
                       ),
                       child: Image(
-                          image: AssetImage(
-                              '${icon ?? 'assets/icons/transport.png'}')),
-                    ),
+                          image: AssetImage(controller.checkIcon(
+                              widget.category, widget.type)))),
               SizedBox(width: 8.0),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${title ?? 'Transporte'}',
+                    '${widget.category} ${widget.title}',
                     style: TextStyles.purple16w500Roboto,
                   ),
                   Text(
-                    '${date ?? DateFormat("dd/MM/yyyy").format(DateTime.now())}',
+                    widget.timestamp
+                        .toDate()
+                        .toLocal()
+                        .toString()
+                        .split(' ')[0],
                     style: TextStyles.grey14w400Roboto,
                   ),
                 ],
@@ -69,8 +69,10 @@ class CustomTransactionItem extends StatelessWidget {
             ],
           ),
           Text(
-            '-R\$ ${transferredValue ?? '25,00'}',
-            style: textstyle,
+            '${widget.transferredValue}',
+            style: widget.transferredValue! < 0
+                ? TextStyles.black16w500Roboto
+                : TextStyles.purple16w500Roboto,
           ),
         ],
       ),

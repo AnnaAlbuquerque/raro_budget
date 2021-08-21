@@ -54,6 +54,21 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
     });
   }
 
+  final _$valueAtom = Atom(name: '_HomePageFilledControllerBase.value');
+
+  @override
+  num get value {
+    _$valueAtom.reportRead();
+    return super.value;
+  }
+
+  @override
+  set value(num value) {
+    _$valueAtom.reportWrite(value, super.value, () {
+      super.value = value;
+    });
+  }
+
   final _$listaTodosAtom =
       Atom(name: '_HomePageFilledControllerBase.listaTodos');
 
@@ -93,22 +108,12 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
   }
 
   @override
-  void getTransactions2() {
-    final _$actionInfo = _$_HomePageFilledControllerBaseActionController
-        .startAction(name: '_HomePageFilledControllerBase.getTransactions2');
-    try {
-      return super.getTransactions2();
-    } finally {
-      _$_HomePageFilledControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 button1: ${button1},
 button2: ${button2},
 button3: ${button3},
+value: ${value},
 listaTodos: ${listaTodos}
     ''';
   }
