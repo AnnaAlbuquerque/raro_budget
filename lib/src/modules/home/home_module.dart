@@ -10,6 +10,7 @@ import 'package:raro_budget/src/modules/home/home_main/home_registration/home_re
 
 import 'package:raro_budget/src/shared/auth/auth_repository.dart';
 import 'package:raro_budget/src/shared/models/firebase_model.dart';
+import 'package:raro_budget/src/shared/validators/validators.dart';
 
 class HomeModule extends Module {
   @override
@@ -17,7 +18,8 @@ class HomeModule extends Module {
         Bind.singleton((i) => HomePageFilledController(i.get<FirebaseModel>())),
         Bind.singleton((i) => HomeController(i.get<FirebaseModel>())),
         Bind.singleton((i) => FirebaseModel(i.get<AuthRepository>())),
-        Bind.lazySingleton((i) => HomeRegistrationController())
+        Bind.lazySingleton((i) => HomeRegistrationController()),
+        Bind.lazySingleton((i) => Validators())
       ];
 
   @override

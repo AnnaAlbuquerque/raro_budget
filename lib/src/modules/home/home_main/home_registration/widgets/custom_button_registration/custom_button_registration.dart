@@ -5,13 +5,13 @@ import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 class CustomButtonRegistration extends StatelessWidget {
   final String text;
   final VoidCallback? onTap;
-  final bool? isValid;
+  final bool? hasChanges;
 
   const CustomButtonRegistration({
     Key? key,
     required this.text,
     this.onTap,
-    this.isValid,
+    this.hasChanges,
   }) : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class CustomButtonRegistration extends StatelessWidget {
         child: Ink(
           padding: EdgeInsets.only(top: 12, bottom: 12, left: 15, right: 15),
           height: 50,
-          decoration: isValid != null && isValid == false
+          decoration: hasChanges != null && hasChanges == false
               ? BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   color: AppColors.grey88,
@@ -40,7 +40,7 @@ class CustomButtonRegistration extends StatelessWidget {
                 children: [
                   Text(
                     text,
-                    style: isValid != null && isValid == false
+                    style: hasChanges != null && hasChanges == false
                         ? TextStyles.black3815w500Roboto
                         : TextStyles.white15w500Roboto,
                   ),

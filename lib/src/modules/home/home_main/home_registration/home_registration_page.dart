@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/home/home_main/home_registration/home_registration_controller.dart';
 import 'package:raro_budget/src/modules/home/home_main/home_registration/widgets/custom_button_registration/custom_button_registration.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
+import 'package:raro_budget/src/shared/validators/validators.dart';
 import 'package:raro_budget/src/shared/widgets/custom_appbar/custom_appbar.dart';
 import 'package:raro_budget/src/shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
 
@@ -15,7 +16,8 @@ class HomeRegistrationPage extends StatefulWidget {
 
 class _HomeRegistrationPageState extends State<HomeRegistrationPage> {
   final controller = Modular.get<HomeRegistrationController>();
-  final bool _isValid = false;
+  final validators = Modular.get<Validators>();
+  final bool _hasChanges = false;
 
   @override
   Widget build(BuildContext context) {
@@ -66,22 +68,28 @@ class _HomeRegistrationPageState extends State<HomeRegistrationPage> {
                 children: [
                   CustomTextFormField(
                     name: 'Nome',
-                    textInputType: TextInputType.number,
+                    textInputType: TextInputType.name,
                     controller: controller.nameController,
+                    validator: (value) => validators.nameValidator(value),
                   ),
                   CustomTextFormField(
                     name: 'CPF',
                     textInputType: TextInputType.number,
                     controller: controller.nameController,
+                    validator: (value) => validators.cpfValidator(value),
                   ),
                   CustomTextFormField(
                     name: 'E-mail',
+                    textInputType: TextInputType.emailAddress,
                     controller: controller.emailController,
+                    validator: (value) => validators.emailValidator(value),
                   ),
                   CustomTextFormField(
                     //TODO: mantendo padrão do create account, telefone ao invés de celular
                     name: 'Telefone',
+                    textInputType: TextInputType.phone,
                     controller: controller.emailController,
+                    validator: (value) => validators.phoneValidator(value),
                   ),
                 ],
               ),
@@ -91,7 +99,7 @@ class _HomeRegistrationPageState extends State<HomeRegistrationPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CustomButtonRegistration(
-        isValid: _isValid,
+        hasChanges: _hasChanges,
         text: 'SALVAR ALTERAÇÕES',
         onTap: () {},
       ),
