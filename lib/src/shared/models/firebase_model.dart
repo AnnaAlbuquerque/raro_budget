@@ -1,15 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:raro_budget/src/shared/auth/repositories/firebase_repository.dart';
-import 'package:raro_budget/src/shared/models/transaction_module.dart';
+import 'package:raro_budget/src/shared/auth/auth_repository.dart';
+import 'package:raro_budget/src/shared/models/transaction_model.dart';
 
 class FirebaseModel {
-  FirebaseRepository firebaseRepository;
+  AuthRepository firebaseRepository;
   FirebaseModel(
     this.firebaseRepository,
   );
 
-  Future<void> insert(TransactionModule transaction) async {
+  Future<void> insert(TransactionModel transaction) async {
     try {
       await firebaseRepository.store
           .collection('users')
@@ -63,7 +62,7 @@ class FirebaseModel {
     }
   }
 
-  Future<void> delete(TransactionModule transaction) async {
+  Future<void> delete(TransactionModel transaction) async {
     try {
       await firebaseRepository.store
           .collection('users')
@@ -89,8 +88,8 @@ class FirebaseModel {
     }
   }
 
-  Future<void> update(TransactionModule transaction,
-      TransactionModule transactionupdated) async {
+  Future<void> update(
+      TransactionModel transaction, TransactionModel transactionupdated) async {
     try {
       await firebaseRepository.store
           .collection('users')
@@ -119,8 +118,8 @@ class FirebaseModel {
     }
   }
 
-  Future<List<TransactionModule>> testeconsulta() async {
-    List<TransactionModule> lista = [];
+  Future<List<TransactionModel>> testeconsulta() async {
+    List<TransactionModel> lista = [];
     try {
       await firebaseRepository.store
           .collection('users')
@@ -131,7 +130,7 @@ class FirebaseModel {
         if (querySnapshot.docs.isNotEmpty) {
           lista = querySnapshot.docs
               .map(
-                (doc) => TransactionModule.fromMap(
+                (doc) => TransactionModel.fromMap(
                   doc.data(),
                 ),
               )

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import 'package:raro_budget/src/modules/login/create_account/create_account_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
@@ -51,13 +52,22 @@ class _PhoneCPFWidgetState extends State<PhoneCPFWidget> {
                   name: 'Telefone',
                   controller: controller.phoneController,
                   textInputType: TextInputType.phone,
+                  hasMask: true,
+                  inputFormatter:
+                      MaskTextInputFormatter(mask: '(##) #####-####'),
+                  validator: (value) => widget.validators.phoneValidator(value),
+                  hint: "(00) 00000-0000",
                 ),
                 SizedBox(height: 16.0),
                 CustomTextFormField(
-                  validator: (value) => widget.validators.cpfValidator(value),
                   name: 'CPF',
                   controller: controller.cpfController,
                   textInputType: TextInputType.number,
+                  hasMask: true,
+                  inputFormatter:
+                      MaskTextInputFormatter(mask: '###.###.###-##'),
+                  //validator: (value) => widget.validators.cpfValidator(value),
+                  hint: "000.000.000-00",
                 ),
                 SizedBox(height: 16.0),
                 SizedBox(height: 52.0),

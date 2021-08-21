@@ -77,6 +77,9 @@ class _PasswordWidgetState extends State<PasswordWidget> {
                     name: 'Confirme sua senha',
                     obscureText: confirmPasswordVisible,
                     controller: controller.confirmPasswordController,
+                    validator: (value) => widget.validators
+                        .confirmPasswordValidator(
+                            value, controller.passwordController.text),
                     icon: VisibleWidget(
                       visible: confirmPasswordVisible,
                       onPressed: () {

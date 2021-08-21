@@ -1,28 +1,34 @@
 // import 'package:firebase_auth/firebase_auth.dart';
-import 'package:raro_budget/src/shared/auth/repositories/firebase_repository.dart';
+import 'package:raro_budget/src/shared/auth/auth_repository.dart';
 import 'package:raro_budget/src/shared/enums/firebase_status.dart';
 
 class AuthController {
-  AuthController(this._firebaseRepository);
+  AuthController(this.authRepository);
 
-  final FirebaseRepository _firebaseRepository;
+  final AuthRepository authRepository;
 
   ConnectionStatus getConnectionStatus() {
-    return _firebaseRepository.getConnectionStatus();
+    return authRepository.getConnectionStatus();
   }
 
   Future<void> initilizer() async {
-    await _firebaseRepository.initializer();
+    await authRepository.initializer();
   }
 
-  Future<bool> hasEmail(String email) async {
-    bool hasEmail = await _firebaseRepository.hasEmail(email);
-    return hasEmail;
+  bool checkUserLogged() {
+    final user = authRepository.auth.currentUser;
+
+    if (user != null) {
+      print("USER LOGGED");
+      return true;
+    } else {
+      print("NO USER LOGGED");
+      return false;
+    }
   }
 
-  Future<bool> getEmailPasswordLogin(String email, String password) async {
-    bool isLogged =
-        await _firebaseRepository.getEmailPasswordLogin(email, password);
-    return isLogged;
+  Future<void> userLogout() async {
+    await authRepository.auth.signOut();
+    print("USER LOGGED OUT!!");
   }
 }
