@@ -3,6 +3,7 @@ import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 
 class CustomDrawer extends StatelessWidget {
+  final String userName;
   final void Function()? registrationOnTap;
   final void Function()? logoutOnTap;
 
@@ -10,6 +11,7 @@ class CustomDrawer extends StatelessWidget {
     Key? key,
     this.registrationOnTap,
     this.logoutOnTap,
+    required this.userName,
   }) : super(key: key);
 
   @override
@@ -31,7 +33,7 @@ class CustomDrawer extends StatelessWidget {
                   gradient: AppColors.cyanToPurpleAppBar,
                 ),
                 child: Text(
-                  "Olá, Jose",
+                  "Olá, $userName",
                   style: TextStyles.white26w700RobotoWithShadows,
                 ),
               ),

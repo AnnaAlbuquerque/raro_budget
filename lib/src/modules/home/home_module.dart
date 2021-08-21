@@ -18,7 +18,8 @@ class HomeModule extends Module {
         Bind.singleton((i) => HomePageFilledController(i.get<FirebaseModel>())),
         Bind.singleton((i) => HomeController(i.get<FirebaseModel>())),
         Bind.singleton((i) => FirebaseModel(i.get<AuthRepository>())),
-        Bind.lazySingleton((i) => HomeRegistrationController()),
+        Bind.lazySingleton((i) =>
+            HomeRegistrationController(authRepository: i<AuthRepository>())),
         Bind.lazySingleton((i) => Validators())
       ];
 

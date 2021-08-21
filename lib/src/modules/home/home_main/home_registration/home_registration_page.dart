@@ -18,6 +18,11 @@ class _HomeRegistrationPageState extends State<HomeRegistrationPage> {
   final controller = Modular.get<HomeRegistrationController>();
   final validators = Modular.get<Validators>();
   final bool _hasChanges = false;
+  @override
+  void initState() {
+    controller.loadUserData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +65,8 @@ class _HomeRegistrationPageState extends State<HomeRegistrationPage> {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.only(left: 40.0, top: 40, right: 40.0),
+            padding: const EdgeInsets.only(
+                left: 40.0, top: 40, right: 40.0, bottom: 40),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +81,7 @@ class _HomeRegistrationPageState extends State<HomeRegistrationPage> {
                   CustomTextFormField(
                     name: 'CPF',
                     textInputType: TextInputType.number,
-                    controller: controller.nameController,
+                    controller: controller.cpfController,
                     validator: (value) => validators.cpfValidator(value),
                   ),
                   CustomTextFormField(
@@ -88,7 +94,7 @@ class _HomeRegistrationPageState extends State<HomeRegistrationPage> {
                     //TODO: mantendo padrão do create account, telefone ao invés de celular
                     name: 'Telefone',
                     textInputType: TextInputType.phone,
-                    controller: controller.emailController,
+                    controller: controller.phoneController,
                     validator: (value) => validators.phoneValidator(value),
                   ),
                 ],

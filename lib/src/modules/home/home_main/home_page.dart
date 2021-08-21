@@ -30,6 +30,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           prefSize: 80,
         ),
         drawer: CustomDrawer(
+          userName: '${'controller.userName'}',
           registrationOnTap: () async => {
             await Modular.to.pushNamed('/home/homeregistration'),
           },
