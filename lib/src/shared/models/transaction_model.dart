@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class TransactionModule {
+class TransactionModel {
   String category;
   num value;
   String type;
   String name;
   Timestamp date;
-  TransactionModule({
+  TransactionModel({
     required this.category,
     required this.value,
     required this.type,
@@ -16,14 +16,14 @@ class TransactionModule {
     required this.date,
   });
 
-  TransactionModule copyWith({
+  TransactionModel copyWith({
     String? category,
     double? value,
     String? type,
     String? name,
     Timestamp? date,
   }) {
-    return TransactionModule(
+    return TransactionModel(
       category: category ?? this.category,
       value: value ?? this.value,
       type: type ?? this.type,
@@ -42,10 +42,10 @@ class TransactionModule {
     };
   }
 
-  factory TransactionModule.fromMap(Map<String, dynamic> map) {
-    return TransactionModule(
+  factory TransactionModel.fromMap(Map<String, dynamic> map) {
+    return TransactionModel(
       category: map['category'],
-      value: map['value'],
+      value: map['value'] / 100,
       type: map['type'],
       name: map['name'],
       date: (map['date']),
@@ -54,8 +54,8 @@ class TransactionModule {
 
   String toJson() => json.encode(toMap());
 
-  factory TransactionModule.fromJson(String source) =>
-      TransactionModule.fromMap(json.decode(source));
+  factory TransactionModel.fromJson(String source) =>
+      TransactionModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -66,7 +66,7 @@ class TransactionModule {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is TransactionModule &&
+    return other is TransactionModel &&
         other.category == category &&
         other.value == value &&
         other.type == type &&

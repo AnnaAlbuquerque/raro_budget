@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_text_styles.dart';
 
@@ -12,6 +13,9 @@ class CustomTextFormField extends StatelessWidget {
     this.icon,
     this.textInputType,
     this.textInputAction,
+    this.hasMask = false,
+    this.inputFormatter,
+    this.hint,
   }) : super(key: key);
 
   final String name;
@@ -21,15 +25,27 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? textInputType;
   final TextInputAction? textInputAction;
   final Widget? icon;
+  final TextInputFormatter? inputFormatter;
+  final bool hasMask;
+  final String? hint;
 
   @override
   Widget build(BuildContext context) {
+    List<TextInputFormatter> formatter;
+
+    if (hasMask) {
+      formatter = [inputFormatter!];
+    } else {
+      formatter = [];
+    }
+
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
       keyboardType: textInputType,
       textInputAction: textInputAction,
       decoration: InputDecoration(
+        hintText: hint,
         labelText: name,
         labelStyle: TextStyles.black5416w400Roboto,
         suffixIcon: icon,
@@ -38,6 +54,7 @@ class CustomTextFormField extends StatelessWidget {
         ),
       ),
       validator: validator,
+      inputFormatters: formatter,
     );
   }
 }

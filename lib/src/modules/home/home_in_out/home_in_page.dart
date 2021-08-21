@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/shared/models/transaction_model.dart';
+import 'package:raro_budget/src/shared/widgets/calendar/calendar.dart';
 import '../../../shared/constants/app_colors.dart';
-import '../../../shared/constants/app_text_styles.dart';
 import '../../../shared/widgets/custom_appbar/custom_appbar.dart';
 import '../../../shared/widgets/custom_button_logged/custom_button_logged_widget.dart';
 import '../../../shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
 import './widgets/custom_dropdownform/custom_dropdownbuttonform_widget.dart';
+import './home_in_page_controller.dart';
 
 class HomeInPage extends StatefulWidget {
   const HomeInPage({Key? key}) : super(key: key);
@@ -14,10 +17,7 @@ class HomeInPage extends StatefulWidget {
   _HomeInPageState createState() => _HomeInPageState();
 }
 
-class _HomeInPageState extends State<HomeInPage> {
-  TextEditingController _valueController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
-  String date = DateFormat('dd/MM/yyyy').format(DateTime.now());
+class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
   DropdownMenuItemData? item;
 
   List<DropdownMenuItemData> items = [
@@ -47,13 +47,6 @@ class _HomeInPageState extends State<HomeInPage> {
       color: AppColors.purple,
     ),
   ];
-
-  @override
-  void dispose() {
-    _valueController.dispose();
-    _nameController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +94,7 @@ class _HomeInPageState extends State<HomeInPage> {
                     CustomTextFormField(
                       name: 'Valor em R\$',
                       textInputType: TextInputType.number,
-                      controller: _valueController,
+                      controller: controller.valueController,
                     ),
                     const SizedBox(height: 24.0),
                     CustomDropdownButtonForm(
@@ -144,15 +137,10 @@ class _HomeInPageState extends State<HomeInPage> {
                     const SizedBox(height: 24.0),
                     CustomTextFormField(
                       name: 'Nome da entrada',
-                      controller: _nameController,
+                      controller: controller.nameController,
                     ),
                     const SizedBox(height: 30.0),
-                    InkWell(
-                      onTap: () {},
-                      child: Ink(
-                        child: Text(date, style: TextStyles.purple14w500Roboto),
-                      ),
-                    ),
+                    CalendarWidget(),
                     const SizedBox(height: 16.0),
                   ],
                 ),
@@ -166,7 +154,17 @@ class _HomeInPageState extends State<HomeInPage> {
         useGradientBackground: true,
         text: 'INSERIR',
         useIconAdd: true,
-        onTap: () {},
+        onTap: () {
+          controller.firebaseModel.insertNewInput(TransactionModel(
+            name: controller.nameController.text,
+            type: 'entrada',
+            category: item!.category,
+            value: double.parse(controller.valueController.text) * 100,
+            date:
+                Timestamp.fromDate(controller.calendarController.selectedDate),
+          ));
+          Modular.to.navigate('/home/homefilled');
+        },
       ),
     );
   }

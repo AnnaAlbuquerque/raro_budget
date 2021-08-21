@@ -1,4 +1,5 @@
 import 'package:animated_card/animated_card.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/splash/splash_controller.dart';
@@ -19,12 +20,14 @@ class _SplashPageState extends ModularState<SplashPage, SplashController> {
     controller.initializerFirebase().then((value) => {
           WidgetsFlutterBinding.ensureInitialized()
               .addPostFrameCallback((timeStamp) {
+            controller.authController.authRepository.auth
+                .authStateChanges()
+                .listen(
+              (User? user) {
+                controller.navigation(user);
+              },
+            );
             //TODO adição de pagina de erro quando o firebase não conectar corretamente
-            //TODO verificar se usuário está logado, se sim -> home, se não -> login
-            if (controller.status == ConnectionStatus.success) {
-              Future.delayed(Duration(seconds: 2))
-                  .then((_) => controller.NavigationLogin());
-            }
           })
         });
 
