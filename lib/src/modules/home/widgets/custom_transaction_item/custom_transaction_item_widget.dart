@@ -6,28 +6,16 @@ import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 
 class CustomTransactionItem extends StatefulWidget {
-  const CustomTransactionItem(
-      Key? key,
-      this.title,
-      this.category,
-      this.icon,
-      this.transferredValue,
-      this.color,
-      this.textstyle,
-      this.type,
-      this.date,
-      this.timestamp)
-      : super(key: key);
-
-  final String? type;
-  final String? category;
-  final TextStyle? textstyle;
+  final String type;
+  final String category;
   final String? title;
   final Color? color;
   final String? icon;
   final num? transferredValue;
   final Timestamp timestamp;
-  final DateTime? date;
+
+  const CustomTransactionItem(this.title, this.category, this.icon,
+      this.transferredValue, this.color, this.type, this.timestamp);
 
   @override
   _CustomTransactionItemState createState() => _CustomTransactionItemState();
@@ -48,11 +36,10 @@ class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
             children: [
               widget.type == 'saida'
                   ? CircleAvatar(
-                      backgroundColor: widget.color,
+                      backgroundColor: controller.checkColor(widget.category),
                       child: Image(
-                          image: AssetImage(
-                              '${widget.icon ?? 'assets/icons/transport.png'}')),
-                    )
+                          image: AssetImage(controller.checkIcon(
+                              widget.category, widget.type))))
                   : Container(
                       width: 40,
                       height: 40,
@@ -61,9 +48,8 @@ class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
                         gradient: AppColors.cyanToPurpleAppBar,
                       ),
                       child: Image(
-                          image: AssetImage(
-                              '${widget.icon ?? 'assets/icons/transport.png'}')),
-                    ),
+                          image: AssetImage(controller.checkIcon(
+                              widget.category, widget.type)))),
               SizedBox(width: 8.0),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +73,7 @@ class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
           Text(
             '${widget.transferredValue}',
             style: widget.transferredValue! <= 0
-                ? widget.textstyle
+                ? TextStyles.black16w500Roboto
                 : TextStyles.purple16w500Roboto,
           ),
         ],

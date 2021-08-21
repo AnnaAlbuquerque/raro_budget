@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:raro_budget/src/shared/constants/app_colors.dart';
 part 'custom_transaction_item_controller.g.dart';
 
 @Injectable()
@@ -24,6 +26,23 @@ abstract class _CustomTransactionItemControllerBase with Store {
     'assets/icons/payments_icon.png',
     'assets/icons/others_icon.png',
   ];
+
+  @action
+  Color checkColor(String category) {
+    if (category == 'meal') {
+      return Colors.yellow;
+    } else if (category == 'transport') {
+      return Colors.green;
+    } else if (category == 'trip') {
+      return Colors.pink;
+    } else if (category == 'education') {
+      return Colors.lightBlueAccent;
+    } else if (category == 'payments') {
+      return Colors.purple;
+    } else {
+      return Colors.lightBlue;
+    }
+  }
 
   @action
   String checkIcon(String category, String type) {

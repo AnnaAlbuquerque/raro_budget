@@ -65,13 +65,13 @@ class _HomePageFilledState
                               itemCount: controller.listaTodos.length,
                               itemBuilder: (context, int index) {
                                 return CustomTransactionItem(
-                                  title: controller.listaTodos[index].name,
-                                  transferredValue:
-                                      controller.listaTodos[index].value,
-                                  category:
-                                      controller.listaTodos[index].category,
-                                  type: controller.listaTodos[index].type,
-                                  timestamp: controller.listaTodos[index].date,
+                                  controller.listaTodos[index].name,
+                                  controller.listaTodos[index].category,
+                                  'icon',
+                                  controller.listaTodos[index].value,
+                                  Colors.red,
+                                  controller.listaTodos[index].type,
+                                  controller.listaTodos[index].date,
                                 );
                               });
                         }
