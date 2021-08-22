@@ -209,7 +209,7 @@ class _HomePageFilledState
               child: Column(
                 children: [
                   Flexible(
-                    flex: 10,
+                    flex: 6,
                     child: Container(
                       child: FutureBuilder(
                           future: controller.getTransactions(),
@@ -334,7 +334,7 @@ class _HomePageFilledState
               child: Column(
                 children: [
                   Flexible(
-                    flex: 10,
+                    flex: 6,
                     child: Container(
                       child: FutureBuilder(
                           future: controller.getTransactions(),
