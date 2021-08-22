@@ -64,7 +64,9 @@ class _HomePageFilledState
                 )
                 .toList(),
             onChanged: (String? value) {
-              controller.changeDropDownMenuItem(value, currentMonth);
+              setState(() {
+                controller.changeDropDownMenuItem(value, currentMonth);
+              });
             },
           ),
         ),

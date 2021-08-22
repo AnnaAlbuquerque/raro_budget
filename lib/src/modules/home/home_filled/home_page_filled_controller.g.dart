@@ -54,6 +54,22 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
     });
   }
 
+  final _$currentMonthStringAtom =
+      Atom(name: '_HomePageFilledControllerBase.currentMonthString');
+
+  @override
+  String? get currentMonthString {
+    _$currentMonthStringAtom.reportRead();
+    return super.currentMonthString;
+  }
+
+  @override
+  set currentMonthString(String? value) {
+    _$currentMonthStringAtom.reportWrite(value, super.currentMonthString, () {
+      super.currentMonthString = value;
+    });
+  }
+
   final _$valueAtom = Atom(name: '_HomePageFilledControllerBase.value');
 
   @override
@@ -131,22 +147,6 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
     });
   }
 
-  final _$currentMonthStringAtom =
-      Atom(name: '_HomePageFilledControllerBase.currentMonthString');
-
-  @override
-  String? get currentMonthString {
-    _$currentMonthStringAtom.reportRead();
-    return super.currentMonthString;
-  }
-
-  @override
-  set currentMonthString(String? value) {
-    _$currentMonthStringAtom.reportWrite(value, super.currentMonthString, () {
-      super.currentMonthString = value;
-    });
-  }
-
   final _$getTransactionsWithTypeAsyncAction =
       AsyncAction('_HomePageFilledControllerBase.getTransactionsWithType');
 
@@ -208,12 +208,12 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
 button1: ${button1},
 button2: ${button2},
 button3: ${button3},
+currentMonthString: ${currentMonthString},
 value: ${value},
 listAll: ${listAll},
 listAllIn: ${listAllIn},
 listAllOut: ${listAllOut},
-transactionModel: ${transactionModel},
-currentMonthString: ${currentMonthString}
+transactionModel: ${transactionModel}
     ''';
   }
 }

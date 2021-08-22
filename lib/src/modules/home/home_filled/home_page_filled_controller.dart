@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:raro_budget/src/modules/home/home_repository.dart';
 import 'package:raro_budget/src/shared/models/transaction_model.dart';
@@ -36,6 +37,82 @@ abstract class _HomePageFilledControllerBase with Store {
   }
 
   @observable
+  String? currentMonthString;
+
+  List<String> months = [
+    'JANEIRO',
+    'FEVEREIRO',
+    'MARÇO',
+    'ABRIL',
+    'MAIO',
+    'JUNHO',
+    'JULHO',
+    'AGOSTO',
+    'SETEMBRO',
+    'OUTUBRO',
+    'NOVEMBRO',
+    'DEZEMBRO',
+    'TODOS',
+  ];
+
+  int? monthStringToInt(String? currentMonthString) {
+    if (currentMonthString == 'JANEIRO') return 1;
+    if (currentMonthString == 'FEVEREIRO') return 2;
+    if (currentMonthString == 'MARÇO') return 3;
+    if (currentMonthString == 'ABRIL') return 4;
+    if (currentMonthString == 'MAIO') return 5;
+    if (currentMonthString == 'JUNHO') return 6;
+    if (currentMonthString == 'JULHO') return 7;
+    if (currentMonthString == 'AGOSTO') return 8;
+    if (currentMonthString == 'SETEMBRO') return 9;
+    if (currentMonthString == 'OUTUBRO') return 10;
+    if (currentMonthString == 'NOVEMBRO') return 11;
+    if (currentMonthString == 'DEZEMBRO') return 12;
+  }
+
+  @action
+  void getCurrentMonth(int currentMonth) {
+    currentMonthString = months[currentMonth - 1];
+  }
+
+  @action
+  void changeDropDownMenuItem(selectedMonth, currentMonth) {
+    selectedMonth == 'JANEIRO'
+        ? currentMonthString = months[0]
+        : selectedMonth == 'FEVEREIRO'
+            ? currentMonthString = months[1]
+            : selectedMonth == 'MARÇO'
+                ? currentMonthString = months[2]
+                : selectedMonth == 'ABRIL'
+                    ? currentMonthString = months[3]
+                    : selectedMonth == 'MAIO'
+                        ? currentMonthString = months[4]
+                        : selectedMonth == 'JUNHO'
+                            ? currentMonthString = months[5]
+                            : selectedMonth == 'JULHO'
+                                ? currentMonthString = months[6]
+                                : selectedMonth == 'AGOSTO'
+                                    ? currentMonthString = months[7]
+                                    : selectedMonth == 'SETEMBRO'
+                                        ? currentMonthString = months[8]
+                                        : selectedMonth == 'OUTUBRO'
+                                            ? currentMonthString = months[9]
+                                            : selectedMonth == 'NOVEMBRO'
+                                                ? currentMonthString =
+                                                    months[10]
+                                                : selectedMonth == 'DEZEMBRO'
+                                                    ? currentMonthString =
+                                                        months[11]
+                                                    : selectedMonth == 'TODOS'
+                                                        ? currentMonthString =
+                                                            months[12]
+                                                        : currentMonthString =
+                                                            months[
+                                                                currentMonth -
+                                                                    1];
+  }
+
+  @observable
   num value = 0;
 
   @observable
@@ -56,9 +133,10 @@ abstract class _HomePageFilledControllerBase with Store {
     listAll.clear();
 
     if (transactionsType == 'entrada') {
-      try {
+      if (currentMonthString == 'TODOS') {
         List<TransactionModel> responseList =
             await homeRepository.getTransactionsDocsWithType(transactionsType);
+
         if (responseList.isNotEmpty) {
           value = 0;
           listAllIn.clear();
@@ -68,14 +146,26 @@ abstract class _HomePageFilledControllerBase with Store {
           });
           return listAllIn;
         }
-      } catch (e) {
-        print('SOMETHING WENT WRONG :(');
-        print(e);
+      } else {
+        int? currentMonthInt = monthStringToInt(currentMonthString);
+        List<TransactionModel> responseList =
+            await homeRepository.getTransactionsDocsWithTypeAndMonth(
+                transactionsType, currentMonthInt as int);
+
+        if (responseList.isNotEmpty) {
+          value = 0;
+          listAllIn.clear();
+          responseList.forEach((element) {
+            listAllIn.add(element);
+            value += element.value;
+          });
+          return listAllIn;
+        }
       }
     }
 
     if (transactionsType == 'saida') {
-      try {
+      if (currentMonthString == 'TODOS') {
         List<TransactionModel> responseList =
             await homeRepository.getTransactionsDocsWithType(transactionsType);
         if (responseList.isNotEmpty) {
@@ -87,14 +177,26 @@ abstract class _HomePageFilledControllerBase with Store {
           });
           return listAllOut;
         }
-      } catch (e) {
-        print('SOMETHING WENT WRONG :(');
-        print(e);
+      } else {
+        int? currentMonthInt = monthStringToInt(currentMonthString);
+        List<TransactionModel> responseList =
+            await homeRepository.getTransactionsDocsWithTypeAndMonth(
+                transactionsType, currentMonthInt as int);
+
+        if (responseList.isNotEmpty) {
+          value = 0;
+          listAllOut.clear();
+          responseList.forEach((element) {
+            listAllOut.add(element);
+            value += element.value;
+          });
+          return listAllOut;
+        }
       }
     }
 
     if (transactionsType == 'total') {
-      try {
+      if (currentMonthString == 'TODOS') {
         List<TransactionModel> responseList =
             await homeRepository.getAllTransactionsDocs();
         if (responseList.isNotEmpty) {
@@ -106,9 +208,20 @@ abstract class _HomePageFilledControllerBase with Store {
           });
           return listAll;
         }
-      } catch (e) {
-        print('SOMETHING WENT WRONG :(');
-        print(e);
+      } else {
+        int? currentMonthInt = monthStringToInt(currentMonthString);
+        List<TransactionModel> responseList = await homeRepository
+            .getAllTransactionsDocsWithMonth(currentMonthInt as int);
+
+        if (responseList.isNotEmpty) {
+          value = 0;
+          listAll.clear();
+          responseList.forEach((element) {
+            listAll.add(element);
+            value += element.value;
+          });
+          return listAll;
+        }
       }
     }
   }
@@ -124,74 +237,5 @@ abstract class _HomePageFilledControllerBase with Store {
 
   Future<void> logout() async {
     await homeRepository.authRepository.auth.signOut();
-  }
-
-  @observable
-  String? currentMonthString;
-
-  List<String> months = [
-    'JANEIRO',
-    'FEVEREIRO',
-    'MARÇO',
-    'ABRIL',
-    'MAIO',
-    'JUNHO',
-    'JULHO',
-    'AGOSTO',
-    'SETEMBRO',
-    'OUTUBRO',
-    'NOVEMBRO',
-    'DEZEMBRO',
-    'TODOS',
-  ];
-
-  @action
-  void getCurrentMonth(int currentMonth) {
-    currentMonthString = months[currentMonth - 1];
-  }
-
-  @action
-  void changeDropDownMenuItem(selectedMonth, currentMonth) {
-    selectedMonth == 1 || selectedMonth == 'JANEIRO'
-        ? currentMonthString = months[0]
-        : selectedMonth == 2 || selectedMonth == 'FEVEREIRO'
-            ? currentMonthString = months[1]
-            : selectedMonth == 3 || selectedMonth == 'MARÇO'
-                ? currentMonthString = months[2]
-                : selectedMonth == 4 || selectedMonth == 'ABRIL'
-                    ? currentMonthString = months[3]
-                    : selectedMonth == 5 || selectedMonth == 'MAIO'
-                        ? currentMonthString = months[4]
-                        : selectedMonth == 6 || selectedMonth == 'JUNHO'
-                            ? currentMonthString = months[5]
-                            : selectedMonth == 7 || selectedMonth == 'JULHO'
-                                ? currentMonthString = months[6]
-                                : selectedMonth == 8 ||
-                                        selectedMonth == 'AGOSTO'
-                                    ? currentMonthString = months[7]
-                                    : selectedMonth == 9 ||
-                                            selectedMonth == 'SETEMBRO'
-                                        ? currentMonthString = months[8]
-                                        : selectedMonth == 10 ||
-                                                selectedMonth == 'OUTUBRO'
-                                            ? currentMonthString = months[9]
-                                            : selectedMonth == 11 ||
-                                                    selectedMonth == 'NOVEMBRO'
-                                                ? currentMonthString =
-                                                    months[10]
-                                                : selectedMonth == 12 ||
-                                                        selectedMonth ==
-                                                            'DEZEMBRO'
-                                                    ? currentMonthString =
-                                                        months[11]
-                                                    : selectedMonth == 13 ||
-                                                            selectedMonth ==
-                                                                'TODOS'
-                                                        ? currentMonthString =
-                                                            months[12]
-                                                        : currentMonthString =
-                                                            months[
-                                                                currentMonth -
-                                                                    1];
   }
 }

@@ -150,6 +150,34 @@ class HomeRepository {
     }
   }
 
+  Future<List<TransactionModel>> getTransactionsDocsWithTypeAndMonth(
+      String transactionType, int currentMonthInt) async {
+    List<TransactionModel> transactionsList = [];
+    try {
+      await authRepository.store
+          .collection('users')
+          .doc(authRepository.auth.currentUser!.uid)
+          .collection('transactions')
+          .where('type', isEqualTo: transactionType)
+          .where('month', isEqualTo: currentMonthInt)
+          .get()
+          .then((querySnapshot) {
+        if (querySnapshot.docs.isNotEmpty) {
+          transactionsList = querySnapshot.docs
+              .map(
+                (doc) => TransactionModel.fromMap(
+                  doc.data(),
+                ),
+              )
+              .toList();
+        }
+      });
+      return transactionsList;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   Future<List<TransactionModel>> getAllTransactionsDocs() async {
     List<TransactionModel> transactionsList = [];
     try {
@@ -157,6 +185,33 @@ class HomeRepository {
           .collection('users')
           .doc(authRepository.auth.currentUser!.uid)
           .collection('transactions')
+          .get()
+          .then((querySnapshot) {
+        if (querySnapshot.docs.isNotEmpty) {
+          transactionsList = querySnapshot.docs
+              .map(
+                (doc) => TransactionModel.fromMap(
+                  doc.data(),
+                ),
+              )
+              .toList();
+        }
+      });
+      return transactionsList;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<List<TransactionModel>> getAllTransactionsDocsWithMonth(
+      int currentMonthInt) async {
+    List<TransactionModel> transactionsList = [];
+    try {
+      await authRepository.store
+          .collection('users')
+          .doc(authRepository.auth.currentUser!.uid)
+          .collection('transactions')
+          .where('month', isEqualTo: currentMonthInt)
           .get()
           .then((querySnapshot) {
         if (querySnapshot.docs.isNotEmpty) {
