@@ -7,6 +7,7 @@ class UserModel {
   String cpf;
   bool terms;
   String password;
+
   UserModel({
     required this.name,
     required this.email,
@@ -52,7 +53,7 @@ class UserModel {
       phone: map['phone'],
       cpf: map['cpf'],
       terms: map['terms'],
-      password: map['password'],
+      password: "",
     );
   }
 
