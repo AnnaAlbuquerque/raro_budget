@@ -76,27 +76,8 @@ class _ExistingEmailLoginPageState
                       text: 'CONTINUAR',
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          controller
-                              .login(controller.emailController.text,
-                                  controller.passwordController.text)
-                              .then((value) => {
-                                    if (value)
-                                      {Modular.to.navigate("/home")}
-                                    else
-                                      {
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return CustomDialog(
-                                              title: "Credênciais inválidas",
-                                              subtitle:
-                                                  "Email ou senha incorreta",
-                                            );
-                                          },
-                                        ),
-                                        print("NAO LOGOU")
-                                      }
-                                  });
+                          controller.login(controller.emailController.text,
+                              controller.passwordController.text, context);
                         } else {
                           print("NAO LOGOU");
                         }

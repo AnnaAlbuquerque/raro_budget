@@ -20,13 +20,48 @@ class LoginController {
     return hasEmail;
   }
 
-  Future<bool> login(String email, String password) async {
-    bool isLogged = await authRepository.getEmailPasswordLogin(email, password);
-    return isLogged;
-  }
-
   Future<void> connection() async {
     await appConnectivity.checkConnection();
+  }
+
+  void login(String email, String password, BuildContext context) {
+    connection().then(
+      (_) => {
+        if (appConnectivity.connectionResult != ConnectivityResult.none)
+          {
+            authRepository.getEmailPasswordLogin(email, password).then(
+                  (value) => {
+                    if (value)
+                      {Modular.to.navigate("/home")}
+                    else
+                      {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return CustomDialog(
+                              title: "Credênciais inválidas",
+                              subtitle: "Email ou senha incorreta",
+                            );
+                          },
+                        ),
+                      }
+                  },
+                )
+          }
+        else
+          {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return CustomDialog(
+                  title: "Sem conexão",
+                  subtitle: "Verifique sua conexão com a internet",
+                );
+              },
+            )
+          }
+      },
+    );
   }
 
   void continueButtonFunction(BuildContext context) {
