@@ -33,8 +33,12 @@ class _HomeRegistrationPageState extends State<HomeRegistrationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
+        iconDataLeft: Icons.arrow_back,
+        iconButtonOnPressed: () {
+          Modular.to.pop();
+        },
         title: 'Cadastro',
-        prefSize: 189,
+        prefSize: 120,
       ),
       body: Form(
         key: _formKey,
@@ -122,8 +126,10 @@ class _HomeRegistrationPageState extends State<HomeRegistrationPage> {
           hasChanges: controller.hasChanges,
           text: 'SALVAR ALTERAÇÕES',
           onTap: () async {
-            await controller.saveUserData();
-            await controller.loadUserData();
+            if (_formKey.currentState!.validate()) {
+              await controller.saveUserData();
+              await controller.loadUserData();
+            }
           },
         ),
       ),

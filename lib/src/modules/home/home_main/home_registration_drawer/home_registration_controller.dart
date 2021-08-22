@@ -38,10 +38,29 @@ abstract class _HomeRegistrationControllerBase with Store {
       (value) {
         final userData = value.data();
 
-        nameController.text = userData!['name'];
-        emailController.text = userData['email'];
-        phoneController.text = userData['phone'];
-        cpfController.text = userData['cpf'];
+        if (userData!['name'] != null) {
+          nameController.text = userData['name'];
+        } else {
+          nameController.text = '';
+        }
+
+        if (userData['email'] != null) {
+          emailController.text = userData['email'];
+        } else {
+          emailController.text = '';
+        }
+
+        if (userData['phone'] != null) {
+          phoneController.text = userData['phone'];
+        } else {
+          phoneController.text = '';
+        }
+
+        if (userData['cpf'] != null) {
+          cpfController.text = userData['cpf'];
+        } else {
+          cpfController.text = '';
+        }
 
         recoveredUser = currentUserData.copyWith(
           name: userData['name'],

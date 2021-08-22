@@ -96,25 +96,25 @@ class _HomePageFilledState
                               );
                             } else {
                               return ListView.builder(
-                                itemCount: controller.listaTodos.length,
+                                itemCount: controller.listAll.length,
                                 itemBuilder: (context, int index) {
                                   return CustomTransactionItem(
-                                      controller.listaTodos[index].name,
-                                      controller.listaTodos[index].category,
-                                      controller.listaTodos[index].value,
-                                      controller.listaTodos[index].type,
-                                      controller.listaTodos[index].day,
-                                      controller.listaTodos[index].month,
-                                      controller.listaTodos[index].year, () {
+                                      controller.listAll[index].name,
+                                      controller.listAll[index].category,
+                                      controller.listAll[index].value,
+                                      controller.listAll[index].type,
+                                      controller.listAll[index].day,
+                                      controller.listAll[index].month,
+                                      controller.listAll[index].year, () {
                                     showModalBottomSheet(
                                         context: context,
                                         isDismissible: false,
                                         backgroundColor: Colors.transparent,
                                         builder: (context) => ModalWidget(
                                               'Você deseja realmente excluir esse arquivo?',
-                                              ('${controller.listaTodos[index].category}'
+                                              ('${controller.listAll[index].category}'
                                                   ' '
-                                                  '${controller.listaTodos[index].name}'),
+                                                  '${controller.listAll[index].name}'),
                                               'Cancelar',
                                               'Ok',
                                               () {
@@ -124,26 +124,20 @@ class _HomePageFilledState
                                                 controller.deleteUser(
                                                   TransactionModel(
                                                       category: controller
-                                                          .listaTodos[index]
+                                                          .listAll[index]
                                                           .category,
                                                       value: controller
-                                                          .listaTodos[index]
-                                                          .value,
+                                                          .listAll[index].value,
                                                       type: controller
-                                                          .listaTodos[index]
-                                                          .type,
+                                                          .listAll[index].type,
                                                       name: controller
-                                                          .listaTodos[index]
-                                                          .name,
+                                                          .listAll[index].name,
                                                       day: controller
-                                                          .listaTodos[index]
-                                                          .day,
+                                                          .listAll[index].day,
                                                       month: controller
-                                                          .listaTodos[index]
-                                                          .month,
+                                                          .listAll[index].month,
                                                       year: controller
-                                                          .listaTodos[index]
-                                                          .year),
+                                                          .listAll[index].year),
                                                 );
                                                 Modular.to.pop();
                                               },
@@ -229,25 +223,25 @@ class _HomePageFilledState
                               );
                             } else {
                               return ListView.builder(
-                                itemCount: controller.listaTodos.length,
+                                itemCount: controller.listAll.length,
                                 itemBuilder: (context, int index) {
                                   return CustomTransactionItem(
-                                      controller.listaTodos[index].name,
-                                      controller.listaTodos[index].category,
-                                      controller.listaTodos[index].value,
-                                      controller.listaTodos[index].type,
-                                      controller.listaTodos[index].day,
-                                      controller.listaTodos[index].month,
-                                      controller.listaTodos[index].year, () {
+                                      controller.listAll[index].name,
+                                      controller.listAll[index].category,
+                                      controller.listAll[index].value,
+                                      controller.listAll[index].type,
+                                      controller.listAll[index].day,
+                                      controller.listAll[index].month,
+                                      controller.listAll[index].year, () {
                                     showModalBottomSheet(
                                         context: context,
                                         isDismissible: false,
                                         backgroundColor: Colors.transparent,
                                         builder: (context) => ModalWidget(
                                               'Você deseja realmente excluir esse arquivo?',
-                                              ('${controller.listaTodos[index].category}'
+                                              ('${controller.listAll[index].category}'
                                                   ' '
-                                                  '${controller.listaTodos[index].name}'),
+                                                  '${controller.listAll[index].name}'),
                                               'Cancelar',
                                               'Ok',
                                               () {
@@ -257,26 +251,20 @@ class _HomePageFilledState
                                                 controller.deleteUser(
                                                   TransactionModel(
                                                       category: controller
-                                                          .listaTodos[index]
+                                                          .listAll[index]
                                                           .category,
                                                       value: controller
-                                                          .listaTodos[index]
-                                                          .value,
+                                                          .listAll[index].value,
                                                       type: controller
-                                                          .listaTodos[index]
-                                                          .type,
+                                                          .listAll[index].type,
                                                       name: controller
-                                                          .listaTodos[index]
-                                                          .name,
+                                                          .listAll[index].name,
                                                       day: controller
-                                                          .listaTodos[index]
-                                                          .day,
+                                                          .listAll[index].day,
                                                       month: controller
-                                                          .listaTodos[index]
-                                                          .month,
+                                                          .listAll[index].month,
                                                       year: controller
-                                                          .listaTodos[index]
-                                                          .year),
+                                                          .listAll[index].year),
                                                 );
                                                 Modular.to.pop();
                                               },
@@ -362,25 +350,25 @@ class _HomePageFilledState
                               );
                             } else {
                               return ListView.builder(
-                                itemCount: controller.listaTodos.length,
+                                itemCount: controller.listAll.length,
                                 itemBuilder: (context, int index) {
                                   return CustomTransactionItem(
-                                      controller.listaTodos[index].name,
-                                      controller.listaTodos[index].category,
-                                      controller.listaTodos[index].value,
-                                      controller.listaTodos[index].type,
-                                      controller.listaTodos[index].day,
-                                      controller.listaTodos[index].month,
-                                      controller.listaTodos[index].year, () {
+                                      controller.listAll[index].name,
+                                      controller.listAll[index].category,
+                                      controller.listAll[index].value,
+                                      controller.listAll[index].type,
+                                      controller.listAll[index].day,
+                                      controller.listAll[index].month,
+                                      controller.listAll[index].year, () {
                                     showModalBottomSheet(
                                         context: context,
                                         isDismissible: false,
                                         backgroundColor: Colors.transparent,
                                         builder: (context) => ModalWidget(
                                               'Você deseja realmente excluir esse arquivo?',
-                                              ('${controller.listaTodos[index].category}'
+                                              ('${controller.listAll[index].category}'
                                                   ' '
-                                                  '${controller.listaTodos[index].name}'),
+                                                  '${controller.listAll[index].name}'),
                                               'Cancelar',
                                               'Ok',
                                               () {
@@ -390,26 +378,20 @@ class _HomePageFilledState
                                                 controller.deleteUser(
                                                   TransactionModel(
                                                       category: controller
-                                                          .listaTodos[index]
+                                                          .listAll[index]
                                                           .category,
                                                       value: controller
-                                                          .listaTodos[index]
-                                                          .value,
+                                                          .listAll[index].value,
                                                       type: controller
-                                                          .listaTodos[index]
-                                                          .type,
+                                                          .listAll[index].type,
                                                       name: controller
-                                                          .listaTodos[index]
-                                                          .name,
+                                                          .listAll[index].name,
                                                       day: controller
-                                                          .listaTodos[index]
-                                                          .day,
+                                                          .listAll[index].day,
                                                       month: controller
-                                                          .listaTodos[index]
-                                                          .month,
+                                                          .listAll[index].month,
                                                       year: controller
-                                                          .listaTodos[index]
-                                                          .year),
+                                                          .listAll[index].year),
                                                 );
                                                 Modular.to.pop();
                                               },

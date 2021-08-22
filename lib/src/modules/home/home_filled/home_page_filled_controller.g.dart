@@ -69,19 +69,34 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
     });
   }
 
-  final _$listaTodosAtom =
-      Atom(name: '_HomePageFilledControllerBase.listaTodos');
+  final _$listAllAtom = Atom(name: '_HomePageFilledControllerBase.listAll');
 
   @override
-  ObservableList<TransactionModel> get listaTodos {
-    _$listaTodosAtom.reportRead();
-    return super.listaTodos;
+  ObservableList<TransactionModel> get listAll {
+    _$listAllAtom.reportRead();
+    return super.listAll;
   }
 
   @override
-  set listaTodos(ObservableList<TransactionModel> value) {
-    _$listaTodosAtom.reportWrite(value, super.listaTodos, () {
-      super.listaTodos = value;
+  set listAll(ObservableList<TransactionModel> value) {
+    _$listAllAtom.reportWrite(value, super.listAll, () {
+      super.listAll = value;
+    });
+  }
+
+  final _$transactionModelAtom =
+      Atom(name: '_HomePageFilledControllerBase.transactionModel');
+
+  @override
+  TransactionModel get transactionModel {
+    _$transactionModelAtom.reportRead();
+    return super.transactionModel;
+  }
+
+  @override
+  set transactionModel(TransactionModel value) {
+    _$transactionModelAtom.reportWrite(value, super.transactionModel, () {
+      super.transactionModel = value;
     });
   }
 
@@ -91,6 +106,15 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
   @override
   Future<dynamic> getTransactions() {
     return _$getTransactionsAsyncAction.run(() => super.getTransactions());
+  }
+
+  final _$deleteUserAsyncAction =
+      AsyncAction('_HomePageFilledControllerBase.deleteUser');
+
+  @override
+  Future<dynamic> deleteUser(TransactionModel transactionModel) {
+    return _$deleteUserAsyncAction
+        .run(() => super.deleteUser(transactionModel));
   }
 
   final _$_HomePageFilledControllerBaseActionController =
@@ -114,7 +138,8 @@ button1: ${button1},
 button2: ${button2},
 button3: ${button3},
 value: ${value},
-listaTodos: ${listaTodos}
+listAll: ${listAll},
+transactionModel: ${transactionModel}
     ''';
   }
 }

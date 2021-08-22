@@ -33,6 +33,7 @@ class LoginRepository {
   }
 }
 
+//TODO: precisa checar email duplicado!
 // aqui pode ir o login social do Google
 // não deixei aqui o verifyEmail pois achei melhor colocar no campo de email do cadastro também, 
 // caso o usuário tenha esquecido que um dia fez o cadastro, 

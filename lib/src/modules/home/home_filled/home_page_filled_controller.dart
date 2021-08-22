@@ -38,21 +38,20 @@ abstract class _HomePageFilledControllerBase with Store {
   @observable
   num value = 0;
   @observable
-  ObservableList<TransactionModel> listaTodos =
-      ObservableList<TransactionModel>();
+  ObservableList<TransactionModel> listAll = ObservableList<TransactionModel>();
 
   @action
   Future getTransactions() async {
-    listaTodos.clear();
+    listAll.clear();
     List<TransactionModel> responseList = await homeRepository.testeconsulta();
     if (responseList.isNotEmpty) {
       value = 0;
-      listaTodos.clear();
+      listAll.clear();
       responseList.forEach((element) {
-        listaTodos.add(element);
+        listAll.add(element);
         value += element.value;
       });
-      return listaTodos;
+      return listAll;
     }
   }
 
@@ -62,7 +61,7 @@ abstract class _HomePageFilledControllerBase with Store {
   @action
   Future deleteUser(TransactionModel transactionModel) async {
     await homeRepository.delete(transactionModel);
-    listaTodos.remove(transactionModel);
+    listAll.remove(transactionModel);
   }
 
   Future<void> logout() async {
