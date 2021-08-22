@@ -1,14 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mobx/mobx.dart';
+
 import 'package:raro_budget/src/modules/home/home_main/home_registration_drawer/home_registration_controller.dart';
 import 'package:raro_budget/src/modules/home/home_main/home_registration_drawer/widgets/custom_button_registration/custom_button_registration.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
-import 'package:raro_budget/src/shared/models/user_model.dart';
+
 import 'package:raro_budget/src/shared/validators/validators.dart';
 import 'package:raro_budget/src/shared/widgets/custom_appbar/custom_appbar.dart';
 import 'package:raro_budget/src/shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
@@ -76,40 +74,42 @@ class _HomeRegistrationPageState extends State<HomeRegistrationPage> {
               padding: const EdgeInsets.only(
                   left: 40.0, top: 40, right: 40.0, bottom: 40),
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    CustomTextFormField(
-                      name: 'Nome',
-                      textInputType: TextInputType.name,
-                      controller: controller.nameController,
-                      onChange: (value) => controller.checkNameChange(value),
-                      validator: (value) => validators.nameValidator(value),
-                    ),
-                    CustomTextFormField(
-                      name: 'CPF',
-                      textInputType: TextInputType.number,
-                      controller: controller.cpfController,
-                      onChange: (value) => controller.checkCpfChange(value),
-                      validator: (value) => validators.cpfValidator(value),
-                    ),
-                    CustomTextFormField(
-                      name: 'E-mail',
-                      textInputType: TextInputType.emailAddress,
-                      controller: controller.emailController,
-                      onChange: (value) => controller.checkEmailChange(value),
-                      validator: (value) => validators.emailValidator(value),
-                    ),
-                    CustomTextFormField(
-                      //TODO: mantendo padrão do create account, telefone ao invés de celular
-                      name: 'Telefone',
-                      textInputType: TextInputType.phone,
-                      controller: controller.phoneController,
-                      onChange: (value) => controller.checkPhoneChange(value),
-                      validator: (value) => validators.phoneValidator(value),
-                    ),
-                  ],
+                child: Observer(
+                  builder: (context) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      CustomTextFormField(
+                        name: 'Nome',
+                        textInputType: TextInputType.name,
+                        controller: controller.nameController,
+                        onChange: (value) => controller.checkNameChange(value),
+                        validator: (value) => validators.nameValidator(value),
+                      ),
+                      CustomTextFormField(
+                        name: 'CPF',
+                        textInputType: TextInputType.number,
+                        controller: controller.cpfController,
+                        onChange: (value) => controller.checkCpfChange(value),
+                        validator: (value) => validators.cpfValidator(value),
+                      ),
+                      CustomTextFormField(
+                        name: 'E-mail',
+                        textInputType: TextInputType.emailAddress,
+                        controller: controller.emailController,
+                        onChange: (value) => controller.checkEmailChange(value),
+                        validator: (value) => validators.emailValidator(value),
+                      ),
+                      CustomTextFormField(
+                        //TODO: mantendo padrão do create account, telefone ao invés de celular
+                        name: 'Telefone',
+                        textInputType: TextInputType.phone,
+                        controller: controller.phoneController,
+                        onChange: (value) => controller.checkPhoneChange(value),
+                        validator: (value) => validators.phoneValidator(value),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -123,6 +123,7 @@ class _HomeRegistrationPageState extends State<HomeRegistrationPage> {
           text: 'SALVAR ALTERAÇÕES',
           onTap: () async {
             await controller.saveUserData();
+            await controller.loadUserData();
           },
         ),
       ),

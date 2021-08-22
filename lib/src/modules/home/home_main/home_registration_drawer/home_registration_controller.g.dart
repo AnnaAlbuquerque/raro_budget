@@ -25,6 +25,22 @@ mixin _$HomeRegistrationController on _HomeRegistrationControllerBase, Store {
     });
   }
 
+  final _$recoveredUserAtom =
+      Atom(name: '_HomeRegistrationControllerBase.recoveredUser');
+
+  @override
+  dynamic get recoveredUser {
+    _$recoveredUserAtom.reportRead();
+    return super.recoveredUser;
+  }
+
+  @override
+  set recoveredUser(dynamic value) {
+    _$recoveredUserAtom.reportWrite(value, super.recoveredUser, () {
+      super.recoveredUser = value;
+    });
+  }
+
   final _$hasChangesAtom =
       Atom(name: '_HomeRegistrationControllerBase.hasChanges');
 
@@ -108,6 +124,7 @@ mixin _$HomeRegistrationController on _HomeRegistrationControllerBase, Store {
   String toString() {
     return '''
 currentUserData: ${currentUserData},
+recoveredUser: ${recoveredUser},
 hasChanges: ${hasChanges}
     ''';
   }

@@ -26,6 +26,7 @@ abstract class _HomeRegistrationControllerBase with Store {
   UserModel currentUserData = UserModel(
       name: '', email: '', phone: '', cpf: '', terms: true, password: '');
 
+  @observable
   var recoveredUser;
 
   @action
