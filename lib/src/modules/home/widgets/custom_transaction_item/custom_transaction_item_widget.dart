@@ -25,6 +25,7 @@ class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.transparent,
       child: InkWell(
         onLongPress: widget.onLongPress,
         child: Container(
@@ -58,7 +59,7 @@ class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${widget.category} ${widget.title}',
+                        '${widget.title}',
                         style: TextStyles.purple16w500Roboto,
                       ),
                       Text(
@@ -74,7 +75,9 @@ class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
                 ],
               ),
               Text(
-                '${widget.transferredValue}',
+                widget.type == "entrada"
+                    ? '+ ${widget.transferredValue}'
+                    : '- ${widget.transferredValue}',
                 style: widget.transferredValue! < 0
                     ? TextStyles.black16w500Roboto
                     : TextStyles.purple16w500Roboto,

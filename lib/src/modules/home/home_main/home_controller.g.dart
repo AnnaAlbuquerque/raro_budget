@@ -54,6 +54,38 @@ mixin _$HomeController on ControllerBase, Store {
     });
   }
 
+  final _$listTransactionAtom = Atom(name: 'ControllerBase.listTransaction');
+
+  @override
+  ObservableList<TransactionModel> get listTransaction {
+    _$listTransactionAtom.reportRead();
+    return super.listTransaction;
+  }
+
+  @override
+  set listTransaction(ObservableList<TransactionModel> value) {
+    _$listTransactionAtom.reportWrite(value, super.listTransaction, () {
+      super.listTransaction = value;
+    });
+  }
+
+  final _$totalLastTransactionsAtom =
+      Atom(name: 'ControllerBase.totalLastTransactions');
+
+  @override
+  double get totalLastTransactions {
+    _$totalLastTransactionsAtom.reportRead();
+    return super.totalLastTransactions;
+  }
+
+  @override
+  set totalLastTransactions(double value) {
+    _$totalLastTransactionsAtom.reportWrite(value, super.totalLastTransactions,
+        () {
+      super.totalLastTransactions = value;
+    });
+  }
+
   final _$getTotalsAsyncAction = AsyncAction('ControllerBase.getTotals');
 
   @override
@@ -61,12 +93,23 @@ mixin _$HomeController on ControllerBase, Store {
     return _$getTotalsAsyncAction.run(() => super.getTotals(month));
   }
 
+  final _$getLastTransactionsAsyncAction =
+      AsyncAction('ControllerBase.getLastTransactions');
+
+  @override
+  Future<List<TransactionModel>> getLastTransactions() {
+    return _$getLastTransactionsAsyncAction
+        .run(() => super.getLastTransactions());
+  }
+
   @override
   String toString() {
     return '''
 totalIn: ${totalIn},
 totalOut: ${totalOut},
-month: ${month}
+month: ${month},
+listTransaction: ${listTransaction},
+totalLastTransactions: ${totalLastTransactions}
     ''';
   }
 }

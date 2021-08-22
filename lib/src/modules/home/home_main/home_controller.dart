@@ -2,6 +2,7 @@ import 'package:mobx/mobx.dart';
 
 import 'package:raro_budget/src/modules/home/home_main/home_repository.dart';
 import 'package:raro_budget/src/shared/auth/auth_controller.dart';
+import 'package:raro_budget/src/shared/models/transaction_model.dart';
 
 part 'home_controller.g.dart';
 
@@ -23,6 +24,13 @@ abstract class ControllerBase with Store {
   @observable
   int month = DateTime.now().month;
 
+  @observable
+  ObservableList<TransactionModel> listTransaction =
+      ObservableList<TransactionModel>();
+
+  @observable
+  double totalLastTransactions = 0;
+
   @action
   Future<void> getTotals(int month) async {
     homeRepository.getTotal(month).then(
@@ -31,5 +39,26 @@ abstract class ControllerBase with Store {
             totalOut = totalResponse.totalOut
           },
         );
+  }
+
+  @action
+  Future<List<TransactionModel>> getLastTransactions() async {
+    listTransaction.clear();
+    List<TransactionModel> responseList =
+        await homeRepository.getLastTransactions();
+    if (responseList.isNotEmpty) {
+      totalLastTransactions = 0;
+      responseList.forEach(
+        (element) {
+          listTransaction.add(element);
+          if (element.type == "entrada") {
+            totalLastTransactions += element.value;
+          } else {
+            totalLastTransactions -= element.value;
+          }
+        },
+      );
+    }
+    return listTransaction;
   }
 }
