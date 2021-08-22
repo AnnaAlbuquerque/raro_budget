@@ -9,6 +9,7 @@ class CustomTransactionItem extends StatefulWidget {
   final String type;
   final String category;
   final String? title;
+  //TODO: checar essa tipagem
   final num? transferredValue;
   final int day;
   final int month;
@@ -55,12 +56,12 @@ class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${widget.category} ${widget.title}',
+                    '${widget.category}: ${widget.title}',
                     style: TextStyles.purple16w500Roboto,
                   ),
                   Text(
                     //TODO: VER SE A DATA ESTÁ SENDO EXIBIDA CORRETAMENTE
-                    '$widget.day/$widget.month/$widget.year',
+                    '${widget.day}/${widget.month}/${widget.year}',
                     style: TextStyles.grey14w400Roboto,
                   ),
                 ],
