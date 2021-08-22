@@ -56,44 +56,59 @@ abstract class _HomePageFilledControllerBase with Store {
     listAll.clear();
 
     if (transactionsType == 'entrada') {
-      List<TransactionModel> responseList =
-          await homeRepository.getTransactionsDocsWithType(transactionsType);
-      if (responseList.isNotEmpty) {
-        value = 0;
-        listAllIn.clear();
-        responseList.forEach((element) {
-          listAllIn.add(element);
-          value += element.value;
-        });
-        return listAllIn;
+      try {
+        List<TransactionModel> responseList =
+            await homeRepository.getTransactionsDocsWithType(transactionsType);
+        if (responseList.isNotEmpty) {
+          value = 0;
+          listAllIn.clear();
+          responseList.forEach((element) {
+            listAllIn.add(element);
+            value += element.value;
+          });
+          return listAllIn;
+        }
+      } catch (e) {
+        print('SOMETHING WENT WRONG :(');
+        print(e);
       }
     }
 
     if (transactionsType == 'saida') {
-      List<TransactionModel> responseList =
-          await homeRepository.getTransactionsDocsWithType(transactionsType);
-      if (responseList.isNotEmpty) {
-        value = 0;
-        listAllOut.clear();
-        responseList.forEach((element) {
-          listAllOut.add(element);
-          value += element.value;
-        });
-        return listAllOut;
+      try {
+        List<TransactionModel> responseList =
+            await homeRepository.getTransactionsDocsWithType(transactionsType);
+        if (responseList.isNotEmpty) {
+          value = 0;
+          listAllOut.clear();
+          responseList.forEach((element) {
+            listAllOut.add(element);
+            value += element.value;
+          });
+          return listAllOut;
+        }
+      } catch (e) {
+        print('SOMETHING WENT WRONG :(');
+        print(e);
       }
     }
 
     if (transactionsType == 'total') {
-      List<TransactionModel> responseList =
-          await homeRepository.getAllTransactionsDocs();
-      if (responseList.isNotEmpty) {
-        value = 0;
-        listAll.clear();
-        responseList.forEach((element) {
-          listAll.add(element);
-          value += element.value;
-        });
-        return listAll;
+      try {
+        List<TransactionModel> responseList =
+            await homeRepository.getAllTransactionsDocs();
+        if (responseList.isNotEmpty) {
+          value = 0;
+          listAll.clear();
+          responseList.forEach((element) {
+            listAll.add(element);
+            value += element.value;
+          });
+          return listAll;
+        }
+      } catch (e) {
+        print('SOMETHING WENT WRONG :(');
+        print(e);
       }
     }
   }

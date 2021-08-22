@@ -38,7 +38,7 @@ class _HomeRegistrationPageState extends State<HomeRegistrationPage> {
           Modular.to.pop();
         },
         title: 'Cadastro',
-        prefSize: 120,
+        prefSize: 145,
       ),
       body: Form(
         key: _formKey,
