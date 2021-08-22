@@ -33,7 +33,7 @@ class HomeRepository {
           .collection('transactions')
           .add({
         'category': transaction.category,
-        'type': 'saída',
+        'type': 'saida',
         'name': transaction.name,
         'value': transaction.value,
         'day': transaction.day,

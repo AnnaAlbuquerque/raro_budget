@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/shared/models/transaction_model.dart';
@@ -94,6 +93,7 @@ class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    //TODO: ADICIONAR MASCARA , .
                     CustomTextFormField(
                       name: 'Valor em R\$',
                       textInputType: TextInputType.number,
