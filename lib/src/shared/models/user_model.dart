@@ -7,6 +7,7 @@ class UserModel {
   String cpf;
   bool terms;
   String password;
+  double generalBalance;
 
   UserModel({
     required this.name,
@@ -15,6 +16,7 @@ class UserModel {
     required this.cpf,
     required this.terms,
     required this.password,
+    required this.generalBalance,
   });
 
   UserModel copyWith({
@@ -24,6 +26,7 @@ class UserModel {
     String? cpf,
     bool? terms,
     String? password,
+    double? generalBalance,
   }) {
     return UserModel(
       name: name ?? this.name,
@@ -32,6 +35,7 @@ class UserModel {
       cpf: cpf ?? this.cpf,
       terms: terms ?? this.terms,
       password: password ?? this.password,
+      generalBalance: generalBalance ?? this.generalBalance,
     );
   }
 
@@ -43,6 +47,7 @@ class UserModel {
       'cpf': cpf,
       'terms': terms,
       'password': password,
+      'generalBalance': generalBalance,
     };
   }
 
@@ -54,6 +59,7 @@ class UserModel {
       cpf: map['cpf'],
       terms: map['terms'],
       password: "",
+      generalBalance: map['generalBalance'] ?? 0,
     );
   }
 
@@ -64,7 +70,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(name: $name, email: $email, phone: $phone, cpf: $cpf, terms: $terms, password: $password)';
+    return 'UserModel(name: $name, email: $email, phone: $phone, cpf: $cpf, terms: $terms, password: $password, generalBalance: $generalBalance)';
   }
 
   @override
@@ -77,7 +83,8 @@ class UserModel {
         other.phone == phone &&
         other.cpf == cpf &&
         other.terms == terms &&
-        other.password == password;
+        other.password == password &&
+        other.generalBalance == generalBalance;
   }
 
   @override
@@ -87,6 +94,7 @@ class UserModel {
         phone.hashCode ^
         cpf.hashCode ^
         terms.hashCode ^
-        password.hashCode;
+        password.hashCode ^
+        generalBalance.hashCode;
   }
 }

@@ -9,7 +9,14 @@ class AuthController {
 
   final AuthRepository authRepository;
   final UserModel userModel = UserModel(
-      name: "", email: "", phone: "", cpf: "", terms: false, password: "");
+    name: "",
+    email: "",
+    phone: "",
+    cpf: "",
+    terms: false,
+    password: "",
+    generalBalance: 0,
+  );
 
   ConnectionStatus getConnectionStatus() {
     return authRepository.getConnectionStatus();
@@ -46,6 +53,7 @@ class AuthController {
               userModel.phone = userResponse.phone,
               userModel.cpf = userResponse.cpf,
               userModel.terms = userResponse.terms,
+              userModel.generalBalance = userResponse.generalBalance,
               print(userModel.name),
             },
           );
