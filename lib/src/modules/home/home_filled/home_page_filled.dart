@@ -31,7 +31,7 @@ class _HomePageFilledState
         iconButtonOnPressed: () {
           Modular.to.popAndPushNamed('/home');
         },
-        iconDataRight: Icons.ac_unit,
+        iconDataRight: Icons.keyboard_arrow_down_rounded,
         title: 'mostra balanço',
         prefSize: 120,
         button1: 'Entradas',

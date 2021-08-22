@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
+import 'package:raro_budget/src/shared/widgets/custom_drop_down_button/custom_drop_down.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
@@ -15,6 +16,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final Function()? b3onPressed;
   final Function()? iconButtonOnPressed;
 
+  final int currentMonth;
+
   const CustomAppBar({
     Key? key,
     required this.title,
@@ -28,10 +31,50 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     this.b2onPressed,
     this.b3onPressed,
     this.iconButtonOnPressed,
+    required this.currentMonth,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<String> months = [
+      'JANEIRO',
+      'FEVEREIRO',
+      'MARÇO',
+      'ABRIL',
+      'MAIO',
+      'JUNHO',
+      'JULHO',
+      'AGOSTO',
+      'SETEMBRO',
+      'OUTUBRO',
+      'NOVEMBRO',
+      'DEZEMBRO',
+    ];
+
+    final String currentMonthString;
+
+    switch (currentMonth) {
+      case 1:
+        currentMonthString = months[0];
+        break;
+      case 2:
+        currentMonthString = months[1];
+        break;
+      case 3:
+        currentMonthString = months[2];
+        break;
+      case 4:
+        currentMonthString = months[3];
+        break;
+      case 5:
+        currentMonthString = months[4];
+        break;
+      case 6:
+        currentMonthString = months[5];
+        break;
+      default:
+    }
+
     return AppBar(
       automaticallyImplyLeading: false,
       flexibleSpace: Center(
@@ -74,17 +117,24 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                               Container(
                                 child: Row(
                                   children: [
-                                    Text(
-                                      'Agosto',
-                                      style: TextStyles.white14w500Roboto,
-                                    ),
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        iconDataRight,
-                                        color: AppColors.white,
-                                      ),
-                                    ),
+                                    CustomDropDownButton(
+                                      iconData: iconDataRight!,
+                                      onChanged: (value) => {},
+                                      items: months
+                                          .map(
+                                            (month) => DropdownMenuItem(
+                                              child: Text(
+                                                month,
+                                                style: TextStyles
+                                                    .white14w500Roboto,
+                                              ),
+                                              value: month,
+                                            ),
+                                          )
+                                          .toList(),
+                                      value: currentMonth,
+                                      isTransparent: false,
+                                    )
                                   ],
                                 ),
                               ),
