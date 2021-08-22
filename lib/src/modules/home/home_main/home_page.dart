@@ -25,7 +25,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     return Scaffold(
       key: keyDrawerHomePage,
       appBar: CustomAppBar(
-        title: "Olá, ${'store.user.name'}",
+        title: "Olá, ${controller.authController.userModel.name}",
         iconDataLeft: Icons.menu,
         prefSize: 80,
         iconButtonOnPressed: () {
