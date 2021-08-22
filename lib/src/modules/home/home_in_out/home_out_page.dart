@@ -168,7 +168,7 @@ class _HomeOutPageState
           controller.homeRepository.insertNewOutput(
             TransactionModel(
               name: controller.nameController.text,
-              type: 'saída',
+              type: 'saida',
               category: item!.category,
               value: double.parse(controller.valueController.text) * 100,
               day: controller.calendarController.selectedDate.day,

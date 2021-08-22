@@ -37,21 +37,70 @@ abstract class _HomePageFilledControllerBase with Store {
 
   @observable
   num value = 0;
+
   @observable
   ObservableList<TransactionModel> listAll = ObservableList<TransactionModel>();
 
+  @observable
+  ObservableList<TransactionModel> listAllIn =
+      ObservableList<TransactionModel>();
+
+  @observable
+  ObservableList<TransactionModel> listAllOut =
+      ObservableList<TransactionModel>();
+
   @action
-  Future getTransactions() async {
+  Future getTransactionsWithType(String transactionsType) async {
+    listAllIn.clear();
+    listAllOut.clear();
     listAll.clear();
-    List<TransactionModel> responseList = await homeRepository.testeconsulta();
-    if (responseList.isNotEmpty) {
-      value = 0;
-      listAll.clear();
-      responseList.forEach((element) {
-        listAll.add(element);
-        value += element.value;
-      });
-      return listAll;
+
+    if (transactionsType == 'entrada') {
+      List<TransactionModel> responseList =
+          await homeRepository.getTransactionsDocsWithType(transactionsType);
+      if (responseList.isNotEmpty) {
+        value = 0;
+        listAllIn.clear();
+        responseList.forEach((element) {
+          listAllIn.add(element);
+          value += element.value;
+        });
+        print('ENTRADAS');
+        print(listAllIn);
+        return listAllIn;
+      }
+    }
+
+    if (transactionsType == 'saida') {
+      List<TransactionModel> responseList =
+          await homeRepository.getTransactionsDocsWithType(transactionsType);
+      if (responseList.isNotEmpty) {
+        value = 0;
+        listAllOut.clear();
+        responseList.forEach((element) {
+          listAllOut.add(element);
+          value += element.value;
+        });
+        print('SAIDAS');
+        print(listAllOut);
+        return listAllOut;
+      }
+    }
+
+    if (transactionsType == 'total') {
+      List<TransactionModel> responseList =
+          await homeRepository.getAllTransactionsDocs();
+      if (responseList.isNotEmpty) {
+        value = 0;
+        listAll.clear();
+        responseList.forEach((element) {
+          listAll.add(element);
+          value += element.value;
+        });
+        print('TOTAL');
+        print(listAll);
+        return listAll;
+      }
     }
   }
 
@@ -65,6 +114,6 @@ abstract class _HomePageFilledControllerBase with Store {
   }
 
   Future<void> logout() async {
-    await homeRepository.firebaseRepository.auth.signOut();
+    await homeRepository.authRepository.auth.signOut();
   }
 }

@@ -3,16 +3,16 @@ import 'package:raro_budget/src/shared/auth/auth_repository.dart';
 import 'package:raro_budget/src/shared/models/transaction_model.dart';
 
 class HomeRepository {
-  AuthRepository firebaseRepository;
+  AuthRepository authRepository;
   HomeRepository(
-    this.firebaseRepository,
+    this.authRepository,
   );
 
   Future<void> insert(TransactionModel transaction) async {
     try {
-      await firebaseRepository.store
+      await authRepository.store
           .collection('users')
-          .doc(firebaseRepository.auth.currentUser!.uid)
+          .doc(authRepository.auth.currentUser!.uid)
           .collection('transactions')
           .add({
         'category': transaction.category,
@@ -27,9 +27,9 @@ class HomeRepository {
 
   Future<void> insertNewOutput(TransactionModel transaction) async {
     try {
-      await firebaseRepository.store
+      await authRepository.store
           .collection('users')
-          .doc(firebaseRepository.auth.currentUser!.uid)
+          .doc(authRepository.auth.currentUser!.uid)
           .collection('transactions')
           .add({
         'category': transaction.category,
@@ -48,9 +48,9 @@ class HomeRepository {
 
   Future<void> insertNewInput(TransactionModel transaction) async {
     try {
-      await firebaseRepository.store
+      await authRepository.store
           .collection('users')
-          .doc(firebaseRepository.auth.currentUser!.uid)
+          .doc(authRepository.auth.currentUser!.uid)
           .collection('transactions')
           .add({
         'category': transaction.category,
@@ -69,18 +69,18 @@ class HomeRepository {
 
   Future<void> delete(TransactionModel transaction) async {
     try {
-      await firebaseRepository.store
+      await authRepository.store
           .collection('users')
-          .doc(firebaseRepository.auth.currentUser!.uid)
+          .doc(authRepository.auth.currentUser!.uid)
           .collection('transactions')
           .where('type', isEqualTo: transaction.type)
           .where('name', isEqualTo: transaction.name)
           .where('category', isEqualTo: transaction.category)
           .get()
           .then((value) => value.docs.forEach((element) {
-                firebaseRepository.store
+                authRepository.store
                     .collection('users')
-                    .doc(firebaseRepository.auth.currentUser!.uid)
+                    .doc(authRepository.auth.currentUser!.uid)
                     .collection('transactions')
                     .doc(element.id)
                     .delete()
@@ -96,18 +96,18 @@ class HomeRepository {
   Future<void> update(
       TransactionModel transaction, TransactionModel transactionupdated) async {
     try {
-      await firebaseRepository.store
+      await authRepository.store
           .collection('users')
-          .doc(firebaseRepository.auth.currentUser!.uid)
+          .doc(authRepository.auth.currentUser!.uid)
           .collection('transactions')
           .where('type', isEqualTo: transaction.type)
           .where('value', isEqualTo: transaction.value)
           .where('category', isEqualTo: transaction.category)
           .get()
           .then((value) => value.docs.forEach((element) {
-                firebaseRepository.store
+                authRepository.store
                     .collection('users')
-                    .doc(firebaseRepository.auth.currentUser!.uid)
+                    .doc(authRepository.auth.currentUser!.uid)
                     .collection('transactions')
                     .doc(element.id)
                     .update({
@@ -123,17 +123,19 @@ class HomeRepository {
     }
   }
 
-  Future<List<TransactionModel>> testeconsulta() async {
-    List<TransactionModel> lista = [];
+  Future<List<TransactionModel>> getTransactionsDocsWithType(
+      String transactionType) async {
+    List<TransactionModel> transactionsList = [];
     try {
-      await firebaseRepository.store
+      await authRepository.store
           .collection('users')
-          .doc(firebaseRepository.auth.currentUser!.uid)
+          .doc(authRepository.auth.currentUser!.uid)
           .collection('transactions')
+          .where('type', isEqualTo: transactionType)
           .get()
           .then((querySnapshot) {
         if (querySnapshot.docs.isNotEmpty) {
-          lista = querySnapshot.docs
+          transactionsList = querySnapshot.docs
               .map(
                 (doc) => TransactionModel.fromMap(
                   doc.data(),
@@ -142,7 +144,32 @@ class HomeRepository {
               .toList();
         }
       });
-      return lista;
+      return transactionsList;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<List<TransactionModel>> getAllTransactionsDocs() async {
+    List<TransactionModel> transactionsList = [];
+    try {
+      await authRepository.store
+          .collection('users')
+          .doc(authRepository.auth.currentUser!.uid)
+          .collection('transactions')
+          .get()
+          .then((querySnapshot) {
+        if (querySnapshot.docs.isNotEmpty) {
+          transactionsList = querySnapshot.docs
+              .map(
+                (doc) => TransactionModel.fromMap(
+                  doc.data(),
+                ),
+              )
+              .toList();
+        }
+      });
+      return transactionsList;
     } catch (e) {
       throw e;
     }
@@ -152,7 +179,7 @@ class HomeRepository {
     QuerySnapshot querySnapshot;
     List docs = [];
     try {
-      querySnapshot = await firebaseRepository.store
+      querySnapshot = await authRepository.store
           .collection('transactions')
           .where('id', isEqualTo: id)
           .get();

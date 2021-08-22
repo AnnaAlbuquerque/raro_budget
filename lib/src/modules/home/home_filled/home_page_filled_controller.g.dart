@@ -84,6 +84,37 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
     });
   }
 
+  final _$listAllInAtom = Atom(name: '_HomePageFilledControllerBase.listAllIn');
+
+  @override
+  ObservableList<TransactionModel> get listAllIn {
+    _$listAllInAtom.reportRead();
+    return super.listAllIn;
+  }
+
+  @override
+  set listAllIn(ObservableList<TransactionModel> value) {
+    _$listAllInAtom.reportWrite(value, super.listAllIn, () {
+      super.listAllIn = value;
+    });
+  }
+
+  final _$listAllOutAtom =
+      Atom(name: '_HomePageFilledControllerBase.listAllOut');
+
+  @override
+  ObservableList<TransactionModel> get listAllOut {
+    _$listAllOutAtom.reportRead();
+    return super.listAllOut;
+  }
+
+  @override
+  set listAllOut(ObservableList<TransactionModel> value) {
+    _$listAllOutAtom.reportWrite(value, super.listAllOut, () {
+      super.listAllOut = value;
+    });
+  }
+
   final _$transactionModelAtom =
       Atom(name: '_HomePageFilledControllerBase.transactionModel');
 
@@ -100,12 +131,13 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
     });
   }
 
-  final _$getTransactionsAsyncAction =
-      AsyncAction('_HomePageFilledControllerBase.getTransactions');
+  final _$getTransactionsWithTypeAsyncAction =
+      AsyncAction('_HomePageFilledControllerBase.getTransactionsWithType');
 
   @override
-  Future<dynamic> getTransactions() {
-    return _$getTransactionsAsyncAction.run(() => super.getTransactions());
+  Future<dynamic> getTransactionsWithType(String transactionsType) {
+    return _$getTransactionsWithTypeAsyncAction
+        .run(() => super.getTransactionsWithType(transactionsType));
   }
 
   final _$deleteUserAsyncAction =
@@ -139,6 +171,8 @@ button2: ${button2},
 button3: ${button3},
 value: ${value},
 listAll: ${listAll},
+listAllIn: ${listAllIn},
+listAllOut: ${listAllOut},
 transactionModel: ${transactionModel}
     ''';
   }

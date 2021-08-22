@@ -86,7 +86,7 @@ class _HomePageFilledState
                     flex: 10,
                     child: Container(
                       child: FutureBuilder(
-                          future: controller.getTransactions(),
+                          future: controller.getTransactionsWithType('entrada'),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData &&
                                 snapshot.connectionState ==
@@ -96,25 +96,25 @@ class _HomePageFilledState
                               );
                             } else {
                               return ListView.builder(
-                                itemCount: controller.listAll.length,
+                                itemCount: controller.listAllIn.length,
                                 itemBuilder: (context, int index) {
                                   return CustomTransactionItem(
-                                      controller.listAll[index].name,
-                                      controller.listAll[index].category,
-                                      controller.listAll[index].value,
-                                      controller.listAll[index].type,
-                                      controller.listAll[index].day,
-                                      controller.listAll[index].month,
-                                      controller.listAll[index].year, () {
+                                      controller.listAllIn[index].name,
+                                      controller.listAllIn[index].category,
+                                      controller.listAllIn[index].value,
+                                      controller.listAllIn[index].type,
+                                      controller.listAllIn[index].day,
+                                      controller.listAllIn[index].month,
+                                      controller.listAllIn[index].year, () {
                                     showModalBottomSheet(
                                         context: context,
                                         isDismissible: false,
                                         backgroundColor: Colors.transparent,
                                         builder: (context) => ModalWidget(
                                               'Você deseja realmente excluir esse arquivo?',
-                                              ('${controller.listAll[index].category}'
+                                              ('${controller.listAllIn[index].category}'
                                                   ' '
-                                                  '${controller.listAll[index].name}'),
+                                                  '${controller.listAllIn[index].name}'),
                                               'Cancelar',
                                               'Ok',
                                               () {
@@ -124,20 +124,25 @@ class _HomePageFilledState
                                                 controller.deleteUser(
                                                   TransactionModel(
                                                       category: controller
-                                                          .listAll[index]
+                                                          .listAllIn[index]
                                                           .category,
                                                       value: controller
-                                                          .listAll[index].value,
+                                                          .listAllIn[index]
+                                                          .value,
                                                       type: controller
-                                                          .listAll[index].type,
+                                                          .listAllIn[index]
+                                                          .type,
                                                       name: controller
-                                                          .listAll[index].name,
+                                                          .listAllIn[index]
+                                                          .name,
                                                       day: controller
-                                                          .listAll[index].day,
+                                                          .listAllIn[index].day,
                                                       month: controller
-                                                          .listAll[index].month,
+                                                          .listAllIn[index]
+                                                          .month,
                                                       year: controller
-                                                          .listAll[index].year),
+                                                          .listAllIn[index]
+                                                          .year),
                                                 );
                                                 Modular.to.pop();
                                               },
@@ -213,7 +218,7 @@ class _HomePageFilledState
                     flex: 10,
                     child: Container(
                       child: FutureBuilder(
-                          future: controller.getTransactions(),
+                          future: controller.getTransactionsWithType('saida'),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData &&
                                 snapshot.connectionState ==
@@ -223,25 +228,25 @@ class _HomePageFilledState
                               );
                             } else {
                               return ListView.builder(
-                                itemCount: controller.listAll.length,
+                                itemCount: controller.listAllOut.length,
                                 itemBuilder: (context, int index) {
                                   return CustomTransactionItem(
-                                      controller.listAll[index].name,
-                                      controller.listAll[index].category,
-                                      controller.listAll[index].value,
-                                      controller.listAll[index].type,
-                                      controller.listAll[index].day,
-                                      controller.listAll[index].month,
-                                      controller.listAll[index].year, () {
+                                      controller.listAllOut[index].name,
+                                      controller.listAllOut[index].category,
+                                      controller.listAllOut[index].value,
+                                      controller.listAllOut[index].type,
+                                      controller.listAllOut[index].day,
+                                      controller.listAllOut[index].month,
+                                      controller.listAllOut[index].year, () {
                                     showModalBottomSheet(
                                         context: context,
                                         isDismissible: false,
                                         backgroundColor: Colors.transparent,
                                         builder: (context) => ModalWidget(
                                               'Você deseja realmente excluir esse arquivo?',
-                                              ('${controller.listAll[index].category}'
+                                              ('${controller.listAllOut[index].category}'
                                                   ' '
-                                                  '${controller.listAll[index].name}'),
+                                                  '${controller.listAllOut[index].name}'),
                                               'Cancelar',
                                               'Ok',
                                               () {
@@ -251,20 +256,26 @@ class _HomePageFilledState
                                                 controller.deleteUser(
                                                   TransactionModel(
                                                       category: controller
-                                                          .listAll[index]
+                                                          .listAllOut[index]
                                                           .category,
                                                       value: controller
-                                                          .listAll[index].value,
+                                                          .listAllOut[index]
+                                                          .value,
                                                       type: controller
-                                                          .listAll[index].type,
+                                                          .listAllOut[index]
+                                                          .type,
                                                       name: controller
-                                                          .listAll[index].name,
+                                                          .listAllOut[index]
+                                                          .name,
                                                       day: controller
-                                                          .listAll[index].day,
+                                                          .listAllOut[index]
+                                                          .day,
                                                       month: controller
-                                                          .listAll[index].month,
+                                                          .listAllOut[index]
+                                                          .month,
                                                       year: controller
-                                                          .listAll[index].year),
+                                                          .listAllOut[index]
+                                                          .year),
                                                 );
                                                 Modular.to.pop();
                                               },
@@ -340,7 +351,7 @@ class _HomePageFilledState
                     flex: 10,
                     child: Container(
                       child: FutureBuilder(
-                          future: controller.getTransactions(),
+                          future: controller.getTransactionsWithType('total'),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData &&
                                 snapshot.connectionState ==

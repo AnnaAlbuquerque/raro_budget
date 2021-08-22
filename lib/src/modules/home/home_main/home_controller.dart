@@ -37,6 +37,6 @@ abstract class ControllerBase with Store {
   }
 
   Future<void> logout() async {
-    await homeRepository.firebaseRepository.auth.signOut();
+    await homeRepository.authRepository.auth.signOut();
   }
 }
