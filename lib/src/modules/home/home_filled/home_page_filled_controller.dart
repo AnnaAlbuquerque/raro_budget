@@ -141,7 +141,8 @@ abstract class _HomePageFilledControllerBase with Store {
     'SETEMBRO',
     'OUTUBRO',
     'NOVEMBRO',
-    'DEZEMBRO'
+    'DEZEMBRO',
+    'TODOS',
   ];
 
   @action
@@ -183,8 +184,14 @@ abstract class _HomePageFilledControllerBase with Store {
                                                             'DEZEMBRO'
                                                     ? currentMonthString =
                                                         months[11]
-                                                    : currentMonthString =
-                                                        months[
-                                                            currentMonth - 1];
+                                                    : selectedMonth == 13 ||
+                                                            selectedMonth ==
+                                                                'TODOS'
+                                                        ? currentMonthString =
+                                                            months[12]
+                                                        : currentMonthString =
+                                                            months[
+                                                                currentMonth -
+                                                                    1];
   }
 }
