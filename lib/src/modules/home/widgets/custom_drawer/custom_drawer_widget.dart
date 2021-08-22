@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/shared/auth/auth_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 
@@ -137,7 +139,9 @@ class CustomDrawer extends StatelessWidget {
                 style: TextStyles.chambray16w400Roboto,
               ),
             ),
-            onTap: () {},
+            onTap: () {
+              Modular.get<AuthController>().userLogout();
+            },
           ),
         ],
       ),
