@@ -10,6 +10,7 @@ import 'package:raro_budget/src/modules/home/widgets/custom_last_transactions/cu
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 import 'package:raro_budget/src/shared/widgets/custom_appbar/custom_appbar.dart';
 import 'package:raro_budget/src/shared/widgets/custom_button/custom_button_widget.dart';
+import 'package:raro_budget/src/shared/widgets/custom_drop_down_button/custom_drop_down.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -20,7 +21,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
   var keyDrawerHomePage = GlobalKey<ScaffoldState>();
-
+  List<String> items = [
+    'JAN',
+    'FEV',
+    'MAR',
+    'ABR',
+    'MAI',
+    'JUN',
+    'JUL',
+    'AGO',
+    'SET',
+    'OUT',
+    'NOV',
+    'DEZ'
+  ];
+  String? selectedItem = 'JAN';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +88,29 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       balance: 'store.balance',
                     ),
                   ),
-                  CustomCard(),
+                  CustomCard(
+                    dropDown: CustomDropDownButton(
+                      iconData: Icons.keyboard_arrow_down_outlined,
+                      isTransparent: false,
+                      value: selectedItem,
+                      items: items
+                          .map(
+                            (i) => DropdownMenuItem(
+                              value: i,
+                              child: Text(
+                                i,
+                                style: TextStyles.white16w400Roboto,
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          selectedItem = value;
+                        });
+                      },
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
                     child: CustomLastTransactions(),

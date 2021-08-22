@@ -12,6 +12,7 @@ import 'package:raro_budget/src/modules/home/home_filled/home_page_filled_contro
 import 'package:raro_budget/src/shared/models/transaction_model.dart';
 import 'package:raro_budget/src/shared/widgets/custom_appbar/custom_appbar.dart';
 import 'package:raro_budget/src/shared/widgets/custom_button_logged/custom_button_logged_widget.dart';
+import 'package:raro_budget/src/shared/widgets/custom_drop_down_button/custom_drop_down.dart';
 
 class HomePageFilled extends StatefulWidget {
   const HomePageFilled({Key? key}) : super(key: key);
@@ -23,6 +24,21 @@ class HomePageFilled extends StatefulWidget {
 class _HomePageFilledState
     extends ModularState<HomePageFilled, HomePageFilledController> {
   var keyDrawerHomeFilled = GlobalKey<ScaffoldState>();
+  List<String> items = [
+    'JANEIRO',
+    'FEVEREIRO',
+    'MARÇO',
+    'ABRIL',
+    'MAIO',
+    'JUNHO',
+    'JULHO',
+    'AGOSTO',
+    'SETEMBRO',
+    'OUTUBRO',
+    'NOVEMBRO',
+    'DEZEMBRO'
+  ];
+  String? selectedItem = 'JANEIRO';
 
   @override
   void initState() {
@@ -41,7 +57,27 @@ class _HomePageFilledState
         iconButtonOnPressed: () {
           Modular.to.popAndPushNamed('/home');
         },
-        iconDataRight: Icons.keyboard_arrow_down_rounded,
+        dropDown: CustomDropDownButton(
+          iconData: Icons.keyboard_arrow_down_outlined,
+          isTransparent: true,
+          value: selectedItem,
+          items: items
+              .map(
+                (i) => DropdownMenuItem(
+                  value: i,
+                  child: Text(
+                    i,
+                    style: TextStyles.white16w400Roboto,
+                  ),
+                ),
+              )
+              .toList(),
+          onChanged: (String? value) {
+            setState(() {
+              selectedItem = value;
+            });
+          },
+        ),
         title: 'title',
         prefSize: 145,
         button1: 'Entradas',

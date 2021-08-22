@@ -7,7 +7,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final double prefSize;
   final IconData? iconDataLeft;
-  final IconData? iconDataRight;
+
+  final Widget? dropDown;
   final String? button1;
   final String? button2;
   final String? button3;
@@ -26,12 +27,12 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     this.button1,
     this.button2,
     this.button3,
-    this.iconDataRight,
     this.b1onPressed,
     this.b2onPressed,
     this.b3onPressed,
     this.iconButtonOnPressed,
     this.currentMonth,
+    this.dropDown,
   }) : super(key: key);
 
   @override
@@ -107,7 +108,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 iconDataLeft == null &&
-                        iconDataRight == null &&
+                        dropDown == null &&
                         button1 == null &&
                         button2 == null &&
                         button3 == null
@@ -120,7 +121,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                         ),
                       )
                     : Container(),
-                iconDataLeft != null && iconDataRight != null && prefSize == 145
+                iconDataLeft != null && dropDown != null && prefSize == 145
                     ? Column(
                         children: [
                           Container(
@@ -135,30 +136,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                                     color: AppColors.white,
                                   ),
                                 ),
-                                Container(
-                                  child: Row(
-                                    children: [
-                                      CustomDropDownButton(
-                                        iconData: iconDataRight!,
-                                        onChanged: (value) => {},
-                                        items: months
-                                            .map(
-                                              (month) => DropdownMenuItem(
-                                                child: Text(
-                                                  month,
-                                                  style: TextStyles
-                                                      .white14w500Roboto,
-                                                ),
-                                                value: month,
-                                              ),
-                                            )
-                                            .toList(),
-                                        value: currentMonthString,
-                                        isTransparent: false,
-                                      )
-                                    ],
-                                  ),
-                                ),
+                                dropDown!
                               ],
                             ),
                           ),
@@ -172,7 +150,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                         ],
                       )
                     : Container(),
-                iconDataLeft != null && iconDataRight == null && prefSize == 80
+                iconDataLeft != null && dropDown == null && prefSize == 80
                     ? Padding(
                         padding: const EdgeInsets.fromLTRB(20, 40, 20, 10),
                         child: Row(
@@ -199,7 +177,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                         ),
                       )
                     : Container(),
-                iconDataLeft != null && iconDataRight == null && prefSize == 145
+                iconDataLeft != null && dropDown == null && prefSize == 145
                     ? Padding(
                         padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
                         child: Column(
