@@ -3,9 +3,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/home/home_main/custom_drawer/custom_drawer_widget.dart';
 import 'package:raro_budget/src/modules/home/widgets/custom_transaction_item/custom_transaction_item_widget.dart';
+import 'package:raro_budget/src/modules/home/widgets/custom_transaction_item/modal_widget.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 import 'package:raro_budget/src/modules/home/home_filled/home_page_filled_controller.dart';
+import 'package:raro_budget/src/shared/models/transaction_model.dart';
 import 'package:raro_budget/src/shared/widgets/custom_appbar/custom_appbar.dart';
 import 'package:raro_budget/src/shared/widgets/custom_button_logged/custom_button_logged_widget.dart';
 
@@ -25,9 +27,9 @@ class _HomePageFilledState
     return Scaffold(
       key: keyDrawerHomeFilled,
       appBar: CustomAppBar(
-        iconDataLeft: Icons.menu,
+        iconDataLeft: Icons.arrow_back,
         iconButtonOnPressed: () {
-          keyDrawerHomeFilled.currentState!.openDrawer();
+          Modular.to.popAndPushNamed('/home');
         },
         iconDataRight: Icons.ac_unit,
         title: 'title',
@@ -97,12 +99,48 @@ class _HomePageFilledState
                                 itemCount: controller.listaTodos.length,
                                 itemBuilder: (context, int index) {
                                   return CustomTransactionItem(
-                                    controller.listaTodos[index].name,
-                                    controller.listaTodos[index].category,
-                                    controller.listaTodos[index].value,
-                                    controller.listaTodos[index].type,
-                                    controller.listaTodos[index].date,
-                                  );
+                                      controller.listaTodos[index].name,
+                                      controller.listaTodos[index].category,
+                                      controller.listaTodos[index].value,
+                                      controller.listaTodos[index].type,
+                                      controller.listaTodos[index].date, () {
+                                    showModalBottomSheet(
+                                        context: context,
+                                        isDismissible: false,
+                                        backgroundColor: Colors.transparent,
+                                        builder: (context) => ModalWidget(
+                                              'Você deseja realmente excluir esse arquivo?',
+                                              ('${controller.listaTodos[index].category}'
+                                                  ' '
+                                                  '${controller.listaTodos[index].name}'),
+                                              'Cancelar',
+                                              'Ok',
+                                              () {
+                                                Modular.to.pop();
+                                              },
+                                              () {
+                                                controller.deleteUser(
+                                                  TransactionModel(
+                                                      category: controller
+                                                          .listaTodos[index]
+                                                          .category,
+                                                      value: controller
+                                                          .listaTodos[index]
+                                                          .value,
+                                                      type: controller
+                                                          .listaTodos[index]
+                                                          .type,
+                                                      name: controller
+                                                          .listaTodos[index]
+                                                          .name,
+                                                      date: controller
+                                                          .listaTodos[index]
+                                                          .date),
+                                                );
+                                                Modular.to.pop();
+                                              },
+                                            ));
+                                  });
                                 },
                               );
                             }
@@ -186,12 +224,48 @@ class _HomePageFilledState
                                 itemCount: controller.listaTodos.length,
                                 itemBuilder: (context, int index) {
                                   return CustomTransactionItem(
-                                    controller.listaTodos[index].name,
-                                    controller.listaTodos[index].category,
-                                    controller.listaTodos[index].value,
-                                    controller.listaTodos[index].type,
-                                    controller.listaTodos[index].date,
-                                  );
+                                      controller.listaTodos[index].name,
+                                      controller.listaTodos[index].category,
+                                      controller.listaTodos[index].value,
+                                      controller.listaTodos[index].type,
+                                      controller.listaTodos[index].date, () {
+                                    showModalBottomSheet(
+                                        context: context,
+                                        isDismissible: false,
+                                        backgroundColor: Colors.transparent,
+                                        builder: (context) => ModalWidget(
+                                              'Você deseja realmente excluir esse arquivo?',
+                                              ('${controller.listaTodos[index].category}'
+                                                  ' '
+                                                  '${controller.listaTodos[index].name}'),
+                                              'Cancelar',
+                                              'Ok',
+                                              () {
+                                                Modular.to.pop();
+                                              },
+                                              () {
+                                                controller.deleteUser(
+                                                  TransactionModel(
+                                                      category: controller
+                                                          .listaTodos[index]
+                                                          .category,
+                                                      value: controller
+                                                          .listaTodos[index]
+                                                          .value,
+                                                      type: controller
+                                                          .listaTodos[index]
+                                                          .type,
+                                                      name: controller
+                                                          .listaTodos[index]
+                                                          .name,
+                                                      date: controller
+                                                          .listaTodos[index]
+                                                          .date),
+                                                );
+                                                Modular.to.pop();
+                                              },
+                                            ));
+                                  });
                                 },
                               );
                             }
@@ -275,12 +349,48 @@ class _HomePageFilledState
                                 itemCount: controller.listaTodos.length,
                                 itemBuilder: (context, int index) {
                                   return CustomTransactionItem(
-                                    controller.listaTodos[index].name,
-                                    controller.listaTodos[index].category,
-                                    controller.listaTodos[index].value,
-                                    controller.listaTodos[index].type,
-                                    controller.listaTodos[index].date,
-                                  );
+                                      controller.listaTodos[index].name,
+                                      controller.listaTodos[index].category,
+                                      controller.listaTodos[index].value,
+                                      controller.listaTodos[index].type,
+                                      controller.listaTodos[index].date, () {
+                                    showModalBottomSheet(
+                                        context: context,
+                                        isDismissible: false,
+                                        backgroundColor: Colors.transparent,
+                                        builder: (context) => ModalWidget(
+                                              'Você deseja realmente excluir esse arquivo?',
+                                              ('${controller.listaTodos[index].category}'
+                                                  ' '
+                                                  '${controller.listaTodos[index].name}'),
+                                              'Cancelar',
+                                              'Ok',
+                                              () {
+                                                Modular.to.pop();
+                                              },
+                                              () {
+                                                controller.deleteUser(
+                                                  TransactionModel(
+                                                      category: controller
+                                                          .listaTodos[index]
+                                                          .category,
+                                                      value: controller
+                                                          .listaTodos[index]
+                                                          .value,
+                                                      type: controller
+                                                          .listaTodos[index]
+                                                          .type,
+                                                      name: controller
+                                                          .listaTodos[index]
+                                                          .name,
+                                                      date: controller
+                                                          .listaTodos[index]
+                                                          .date),
+                                                );
+                                                Modular.to.pop();
+                                              },
+                                            ));
+                                  });
                                 },
                               );
                             }

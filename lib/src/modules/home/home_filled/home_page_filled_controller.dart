@@ -55,4 +55,13 @@ abstract class _HomePageFilledControllerBase with Store {
       return listaTodos;
     }
   }
+
+  @observable
+  late TransactionModel transactionModel;
+
+  @action
+  Future deleteUser(TransactionModel transactionModel) async {
+    await firebaseModel.delete(transactionModel);
+    listaTodos.remove(transactionModel);
+  }
 }
