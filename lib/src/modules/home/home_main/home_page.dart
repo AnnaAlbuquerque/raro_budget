@@ -22,10 +22,12 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    var name = controller.authController.userModel.name.split(" ");
+
     return Scaffold(
       key: keyDrawerHomePage,
       appBar: CustomAppBar(
-        title: "Olá, ${controller.authController.userModel.name}",
+        title: "Olá, ${name[0]}",
         iconDataLeft: Icons.menu,
         prefSize: 80,
         iconButtonOnPressed: () {

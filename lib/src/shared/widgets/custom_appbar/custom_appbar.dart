@@ -53,6 +53,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                       child: Text(
                         title,
                         style: TextStyles.white26w700Roboto,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     )
                   : Container(),
