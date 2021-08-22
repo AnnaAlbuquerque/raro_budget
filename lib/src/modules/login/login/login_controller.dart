@@ -1,10 +1,16 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/shared/auth/auth_repository.dart';
+import 'package:raro_budget/src/shared/connectivity/app_connectivity.dart';
+import 'package:raro_budget/src/shared/widgets/custom_dialog/custom_dialog.dart';
 
 class LoginController {
-  final AuthRepository authRepository;
+  LoginController(
+      {required this.authRepository, required this.appConnectivity});
 
-  LoginController({required this.authRepository});
+  final AuthRepository authRepository;
+  final AppConnectivity appConnectivity;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -17,5 +23,49 @@ class LoginController {
   Future<bool> login(String email, String password) async {
     bool isLogged = await authRepository.getEmailPasswordLogin(email, password);
     return isLogged;
+  }
+
+  Future<void> connection() async {
+    await appConnectivity.checkConnection();
+  }
+
+  void continueButtonFunction(BuildContext context) {
+    connection().then(
+      (_) => {
+        if (appConnectivity.connectionResult != ConnectivityResult.none)
+          {
+            verifyEmail(emailController.text).then(
+              (value) => {
+                if (value)
+                  {Modular.to.navigate("/login/existing_email")}
+                else
+                  {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CustomDialog(
+                          title: "Email não cadastrado",
+                          subtitle: "O email inserido não está cadastrado",
+                        );
+                      },
+                    ),
+                  }
+              },
+            )
+          }
+        else
+          {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return CustomDialog(
+                  title: "Sem conexão",
+                  subtitle: "Verifique sua conexão com a internet",
+                );
+              },
+            )
+          }
+      },
+    );
   }
 }
