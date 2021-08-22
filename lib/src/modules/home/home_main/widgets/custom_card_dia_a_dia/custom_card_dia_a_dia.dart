@@ -9,12 +9,18 @@ import 'package:raro_budget/src/shared/widgets/custom_drop_down_button/custom_dr
 class CustomCard extends StatefulWidget {
   final Function()? onTape;
   final AnimationController? animationController;
+  final double totalIn;
+  final double totalOut;
+  final double total;
 
-  const CustomCard({
-    Key? key,
-    this.animationController,
-    this.onTape,
-  }) : super(key: key);
+  CustomCard(
+      {Key? key,
+      this.animationController,
+      this.onTape,
+      required this.totalIn,
+      required this.totalOut,
+      required this.total})
+      : super(key: key);
 
   @override
   _CustomCardState createState() => _CustomCardState();
@@ -30,9 +36,6 @@ class _CustomCardState extends State<CustomCard> {
       'ABRIL',
     ];
     String? selectedItem = 'FEVEREIRO';
-    String entrada = '8.000,00';
-    String saida = '5.000,00';
-    String total = '3.000,00';
     return InkResponse(
       onTap: () {
         Modular.to.navigate("homefilled");
@@ -98,7 +101,7 @@ class _CustomCardState extends State<CustomCard> {
             Column(
               children: [
                 Text(
-                  "R\$ $total",
+                  "R\$ ${widget.total}",
                   style: TextStyles.black24w400Roboto,
                 ),
               ],
@@ -114,14 +117,14 @@ class _CustomCardState extends State<CustomCard> {
                     style: TextStyles.black5414w400Roboto,
                   ),
                   Text(
-                    'R\$ $saida',
+                    'R\$ ${widget.totalOut}',
                     style: TextStyles.black5414w400Roboto,
                   ),
                 ],
               ),
             ),
             CustomProgressBar(
-              currentValue: 70,
+              currentValue: 0,
               progressColor: AppColors.cyan,
             ),
             Padding(
@@ -135,7 +138,7 @@ class _CustomCardState extends State<CustomCard> {
                     style: TextStyles.black5414w400Roboto,
                   ),
                   Text(
-                    'R\$ $entrada',
+                    'R\$ ${widget.totalIn}',
                     style: TextStyles.black5414w400Roboto,
                   ),
                 ],
