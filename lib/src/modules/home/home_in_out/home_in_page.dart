@@ -101,6 +101,7 @@ class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
                     ),
                     const SizedBox(height: 24.0),
                     CustomDropdownButtonForm(
+                      label: 'Tipo de entrada',
                       value: item,
                       onChanged: (value) {
                         setState(() {

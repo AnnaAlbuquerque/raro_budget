@@ -107,6 +107,7 @@ class _HomeOutPageState
                     ),
                     const SizedBox(height: 32.0),
                     CustomDropdownButtonForm(
+                      label: 'Tipo de saída',
                       value: item,
                       onChanged: (value) {
                         setState(() {

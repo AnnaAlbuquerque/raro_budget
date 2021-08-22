@@ -32,7 +32,7 @@ class _HomePageFilledState
           Modular.to.popAndPushNamed('/home');
         },
         iconDataRight: Icons.ac_unit,
-        title: 'title',
+        title: 'mostra balanço',
         prefSize: 120,
         button1: 'Entradas',
         button2: 'Saidas',
