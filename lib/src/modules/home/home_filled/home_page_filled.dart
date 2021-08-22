@@ -33,7 +33,7 @@ class _HomePageFilledState
         },
         iconDataRight: Icons.ac_unit,
         title: 'title',
-        prefSize: 120,
+        prefSize: 145,
         button1: 'Entradas',
         button2: 'Saidas',
         button3: 'Todos',
@@ -56,6 +56,7 @@ class _HomePageFilledState
               controller.button2 == false &&
               controller.button3 == false) {
             return Container(
+              height: MediaQuery.of(context).size.height / 1.2,
               padding: EdgeInsets.all(16),
               margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 40.0),
               decoration: BoxDecoration(
@@ -83,7 +84,7 @@ class _HomePageFilledState
               child: Column(
                 children: [
                   Flexible(
-                    flex: 10,
+                    flex: 6,
                     child: Container(
                       child: FutureBuilder(
                           future: controller.getTransactions(),
@@ -208,7 +209,7 @@ class _HomePageFilledState
               child: Column(
                 children: [
                   Flexible(
-                    flex: 10,
+                    flex: 6,
                     child: Container(
                       child: FutureBuilder(
                           future: controller.getTransactions(),
@@ -333,7 +334,7 @@ class _HomePageFilledState
               child: Column(
                 children: [
                   Flexible(
-                    flex: 10,
+                    flex: 6,
                     child: Container(
                       child: FutureBuilder(
                           future: controller.getTransactions(),
