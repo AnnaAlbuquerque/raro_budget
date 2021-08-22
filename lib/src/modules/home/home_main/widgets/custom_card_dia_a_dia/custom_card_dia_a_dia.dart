@@ -12,11 +12,15 @@ class CustomCard extends StatefulWidget {
   final double totalIn;
   final double totalOut;
   final double total;
+  final Widget progressBarIn;
+  final Widget progressBarOut;
 
   CustomCard(
       {Key? key,
       this.animationController,
       this.onTape,
+      required this.progressBarIn,
+      required this.progressBarOut,
       required this.totalIn,
       required this.totalOut,
       required this.total})
@@ -123,10 +127,7 @@ class _CustomCardState extends State<CustomCard> {
                 ],
               ),
             ),
-            CustomProgressBar(
-              currentValue: 0,
-              progressColor: AppColors.cyan,
-            ),
+            widget.progressBarOut,
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 16, 0, 8),
               child: Row(
@@ -144,10 +145,7 @@ class _CustomCardState extends State<CustomCard> {
                 ],
               ),
             ),
-            CustomProgressBar(
-              currentValue: 100,
-              progressColor: AppColors.yellow,
-            ),
+            widget.progressBarIn,
           ],
         ),
       ),

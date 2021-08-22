@@ -4,9 +4,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/home/home_main/home_controller.dart';
 import 'package:raro_budget/src/modules/home/home_main/widgets/custom_card_dia_a_dia/custom_card_dia_a_dia.dart';
+import 'package:raro_budget/src/modules/home/home_main/widgets/custom_card_dia_a_dia/custom_progress_bar.dart';
 import 'package:raro_budget/src/modules/home/home_main/widgets/custom_general_balance/custom_general_balance_widget.dart';
 import 'package:raro_budget/src/modules/home/home_main/widgets/custom_last_transactions/custom_last_transactions_widget.dart';
 import 'package:raro_budget/src/modules/home/widgets/custom_drawer/custom_drawer_widget.dart';
+import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 import 'package:raro_budget/src/shared/models/transaction_model.dart';
 import 'package:raro_budget/src/shared/widgets/custom_appbar/custom_appbar.dart';
@@ -87,6 +89,18 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       total: controller.totalIn - controller.totalOut,
                       totalIn: controller.totalIn,
                       totalOut: controller.totalOut,
+                      progressBarOut: (controller.totalOut != 0.0)
+                          ? CustomProgressBar(
+                              currentValue: controller.totalOut.toInt(),
+                              progressColor: AppColors.cyan,
+                            )
+                          : Container(),
+                      progressBarIn: (controller.totalIn != 0.0)
+                          ? CustomProgressBar(
+                              currentValue: controller.totalIn.toInt(),
+                              progressColor: AppColors.yellow,
+                            )
+                          : Container(),
                     );
                   }),
                   Padding(
