@@ -11,6 +11,7 @@ class CustomSocialLoginButton extends StatelessWidget {
     this.borderColor,
     required this.horizontal,
     required this.vertical,
+    required this.onTap,
   }) : super(key: key);
 
   final String text;
@@ -20,12 +21,13 @@ class CustomSocialLoginButton extends StatelessWidget {
   final TextStyle textStyle;
   final double horizontal;
   final double vertical;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(20.0),
-      onTap: () {},
+      onTap: onTap,
       child: Ink(
         height: 36.0,
         decoration: BoxDecoration(
