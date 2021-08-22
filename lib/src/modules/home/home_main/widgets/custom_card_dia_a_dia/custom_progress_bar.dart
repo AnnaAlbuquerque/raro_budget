@@ -25,8 +25,8 @@ class _CustomProgressBarState extends State<CustomProgressBar>
 
   @override
   void initState() {
-    _controller =
-        AnimationController(duration: Duration(milliseconds: 600), vsync: this);
+    _controller = AnimationController(
+        duration: Duration(milliseconds: 1000), vsync: this);
     _animation = Tween<double>(begin: _currentBegin, end: _currentEnd)
         .animate(_controller);
 
