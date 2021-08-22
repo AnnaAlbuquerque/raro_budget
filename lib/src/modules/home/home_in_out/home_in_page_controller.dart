@@ -10,10 +10,10 @@ class HomeInPageController = _HomeInPageControllerBase
     with _$HomeInPageController;
 
 abstract class _HomeInPageControllerBase with Store {
-  HomeRepository firebaseModel;
+  HomeRepository homeRepository;
   CalendarController calendarController;
   _HomeInPageControllerBase(
-    this.firebaseModel,
+    this.homeRepository,
     this.calendarController,
   );
 

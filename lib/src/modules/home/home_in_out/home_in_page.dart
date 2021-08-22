@@ -155,13 +155,14 @@ class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
         text: 'INSERIR',
         useIconAdd: true,
         onTap: () {
-          controller.firebaseModel.insertNewInput(TransactionModel(
+          controller.homeRepository.insertNewInput(TransactionModel(
             name: controller.nameController.text,
             type: 'entrada',
             category: item!.category,
             value: double.parse(controller.valueController.text) * 100,
-            date:
-                Timestamp.fromDate(controller.calendarController.selectedDate),
+            day: controller.calendarController.selectedDate.day,
+            month: controller.calendarController.selectedDate.month,
+            year: controller.calendarController.selectedDate.year,
           ));
           Modular.to.navigate('/home/homefilled');
         },

@@ -161,17 +161,22 @@ class _HomeOutPageState
         text: 'INSERIR',
         useIconAdd: true,
         onTap: () {
-          controller.firebaseModel.insertNewOutput(TransactionModel(
-            name: controller.nameController.text,
-            type: 'saída',
-            category: item!.category,
-            value: double.parse(controller.valueController.text) * 100,
-            date:
-                Timestamp.fromDate(controller.calendarController.selectedDate),
-          ));
+          controller.homeRepository.insertNewOutput(
+            TransactionModel(
+              name: controller.nameController.text,
+              type: 'saída',
+              category: item!.category,
+              value: double.parse(controller.valueController.text) * 100,
+              day: controller.calendarController.selectedDate.day,
+              month: controller.calendarController.selectedDate.month,
+              year: controller.calendarController.selectedDate.year,
+            ),
+          );
           Modular.to.navigate('/home/homefilled');
         },
       ),
     );
   }
 }
+
+// Timestamp.fromDate(controller.calendarController.selectedDate)

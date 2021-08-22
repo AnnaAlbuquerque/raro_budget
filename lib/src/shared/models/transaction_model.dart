@@ -1,34 +1,41 @@
 import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class TransactionModel {
   String category;
   num value;
   String type;
   String name;
-  Timestamp date;
+  int day;
+  int month;
+  int year;
+
   TransactionModel({
     required this.category,
     required this.value,
     required this.type,
     required this.name,
-    required this.date,
+    required this.day,
+    required this.month,
+    required this.year,
   });
 
   TransactionModel copyWith({
     String? category,
-    double? value,
+    num? value,
     String? type,
     String? name,
-    Timestamp? date,
+    int? day,
+    int? month,
+    int? year,
   }) {
     return TransactionModel(
       category: category ?? this.category,
       value: value ?? this.value,
       type: type ?? this.type,
       name: name ?? this.name,
-      date: date ?? this.date,
+      day: day ?? this.day,
+      month: month ?? this.month,
+      year: year ?? this.year,
     );
   }
 
@@ -38,17 +45,21 @@ class TransactionModel {
       'value': value,
       'type': type,
       'name': name,
-      'date': date.millisecondsSinceEpoch,
+      'day': day,
+      'month': month,
+      'year': year,
     };
   }
 
   factory TransactionModel.fromMap(Map<String, dynamic> map) {
     return TransactionModel(
       category: map['category'],
-      value: map['value'] / 100,
+      value: map['value'],
       type: map['type'],
       name: map['name'],
-      date: (map['date']),
+      day: map['day'],
+      month: map['month'],
+      year: map['year'],
     );
   }
 
@@ -59,7 +70,7 @@ class TransactionModel {
 
   @override
   String toString() {
-    return 'TransactionModule( category: $category, value: $value, type: $type, name: $name, date: $date)';
+    return 'TransactionModel(category: $category, value: $value, type: $type, name: $name, day: $day, month: $month, year: $year)';
   }
 
   @override
@@ -71,7 +82,9 @@ class TransactionModel {
         other.value == value &&
         other.type == type &&
         other.name == name &&
-        other.date == date;
+        other.day == day &&
+        other.month == month &&
+        other.year == year;
   }
 
   @override
@@ -80,6 +93,8 @@ class TransactionModel {
         value.hashCode ^
         type.hashCode ^
         name.hashCode ^
-        date.hashCode;
+        day.hashCode ^
+        month.hashCode ^
+        year.hashCode;
   }
 }

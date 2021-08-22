@@ -10,10 +10,10 @@ class HomeOutPageController = _HomeOutPageControllerBase
     with _$HomeOutPageController;
 
 abstract class _HomeOutPageControllerBase with Store {
-  HomeRepository firebaseModel;
+  HomeRepository homeRepository;
   CalendarController calendarController;
   _HomeOutPageControllerBase(
-    this.firebaseModel,
+    this.homeRepository,
     this.calendarController,
   );
 

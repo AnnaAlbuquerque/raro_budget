@@ -18,7 +18,6 @@ class HomeRepository {
         'category': transaction.category,
         'type': transaction.type,
         'name': transaction.name,
-        'date': transaction.date,
         'value': transaction.value,
       });
     } catch (e) {
@@ -36,7 +35,6 @@ class HomeRepository {
         'category': transaction.category,
         'type': 'saída',
         'name': transaction.name,
-        'date': transaction.date,
         'value': transaction.value,
       });
     } catch (e) {
@@ -54,8 +52,11 @@ class HomeRepository {
         'category': transaction.category,
         'type': 'entrada',
         'name': transaction.name,
-        'date': transaction.date,
         'value': transaction.value,
+        'day': transaction.day,
+        'month': transaction.month,
+        'year': transaction.year,
+        'createdAt': FieldValue.serverTimestamp()
       });
     } catch (e) {
       print(e);
@@ -157,7 +158,6 @@ class HomeRepository {
             "id": doc.id,
             "name": doc['name'],
             "type": doc['type'],
-            "date": doc['date']
           };
           docs.add(a);
           print(a);

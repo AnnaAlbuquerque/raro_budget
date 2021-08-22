@@ -10,10 +10,12 @@ class CustomTransactionItem extends StatefulWidget {
   final String category;
   final String? title;
   final num? transferredValue;
-  final Timestamp timestamp;
+  final int day;
+  final int month;
+  final int year;
 
   const CustomTransactionItem(this.title, this.category, this.transferredValue,
-      this.type, this.timestamp);
+      this.type, this.day, this.month, this.year);
 
   @override
   _CustomTransactionItemState createState() => _CustomTransactionItemState();
@@ -57,11 +59,8 @@ class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
                     style: TextStyles.purple16w500Roboto,
                   ),
                   Text(
-                    widget.timestamp
-                        .toDate()
-                        .toLocal()
-                        .toString()
-                        .split(' ')[0],
+                    //TODO: VER SE A DATA ESTÁ SENDO EXIBIDA CORRETAMENTE
+                    '$widget.day/$widget.month/$widget.year',
                     style: TextStyles.grey14w400Roboto,
                   ),
                 ],

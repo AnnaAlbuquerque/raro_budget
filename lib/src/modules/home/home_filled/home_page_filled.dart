@@ -94,7 +94,9 @@ class _HomePageFilledState
                                     controller.listaTodos[index].category,
                                     controller.listaTodos[index].value,
                                     controller.listaTodos[index].type,
-                                    controller.listaTodos[index].date,
+                                    controller.listaTodos[index].day,
+                                    controller.listaTodos[index].month,
+                                    controller.listaTodos[index].year,
                                   );
                                 },
                               );
@@ -183,7 +185,9 @@ class _HomePageFilledState
                                     controller.listaTodos[index].category,
                                     controller.listaTodos[index].value,
                                     controller.listaTodos[index].type,
-                                    controller.listaTodos[index].date,
+                                    controller.listaTodos[index].day,
+                                    controller.listaTodos[index].month,
+                                    controller.listaTodos[index].year,
                                   );
                                 },
                               );
@@ -272,7 +276,9 @@ class _HomePageFilledState
                                     controller.listaTodos[index].category,
                                     controller.listaTodos[index].value,
                                     controller.listaTodos[index].type,
-                                    controller.listaTodos[index].date,
+                                    controller.listaTodos[index].day,
+                                    controller.listaTodos[index].month,
+                                    controller.listaTodos[index].year,
                                   );
                                 },
                               );
