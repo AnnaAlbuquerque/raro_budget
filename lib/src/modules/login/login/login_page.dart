@@ -88,6 +88,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 ),
                 SizedBox(height: 9.0),
                 CustomSocialLoginButton(
+                  onTap: controller.loginWithGoogle,
                   text: 'CONTINUAR COM O GOOGLE',
                   image: 'assets/images/logo_google.png',
                   color: AppColors.white,
@@ -97,6 +98,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 ),
                 SizedBox(height: 16.0),
                 CustomSocialLoginButton(
+                  onTap: () {},
                   text: 'CONTINUAR COM O FACEBOOK',
                   image: 'assets/images/logo_facebook.png',
                   color: AppColors.chambray,
