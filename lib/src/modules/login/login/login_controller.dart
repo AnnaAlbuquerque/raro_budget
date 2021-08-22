@@ -1,15 +1,20 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/modules/login/login/login_respository.dart';
 import 'package:raro_budget/src/shared/auth/auth_repository.dart';
 import 'package:raro_budget/src/shared/connectivity/app_connectivity.dart';
 import 'package:raro_budget/src/shared/widgets/custom_dialog/custom_dialog.dart';
 
 class LoginController {
   LoginController(
-      {required this.authRepository, required this.appConnectivity});
+    this.authRepository,
+    this.loginRepository,
+    this.appConnectivity,
+  );
 
   final AuthRepository authRepository;
+  final LoginRepository loginRepository;
   final AppConnectivity appConnectivity;
 
   TextEditingController emailController = TextEditingController();
@@ -102,5 +107,9 @@ class LoginController {
           }
       },
     );
+  }
+
+  Future<void> loginWithGoogle() async {
+    return await loginRepository.loginWithGoogle();
   }
 }
