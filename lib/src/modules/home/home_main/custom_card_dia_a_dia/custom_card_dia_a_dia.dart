@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:raro_budget/src/modules/home/home_main/custom_card_dia_a_dia/custom_progress_bar.dart';
 
+import 'package:raro_budget/src/modules/home/home_main/custom_card_dia_a_dia/custom_progress_bar.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 import 'package:raro_budget/src/shared/widgets/custom_drop_down_button/custom_drop_down.dart';
@@ -9,11 +9,13 @@ import 'package:raro_budget/src/shared/widgets/custom_drop_down_button/custom_dr
 class CustomCard extends StatefulWidget {
   final Function()? onTape;
   final AnimationController? animationController;
+  final Widget dropDown;
 
   const CustomCard({
     Key? key,
-    this.animationController,
     this.onTape,
+    this.animationController,
+    required this.dropDown,
   }) : super(key: key);
 
   @override
@@ -23,21 +25,6 @@ class CustomCard extends StatefulWidget {
 class _CustomCardState extends State<CustomCard> {
   @override
   Widget build(BuildContext context) {
-    List<String> items = [
-      'JAN',
-      'FEV',
-      'MAR',
-      'ABR',
-      'MAI',
-      'JUN',
-      'JUL',
-      'AGO',
-      'SET',
-      'OUT',
-      'NOV',
-      'DEZ'
-    ];
-    String? selectedItem = 'JAN';
     String entrada = '8.000,00';
     String saida = '5.000,00';
     String total = '3.000,00';
@@ -80,27 +67,7 @@ class _CustomCardState extends State<CustomCard> {
                   "Saldo geral",
                   style: TextStyles.purple20w500Roboto,
                 ),
-                CustomDropDownButton(
-                  isTransparent: false,
-                  iconData: Icons.keyboard_arrow_down_rounded,
-                  value: selectedItem,
-                  items: items
-                      .map(
-                        (month) => DropdownMenuItem(
-                          child: Text(
-                            month,
-                            style: TextStyles.white14w500Roboto,
-                          ),
-                          value: month,
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (String? value) {
-                    setState(() {
-                      selectedItem = value;
-                    });
-                  },
-                ),
+                widget.dropDown,
               ],
             ),
             Column(
