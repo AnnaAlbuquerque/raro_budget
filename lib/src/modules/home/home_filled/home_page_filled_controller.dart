@@ -65,8 +65,6 @@ abstract class _HomePageFilledControllerBase with Store {
           listAllIn.add(element);
           value += element.value;
         });
-        print('ENTRADAS');
-        print(listAllIn);
         return listAllIn;
       }
     }
@@ -81,8 +79,6 @@ abstract class _HomePageFilledControllerBase with Store {
           listAllOut.add(element);
           value += element.value;
         });
-        print('SAIDAS');
-        print(listAllOut);
         return listAllOut;
       }
     }
@@ -97,8 +93,6 @@ abstract class _HomePageFilledControllerBase with Store {
           listAll.add(element);
           value += element.value;
         });
-        print('TOTAL');
-        print(listAll);
         return listAll;
       }
     }
