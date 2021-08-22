@@ -8,7 +8,7 @@ class AuthController {
   AuthController(this.authRepository);
 
   final AuthRepository authRepository;
-  final UserModel userModel = UserModel(
+  UserModel userModel = UserModel(
     name: "",
     email: "",
     phone: "",
@@ -38,25 +38,22 @@ class AuthController {
     }
   }
 
-  void getUser() {
+  Future<void> getUser() async {
     UserModel userResponse;
     try {
-      authRepository.store
+      final response = await authRepository.store
           .collection('users')
           .doc(authRepository.auth.currentUser!.uid)
-          .get()
-          .then(
-            (value) => {
-              userResponse = UserModel.fromMap(value.data()!),
-              userModel.name = userResponse.name,
-              userModel.email = userResponse.email,
-              userModel.phone = userResponse.phone,
-              userModel.cpf = userResponse.cpf,
-              userModel.terms = userResponse.terms,
-              userModel.generalBalance = userResponse.generalBalance,
-              print(userModel.name),
-            },
-          );
+          .get();
+
+      userResponse = UserModel.fromMap(response.data()!);
+      userModel.name = userResponse.name;
+      userModel.email = userResponse.email;
+      userModel.phone = userResponse.phone;
+      userModel.cpf = userResponse.cpf;
+      userModel.terms = userResponse.terms;
+      userModel.generalBalance = userResponse.generalBalance;
+      print(userModel.name);
     } catch (e) {
       print("DIDN'T SAVE USER INFORMATION");
     }

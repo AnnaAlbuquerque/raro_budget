@@ -40,8 +40,9 @@ class LoginController {
                   (value) => {
                     if (value)
                       {
-                        authController.getUser(),
-                        Modular.to.navigate("/home"),
+                        authController.getUser().then(
+                              (_) => Modular.to.navigate("/home"),
+                            ),
                       }
                     else
                       {

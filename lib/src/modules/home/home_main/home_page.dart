@@ -61,7 +61,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
                     child: CustomGeneralBalance(
-                      balance: 'store.balance',
+                      balance:
+                          '${controller.authController.userModel.generalBalance}',
                     ),
                   ),
                   CustomCard(),

@@ -59,7 +59,8 @@ class UserModel {
       cpf: map['cpf'],
       terms: map['terms'],
       password: "",
-      generalBalance: map['generalBalance'] ?? 0,
+      generalBalance:
+          map['generalBalance'] != null ? map['generalBalance'] / 100 : 0,
     );
   }
 

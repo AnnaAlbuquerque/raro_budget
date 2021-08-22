@@ -27,9 +27,12 @@ abstract class SplashBase with Store {
       Future.delayed(Duration(seconds: 2))
           .then((_) => Modular.to.navigate("/login"));
     } else if ((status == ConnectionStatus.success) && user != null) {
-      authController.getUser();
-      Future.delayed(Duration(seconds: 2))
-          .then((_) => Modular.to.navigate("/home"));
+      authController.getUser().then(
+            (_) => {
+              Future.delayed(Duration(seconds: 2))
+                  .then((_) => Modular.to.navigate("/home"))
+            },
+          );
     }
   }
 
