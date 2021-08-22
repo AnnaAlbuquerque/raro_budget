@@ -36,6 +36,10 @@ class HomeRepository {
         'type': 'saída',
         'name': transaction.name,
         'value': transaction.value,
+        'day': transaction.day,
+        'month': transaction.month,
+        'year': transaction.year,
+        'createdAt': FieldValue.serverTimestamp()
       });
     } catch (e) {
       print(e);
