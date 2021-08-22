@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/home/home_main/home_controller.dart';
 import 'package:raro_budget/src/modules/home/home_main/widgets/custom_card_dia_a_dia/custom_card_dia_a_dia.dart';
@@ -21,8 +22,17 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   var keyDrawerHomePage = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    controller.getTotals(DateTime.now().month);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var name = controller.authController.userModel.name.split(" ");
+    var name =
+        controller.homeRepository.authController.userModel.name.split(" ");
+    var balance =
+        controller.homeRepository.authController.userModel.generalBalance;
 
     return Scaffold(
       key: keyDrawerHomePage,
@@ -63,11 +73,16 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
                     child: CustomGeneralBalance(
-                      balance:
-                          '${controller.authController.userModel.generalBalance}',
+                      balance: '$balance',
                     ),
                   ),
-                  CustomCard(),
+                  Observer(builder: (_) {
+                    return CustomCard(
+                      total: controller.totalIn - controller.totalOut,
+                      totalIn: controller.totalIn,
+                      totalOut: controller.totalOut,
+                    );
+                  }),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
                     child: CustomLastTransactions(),
