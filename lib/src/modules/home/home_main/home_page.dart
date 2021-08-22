@@ -19,63 +19,68 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
+  var keyDrawerHomePage = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      bottom: true,
-      child: Scaffold(
-        appBar: CustomAppBar(
-          title: "Olá, ${'store.user.name'}",
-          prefSize: 80,
-        ),
-        drawer: CustomDrawer(
-          userName: '${'controller.userName'}',
-          registrationOnTap: () async => {
-            await Modular.to.pushNamed('/home/homeregistration'),
-          },
-          logoutOnTap: () async {
-            await controller.logout();
-          },
-        ),
-        body: 1 == 0 //store.error
-            ? Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "Erro na conexão",
-                      style: TextStyles.cyan48w400Roboto,
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    CustomButton(
-                      useGradientBackground: true,
-                      text: "TENTAR NOVAMENTE",
-                    ),
-                  ],
-                ),
-              )
-            : SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-                      child: CustomGeneralBalance(
-                        balance: 'store.balance',
-                      ),
-                    ),
-                    CustomCard(),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-                      child: CustomLastTransactions(),
-                    ),
-                  ],
-                ),
-              ),
+    return Scaffold(
+      key: keyDrawerHomePage,
+      appBar: CustomAppBar(
+        title: "Olá, ${'store.user.name'}",
+        iconDataLeft: Icons.menu,
+        prefSize: 80,
+        iconButtonOnPressed: () {
+          {
+            keyDrawerHomePage.currentState!.openDrawer();
+          }
+        },
       ),
+      drawer: CustomDrawer(
+        userName: '${'controller.userName'}',
+        registrationOnTap: () async => {
+          await Modular.to.pushNamed('/home/homeregistration'),
+        },
+        logoutOnTap: () async {
+          await controller.logout();
+        },
+      ),
+      body: 1 == 0 //store.error
+          ? Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Erro na conexão",
+                    style: TextStyles.cyan48w400Roboto,
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  CustomButton(
+                    useGradientBackground: true,
+                    text: "TENTAR NOVAMENTE",
+                  ),
+                ],
+              ),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                    child: CustomGeneralBalance(
+                      balance: 'store.balance',
+                    ),
+                  ),
+                  CustomCard(),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+                    child: CustomLastTransactions(),
+                  ),
+                ],
+              ),
+            ),
     );
   }
 }

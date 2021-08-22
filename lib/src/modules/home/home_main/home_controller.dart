@@ -7,9 +7,9 @@ part 'home_controller.g.dart';
 class HomeController = ControllerBase with _$HomeController;
 
 abstract class ControllerBase with Store {
-  HomeRepository fire;
+  HomeRepository homeRepository;
   ControllerBase(
-    this.fire,
+    this.homeRepository,
   );
 
   @observable
@@ -37,6 +37,6 @@ abstract class ControllerBase with Store {
   }
 
   Future<void> logout() async {
-    await fire.firebaseRepository.auth.signOut();
+    await homeRepository.firebaseRepository.auth.signOut();
   }
 }

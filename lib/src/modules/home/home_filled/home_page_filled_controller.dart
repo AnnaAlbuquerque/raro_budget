@@ -7,9 +7,9 @@ class HomePageFilledController = _HomePageFilledControllerBase
     with _$HomePageFilledController;
 
 abstract class _HomePageFilledControllerBase with Store {
-  HomeRepository firebaseModel;
+  HomeRepository homeRepository;
   _HomePageFilledControllerBase(
-    this.firebaseModel,
+    this.homeRepository,
   );
   @observable
   bool button1 = true;
@@ -44,14 +44,28 @@ abstract class _HomePageFilledControllerBase with Store {
   @action
   Future getTransactions() async {
     listaTodos.clear();
-    List<TransactionModel> responseList = await firebaseModel.testeconsulta();
+    List<TransactionModel> responseList = await homeRepository.testeconsulta();
     if (responseList.isNotEmpty) {
       value = 0;
+      listaTodos.clear();
       responseList.forEach((element) {
         listaTodos.add(element);
         value += element.value;
       });
       return listaTodos;
     }
+  }
+
+  @observable
+  late TransactionModel transactionModel;
+
+  @action
+  Future deleteUser(TransactionModel transactionModel) async {
+    await homeRepository.delete(transactionModel);
+    listaTodos.remove(transactionModel);
+  }
+
+  Future<void> logout() async {
+    await homeRepository.firebaseRepository.auth.signOut();
   }
 }

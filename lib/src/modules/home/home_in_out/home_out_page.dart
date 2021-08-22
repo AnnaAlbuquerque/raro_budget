@@ -59,6 +59,9 @@ class _HomeOutPageState
     return Scaffold(
       appBar: CustomAppBar(
         iconDataLeft: Icons.arrow_back,
+        iconButtonOnPressed: () {
+          Modular.to.navigate('/home/homefilled');
+        },
         title: 'Saída',
         prefSize: 120.0,
       ),

@@ -13,6 +13,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final Function()? b1onPressed;
   final Function()? b2onPressed;
   final Function()? b3onPressed;
+  final Function()? iconButtonOnPressed;
 
   const CustomAppBar({
     Key? key,
@@ -26,11 +27,13 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     this.b1onPressed,
     this.b2onPressed,
     this.b3onPressed,
+    this.iconButtonOnPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       flexibleSpace: Center(
         child: Container(
           decoration: BoxDecoration(
@@ -45,7 +48,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                       button2 == null &&
                       button3 == null
                   ? Container(
-                      margin: EdgeInsets.fromLTRB(24, 48, 24, 24),
+                      margin: EdgeInsets.fromLTRB(24, 45, 24, 24),
                       alignment: Alignment.center,
                       child: Text(
                         title,
@@ -62,7 +65,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               IconButton(
-                                onPressed: () {},
+                                onPressed: iconButtonOnPressed,
                                 icon: Icon(
                                   iconDataLeft,
                                   color: AppColors.white,
@@ -105,7 +108,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: iconButtonOnPressed,
                             icon: Icon(
                               iconDataLeft,
                               color: AppColors.white,
@@ -135,7 +138,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                           Container(
                             alignment: Alignment.centerLeft,
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: iconButtonOnPressed,
                               icon: Icon(
                                 iconDataLeft,
                                 color: AppColors.white,

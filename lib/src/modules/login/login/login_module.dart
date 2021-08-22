@@ -5,6 +5,7 @@ import 'package:raro_budget/src/modules/login/login/login_controller.dart';
 import 'package:raro_budget/src/modules/login/login/login_page.dart';
 import 'package:raro_budget/src/modules/login/login/login_respository.dart';
 import 'package:raro_budget/src/shared/auth/auth_repository.dart';
+import 'package:raro_budget/src/shared/connectivity/app_connectivity.dart';
 import 'package:raro_budget/src/shared/validators/validators.dart';
 
 class LoginModule extends Module {
@@ -13,6 +14,7 @@ class LoginModule extends Module {
         Bind.singleton((i) => LoginController(
               i.get<AuthRepository>(),
               i.get<LoginRepository>(),
+              i<AppConnectivity>(),
             )),
         Bind.singleton((i) => LoginRepository(i.get<AuthRepository>())),
         Bind.lazySingleton((i) => Validators())

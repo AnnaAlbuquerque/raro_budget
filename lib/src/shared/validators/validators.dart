@@ -53,6 +53,14 @@ class Validators {
     }
   }
 
+  String? passwordValidatorEmailPage(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Ops! Coloque uma senha!";
+    } else {
+      return null;
+    }
+  }
+
   String? confirmPasswordValidator(String? value1, String? value2) {
     if (value2 == null || value2.isEmpty) {
       return "Ops! É necessário confirmar a senha!";

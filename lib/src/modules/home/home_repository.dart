@@ -74,7 +74,7 @@ class HomeRepository {
           .doc(firebaseRepository.auth.currentUser!.uid)
           .collection('transactions')
           .where('type', isEqualTo: transaction.type)
-          .where('value', isEqualTo: transaction.value)
+          .where('name', isEqualTo: transaction.name)
           .where('category', isEqualTo: transaction.category)
           .get()
           .then((value) => value.docs.forEach((element) {
