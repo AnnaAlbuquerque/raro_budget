@@ -25,12 +25,20 @@ class _CustomCardState extends State<CustomCard> {
   @override
   Widget build(BuildContext context) {
     List<String> items = [
-      'FEVEREIRO',
-      'AGOSTO',
-      'JANEIRO',
-      'ABRIL',
+      'JAN',
+      'FEV',
+      'MAR',
+      'ABR',
+      'MAI',
+      'JUN',
+      'JUL',
+      'AGO',
+      'SET',
+      'OUT',
+      'NOV',
+      'DEZ'
     ];
-    String? selectedItem = 'FEVEREIRO';
+    String? selectedItem = 'JAN';
     String entrada = '8.000,00';
     String saida = '5.000,00';
     String total = '3.000,00';

@@ -96,178 +96,181 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
     return AppBar(
       automaticallyImplyLeading: false,
-      flexibleSpace: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: AppColors.cyanToPurpleAppBar,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              iconDataLeft == null &&
-                      iconDataRight == null &&
-                      button1 == null &&
-                      button2 == null &&
-                      button3 == null
-                  ? Container(
-                      margin: EdgeInsets.fromLTRB(24, 45, 24, 24),
-                      alignment: Alignment.center,
-                      child: Text(
-                        title,
-                        style: TextStyles.white26w700RobotoWithShadows,
-                      ),
-                    )
-                  : Container(),
-              iconDataLeft != null && iconDataRight != null && prefSize == 120
-                  ? Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(20, 20, 10, 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              IconButton(
+      flexibleSpace: AspectRatio(
+        aspectRatio: 2,
+        child: Center(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: AppColors.cyanToPurpleAppBar,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                iconDataLeft == null &&
+                        iconDataRight == null &&
+                        button1 == null &&
+                        button2 == null &&
+                        button3 == null
+                    ? Container(
+                        margin: EdgeInsets.fromLTRB(24, 45, 24, 24),
+                        alignment: Alignment.center,
+                        child: Text(
+                          title,
+                          style: TextStyles.white26w700Roboto,
+                        ),
+                      )
+                    : Container(),
+                iconDataLeft != null && iconDataRight != null && prefSize == 145
+                    ? Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.fromLTRB(20, 20, 10, 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                IconButton(
+                                  onPressed: iconButtonOnPressed,
+                                  icon: Icon(
+                                    iconDataLeft,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                                Container(
+                                  child: Row(
+                                    children: [
+                                      CustomDropDownButton(
+                                        iconData: iconDataRight!,
+                                        onChanged: (value) => {},
+                                        items: months
+                                            .map(
+                                              (month) => DropdownMenuItem(
+                                                child: Text(
+                                                  month,
+                                                  style: TextStyles
+                                                      .white14w500Roboto,
+                                                ),
+                                                value: month,
+                                              ),
+                                            )
+                                            .toList(),
+                                        value: currentMonthString,
+                                        isTransparent: false,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                            child: Text(
+                              title,
+                              style: TextStyles.white26w700Roboto,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(),
+                iconDataLeft != null && iconDataRight == null && prefSize == 80
+                    ? Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 40, 20, 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(
+                              onPressed: iconButtonOnPressed,
+                              icon: Icon(
+                                iconDataLeft,
+                                color: AppColors.white,
+                                size: 30,
+                              ),
+                            ),
+                            Expanded(
+                              flex: 5,
+                              child: Text(
+                                title,
+                                textAlign: TextAlign.center,
+                                style: TextStyles.white24w400Roboto,
+                              ),
+                            ),
+                            Spacer()
+                          ],
+                        ),
+                      )
+                    : Container(),
+                iconDataLeft != null && iconDataRight == null && prefSize == 145
+                    ? Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: IconButton(
                                 onPressed: iconButtonOnPressed,
                                 icon: Icon(
                                   iconDataLeft,
                                   color: AppColors.white,
                                 ),
                               ),
-                              Container(
-                                child: Row(
-                                  children: [
-                                    CustomDropDownButton(
-                                      iconData: iconDataRight!,
-                                      onChanged: (value) => {},
-                                      items: months
-                                          .map(
-                                            (month) => DropdownMenuItem(
-                                              child: Text(
-                                                month,
-                                                style: TextStyles
-                                                    .white14w500Roboto,
-                                              ),
-                                              value: month,
-                                            ),
-                                          )
-                                          .toList(),
-                                      value: currentMonthString,
-                                      isTransparent: false,
-                                    )
-                                  ],
-                                ),
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                title,
+                                style: TextStyles.white26w700Roboto,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: Text(
-                            title,
-                            style: TextStyles.white26w700RobotoWithShadows,
-                          ),
-                        ),
-                      ],
-                    )
-                  : Container(),
-              iconDataLeft != null && iconDataRight == null && prefSize == 80
-                  ? Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 40, 20, 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                            onPressed: iconButtonOnPressed,
-                            icon: Icon(
-                              iconDataLeft,
+                      )
+                    : Container(),
+                button1 != null && button2 != null && button3 != null
+                    ? Container(
+                        margin: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                              onPressed: b1onPressed,
+                              child: Text(
+                                '$button1',
+                                style: TextStyles.white16w400Roboto,
+                              ),
+                            ),
+                            Container(
                               color: AppColors.white,
-                              size: 30,
+                              height: 22,
+                              width: 2,
                             ),
-                          ),
-                          Expanded(
-                            flex: 5,
-                            child: Text(
-                              title,
-                              textAlign: TextAlign.center,
-                              style: TextStyles.white24w400Roboto,
-                            ),
-                          ),
-                          Spacer()
-                        ],
-                      ),
-                    )
-                  : Container(),
-              iconDataLeft != null && iconDataRight == null && prefSize == 120
-                  ? Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: IconButton(
-                              onPressed: iconButtonOnPressed,
-                              icon: Icon(
-                                iconDataLeft,
-                                color: AppColors.white,
+                            TextButton(
+                              onPressed: b2onPressed,
+                              child: Text(
+                                '$button2',
+                                style: TextStyles.white16w400Roboto,
                               ),
                             ),
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              title,
-                              style: TextStyles.white26w700RobotoWithShadows,
+                            Container(
+                              color: AppColors.white,
+                              height: 22,
+                              width: 2,
                             ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container(),
-              button1 != null && button2 != null && button3 != null
-                  ? Container(
-                      margin: const EdgeInsets.fromLTRB(30, 0, 30, 10),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextButton(
-                            onPressed: b1onPressed,
-                            child: Text(
-                              '$button1',
-                              style: TextStyles.white16w400Roboto,
+                            TextButton(
+                              onPressed: b3onPressed,
+                              child: Text(
+                                '$button3',
+                                style: TextStyles.white16w400Roboto,
+                              ),
                             ),
-                          ),
-                          Container(
-                            color: AppColors.white,
-                            height: 22,
-                            width: 2,
-                          ),
-                          TextButton(
-                            onPressed: b2onPressed,
-                            child: Text(
-                              '$button2',
-                              style: TextStyles.white16w400Roboto,
-                            ),
-                          ),
-                          Container(
-                            color: AppColors.white,
-                            height: 22,
-                            width: 2,
-                          ),
-                          TextButton(
-                            onPressed: b3onPressed,
-                            child: Text(
-                              '$button3',
-                              style: TextStyles.white16w400Roboto,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container(),
-            ],
+                          ],
+                        ),
+                      )
+                    : Container(),
+              ],
+            ),
           ),
         ),
       ),
