@@ -37,64 +37,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> months = [
-      'JANEIRO',
-      'FEVEREIRO',
-      'MARÇO',
-      'ABRIL',
-      'MAIO',
-      'JUNHO',
-      'JULHO',
-      'AGOSTO',
-      'SETEMBRO',
-      'OUTUBRO',
-      'NOVEMBRO',
-      'DEZEMBRO',
-    ];
-
-    final String currentMonthString;
-
-    switch (currentMonth) {
-      case 1:
-        currentMonthString = months[0];
-        break;
-      case 2:
-        currentMonthString = months[1];
-        break;
-      case 3:
-        currentMonthString = months[2];
-        break;
-      case 4:
-        currentMonthString = months[3];
-        break;
-      case 5:
-        currentMonthString = months[4];
-        break;
-      case 6:
-        currentMonthString = months[5];
-        break;
-      case 7:
-        currentMonthString = months[6];
-        break;
-      case 8:
-        currentMonthString = months[7];
-        break;
-      case 9:
-        currentMonthString = months[8];
-        break;
-      case 10:
-        currentMonthString = months[9];
-        break;
-      case 11:
-        currentMonthString = months[10];
-        break;
-      case 12:
-        currentMonthString = months[11];
-        break;
-      default:
-        currentMonthString = months[0];
-    }
-
     return AppBar(
       automaticallyImplyLeading: false,
       flexibleSpace: AspectRatio(

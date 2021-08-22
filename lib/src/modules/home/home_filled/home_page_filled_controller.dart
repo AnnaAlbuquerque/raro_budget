@@ -125,4 +125,66 @@ abstract class _HomePageFilledControllerBase with Store {
   Future<void> logout() async {
     await homeRepository.authRepository.auth.signOut();
   }
+
+  @observable
+  String? currentMonthString;
+
+  List<String> months = [
+    'JANEIRO',
+    'FEVEREIRO',
+    'MARÇO',
+    'ABRIL',
+    'MAIO',
+    'JUNHO',
+    'JULHO',
+    'AGOSTO',
+    'SETEMBRO',
+    'OUTUBRO',
+    'NOVEMBRO',
+    'DEZEMBRO'
+  ];
+
+  @action
+  void getCurrentMonth(int currentMonth) {
+    currentMonthString = months[currentMonth - 1];
+  }
+
+  @action
+  void changeDropDownMenuItem(selectedMonth, currentMonth) {
+    selectedMonth == 1 || selectedMonth == 'JANEIRO'
+        ? currentMonthString = months[0]
+        : selectedMonth == 2 || selectedMonth == 'FEVEREIRO'
+            ? currentMonthString = months[1]
+            : selectedMonth == 3 || selectedMonth == 'MARÇO'
+                ? currentMonthString = months[2]
+                : selectedMonth == 4 || selectedMonth == 'ABRIL'
+                    ? currentMonthString = months[3]
+                    : selectedMonth == 5 || selectedMonth == 'MAIO'
+                        ? currentMonthString = months[4]
+                        : selectedMonth == 6 || selectedMonth == 'JUNHO'
+                            ? currentMonthString = months[5]
+                            : selectedMonth == 7 || selectedMonth == 'JULHO'
+                                ? currentMonthString = months[6]
+                                : selectedMonth == 8 ||
+                                        selectedMonth == 'AGOSTO'
+                                    ? currentMonthString = months[7]
+                                    : selectedMonth == 9 ||
+                                            selectedMonth == 'SETEMBRO'
+                                        ? currentMonthString = months[8]
+                                        : selectedMonth == 10 ||
+                                                selectedMonth == 'OUTUBRO'
+                                            ? currentMonthString = months[9]
+                                            : selectedMonth == 11 ||
+                                                    selectedMonth == 'NOVEMBRO'
+                                                ? currentMonthString =
+                                                    months[10]
+                                                : selectedMonth == 12 ||
+                                                        selectedMonth ==
+                                                            'DEZEMBRO'
+                                                    ? currentMonthString =
+                                                        months[11]
+                                                    : currentMonthString =
+                                                        months[
+                                                            currentMonth - 1];
+  }
 }

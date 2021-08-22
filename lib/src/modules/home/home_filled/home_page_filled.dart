@@ -24,25 +24,17 @@ class HomePageFilled extends StatefulWidget {
 class _HomePageFilledState
     extends ModularState<HomePageFilled, HomePageFilledController> {
   var keyDrawerHomeFilled = GlobalKey<ScaffoldState>();
-  List<String> items = [
-    'JANEIRO',
-    'FEVEREIRO',
-    'MARÇO',
-    'ABRIL',
-    'MAIO',
-    'JUNHO',
-    'JULHO',
-    'AGOSTO',
-    'SETEMBRO',
-    'OUTUBRO',
-    'NOVEMBRO',
-    'DEZEMBRO'
-  ];
-  String? selectedItem = 'JANEIRO';
+
+  int currentMonth = 0;
+  dateFormatterInitializer() async {
+    await initializeDateFormatting('pt_BR', null);
+  }
 
   @override
   void initState() {
-    initializeDateFormatting('pt_BR', null);
+    dateFormatterInitializer();
+    currentMonth = int.parse(DateFormat.M('pt_BR').format(DateTime.now()));
+    controller.getCurrentMonth(currentMonth);
     super.initState();
   }
 
@@ -51,32 +43,30 @@ class _HomePageFilledState
     return Scaffold(
       key: keyDrawerHomeFilled,
       appBar: CustomAppBar(
-        currentMonth:
-            int.tryParse(DateFormat.M('pt_BR').format(DateTime.now())),
         iconDataLeft: Icons.arrow_back,
         iconButtonOnPressed: () {
           Modular.to.popAndPushNamed('/home');
         },
-        dropDown: CustomDropDownButton(
-          iconData: Icons.keyboard_arrow_down_outlined,
-          isTransparent: true,
-          value: selectedItem,
-          items: items
-              .map(
-                (i) => DropdownMenuItem(
-                  value: i,
-                  child: Text(
-                    i,
-                    style: TextStyles.white16w400Roboto,
+        dropDown: Observer(
+          builder: (context) => CustomDropDownButton(
+            iconData: Icons.keyboard_arrow_down_outlined,
+            isTransparent: true,
+            value: controller.currentMonthString,
+            items: controller.months
+                .map(
+                  (month) => DropdownMenuItem(
+                    value: month,
+                    child: Text(
+                      month,
+                      style: TextStyles.white16w400Roboto,
+                    ),
                   ),
-                ),
-              )
-              .toList(),
-          onChanged: (String? value) {
-            setState(() {
-              selectedItem = value;
-            });
-          },
+                )
+                .toList(),
+            onChanged: (String? value) {
+              controller.changeDropDownMenuItem(value, currentMonth);
+            },
+          ),
         ),
         title: 'title',
         prefSize: 145,

@@ -131,6 +131,22 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
     });
   }
 
+  final _$currentMonthStringAtom =
+      Atom(name: '_HomePageFilledControllerBase.currentMonthString');
+
+  @override
+  String? get currentMonthString {
+    _$currentMonthStringAtom.reportRead();
+    return super.currentMonthString;
+  }
+
+  @override
+  set currentMonthString(String? value) {
+    _$currentMonthStringAtom.reportWrite(value, super.currentMonthString, () {
+      super.currentMonthString = value;
+    });
+  }
+
   final _$getTransactionsWithTypeAsyncAction =
       AsyncAction('_HomePageFilledControllerBase.getTransactionsWithType');
 
@@ -164,6 +180,29 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
   }
 
   @override
+  void getCurrentMonth(int currentMonth) {
+    final _$actionInfo = _$_HomePageFilledControllerBaseActionController
+        .startAction(name: '_HomePageFilledControllerBase.getCurrentMonth');
+    try {
+      return super.getCurrentMonth(currentMonth);
+    } finally {
+      _$_HomePageFilledControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeDropDownMenuItem(dynamic selectedMonth, dynamic currentMonth) {
+    final _$actionInfo =
+        _$_HomePageFilledControllerBaseActionController.startAction(
+            name: '_HomePageFilledControllerBase.changeDropDownMenuItem');
+    try {
+      return super.changeDropDownMenuItem(selectedMonth, currentMonth);
+    } finally {
+      _$_HomePageFilledControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 button1: ${button1},
@@ -173,7 +212,8 @@ value: ${value},
 listAll: ${listAll},
 listAllIn: ${listAllIn},
 listAllOut: ${listAllOut},
-transactionModel: ${transactionModel}
+transactionModel: ${transactionModel},
+currentMonthString: ${currentMonthString}
     ''';
   }
 }
