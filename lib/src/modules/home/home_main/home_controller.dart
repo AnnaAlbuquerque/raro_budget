@@ -1,13 +1,13 @@
 import 'package:mobx/mobx.dart';
 
-import 'package:raro_budget/src/shared/models/firebase_model.dart';
+import 'package:raro_budget/src/modules/home/home_repository.dart';
 
 part 'home_controller.g.dart';
 
 class HomeController = ControllerBase with _$HomeController;
 
 abstract class ControllerBase with Store {
-  FirebaseModel fire;
+  HomeRepository fire;
   ControllerBase(
     this.fire,
   );

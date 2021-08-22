@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:raro_budget/src/shared/auth/auth_repository.dart';
 import 'package:raro_budget/src/shared/models/transaction_model.dart';
 
-class FirebaseModel {
+class HomeRepository {
   AuthRepository firebaseRepository;
-  FirebaseModel(
+  HomeRepository(
     this.firebaseRepository,
   );
 

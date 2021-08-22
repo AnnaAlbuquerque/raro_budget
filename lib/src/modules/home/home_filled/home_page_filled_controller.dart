@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:raro_budget/src/shared/models/firebase_model.dart';
+import 'package:raro_budget/src/modules/home/home_repository.dart';
 import 'package:raro_budget/src/shared/models/transaction_model.dart';
 part 'home_page_filled_controller.g.dart';
 
@@ -7,7 +7,7 @@ class HomePageFilledController = _HomePageFilledControllerBase
     with _$HomePageFilledController;
 
 abstract class _HomePageFilledControllerBase with Store {
-  FirebaseModel firebaseModel;
+  HomeRepository firebaseModel;
   _HomePageFilledControllerBase(
     this.firebaseModel,
   );
