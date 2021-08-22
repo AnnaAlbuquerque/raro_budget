@@ -60,23 +60,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                     text: 'CONTINUAR',
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
-                        controller
-                            .verifyEmail(controller.emailController.text)
-                            .then((value) => {
-                                  if (value)
-                                    {
-                                      Modular.to
-                                          .navigate("/login/existing_email")
-                                    }
-                                  else
-                                    {
-                                      //TODO colocar modal com mensagem de email não cadastrado
-                                      print("EMAIL NÃO ENCONTRADO")
-                                    }
-                                });
-                      } else {
-                        //TODO colocar modal com mensagem de email inválido
-                        print("NAO VALIDOU");
+                        controller.continueButtonFunction(context);
                       }
                     },
                   ),

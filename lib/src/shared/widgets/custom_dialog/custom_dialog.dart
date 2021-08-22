@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 
-class ErrorDialog extends StatelessWidget {
+class CustomDialog extends StatelessWidget {
   final String title;
   final String subtitle;
   final Function? function;
-  const ErrorDialog(
+  const CustomDialog(
       {Key? key, required this.title, required this.subtitle, this.function})
       : super(key: key);
 
@@ -28,7 +29,7 @@ class ErrorDialog extends StatelessWidget {
                   style: TextStyle(color: AppColors.cyan),
                 ),
                 onPressed: () {
-                  print("sem função");
+                  Modular.to.pop();
                 },
               )
             : TextButton(
@@ -37,7 +38,7 @@ class ErrorDialog extends StatelessWidget {
                   style: TextStyle(color: AppColors.cyan),
                 ),
                 onPressed: () {
-                  function;
+                  function!();
                 },
               )
       ],
