@@ -53,6 +53,9 @@ class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
     return Scaffold(
       appBar: CustomAppBar(
         iconDataLeft: Icons.arrow_back,
+        iconButtonOnPressed: () {
+          Modular.to.navigate('/home/homefilled');
+        },
         title: 'Entrada',
         prefSize: 120.0,
       ),

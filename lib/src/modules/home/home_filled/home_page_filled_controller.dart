@@ -47,11 +47,21 @@ abstract class _HomePageFilledControllerBase with Store {
     List<TransactionModel> responseList = await firebaseModel.testeconsulta();
     if (responseList.isNotEmpty) {
       value = 0;
+      listaTodos.clear();
       responseList.forEach((element) {
         listaTodos.add(element);
         value += element.value;
       });
       return listaTodos;
     }
+  }
+
+  @observable
+  late TransactionModel transactionModel;
+
+  @action
+  Future deleteUser(TransactionModel transactionModel) async {
+    await firebaseModel.delete(transactionModel);
+    listaTodos.remove(transactionModel);
   }
 }
