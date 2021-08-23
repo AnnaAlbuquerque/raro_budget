@@ -6,6 +6,7 @@ import '../../../shared/constants/app_colors.dart';
 import '../../../shared/widgets/custom_appbar/custom_appbar.dart';
 import '../../../shared/widgets/custom_button_logged/custom_button_logged_widget.dart';
 import '../../../shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
+import '../home_repository.dart';
 import './widgets/custom_dropdownform/custom_dropdownbuttonform_widget.dart';
 import './home_in_page_controller.dart';
 
@@ -17,6 +18,8 @@ class HomeInPage extends StatefulWidget {
 }
 
 class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
+  final repository = Modular.get<HomeRepository>();
+
   DropdownMenuItemData? item;
 
   List<DropdownMenuItemData> items = [
@@ -160,6 +163,15 @@ class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
         useIconAdd: true,
         onTap: () {
           controller.homeRepository.insertNewInput(TransactionModel(
+            name: controller.nameController.text,
+            type: 'entrada',
+            category: item!.category,
+            value: double.parse(controller.valueController.text) * 100,
+            day: controller.calendarController.selectedDate.day,
+            month: controller.calendarController.selectedDate.month,
+            year: controller.calendarController.selectedDate.year,
+          ));
+          repository.newMonthTotal(TransactionModel(
             name: controller.nameController.text,
             type: 'entrada',
             category: item!.category,

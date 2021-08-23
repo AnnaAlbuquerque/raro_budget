@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -109,46 +110,48 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       balance: '$balance',
                     ),
                   ),
-                  CustomCard(
-                    total: controller.totalIn - controller.totalOut,
-                    totalIn: controller.totalIn,
-                    totalOut: controller.totalOut,
-                    progressBarOut: (controller.totalOut != 0.0)
-                        ? CustomProgressBar(
-                            currentValue: (controller.getPorcentage(
-                                    controller.totalOut, controller.totalIn))
-                                .toInt(),
-                            progressColor: AppColors.cyan,
-                          )
-                        : Container(),
-                    progressBarIn: (controller.totalIn != 0.0)
-                        ? CustomProgressBar(
-                            currentValue: (controller.getPorcentage(
-                                    controller.totalIn, controller.totalOut))
-                                .toInt(),
-                            progressColor: AppColors.yellow,
-                          )
-                        : Container(),
-                    dropDown: CustomDropDownButton(
-                      iconData: Icons.keyboard_arrow_down_outlined,
-                      isTransparent: false,
-                      value: selectedItem,
-                      items: items
-                          .map(
-                            (i) => DropdownMenuItem(
-                              value: i,
-                              child: Text(
-                                i,
-                                style: TextStyles.white16w400Roboto,
+                  Observer(
+                    builder: (context) => CustomCard(
+                      total: controller.totalIn - controller.totalOut,
+                      totalIn: controller.totalIn,
+                      totalOut: controller.totalOut,
+                      progressBarOut: (controller.totalOut != 0.0)
+                          ? CustomProgressBar(
+                              currentValue: (controller.getPorcentage(
+                                      controller.totalOut, controller.totalIn))
+                                  .toInt(),
+                              progressColor: AppColors.cyan,
+                            )
+                          : Container(),
+                      progressBarIn: (controller.totalIn != 0.0)
+                          ? CustomProgressBar(
+                              currentValue: (controller.getPorcentage(
+                                      controller.totalIn, controller.totalOut))
+                                  .toInt(),
+                              progressColor: AppColors.yellow,
+                            )
+                          : Container(),
+                      dropDown: CustomDropDownButton(
+                        iconData: Icons.keyboard_arrow_down_outlined,
+                        isTransparent: false,
+                        value: selectedItem,
+                        items: items
+                            .map(
+                              (i) => DropdownMenuItem(
+                                value: i,
+                                child: Text(
+                                  i,
+                                  style: TextStyles.white16w400Roboto,
+                                ),
                               ),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (String? value) {
-                        setState(() {
-                          selectedItem = value;
-                        });
-                      },
+                            )
+                            .toList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            selectedItem = value;
+                          });
+                        },
+                      ),
                     ),
                   ),
                   Padding(

@@ -72,6 +72,66 @@ class HomeRepository {
     }
   }
 
+  Future<void> newMonthTotal(TransactionModel transaction) async {
+    try {
+      final repository = authRepository.store;
+
+      await repository
+          .collection('users')
+          .doc(authRepository.auth.currentUser!.uid)
+          .collection('monthTotal')
+          .where('month', isEqualTo: transaction.month)
+          .get()
+          .then((querySnapshot) {
+        if (querySnapshot.docs.isNotEmpty) {
+          var monthTotalExists =
+              TotalModel.fromMap(querySnapshot.docs[0].data());
+
+          if (transaction.type == 'entrada') {
+            monthTotalExists.totalIn += transaction.value;
+          } else {
+            monthTotalExists.totalOut += transaction.value;
+          }
+
+          repository
+              .collection('users')
+              .doc(authRepository.auth.currentUser!.uid)
+              .collection('monthTotal')
+              .doc(querySnapshot.docs[0].id)
+              .set({
+            'totalIn': monthTotalExists.totalIn,
+            'totalOut': monthTotalExists.totalOut,
+            'month': monthTotalExists.month
+          });
+        } else {
+          if (transaction.type == 'entrada') {
+            repository
+                .collection('users')
+                .doc(authRepository.auth.currentUser!.uid)
+                .collection('monthTotal')
+                .add({
+              'totalIn': transaction.value * 100,
+              'totalOut': 0,
+              'month': transaction.month
+            });
+          } else {
+            repository
+                .collection('users')
+                .doc(authRepository.auth.currentUser!.uid)
+                .collection('monthTotal')
+                .add({
+              'totalIn': 0,
+              'totalOut': transaction.value * 100,
+              'month': transaction.month
+            });
+          }
+        }
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<void> delete(TransactionModel transaction) async {
     try {
       await authRepository.store
@@ -265,9 +325,9 @@ class HomeRepository {
   Future<TotalModel> getTotal(int month) async {
     TotalModel total = TotalModel(totalIn: 0, totalOut: 0, month: 0);
     try {
-      await authController.authRepository.store
+      await authRepository.store
           .collection('users')
-          .doc(authController.authRepository.auth.currentUser!.uid)
+          .doc(authRepository.auth.currentUser!.uid)
           .collection('monthTotal')
           .where('month', isEqualTo: month)
           .get()
@@ -285,11 +345,11 @@ class HomeRepository {
   Future<List<TransactionModel>> getLastTransactions() async {
     List<TransactionModel> listTransaction = [];
     try {
-      await authController.authRepository.store
+      await authRepository.store
           .collection('users')
-          .doc(authController.authRepository.auth.currentUser!.uid)
+          .doc(authRepository.auth.currentUser!.uid)
           .collection("transactions")
-          .orderBy("date", descending: true)
+          .orderBy("createdAt", descending: true)
           .limit(5)
           .get()
           .then((query) => {
