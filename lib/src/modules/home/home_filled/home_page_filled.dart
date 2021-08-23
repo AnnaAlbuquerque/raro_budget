@@ -73,7 +73,7 @@ class _HomePageFilledState
         ),
         balanceWidget: Observer(
           builder: (context) => Text(
-            '${controller.getBalance}',
+            'R\$ ${controller.getBalance.toStringAsFixed(2)}',
             style: TextStyles.white26w700Roboto,
           ),
         ),
@@ -218,7 +218,8 @@ class _HomePageFilledState
                               style: TextStyles.purple16w500Roboto,
                             ),
                             Observer(builder: (_) {
-                              return Text(controller.valueIn.toString(),
+                              return Text(
+                                  'R\$ ${controller.valueIn.toStringAsFixed(2)}',
                                   style: TextStyles.green14w500Roboto);
                             }),
                           ],
@@ -350,8 +351,9 @@ class _HomePageFilledState
                               style: TextStyles.purple16w500Roboto,
                             ),
                             Observer(builder: (_) {
-                              return Text(controller.valueOut.toString(),
-                                  style: TextStyles.green14w500Roboto);
+                              return Text(
+                                  'R\$ ${controller.valueOut.toStringAsFixed(2)}',
+                                  style: TextStyles.red14w500Roboto);
                             }),
                           ],
                         ),
@@ -478,8 +480,8 @@ class _HomePageFilledState
                             ),
                             Observer(
                                 builder: (_) => Text(
-                                    controller.getBalance.toString(),
-                                    style: TextStyles.green14w500Roboto)),
+                                    'R\$ ${controller.getBalance.toStringAsFixed(2)}',
+                                    style: TextStyles.black5414w500Roboto)),
                           ],
                         ),
                       ],

@@ -67,38 +67,38 @@ class _HomeOutPageState
         title: 'Saída',
         prefSize: 145.0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(
-            left: 16.0, top: 16.0, right: 16.0, bottom: 40.0),
-        child: Card(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(7.0),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.black.withOpacity(0.12),
-                  offset: Offset(0.0, 1.0),
-                  blurRadius: 10.0,
-                ),
-                BoxShadow(
-                  color: AppColors.black.withOpacity(0.14),
-                  offset: Offset(0.0, 4.0),
-                  blurRadius: 5.0,
-                ),
-                BoxShadow(
-                  color: AppColors.black.withOpacity(0.2),
-                  offset: Offset(0.0, 2.0),
-                  blurRadius: 4.0,
-                  spreadRadius: -1.0,
-                ),
-              ],
-            ),
-            child: Padding(
-              padding:
-                  const EdgeInsets.only(left: 54.0, top: 88.0, right: 54.0),
-              child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(
+              left: 16.0, top: 16.0, right: 16.0, bottom: 40.0),
+          child: Card(
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.67,
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(7.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.black.withOpacity(0.12),
+                    offset: Offset(0.0, 1.0),
+                    blurRadius: 10.0,
+                  ),
+                  BoxShadow(
+                    color: AppColors.black.withOpacity(0.14),
+                    offset: Offset(0.0, 4.0),
+                    blurRadius: 5.0,
+                  ),
+                  BoxShadow(
+                    color: AppColors.black.withOpacity(0.2),
+                    offset: Offset(0.0, 2.0),
+                    blurRadius: 4.0,
+                    spreadRadius: -1.0,
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding:
+                    const EdgeInsets.only(left: 54.0, top: 88.0, right: 54.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -178,15 +178,15 @@ class _HomeOutPageState
               year: controller.calendarController.selectedDate.year,
             ),
           );
-          repository.newMonthTotal(TransactionModel(
-            name: controller.nameController.text,
-            type: 'saida',
-            category: item!.category,
-            value: double.parse(controller.valueController.text) * 100,
-            day: controller.calendarController.selectedDate.day,
-            month: controller.calendarController.selectedDate.month,
-            year: controller.calendarController.selectedDate.year,
-          ));
+          // repository.newMonthTotal(TransactionModel(
+          //   name: controller.nameController.text,
+          //   type: 'saida',
+          //   category: item!.category,
+          //   value: double.parse(controller.valueController.text) * 100,
+          //   day: controller.calendarController.selectedDate.day,
+          //   month: controller.calendarController.selectedDate.month,
+          //   year: controller.calendarController.selectedDate.year,
+          // ));
           Modular.to.navigate('/home/homefilled');
         },
       ),

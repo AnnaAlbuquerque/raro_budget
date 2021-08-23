@@ -41,7 +41,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     'NOV',
     'DEZ'
   ];
-  String? selectedItem = 'JAN';
+  String? selectedItem = 'AGO';
   @override
   void initState() {
     controller
@@ -60,116 +60,124 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     var balance =
         controller.homeRepository.authController.userModel.generalBalance;
 
-    return Scaffold(
-      key: keyDrawerHomePage,
-      appBar: CustomAppBar(
-        title: "Olá, ${name[0]}",
-        iconDataLeft: Icons.menu,
-        prefSize: 80,
-        iconButtonOnPressed: () {
-          {
-            keyDrawerHomePage.currentState!.openDrawer();
-          }
-        },
-      ),
-      drawer: CustomDrawer(
-        userName: '${name[0]}',
-        registrationOnTap: () async => {
-          await Modular.to.pushNamed('/home/homeregistration'),
-        },
-        logoutOnTap: () async {
-          await controller.logout();
-        },
-      ),
-      body: 1 == 0 //store.error
-          ? Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Erro na conexão",
-                    style: TextStyles.cyan48w400Roboto,
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  CustomButton(
-                    useGradientBackground: true,
-                    text: "TENTAR NOVAMENTE",
-                  ),
-                ],
-              ),
-            )
-          : SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-                    child: CustomGeneralBalance(
-                      balance: '$balance',
+    return SafeArea(
+      top: false,
+      bottom: true,
+      child: Scaffold(
+        key: keyDrawerHomePage,
+        appBar: CustomAppBar(
+          title: "Olá, ${name[0]}",
+          iconDataLeft: Icons.menu,
+          prefSize: 80,
+          iconButtonOnPressed: () {
+            {
+              keyDrawerHomePage.currentState!.openDrawer();
+            }
+          },
+        ),
+        drawer: CustomDrawer(
+          userName: '${name[0]}',
+          registrationOnTap: () async => {
+            await Modular.to.pushNamed('/home/homeregistration'),
+          },
+          logoutOnTap: () async {
+            await controller.logout();
+          },
+        ),
+        body: 1 == 0 //store.error
+            ? Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Erro na conexão",
+                      style: TextStyles.cyan48w400Roboto,
                     ),
-                  ),
-                  Observer(
-                    builder: (context) => CustomCard(
-                      total: controller.totalIn - controller.totalOut,
-                      totalIn: controller.totalIn,
-                      totalOut: controller.totalOut,
-                      progressBarOut: (controller.totalOut != 0.0)
-                          ? CustomProgressBar(
-                              currentValue: (controller.getPorcentage(
-                                      controller.totalOut, controller.totalIn))
-                                  .toInt(),
-                              progressColor: AppColors.cyan,
-                            )
-                          : Container(),
-                      progressBarIn: (controller.totalIn != 0.0)
-                          ? CustomProgressBar(
-                              currentValue: (controller.getPorcentage(
-                                      controller.totalIn, controller.totalOut))
-                                  .toInt(),
-                              progressColor: AppColors.yellow,
-                            )
-                          : Container(),
-                      dropDown: CustomDropDownButton(
-                        iconData: Icons.keyboard_arrow_down_outlined,
-                        isTransparent: false,
-                        value: selectedItem,
-                        items: items
-                            .map(
-                              (i) => DropdownMenuItem(
-                                value: i,
-                                child: Text(
-                                  i,
-                                  style: TextStyles.white16w400Roboto,
+                    SizedBox(
+                      height: 25,
+                    ),
+                    CustomButton(
+                      useGradientBackground: true,
+                      text: "TENTAR NOVAMENTE",
+                    ),
+                  ],
+                ),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                      child: Observer(
+                        builder: (context) => CustomGeneralBalance(
+                          balance: controller.totalIn - controller.totalOut,
+                        ),
+                      ),
+                    ),
+                    Observer(
+                      builder: (context) => CustomCard(
+                        total: controller.totalIn - controller.totalOut,
+                        totalIn: controller.totalIn,
+                        totalOut: controller.totalOut,
+                        progressBarOut: (controller.totalOut != 0.0)
+                            ? CustomProgressBar(
+                                currentValue: (controller.getPorcentage(
+                                        controller.totalOut,
+                                        controller.totalIn))
+                                    .toInt(),
+                                progressColor: AppColors.cyan,
+                              )
+                            : Container(),
+                        progressBarIn: (controller.totalIn != 0.0)
+                            ? CustomProgressBar(
+                                currentValue: (controller.getPorcentage(
+                                        controller.totalIn,
+                                        controller.totalOut))
+                                    .toInt(),
+                                progressColor: AppColors.yellow,
+                              )
+                            : Container(),
+                        dropDown: CustomDropDownButton(
+                          iconData: Icons.keyboard_arrow_down_outlined,
+                          isTransparent: false,
+                          value: selectedItem,
+                          items: items
+                              .map(
+                                (i) => DropdownMenuItem(
+                                  value: i,
+                                  child: Text(
+                                    i,
+                                    style: TextStyles.white16w400Roboto,
+                                  ),
                                 ),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (String? value) {
-                          setState(() {
-                            selectedItem = value;
-                          });
+                              )
+                              .toList(),
+                          onChanged: (String? value) {
+                            setState(() {
+                              selectedItem = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+                      child: FutureBuilder(
+                        future: controller.getLastTransactions(),
+                        builder: (context, snapshot) {
+                          return CustomLastTransactions(
+                            value: controller.totalLastTransactions
+                                .toStringAsFixed(2),
+                            listTransaction: controller.listTransaction,
+                          );
                         },
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-                    child: FutureBuilder(
-                      future: controller.getLastTransactions(),
-                      builder: (context, snapshot) {
-                        return CustomLastTransactions(
-                          value: controller.totalLastTransactions
-                              .toStringAsFixed(2),
-                          listTransaction: controller.listTransaction,
-                        );
-                      },
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+      ),
     );
   }
 }

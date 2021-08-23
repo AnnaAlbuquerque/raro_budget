@@ -5,8 +5,9 @@ import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 
 class CustomGeneralBalance extends StatefulWidget {
-  const CustomGeneralBalance({Key? key, this.balance}) : super(key: key);
-  final String? balance;
+  const CustomGeneralBalance({Key? key, required this.balance})
+      : super(key: key);
+  final double balance;
   @override
   _CustomGeneralBalanceState createState() => _CustomGeneralBalanceState();
 }
@@ -66,7 +67,7 @@ class _CustomGeneralBalanceState extends State<CustomGeneralBalance> {
               Visibility(
                 visible: controller.balanceVisible,
                 child: Text(
-                  'R\$ ${widget.balance ?? '3.000,00'}',
+                  'R\$ ${widget.balance.toStringAsFixed(2)}',
                   style: TextStyles.black24w400Roboto,
                 ),
               ),

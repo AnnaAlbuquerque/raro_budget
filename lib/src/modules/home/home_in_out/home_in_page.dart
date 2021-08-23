@@ -61,12 +61,12 @@ class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
         title: 'Entrada',
         prefSize: 145.0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(
-            left: 16.0, top: 16.0, right: 16.0, bottom: 40.0),
-        child: Card(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(
+              left: 16.0, top: 16.0, right: 16.0, bottom: 40.0),
           child: Container(
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery.of(context).size.height * 0.67,
             decoration: BoxDecoration(
               color: AppColors.white,
               borderRadius: BorderRadius.circular(7.0),
@@ -92,65 +92,64 @@ class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
             child: Padding(
               padding:
                   const EdgeInsets.only(left: 54.0, top: 73.0, right: 54.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //TODO: ADICIONAR MASCARA , .
-                    CustomTextFormField(
-                      name: 'Valor em R\$',
-                      textInputType: TextInputType.number,
-                      controller: controller.valueController,
-                    ),
-                    const SizedBox(height: 24.0),
-                    CustomDropdownButtonForm(
-                      label: 'Tipo de entrada',
-                      value: item,
-                      onChanged: (value) {
-                        setState(() {
-                          item = value as DropdownMenuItemData;
-                        });
-                      },
-                      selectedItemBuilder: (BuildContext context) {
-                        return items.map<Widget>((DropdownMenuItemData item) {
-                          return Row(
-                            children: [
-                              Text(item.category),
-                            ],
-                          );
-                        }).toList();
-                      },
-                      items: items.map((DropdownMenuItemData item) {
-                        return DropdownMenuItem<DropdownMenuItemData>(
-                          value: item,
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 24.0,
-                                height: 24.0,
-                                decoration: BoxDecoration(
-                                  color: item.color,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image(image: AssetImage(item.icon)),
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(item.category),
-                            ],
-                          ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //TODO: ADICIONAR MASCARA , .
+                  CustomTextFormField(
+                    name: 'Valor em R\$',
+                    textInputType: TextInputType.number,
+                    controller: controller.valueController,
+                  ),
+                  const SizedBox(height: 24.0),
+                  CustomDropdownButtonForm(
+                    label: 'Tipo de entrada',
+                    value: item,
+                    onChanged: (value) {
+                      setState(() {
+                        item = value as DropdownMenuItemData;
+                      });
+                    },
+                    selectedItemBuilder: (BuildContext context) {
+                      return items.map<Widget>((DropdownMenuItemData item) {
+                        return Row(
+                          children: [
+                            Text(item.category),
+                          ],
                         );
-                      }).toList(),
-                    ),
-                    const SizedBox(height: 24.0),
-                    CustomTextFormField(
-                      name: 'Nome da entrada',
-                      controller: controller.nameController,
-                    ),
-                    const SizedBox(height: 30.0),
-                    CalendarWidget(),
-                    const SizedBox(height: 16.0),
-                  ],
-                ),
+                      }).toList();
+                    },
+                    items: items.map((DropdownMenuItemData item) {
+                      return DropdownMenuItem<DropdownMenuItemData>(
+                        value: item,
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 24.0,
+                              height: 24.0,
+                              decoration: BoxDecoration(
+                                color: item.color,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Image(image: AssetImage(item.icon)),
+                            ),
+                            const SizedBox(width: 8.0),
+                            Text(item.category),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  const SizedBox(height: 24.0),
+                  CustomTextFormField(
+                    name: 'Nome da entrada',
+                    controller: controller.nameController,
+                  ),
+                  const SizedBox(height: 30.0),
+                  CalendarWidget(),
+                  const SizedBox(height: 16.0),
+                ],
               ),
             ),
           ),
@@ -171,15 +170,16 @@ class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
             month: controller.calendarController.selectedDate.month,
             year: controller.calendarController.selectedDate.year,
           ));
-          repository.newMonthTotal(TransactionModel(
-            name: controller.nameController.text,
-            type: 'entrada',
-            category: item!.category,
-            value: double.parse(controller.valueController.text) * 100,
-            day: controller.calendarController.selectedDate.day,
-            month: controller.calendarController.selectedDate.month,
-            year: controller.calendarController.selectedDate.year,
-          ));
+
+          // repository.newMonthTotal(TransactionModel(
+          //   name: controller.nameController.text,
+          //   type: 'entrada',
+          //   category: item!.category,
+          //   value: double.parse(controller.valueController.text) * 100,
+          //   day: controller.calendarController.selectedDate.day,
+          //   month: controller.calendarController.selectedDate.month,
+          //   year: controller.calendarController.selectedDate.year,
+          // ));
           Modular.to.navigate('/home/homefilled');
         },
       ),

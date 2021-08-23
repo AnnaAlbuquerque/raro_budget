@@ -72,6 +72,7 @@ class HomeRepository {
     }
   }
 
+  //TODO: remover o valor dos totalIn, totalOut quando a transaction for deletada
   Future<void> newMonthTotal(TransactionModel transaction) async {
     try {
       final repository = authRepository.store;
@@ -92,6 +93,9 @@ class HomeRepository {
           } else {
             monthTotalExists.totalOut += transaction.value;
           }
+
+          print('MONTH TOTAL EXISTS');
+          print(monthTotalExists);
 
           repository
               .collection('users')
