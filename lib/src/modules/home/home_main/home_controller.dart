@@ -61,4 +61,16 @@ abstract class ControllerBase with Store {
     }
     return listTransaction;
   }
+
+  double getPorcentage(double value1, value2) {
+    double percentage = 0;
+    if (value1 == 0) {
+      return percentage;
+    } else if (value1 >= value2) {
+      percentage = 100;
+      return percentage;
+    } else {
+      return percentage = (value1 * 100) / value2;
+    }
+  }
 }

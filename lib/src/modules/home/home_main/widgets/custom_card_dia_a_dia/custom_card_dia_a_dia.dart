@@ -105,7 +105,7 @@ class _CustomCardState extends State<CustomCard> {
             Column(
               children: [
                 Text(
-                  "R\$ ${widget.total}",
+                  "R\$ ${widget.total.toStringAsFixed(2)}",
                   style: TextStyles.black24w400Roboto,
                 ),
               ],
@@ -121,7 +121,7 @@ class _CustomCardState extends State<CustomCard> {
                     style: TextStyles.black5414w400Roboto,
                   ),
                   Text(
-                    'R\$ ${widget.totalOut}',
+                    'R\$ ${widget.totalOut.toStringAsFixed(2)}',
                     style: TextStyles.black5414w400Roboto,
                   ),
                 ],
@@ -139,7 +139,7 @@ class _CustomCardState extends State<CustomCard> {
                     style: TextStyles.black5414w400Roboto,
                   ),
                   Text(
-                    'R\$ ${widget.totalIn}',
+                    'R\$ ${widget.totalIn.toStringAsFixed(2)}',
                     style: TextStyles.black5414w400Roboto,
                   ),
                 ],

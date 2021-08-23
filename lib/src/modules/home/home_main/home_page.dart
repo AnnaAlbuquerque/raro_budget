@@ -91,13 +91,17 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       totalOut: controller.totalOut,
                       progressBarOut: (controller.totalOut != 0.0)
                           ? CustomProgressBar(
-                              currentValue: controller.totalOut.toInt(),
+                              currentValue: (controller.getPorcentage(
+                                      controller.totalOut, controller.totalIn))
+                                  .toInt(),
                               progressColor: AppColors.cyan,
                             )
                           : Container(),
                       progressBarIn: (controller.totalIn != 0.0)
                           ? CustomProgressBar(
-                              currentValue: controller.totalIn.toInt(),
+                              currentValue: (controller.getPorcentage(
+                                      controller.totalIn, controller.totalOut))
+                                  .toInt(),
                               progressColor: AppColors.yellow,
                             )
                           : Container(),
