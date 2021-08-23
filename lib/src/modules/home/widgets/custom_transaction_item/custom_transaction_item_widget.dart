@@ -16,16 +16,8 @@ class CustomTransactionItem extends StatefulWidget {
   final int year;
   final Function()? onLongPress;
 
-  const CustomTransactionItem(
-    this.title,
-    this.category,
-    this.transferredValue,
-    this.type,
-    this.day,
-    this.month,
-    this.year,
-    this.onLongPress,
-  );
+  const CustomTransactionItem(this.title, this.category, this.transferredValue,
+      this.type, this.day, this.month, this.year, this.onLongPress);
 
   @override
   _CustomTransactionItemState createState() => _CustomTransactionItemState();
@@ -48,7 +40,10 @@ class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  widget.type == 'saida'
+                  widget.type == 'Saída' ||
+                          widget.type == 'saída' ||
+                          widget.type == 'Saida' ||
+                          widget.type == 'saida'
                       ? CircleAvatar(
                           backgroundColor:
                               controller.checkColor(widget.category),
@@ -74,7 +69,6 @@ class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
                         style: TextStyles.purple16w500Roboto,
                       ),
                       Text(
-                        //TODO: VER SE A DATA ESTÁ SENDO EXIBIDA CORRETAMENTE
                         '${widget.day}/${widget.month}/${widget.year}',
                         style: TextStyles.grey14w400Roboto,
                       ),
