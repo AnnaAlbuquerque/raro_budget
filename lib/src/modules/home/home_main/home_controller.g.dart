@@ -9,71 +9,107 @@ part of 'home_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeController on ControllerBase, Store {
-  final _$button1Atom = Atom(name: 'ControllerBase.button1');
+  final _$totalInAtom = Atom(name: 'ControllerBase.totalIn');
 
   @override
-  bool get button1 {
-    _$button1Atom.reportRead();
-    return super.button1;
+  double get totalIn {
+    _$totalInAtom.reportRead();
+    return super.totalIn;
   }
 
   @override
-  set button1(bool value) {
-    _$button1Atom.reportWrite(value, super.button1, () {
-      super.button1 = value;
+  set totalIn(double value) {
+    _$totalInAtom.reportWrite(value, super.totalIn, () {
+      super.totalIn = value;
     });
   }
 
-  final _$button2Atom = Atom(name: 'ControllerBase.button2');
+  final _$totalOutAtom = Atom(name: 'ControllerBase.totalOut');
 
   @override
-  bool get button2 {
-    _$button2Atom.reportRead();
-    return super.button2;
+  double get totalOut {
+    _$totalOutAtom.reportRead();
+    return super.totalOut;
   }
 
   @override
-  set button2(bool value) {
-    _$button2Atom.reportWrite(value, super.button2, () {
-      super.button2 = value;
+  set totalOut(double value) {
+    _$totalOutAtom.reportWrite(value, super.totalOut, () {
+      super.totalOut = value;
     });
   }
 
-  final _$button3Atom = Atom(name: 'ControllerBase.button3');
+  final _$monthAtom = Atom(name: 'ControllerBase.month');
 
   @override
-  bool get button3 {
-    _$button3Atom.reportRead();
-    return super.button3;
+  int get month {
+    _$monthAtom.reportRead();
+    return super.month;
   }
 
   @override
-  set button3(bool value) {
-    _$button3Atom.reportWrite(value, super.button3, () {
-      super.button3 = value;
+  set month(int value) {
+    _$monthAtom.reportWrite(value, super.month, () {
+      super.month = value;
     });
   }
 
-  final _$ControllerBaseActionController =
-      ActionController(name: 'ControllerBase');
+  final _$listTransactionAtom = Atom(name: 'ControllerBase.listTransaction');
 
   @override
-  dynamic changeScreen1(String option) {
-    final _$actionInfo = _$ControllerBaseActionController.startAction(
-        name: 'ControllerBase.changeScreen1');
-    try {
-      return super.changeScreen1(option);
-    } finally {
-      _$ControllerBaseActionController.endAction(_$actionInfo);
-    }
+  ObservableList<TransactionModel> get listTransaction {
+    _$listTransactionAtom.reportRead();
+    return super.listTransaction;
+  }
+
+  @override
+  set listTransaction(ObservableList<TransactionModel> value) {
+    _$listTransactionAtom.reportWrite(value, super.listTransaction, () {
+      super.listTransaction = value;
+    });
+  }
+
+  final _$totalLastTransactionsAtom =
+      Atom(name: 'ControllerBase.totalLastTransactions');
+
+  @override
+  double get totalLastTransactions {
+    _$totalLastTransactionsAtom.reportRead();
+    return super.totalLastTransactions;
+  }
+
+  @override
+  set totalLastTransactions(double value) {
+    _$totalLastTransactionsAtom.reportWrite(value, super.totalLastTransactions,
+        () {
+      super.totalLastTransactions = value;
+    });
+  }
+
+  final _$getTotalsAsyncAction = AsyncAction('ControllerBase.getTotals');
+
+  @override
+  Future<void> getTotals(int month) {
+    return _$getTotalsAsyncAction.run(() => super.getTotals(month));
+  }
+
+  final _$getLastTransactionsAsyncAction =
+      AsyncAction('ControllerBase.getLastTransactions');
+
+  @override
+  Future<List<TransactionModel>> getLastTransactions() {
+    return _$getLastTransactionsAsyncAction
+        .run(() => super.getLastTransactions());
   }
 
   @override
   String toString() {
     return '''
-button1: ${button1},
-button2: ${button2},
-button3: ${button3}
+totalIn: ${totalIn},
+totalOut: ${totalOut},
+month: ${month},
+listTransaction: ${listTransaction},
+totalLastTransactions: ${totalLastTransactions}
     ''';
   }
 }

@@ -29,11 +29,12 @@ class HomeModule extends Module {
             i.get<HomeRepository>(), i.get<CalendarController>())),
         Bind.singleton((i) => CalendarController()),
         Bind.singleton((i) => HomeController(i.get<HomeRepository>())),
-        Bind.singleton((i) => HomeRepository(i.get<AuthRepository>())),
         Bind.lazySingleton((i) => HomeRegistrationController(
             authRepository: i<AuthRepository>(),
             authController: i<AuthController>())),
         Bind.lazySingleton((i) => Validators()),
+        Bind.singleton((i) =>
+            HomeRepository(i.get<AuthController>(), i.get<AuthRepository>())),
         $CustomTransactionItemController,
       ];
 

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/splash/splash_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
-import 'package:raro_budget/src/shared/enums/firebase_status.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SplashPage extends StatefulWidget {
