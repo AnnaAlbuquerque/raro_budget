@@ -58,6 +58,7 @@ class _PasswordWidgetState extends State<PasswordWidget> {
                   CustomTextFormField(
                     name: 'Crie uma senha',
                     obscureText: passwordVisible,
+                    textInputType: TextInputType.visiblePassword,
                     validator: (value) =>
                         widget.validators.passwordValidator(value),
                     controller: controller.passwordController,
@@ -76,7 +77,11 @@ class _PasswordWidgetState extends State<PasswordWidget> {
                   CustomTextFormField(
                     name: 'Confirme sua senha',
                     obscureText: confirmPasswordVisible,
+                    textInputType: TextInputType.visiblePassword,
                     controller: controller.confirmPasswordController,
+                    validator: (value) => widget.validators
+                        .confirmPasswordValidator(
+                            value, controller.passwordController.text),
                     icon: VisibleWidget(
                       visible: confirmPasswordVisible,
                       onPressed: () {

@@ -1,4 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/modules/home/home_in_out/home_out_page_controller.dart';
+import 'package:raro_budget/src/modules/home/home_repository.dart';
+import 'package:raro_budget/src/shared/models/transaction_model.dart';
 import 'package:raro_budget/src/shared/widgets/calendar/calendar.dart';
 import '../../../shared/constants/app_colors.dart';
 import '../../../shared/widgets/custom_appbar/custom_appbar.dart';
@@ -13,9 +18,9 @@ class HomeOutPage extends StatefulWidget {
   _HomeOutPageState createState() => _HomeOutPageState();
 }
 
-class _HomeOutPageState extends State<HomeOutPage> {
-  TextEditingController _valueController = TextEditingController();
-
+class _HomeOutPageState
+    extends ModularState<HomeOutPage, HomeOutPageController> {
+  final repository = Modular.get<HomeRepository>();
   DropdownMenuItemData? item;
 
   List<DropdownMenuItemData> items = [
@@ -52,18 +57,15 @@ class _HomeOutPageState extends State<HomeOutPage> {
   ];
 
   @override
-  void dispose() {
-    _valueController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
         iconDataLeft: Icons.arrow_back,
+        iconButtonOnPressed: () {
+          Modular.to.navigate('/home/homefilled');
+        },
         title: 'Saída',
-        prefSize: 120.0,
+        prefSize: 145.0,
       ),
       body: Padding(
         padding: const EdgeInsets.only(
@@ -103,10 +105,11 @@ class _HomeOutPageState extends State<HomeOutPage> {
                     CustomTextFormField(
                       name: 'Valor em R\$',
                       textInputType: TextInputType.number,
-                      controller: _valueController,
+                      controller: controller.valueController,
                     ),
                     const SizedBox(height: 32.0),
                     CustomDropdownButtonForm(
+                      label: 'Tipo de saída',
                       value: item,
                       onChanged: (value) {
                         setState(() {
@@ -143,7 +146,12 @@ class _HomeOutPageState extends State<HomeOutPage> {
                         );
                       }).toList(),
                     ),
-                    const SizedBox(height: 38.0),
+                    const SizedBox(height: 24.0),
+                    CustomTextFormField(
+                      name: 'Nome da saída',
+                      controller: controller.nameController,
+                    ),
+                    const SizedBox(height: 30.0),
                     CalendarWidget(),
                     const SizedBox(height: 16.0),
                   ],
@@ -158,8 +166,32 @@ class _HomeOutPageState extends State<HomeOutPage> {
         useGradientBackground: true,
         text: 'INSERIR',
         useIconAdd: true,
-        onTap: () {},
+        onTap: () {
+          controller.homeRepository.insertNewOutput(
+            TransactionModel(
+              name: controller.nameController.text,
+              type: 'saida',
+              category: item!.category,
+              value: double.parse(controller.valueController.text) * 100,
+              day: controller.calendarController.selectedDate.day,
+              month: controller.calendarController.selectedDate.month,
+              year: controller.calendarController.selectedDate.year,
+            ),
+          );
+          repository.newMonthTotal(TransactionModel(
+            name: controller.nameController.text,
+            type: 'saida',
+            category: item!.category,
+            value: double.parse(controller.valueController.text) * 100,
+            day: controller.calendarController.selectedDate.day,
+            month: controller.calendarController.selectedDate.month,
+            year: controller.calendarController.selectedDate.year,
+          ));
+          Modular.to.navigate('/home/homefilled');
+        },
       ),
     );
   }
 }
+
+// Timestamp.fromDate(controller.calendarController.selectedDate)

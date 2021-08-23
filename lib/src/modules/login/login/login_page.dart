@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/login/login/login_controller.dart';
+import 'package:raro_budget/src/shared/validators/validators.dart';
 import '../../../shared/widgets/custom_button/custom_button_widget.dart';
 import '../../../shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
 import '../../../shared/widgets/custom_social_login_button/custom_social_login_button_widget.dart';
@@ -18,11 +18,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends ModularState<LoginPage, LoginController> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  final validators = Modular.get<Validators>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +51,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 CustomTextFormField(
                   name: 'E-mail',
                   controller: controller.emailController,
-                  validator: (value) {
-                    return controller.validateEmail();
-                  },
+                  validator: (value) => validators.emailValidator(value),
                 ),
                 SizedBox(height: 16.0),
                 Align(
@@ -66,23 +60,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                     text: 'CONTINUAR',
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
-                        controller
-                            .verifyEmail(controller.emailController.text)
-                            .then((value) => {
-                                  if (value)
-                                    {
-                                      Modular.to
-                                          .navigate("/login/existing_email")
-                                    }
-                                  else
-                                    {
-                                      //TODO colocar modal com mensagem de email não cadastrado
-                                      print("EMAIL NÃO ENCONTRADO")
-                                    }
-                                });
-                      } else {
-                        //TODO colocar modal com mensagem de email inválido
-                        print("NAO VALIDOU");
+                        controller.continueButtonFunction(context);
                       }
                     },
                   ),
@@ -94,21 +72,12 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 ),
                 SizedBox(height: 9.0),
                 CustomSocialLoginButton(
+                  onTap: controller.loginWithGoogle,
                   text: 'CONTINUAR COM O GOOGLE',
                   image: 'assets/images/logo_google.png',
                   color: AppColors.white,
                   textStyle: TextStyles.black5414w500Roboto,
                   horizontal: 31.0,
-                  vertical: 8.0,
-                ),
-                SizedBox(height: 16.0),
-                CustomSocialLoginButton(
-                  text: 'CONTINUAR COM O FACEBOOK',
-                  image: 'assets/images/logo_facebook.png',
-                  color: AppColors.chambray,
-                  borderColor: AppColors.chambray,
-                  textStyle: TextStyles.white14w500Roboto,
-                  horizontal: 23.0,
                   vertical: 8.0,
                 ),
               ],

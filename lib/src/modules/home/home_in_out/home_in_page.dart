@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/shared/models/transaction_model.dart';
 import 'package:raro_budget/src/shared/widgets/calendar/calendar.dart';
 import '../../../shared/constants/app_colors.dart';
 import '../../../shared/widgets/custom_appbar/custom_appbar.dart';
 import '../../../shared/widgets/custom_button_logged/custom_button_logged_widget.dart';
 import '../../../shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
+import '../home_repository.dart';
 import './widgets/custom_dropdownform/custom_dropdownbuttonform_widget.dart';
+import './home_in_page_controller.dart';
 
 class HomeInPage extends StatefulWidget {
   const HomeInPage({Key? key}) : super(key: key);
@@ -13,9 +17,8 @@ class HomeInPage extends StatefulWidget {
   _HomeInPageState createState() => _HomeInPageState();
 }
 
-class _HomeInPageState extends State<HomeInPage> {
-  TextEditingController _valueController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
+class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
+  final repository = Modular.get<HomeRepository>();
 
   DropdownMenuItemData? item;
 
@@ -48,19 +51,15 @@ class _HomeInPageState extends State<HomeInPage> {
   ];
 
   @override
-  void dispose() {
-    _valueController.dispose();
-    _nameController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
         iconDataLeft: Icons.arrow_back,
+        iconButtonOnPressed: () {
+          Modular.to.navigate('/home/homefilled');
+        },
         title: 'Entrada',
-        prefSize: 120.0,
+        prefSize: 145.0,
       ),
       body: Padding(
         padding: const EdgeInsets.only(
@@ -97,13 +96,15 @@ class _HomeInPageState extends State<HomeInPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    //TODO: ADICIONAR MASCARA , .
                     CustomTextFormField(
                       name: 'Valor em R\$',
                       textInputType: TextInputType.number,
-                      controller: _valueController,
+                      controller: controller.valueController,
                     ),
                     const SizedBox(height: 24.0),
                     CustomDropdownButtonForm(
+                      label: 'Tipo de entrada',
                       value: item,
                       onChanged: (value) {
                         setState(() {
@@ -143,7 +144,7 @@ class _HomeInPageState extends State<HomeInPage> {
                     const SizedBox(height: 24.0),
                     CustomTextFormField(
                       name: 'Nome da entrada',
-                      controller: _nameController,
+                      controller: controller.nameController,
                     ),
                     const SizedBox(height: 30.0),
                     CalendarWidget(),
@@ -160,7 +161,27 @@ class _HomeInPageState extends State<HomeInPage> {
         useGradientBackground: true,
         text: 'INSERIR',
         useIconAdd: true,
-        onTap: () {},
+        onTap: () {
+          controller.homeRepository.insertNewInput(TransactionModel(
+            name: controller.nameController.text,
+            type: 'entrada',
+            category: item!.category,
+            value: double.parse(controller.valueController.text) * 100,
+            day: controller.calendarController.selectedDate.day,
+            month: controller.calendarController.selectedDate.month,
+            year: controller.calendarController.selectedDate.year,
+          ));
+          repository.newMonthTotal(TransactionModel(
+            name: controller.nameController.text,
+            type: 'entrada',
+            category: item!.category,
+            value: double.parse(controller.valueController.text) * 100,
+            day: controller.calendarController.selectedDate.day,
+            month: controller.calendarController.selectedDate.month,
+            year: controller.calendarController.selectedDate.year,
+          ));
+          Modular.to.navigate('/home/homefilled');
+        },
       ),
     );
   }

@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:raro_budget/src/shared/enums/firebase_status.dart';
 
-class FirebaseRepository {
+class AuthRepository {
   late final FirebaseAuth auth;
   late ConnectionStatus firebaseConnectionStatus;
   late final FirebaseFirestore store;
@@ -12,12 +12,12 @@ class FirebaseRepository {
     try {
       await Firebase.initializeApp();
       firebaseConnectionStatus = ConnectionStatus.success;
-      print("CONEXÃO COM FIREBASE - SUCCESS");
+      print("FIREBASE CONNECTION - SUCCESS");
       auth = FirebaseAuth.instance;
       store = FirebaseFirestore.instance;
     } catch (e) {
       firebaseConnectionStatus = ConnectionStatus.error;
-      print("CONEXÃO COM FIREBASE - ERROR");
+      print("FIREBASE CONNECTION - ERROR");
     }
   }
 

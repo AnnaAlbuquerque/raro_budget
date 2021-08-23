@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/login/login/login_controller.dart';
+import 'package:raro_budget/src/shared/validators/validators.dart';
+import 'package:raro_budget/src/shared/widgets/custom_dialog/custom_dialog.dart';
 import '../../../shared/constants/app_text_styles.dart';
 import '../../../shared/widgets/custom_button/custom_button_widget.dart';
 import '../../../shared/widgets/custom_main_text_title/custom_main_text_title_widget.dart';
@@ -16,12 +18,8 @@ class ExistingEmailLoginPage extends StatefulWidget {
 class _ExistingEmailLoginPageState
     extends ModularState<ExistingEmailLoginPage, LoginController> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final validators = Modular.get<Validators>();
   bool _isObscure = true;
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,20 +43,16 @@ class _ExistingEmailLoginPageState
                 ),
                 const SizedBox(height: 82.0),
                 CustomTextFormField(
-                  name: 'Email',
-                  controller: controller.emailController,
-                  validator: (_) {
-                    return controller.validateEmail();
-                  },
-                ),
+                    name: 'Email',
+                    controller: controller.emailController,
+                    validator: (value) => validators.emailValidator(value)),
                 const SizedBox(height: 50.0),
                 CustomTextFormField(
                   name: 'Senha',
                   obscureText: _isObscure,
                   controller: controller.passwordController,
-                  validator: (_) {
-                    return controller.validatePassword();
-                  },
+                  validator: (value) =>
+                      validators.passwordValidatorEmailPage(value),
                   icon: IconButton(
                     icon: Icon(
                       _isObscure ? Icons.visibility_off : Icons.visibility,
@@ -82,20 +76,9 @@ class _ExistingEmailLoginPageState
                       text: 'CONTINUAR',
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          controller
-                              .login(controller.emailController.text,
-                                  controller.passwordController.text)
-                              .then((value) => {
-                                    if (value)
-                                      {Modular.to.navigate("/home")}
-                                    else
-                                      {
-                                        //TODO modal com mensagem de credenciais inválidas
-                                        print("NAO LOGOU")
-                                      }
-                                  });
+                          controller.login(controller.emailController.text,
+                              controller.passwordController.text, context);
                         } else {
-                          //TODO colocar modal com mensagem de email inválido
                           print("NAO LOGOU");
                         }
                       },

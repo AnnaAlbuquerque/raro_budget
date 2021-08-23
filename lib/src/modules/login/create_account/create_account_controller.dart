@@ -1,8 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:raro_budget/src/modules/login/create_account/create_account_repository.dart';
+import 'package:raro_budget/src/shared/auth/auth_controller.dart';
 import 'package:raro_budget/src/shared/models/user_model.dart';
 
 part 'create_account_controller.g.dart';
@@ -12,7 +11,12 @@ class CreateAccountController = CreateAccountBase
 
 abstract class CreateAccountBase with Store {
   final CreateAccountRepository repository;
-  CreateAccountBase({required this.repository});
+  final AuthController authController;
+
+  CreateAccountBase({
+    required this.authController,
+    required this.repository,
+  });
 
   @observable
   PageController pageViewController = PageController(
@@ -38,27 +42,35 @@ abstract class CreateAccountBase with Store {
 
   @observable
   UserModel newUser = UserModel(
-      name: "", email: "", phone: "", cpf: "", terms: false, password: "");
+    name: "",
+    email: "",
+    phone: "",
+    cpf: "",
+    terms: false,
+    password: "",
+    generalBalance: 0,
+  );
 
   @action
   void saveNewUserData() {
     var savedUser = newUser.copyWith(
-        name: nameController.text,
-        email: emailController.text,
-        phone: phoneController.text,
-        cpf: cpfController.text,
-        terms: termsAccepted,
-        password: passwordController.text);
-
-    print(savedUser);
+      name: nameController.text,
+      email: emailController.text,
+      phone: phoneController.text,
+      cpf: cpfController.text,
+      terms: termsAccepted,
+      password: confirmPasswordController.text,
+      generalBalance: 0,
+    );
 
     repository.addUser(savedUser);
 
-    print("USUÁRIO CRIADO!!!!");
+    print(savedUser);
+    print("USER CREATED!");
   }
 
   @action
   bool checkUserLogin() {
-    return repository.checkUserLogin();
+    return authController.checkUserLogged();
   }
 }
