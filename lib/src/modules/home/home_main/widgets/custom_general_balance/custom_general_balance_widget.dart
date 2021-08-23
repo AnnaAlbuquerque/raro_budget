@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:raro_budget/src/modules/home/home_main/widgets/custom_general_balance/custom_general_balance_widget_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 
@@ -10,8 +12,8 @@ class CustomGeneralBalance extends StatefulWidget {
 }
 
 class _CustomGeneralBalanceState extends State<CustomGeneralBalance> {
-  bool isVisible = true;
-
+  final CustomGeneralBalanceWidgetController controller =
+      CustomGeneralBalanceWidgetController();
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -40,31 +42,38 @@ class _CustomGeneralBalanceState extends State<CustomGeneralBalance> {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Saldo geral',
-                    style: TextStyles.purple20w500Roboto,
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      isVisible ? Icons.visibility : Icons.visibility_off,
-                      color: AppColors.purple,
+          child: Observer(builder: (_) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Saldo geral',
+                      style: TextStyles.purple20w500Roboto,
                     ),
-                    onPressed: () => setState(() => isVisible = !isVisible),
+                    IconButton(
+                      icon: Icon(
+                        controller.balanceVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: AppColors.purple,
+                      ),
+                      onPressed: () => controller.changeBalanceVisibility(),
+                    ),
+                  ],
+                ),
+                Visibility(
+                  visible: controller.balanceVisible,
+                  child: Text(
+                    'R\$ ${widget.balance ?? '3.000,00'}',
+                    style: TextStyles.black24w400Roboto,
                   ),
-                ],
-              ),
-              Text(
-                'R\$ ${widget.balance ?? '3.000,00'}',
-                style: TextStyles.black24w400Roboto,
-              ),
-            ],
-          ),
+                ),
+              ],
+            );
+          }),
         ),
       ),
     );

@@ -2,18 +2,18 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/login/login/login_respository.dart';
-import 'package:raro_budget/src/shared/auth/auth_repository.dart';
+import 'package:raro_budget/src/shared/auth/auth_controller.dart';
 import 'package:raro_budget/src/shared/connectivity/app_connectivity.dart';
 import 'package:raro_budget/src/shared/widgets/custom_dialog/custom_dialog.dart';
 
 class LoginController {
   LoginController(
-    this.authRepository,
+    this.authController,
     this.loginRepository,
     this.appConnectivity,
   );
 
-  final AuthRepository authRepository;
+  final AuthController authController;
   final LoginRepository loginRepository;
   final AppConnectivity appConnectivity;
 
@@ -21,7 +21,7 @@ class LoginController {
   TextEditingController passwordController = TextEditingController();
 
   Future<bool> verifyEmail(String email) async {
-    bool hasEmail = await authRepository.hasEmail(email);
+    bool hasEmail = await authController.authRepository.hasEmail(email);
     return hasEmail;
   }
 
@@ -34,10 +34,16 @@ class LoginController {
       (_) => {
         if (appConnectivity.connectionResult != ConnectivityResult.none)
           {
-            authRepository.getEmailPasswordLogin(email, password).then(
+            authController.authRepository
+                .getEmailPasswordLogin(email, password)
+                .then(
                   (value) => {
                     if (value)
-                      {Modular.to.navigate("/home")}
+                      {
+                        authController.getUser().then(
+                              (_) => Modular.to.navigate("/home"),
+                            ),
+                      }
                     else
                       {
                         showDialog(

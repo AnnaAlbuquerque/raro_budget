@@ -42,17 +42,26 @@ abstract class CreateAccountBase with Store {
 
   @observable
   UserModel newUser = UserModel(
-      name: "", email: "", phone: "", cpf: "", terms: false, password: "");
+    name: "",
+    email: "",
+    phone: "",
+    cpf: "",
+    terms: false,
+    password: "",
+    generalBalance: 0,
+  );
 
   @action
   void saveNewUserData() {
     var savedUser = newUser.copyWith(
-        name: nameController.text,
-        email: emailController.text,
-        phone: phoneController.text,
-        cpf: cpfController.text,
-        terms: termsAccepted,
-        password: confirmPasswordController.text);
+      name: nameController.text,
+      email: emailController.text,
+      phone: phoneController.text,
+      cpf: cpfController.text,
+      terms: termsAccepted,
+      password: confirmPasswordController.text,
+      generalBalance: 0,
+    );
 
     repository.addUser(savedUser);
 

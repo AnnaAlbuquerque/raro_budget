@@ -1,5 +1,7 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:raro_budget/src/shared/auth/auth_controller.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 
@@ -204,7 +206,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   style: TextStyles.chambray16w400Roboto,
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                Modular.get<AuthController>().userLogout();
+              },
             ),
           ),
         ],

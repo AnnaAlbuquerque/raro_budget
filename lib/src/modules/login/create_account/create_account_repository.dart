@@ -25,7 +25,8 @@ class CreateAccountRepositoryImpl implements CreateAccountRepository {
                 "phone": user.phone,
                 "cpf": user.cpf,
                 "terms": user.terms,
-                "createdAt": FieldValue.serverTimestamp()
+                "createdAt": FieldValue.serverTimestamp(),
+                "generalBalance": user.generalBalance,
               })
             },
           );

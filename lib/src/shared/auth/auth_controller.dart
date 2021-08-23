@@ -1,11 +1,22 @@
 // import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:raro_budget/src/shared/auth/auth_repository.dart';
 import 'package:raro_budget/src/shared/enums/firebase_status.dart';
+import 'package:raro_budget/src/shared/models/user_model.dart';
 
 class AuthController {
   AuthController(this.authRepository);
 
   final AuthRepository authRepository;
+  UserModel userModel = UserModel(
+    name: "",
+    email: "",
+    phone: "",
+    cpf: "",
+    terms: false,
+    password: "",
+    generalBalance: 0,
+  );
 
   ConnectionStatus getConnectionStatus() {
     return authRepository.getConnectionStatus();
@@ -16,14 +27,35 @@ class AuthController {
   }
 
   bool checkUserLogged() {
-    final user = authRepository.auth.currentUser;
+    final User? userLogged = authRepository.auth.currentUser;
 
-    if (user != null) {
+    if (userLogged != null) {
       print("USER LOGGED");
       return true;
     } else {
       print("NO USER LOGGED");
       return false;
+    }
+  }
+
+  Future<void> getUser() async {
+    UserModel userResponse;
+    try {
+      final response = await authRepository.store
+          .collection('users')
+          .doc(authRepository.auth.currentUser!.uid)
+          .get();
+
+      userResponse = UserModel.fromMap(response.data()!);
+      userModel.name = userResponse.name;
+      userModel.email = userResponse.email;
+      userModel.phone = userResponse.phone;
+      userModel.cpf = userResponse.cpf;
+      userModel.terms = userResponse.terms;
+      userModel.generalBalance = userResponse.generalBalance;
+      print(userModel.name);
+    } catch (e) {
+      print("DIDN'T SAVE USER INFORMATION");
     }
   }
 
