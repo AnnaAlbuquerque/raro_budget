@@ -9,12 +9,15 @@ class CustomTransactionItem extends StatefulWidget {
   final String type;
   final String category;
   final String? title;
+  //TODO: checar essa tipagem
   final num? transferredValue;
-  final Timestamp timestamp;
+  final int day;
+  final int month;
+  final int year;
   final Function()? onLongPress;
 
   const CustomTransactionItem(this.title, this.category, this.transferredValue,
-      this.type, this.timestamp, this.onLongPress);
+      this.type, this.day, this.month, this.year, this.onLongPress);
 
   @override
   _CustomTransactionItemState createState() => _CustomTransactionItemState();
@@ -37,7 +40,10 @@ class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  widget.type == 'saida'
+                  widget.type == 'Saída' ||
+                          widget.type == 'saída' ||
+                          widget.type == 'Saida' ||
+                          widget.type == 'saida'
                       ? CircleAvatar(
                           backgroundColor:
                               controller.checkColor(widget.category),
@@ -63,11 +69,7 @@ class _CustomTransactionItemState extends ModularState<CustomTransactionItem,
                         style: TextStyles.purple16w500Roboto,
                       ),
                       Text(
-                        widget.timestamp
-                            .toDate()
-                            .toLocal()
-                            .toString()
-                            .split(' ')[0],
+                        '${widget.day}/${widget.month}/${widget.year}',
                         style: TextStyles.grey14w400Roboto,
                       ),
                     ],

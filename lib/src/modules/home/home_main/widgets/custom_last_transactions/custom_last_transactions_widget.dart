@@ -79,7 +79,9 @@ class CustomLastTransactions extends StatelessWidget {
                                     listTransaction[index].category,
                                     listTransaction[index].value,
                                     listTransaction[index].type,
-                                    listTransaction[index].date,
+                                    listTransaction[index].day,
+                                    listTransaction[index].month,
+                                    listTransaction[index].year,
                                     () {});
                               })),
                     ),

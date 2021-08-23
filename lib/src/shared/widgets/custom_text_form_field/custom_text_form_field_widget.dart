@@ -16,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
     this.hasMask = false,
     this.inputFormatter,
     this.hint,
+    this.onChange,
   }) : super(key: key);
 
   final String name;
@@ -28,6 +29,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputFormatter? inputFormatter;
   final bool hasMask;
   final String? hint;
+  final void Function(String)? onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,7 @@ class CustomTextFormField extends StatelessWidget {
       ),
       validator: validator,
       inputFormatters: formatter,
+      onChanged: onChange,
     );
   }
 }

@@ -9,6 +9,14 @@ part of 'home_page_filled_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
+  Computed<num>? _$getBalanceComputed;
+
+  @override
+  num get getBalance =>
+      (_$getBalanceComputed ??= Computed<num>(() => super.getBalance,
+              name: '_HomePageFilledControllerBase.getBalance'))
+          .value;
+
   final _$button1Atom = Atom(name: '_HomePageFilledControllerBase.button1');
 
   @override
@@ -54,6 +62,22 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
     });
   }
 
+  final _$currentMonthStringAtom =
+      Atom(name: '_HomePageFilledControllerBase.currentMonthString');
+
+  @override
+  String? get currentMonthString {
+    _$currentMonthStringAtom.reportRead();
+    return super.currentMonthString;
+  }
+
+  @override
+  set currentMonthString(String? value) {
+    _$currentMonthStringAtom.reportWrite(value, super.currentMonthString, () {
+      super.currentMonthString = value;
+    });
+  }
+
   final _$valueAtom = Atom(name: '_HomePageFilledControllerBase.value');
 
   @override
@@ -69,28 +93,114 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
     });
   }
 
-  final _$listaTodosAtom =
-      Atom(name: '_HomePageFilledControllerBase.listaTodos');
+  final _$valueInAtom = Atom(name: '_HomePageFilledControllerBase.valueIn');
 
   @override
-  ObservableList<TransactionModel> get listaTodos {
-    _$listaTodosAtom.reportRead();
-    return super.listaTodos;
+  num get valueIn {
+    _$valueInAtom.reportRead();
+    return super.valueIn;
   }
 
   @override
-  set listaTodos(ObservableList<TransactionModel> value) {
-    _$listaTodosAtom.reportWrite(value, super.listaTodos, () {
-      super.listaTodos = value;
+  set valueIn(num value) {
+    _$valueInAtom.reportWrite(value, super.valueIn, () {
+      super.valueIn = value;
     });
   }
 
-  final _$getTransactionsAsyncAction =
-      AsyncAction('_HomePageFilledControllerBase.getTransactions');
+  final _$valueOutAtom = Atom(name: '_HomePageFilledControllerBase.valueOut');
 
   @override
-  Future<dynamic> getTransactions() {
-    return _$getTransactionsAsyncAction.run(() => super.getTransactions());
+  num get valueOut {
+    _$valueOutAtom.reportRead();
+    return super.valueOut;
+  }
+
+  @override
+  set valueOut(num value) {
+    _$valueOutAtom.reportWrite(value, super.valueOut, () {
+      super.valueOut = value;
+    });
+  }
+
+  final _$listAllAtom = Atom(name: '_HomePageFilledControllerBase.listAll');
+
+  @override
+  ObservableList<TransactionModel> get listAll {
+    _$listAllAtom.reportRead();
+    return super.listAll;
+  }
+
+  @override
+  set listAll(ObservableList<TransactionModel> value) {
+    _$listAllAtom.reportWrite(value, super.listAll, () {
+      super.listAll = value;
+    });
+  }
+
+  final _$listAllInAtom = Atom(name: '_HomePageFilledControllerBase.listAllIn');
+
+  @override
+  ObservableList<TransactionModel> get listAllIn {
+    _$listAllInAtom.reportRead();
+    return super.listAllIn;
+  }
+
+  @override
+  set listAllIn(ObservableList<TransactionModel> value) {
+    _$listAllInAtom.reportWrite(value, super.listAllIn, () {
+      super.listAllIn = value;
+    });
+  }
+
+  final _$listAllOutAtom =
+      Atom(name: '_HomePageFilledControllerBase.listAllOut');
+
+  @override
+  ObservableList<TransactionModel> get listAllOut {
+    _$listAllOutAtom.reportRead();
+    return super.listAllOut;
+  }
+
+  @override
+  set listAllOut(ObservableList<TransactionModel> value) {
+    _$listAllOutAtom.reportWrite(value, super.listAllOut, () {
+      super.listAllOut = value;
+    });
+  }
+
+  final _$transactionModelAtom =
+      Atom(name: '_HomePageFilledControllerBase.transactionModel');
+
+  @override
+  TransactionModel get transactionModel {
+    _$transactionModelAtom.reportRead();
+    return super.transactionModel;
+  }
+
+  @override
+  set transactionModel(TransactionModel value) {
+    _$transactionModelAtom.reportWrite(value, super.transactionModel, () {
+      super.transactionModel = value;
+    });
+  }
+
+  final _$getTransactionsWithTypeAsyncAction =
+      AsyncAction('_HomePageFilledControllerBase.getTransactionsWithType');
+
+  @override
+  Future<dynamic> getTransactionsWithType(String transactionsType) {
+    return _$getTransactionsWithTypeAsyncAction
+        .run(() => super.getTransactionsWithType(transactionsType));
+  }
+
+  final _$deleteUserAsyncAction =
+      AsyncAction('_HomePageFilledControllerBase.deleteUser');
+
+  @override
+  Future<dynamic> deleteUser(TransactionModel transactionModel) {
+    return _$deleteUserAsyncAction
+        .run(() => super.deleteUser(transactionModel));
   }
 
   final _$_HomePageFilledControllerBaseActionController =
@@ -108,13 +218,43 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
   }
 
   @override
+  void getCurrentMonth(int currentMonth) {
+    final _$actionInfo = _$_HomePageFilledControllerBaseActionController
+        .startAction(name: '_HomePageFilledControllerBase.getCurrentMonth');
+    try {
+      return super.getCurrentMonth(currentMonth);
+    } finally {
+      _$_HomePageFilledControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeDropDownMenuItem(dynamic selectedMonth, dynamic currentMonth) {
+    final _$actionInfo =
+        _$_HomePageFilledControllerBaseActionController.startAction(
+            name: '_HomePageFilledControllerBase.changeDropDownMenuItem');
+    try {
+      return super.changeDropDownMenuItem(selectedMonth, currentMonth);
+    } finally {
+      _$_HomePageFilledControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 button1: ${button1},
 button2: ${button2},
 button3: ${button3},
+currentMonthString: ${currentMonthString},
 value: ${value},
-listaTodos: ${listaTodos}
+valueIn: ${valueIn},
+valueOut: ${valueOut},
+listAll: ${listAll},
+listAllIn: ${listAllIn},
+listAllOut: ${listAllOut},
+transactionModel: ${transactionModel},
+getBalance: ${getBalance}
     ''';
   }
 }

@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 
-import 'package:raro_budget/src/modules/home/home_main/home_repository.dart';
-import 'package:raro_budget/src/shared/auth/auth_controller.dart';
+import 'package:raro_budget/src/modules/home/home_repository.dart';
+
 import 'package:raro_budget/src/shared/models/transaction_model.dart';
 
 part 'home_controller.g.dart';
@@ -72,5 +72,9 @@ abstract class ControllerBase with Store {
     } else {
       return percentage = (value1 * 100) / value2;
     }
+  }
+
+  Future<void> logout() async {
+    await homeRepository.authRepository.auth.signOut();
   }
 }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/home/home_in_out/home_out_page_controller.dart';
+import 'package:raro_budget/src/modules/home/home_repository.dart';
 import 'package:raro_budget/src/shared/models/transaction_model.dart';
 import 'package:raro_budget/src/shared/widgets/calendar/calendar.dart';
 import '../../../shared/constants/app_colors.dart';
@@ -19,6 +20,7 @@ class HomeOutPage extends StatefulWidget {
 
 class _HomeOutPageState
     extends ModularState<HomeOutPage, HomeOutPageController> {
+  final repository = Modular.get<HomeRepository>();
   DropdownMenuItemData? item;
 
   List<DropdownMenuItemData> items = [
@@ -107,6 +109,7 @@ class _HomeOutPageState
                     ),
                     const SizedBox(height: 32.0),
                     CustomDropdownButtonForm(
+                      label: 'Tipo de saída',
                       value: item,
                       onChanged: (value) {
                         setState(() {
@@ -164,13 +167,25 @@ class _HomeOutPageState
         text: 'INSERIR',
         useIconAdd: true,
         onTap: () {
-          controller.firebaseModel.insertNewOutput(TransactionModel(
+          controller.homeRepository.insertNewOutput(
+            TransactionModel(
+              name: controller.nameController.text,
+              type: 'saida',
+              category: item!.category,
+              value: double.parse(controller.valueController.text) * 100,
+              day: controller.calendarController.selectedDate.day,
+              month: controller.calendarController.selectedDate.month,
+              year: controller.calendarController.selectedDate.year,
+            ),
+          );
+          repository.newMonthTotal(TransactionModel(
             name: controller.nameController.text,
-            type: 'saída',
+            type: 'saida',
             category: item!.category,
             value: double.parse(controller.valueController.text) * 100,
-            date:
-                Timestamp.fromDate(controller.calendarController.selectedDate),
+            day: controller.calendarController.selectedDate.day,
+            month: controller.calendarController.selectedDate.month,
+            year: controller.calendarController.selectedDate.year,
           ));
           Modular.to.navigate('/home/homefilled');
         },
@@ -178,3 +193,5 @@ class _HomeOutPageState
     );
   }
 }
+
+// Timestamp.fromDate(controller.calendarController.selectedDate)

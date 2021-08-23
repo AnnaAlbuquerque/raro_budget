@@ -29,15 +29,15 @@ abstract class _CustomTransactionItemControllerBase with Store {
 
   @action
   Color checkColor(String category) {
-    if (category == 'meal') {
+    if (category == 'Refeições') {
       return Colors.yellow;
-    } else if (category == 'transport') {
+    } else if (category == 'Transporte') {
       return Colors.green;
-    } else if (category == 'trip') {
+    } else if (category == 'Viagem') {
       return Colors.pink;
-    } else if (category == 'education') {
+    } else if (category == 'Educação') {
       return Colors.lightBlueAccent;
-    } else if (category == 'payments') {
+    } else if (category == 'Pagamentos') {
       return Colors.purple;
     } else {
       return Colors.lightBlue;
@@ -46,36 +46,39 @@ abstract class _CustomTransactionItemControllerBase with Store {
 
   @action
   String checkIcon(String category, String type) {
-    if (type == 'entrada') {
-      if (category == 'pix') {
+    if (type == 'Entrada' || type == 'entrada') {
+      if (category == 'Pix') {
         return listEntrada[0];
-      } else if (category == 'payments') {
+      } else if (category == 'Boleto') {
         return listEntrada[1];
-      } else if (category == 'doc') {
+      } else if (category == 'Doc') {
         return listEntrada[2];
-      } else if (category == 'ted') {
+      } else if (category == 'Ted') {
         return listEntrada[3];
-      } else if (category == 'pix') {
+      } else if (category == 'Dinheiro') {
         return listEntrada[4];
       } else {
         return listEntrada[5];
       }
-    } else if (type == 'saida') {
-      if (category == 'meal') {
-        return listEntrada[0];
-      } else if (category == 'transport') {
-        return listEntrada[1];
-      } else if (category == 'trip') {
-        return listEntrada[2];
-      } else if (category == 'education') {
-        return listEntrada[3];
-      } else if (category == 'payments') {
-        return listEntrada[4];
+    } else if (type == 'Saída' ||
+        type == 'saída' ||
+        type == 'Saida' ||
+        type == 'saida') {
+      if (category == 'Refeições') {
+        return listSaida[0];
+      } else if (category == 'Transporte') {
+        return listSaida[1];
+      } else if (category == 'Viagem') {
+        return listSaida[2];
+      } else if (category == 'Educação') {
+        return listSaida[3];
+      } else if (category == 'Pagamentos') {
+        return listSaida[4];
       } else {
-        return listEntrada[5];
+        return listSaida[5];
       }
     } else {
-      return listEntrada[5];
+      return listSaida[5];
     }
   }
 }

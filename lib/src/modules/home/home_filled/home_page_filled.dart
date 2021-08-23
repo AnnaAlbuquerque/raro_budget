@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:raro_budget/src/modules/home/widgets/custom_drawer/custom_drawer_widget.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
 import 'package:raro_budget/src/modules/home/widgets/custom_transaction_item/custom_transaction_item_widget.dart';
 import 'package:raro_budget/src/modules/home/widgets/custom_transaction_item/modal_widget.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
@@ -22,21 +24,20 @@ class HomePageFilled extends StatefulWidget {
 class _HomePageFilledState
     extends ModularState<HomePageFilled, HomePageFilledController> {
   var keyDrawerHomeFilled = GlobalKey<ScaffoldState>();
-  List<String> items = [
-    'JANEIRO',
-    'FEVEREIRO',
-    'MARÇO',
-    'ABRIL',
-    'MAIO',
-    'JUNHO',
-    'JULHO',
-    'AGOSTO',
-    'SETEMBRO',
-    'OUTUBRO',
-    'NOVEMBRO',
-    'DEZEMBRO'
-  ];
-  String? selectedItem = 'JANEIRO';
+
+  int currentMonth = 0;
+  dateFormatterInitializer() async {
+    await initializeDateFormatting('pt_BR', null);
+  }
+
+  @override
+  void initState() {
+    dateFormatterInitializer();
+    currentMonth = int.parse(DateFormat.M('pt_BR').format(DateTime.now()));
+    controller.getCurrentMonth(currentMonth);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,28 +48,35 @@ class _HomePageFilledState
         iconButtonOnPressed: () {
           Modular.to.popAndPushNamed('/home');
         },
-        dropDown: CustomDropDownButton(
-          iconData: Icons.keyboard_arrow_down_outlined,
-          isTransparent: true,
-          value: selectedItem,
-          items: items
-              .map(
-                (i) => DropdownMenuItem(
-                  value: i,
-                  child: Text(
-                    i,
-                    style: TextStyles.white16w400Roboto,
+        dropDown: Observer(
+          builder: (context) => CustomDropDownButton(
+            iconData: Icons.keyboard_arrow_down_outlined,
+            isTransparent: true,
+            value: controller.currentMonthString,
+            items: controller.months
+                .map(
+                  (month) => DropdownMenuItem(
+                    value: month,
+                    child: Text(
+                      month,
+                      style: TextStyles.white16w400Roboto,
+                    ),
                   ),
-                ),
-              )
-              .toList(),
-          onChanged: (String? value) {
-            setState(() {
-              selectedItem = value;
-            });
-          },
+                )
+                .toList(),
+            onChanged: (String? value) {
+              setState(() {
+                controller.changeDropDownMenuItem(value, currentMonth);
+              });
+            },
+          ),
         ),
-        title: 'title',
+        balanceWidget: Observer(
+          builder: (context) => Text(
+            '${controller.getBalance}',
+            style: TextStyles.white26w700Roboto,
+          ),
+        ),
         prefSize: 145,
         button1: 'Entradas',
         button2: 'Saidas',
@@ -123,7 +131,7 @@ class _HomePageFilledState
                     flex: 6,
                     child: Container(
                       child: FutureBuilder(
-                          future: controller.getTransactions(),
+                          future: controller.getTransactionsWithType('entrada'),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData &&
                                 snapshot.connectionState ==
@@ -133,23 +141,25 @@ class _HomePageFilledState
                               );
                             } else {
                               return ListView.builder(
-                                itemCount: controller.listaTodos.length,
+                                itemCount: controller.listAllIn.length,
                                 itemBuilder: (context, int index) {
                                   return CustomTransactionItem(
-                                      controller.listaTodos[index].name,
-                                      controller.listaTodos[index].category,
-                                      controller.listaTodos[index].value,
-                                      controller.listaTodos[index].type,
-                                      controller.listaTodos[index].date, () {
+                                      controller.listAllIn[index].name,
+                                      controller.listAllIn[index].category,
+                                      controller.listAllIn[index].value,
+                                      controller.listAllIn[index].type,
+                                      controller.listAllIn[index].day,
+                                      controller.listAllIn[index].month,
+                                      controller.listAllIn[index].year, () {
                                     showModalBottomSheet(
                                         context: context,
                                         isDismissible: false,
                                         backgroundColor: Colors.transparent,
                                         builder: (context) => ModalWidget(
                                               'Você deseja realmente excluir esse arquivo?',
-                                              ('${controller.listaTodos[index].category}'
+                                              ('${controller.listAllIn[index].category}'
                                                   ' '
-                                                  '${controller.listaTodos[index].name}'),
+                                                  '${controller.listAllIn[index].name}'),
                                               'Cancelar',
                                               'Ok',
                                               () {
@@ -159,20 +169,25 @@ class _HomePageFilledState
                                                 controller.deleteUser(
                                                   TransactionModel(
                                                       category: controller
-                                                          .listaTodos[index]
+                                                          .listAllIn[index]
                                                           .category,
                                                       value: controller
-                                                          .listaTodos[index]
+                                                          .listAllIn[index]
                                                           .value,
                                                       type: controller
-                                                          .listaTodos[index]
+                                                          .listAllIn[index]
                                                           .type,
                                                       name: controller
-                                                          .listaTodos[index]
+                                                          .listAllIn[index]
                                                           .name,
-                                                      date: controller
-                                                          .listaTodos[index]
-                                                          .date),
+                                                      day: controller
+                                                          .listAllIn[index].day,
+                                                      month: controller
+                                                          .listAllIn[index]
+                                                          .month,
+                                                      year: controller
+                                                          .listAllIn[index]
+                                                          .year),
                                                 );
                                                 Modular.to.pop();
                                               },
@@ -203,7 +218,7 @@ class _HomePageFilledState
                               style: TextStyles.purple16w500Roboto,
                             ),
                             Observer(builder: (_) {
-                              return Text(controller.value.toString(),
+                              return Text(controller.valueIn.toString(),
                                   style: TextStyles.green14w500Roboto);
                             }),
                           ],
@@ -248,7 +263,7 @@ class _HomePageFilledState
                     flex: 6,
                     child: Container(
                       child: FutureBuilder(
-                          future: controller.getTransactions(),
+                          future: controller.getTransactionsWithType('saida'),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData &&
                                 snapshot.connectionState ==
@@ -258,23 +273,25 @@ class _HomePageFilledState
                               );
                             } else {
                               return ListView.builder(
-                                itemCount: controller.listaTodos.length,
+                                itemCount: controller.listAllOut.length,
                                 itemBuilder: (context, int index) {
                                   return CustomTransactionItem(
-                                      controller.listaTodos[index].name,
-                                      controller.listaTodos[index].category,
-                                      controller.listaTodos[index].value,
-                                      controller.listaTodos[index].type,
-                                      controller.listaTodos[index].date, () {
+                                      controller.listAllOut[index].name,
+                                      controller.listAllOut[index].category,
+                                      controller.listAllOut[index].value,
+                                      controller.listAllOut[index].type,
+                                      controller.listAllOut[index].day,
+                                      controller.listAllOut[index].month,
+                                      controller.listAllOut[index].year, () {
                                     showModalBottomSheet(
                                         context: context,
                                         isDismissible: false,
                                         backgroundColor: Colors.transparent,
                                         builder: (context) => ModalWidget(
                                               'Você deseja realmente excluir esse arquivo?',
-                                              ('${controller.listaTodos[index].category}'
+                                              ('${controller.listAllOut[index].category}'
                                                   ' '
-                                                  '${controller.listaTodos[index].name}'),
+                                                  '${controller.listAllOut[index].name}'),
                                               'Cancelar',
                                               'Ok',
                                               () {
@@ -284,20 +301,26 @@ class _HomePageFilledState
                                                 controller.deleteUser(
                                                   TransactionModel(
                                                       category: controller
-                                                          .listaTodos[index]
+                                                          .listAllOut[index]
                                                           .category,
                                                       value: controller
-                                                          .listaTodos[index]
+                                                          .listAllOut[index]
                                                           .value,
                                                       type: controller
-                                                          .listaTodos[index]
+                                                          .listAllOut[index]
                                                           .type,
                                                       name: controller
-                                                          .listaTodos[index]
+                                                          .listAllOut[index]
                                                           .name,
-                                                      date: controller
-                                                          .listaTodos[index]
-                                                          .date),
+                                                      day: controller
+                                                          .listAllOut[index]
+                                                          .day,
+                                                      month: controller
+                                                          .listAllOut[index]
+                                                          .month,
+                                                      year: controller
+                                                          .listAllOut[index]
+                                                          .year),
                                                 );
                                                 Modular.to.pop();
                                               },
@@ -327,7 +350,7 @@ class _HomePageFilledState
                               style: TextStyles.purple16w500Roboto,
                             ),
                             Observer(builder: (_) {
-                              return Text(controller.value.toString(),
+                              return Text(controller.valueOut.toString(),
                                   style: TextStyles.green14w500Roboto);
                             }),
                           ],
@@ -373,7 +396,7 @@ class _HomePageFilledState
                     flex: 6,
                     child: Container(
                       child: FutureBuilder(
-                          future: controller.getTransactions(),
+                          future: controller.getTransactionsWithType('total'),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData &&
                                 snapshot.connectionState ==
@@ -383,23 +406,25 @@ class _HomePageFilledState
                               );
                             } else {
                               return ListView.builder(
-                                itemCount: controller.listaTodos.length,
+                                itemCount: controller.listAll.length,
                                 itemBuilder: (context, int index) {
                                   return CustomTransactionItem(
-                                      controller.listaTodos[index].name,
-                                      controller.listaTodos[index].category,
-                                      controller.listaTodos[index].value,
-                                      controller.listaTodos[index].type,
-                                      controller.listaTodos[index].date, () {
+                                      controller.listAll[index].name,
+                                      controller.listAll[index].category,
+                                      controller.listAll[index].value,
+                                      controller.listAll[index].type,
+                                      controller.listAll[index].day,
+                                      controller.listAll[index].month,
+                                      controller.listAll[index].year, () {
                                     showModalBottomSheet(
                                         context: context,
                                         isDismissible: false,
                                         backgroundColor: Colors.transparent,
                                         builder: (context) => ModalWidget(
                                               'Você deseja realmente excluir esse arquivo?',
-                                              ('${controller.listaTodos[index].category}'
+                                              ('${controller.listAll[index].category}'
                                                   ' '
-                                                  '${controller.listaTodos[index].name}'),
+                                                  '${controller.listAll[index].name}'),
                                               'Cancelar',
                                               'Ok',
                                               () {
@@ -409,20 +434,20 @@ class _HomePageFilledState
                                                 controller.deleteUser(
                                                   TransactionModel(
                                                       category: controller
-                                                          .listaTodos[index]
+                                                          .listAll[index]
                                                           .category,
                                                       value: controller
-                                                          .listaTodos[index]
-                                                          .value,
+                                                          .listAll[index].value,
                                                       type: controller
-                                                          .listaTodos[index]
-                                                          .type,
+                                                          .listAll[index].type,
                                                       name: controller
-                                                          .listaTodos[index]
-                                                          .name,
-                                                      date: controller
-                                                          .listaTodos[index]
-                                                          .date),
+                                                          .listAll[index].name,
+                                                      day: controller
+                                                          .listAll[index].day,
+                                                      month: controller
+                                                          .listAll[index].month,
+                                                      year: controller
+                                                          .listAll[index].year),
                                                 );
                                                 Modular.to.pop();
                                               },
@@ -451,10 +476,10 @@ class _HomePageFilledState
                               "Total",
                               style: TextStyles.purple16w500Roboto,
                             ),
-                            Observer(builder: (_) {
-                              return Text(controller.value.toString(),
-                                  style: TextStyles.green14w500Roboto);
-                            }),
+                            Observer(
+                                builder: (_) => Text(
+                                    controller.getBalance.toString(),
+                                    style: TextStyles.green14w500Roboto)),
                           ],
                         ),
                       ],
@@ -468,7 +493,6 @@ class _HomePageFilledState
           }
         }),
       ),
-      drawer: CustomDrawer(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Observer(builder: (_) {
         return (controller.button1 == true ||

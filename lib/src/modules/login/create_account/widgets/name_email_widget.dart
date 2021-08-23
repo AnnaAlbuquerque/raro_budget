@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/login/create_account/create_account_controller.dart';
 
@@ -46,6 +47,7 @@ class _NameEmailWidgetState extends State<NameEmailWidget> {
                 children: [
                   CustomTextFormField(
                     name: 'Nome',
+                    textInputType: TextInputType.name,
                     controller: controller.nameController,
                     validator: (value) =>
                         widget.validators.nameValidator(value),
@@ -55,6 +57,7 @@ class _NameEmailWidgetState extends State<NameEmailWidget> {
                   ),
                   CustomTextFormField(
                     name: 'E-mail',
+                    textInputType: TextInputType.emailAddress,
                     controller: controller.emailController,
                     validator: (value) =>
                         widget.validators.emailValidator(value),

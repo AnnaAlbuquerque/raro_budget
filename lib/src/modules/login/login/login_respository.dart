@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:raro_budget/src/shared/auth/auth_repository.dart';
 
@@ -34,6 +33,7 @@ class LoginRepository {
   }
 }
 
+//TODO: precisa checar email duplicado!
 // aqui pode ir o login social do Google
 // não deixei aqui o verifyEmail pois achei melhor colocar no campo de email do cadastro também, 
 // caso o usuário tenha esquecido que um dia fez o cadastro, 

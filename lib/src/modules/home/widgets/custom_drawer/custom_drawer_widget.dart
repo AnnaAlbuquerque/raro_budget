@@ -1,13 +1,19 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:raro_budget/src/shared/auth/auth_controller.dart';
+
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 
 class CustomDrawer extends StatefulWidget {
+  final String? userName;
+  final void Function()? logoutOnTap;
+  final void Function()? registrationOnTap;
+
   const CustomDrawer({
     Key? key,
+    this.userName,
+    this.logoutOnTap,
+    this.registrationOnTap,
   }) : super(key: key);
 
   @override
@@ -34,185 +40,182 @@ class _CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            height: _height,
-            child: AnimatedOpacity(
-              opacity: _opacity,
-              duration: Duration(milliseconds: 800),
-              child: DrawerHeader(
-                padding: EdgeInsets.fromLTRB(24, 10, 0, 20),
-                decoration: BoxDecoration(
-                  gradient: AppColors.cyanToPurpleAppBar,
-                ),
-                child: Text(
-                  "Olá, Jose",
-                  style: TextStyles.white26w700Roboto,
-                ),
+        child: ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        AnimatedContainer(
+          duration: Duration(milliseconds: 300),
+          height: _height,
+          child: AnimatedOpacity(
+            opacity: _opacity,
+            duration: Duration(milliseconds: 800),
+            child: DrawerHeader(
+              padding: EdgeInsets.fromLTRB(24, 10, 0, 20),
+              decoration: BoxDecoration(
+                gradient: AppColors.cyanToPurpleAppBar,
+              ),
+              child: Text(
+                "Olá, ${widget.userName}",
+                style: TextStyles.white26w700RobotoWithShadows,
               ),
             ),
           ),
-          AnimatedCard(
-            direction: AnimatedCardDirection.right,
-            child: ListTile(
-              dense: true,
-              visualDensity: VisualDensity(vertical: -4, horizontal: 0),
-              contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
-              title: const Text(
-                'Perfil',
-                style: TextStyles.black5414w500Roboto,
+        ),
+        AnimatedCard(
+          direction: AnimatedCardDirection.right,
+          child: ListTile(
+            dense: true,
+            visualDensity: VisualDensity(vertical: -4, horizontal: 0),
+            contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
+            title: const Text(
+              'Perfil',
+              style: TextStyles.black5414w500Roboto,
+            ),
+          ),
+        ),
+        AnimatedCard(
+          direction: AnimatedCardDirection.right,
+          child: ListTile(
+            dense: true,
+            visualDensity: VisualDensity(vertical: -2, horizontal: 0),
+            contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
+            title: const Text(
+              'Cadastro',
+              style: TextStyles.black8716w500Roboto,
+            ),
+            onTap: widget.registrationOnTap,
+          ),
+        ),
+        AnimatedCard(
+          child: Divider(
+            height: 20,
+            thickness: 2,
+            color: AppColors.grey88,
+          ),
+        ),
+        AnimatedCard(
+          direction: AnimatedCardDirection.right,
+          child: ListTile(
+            dense: true,
+            visualDensity: VisualDensity(vertical: -4, horizontal: 0),
+            contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
+            title: const Text(
+              'Conta',
+              style: TextStyles.black5414w500Roboto,
+            ),
+          ),
+        ),
+        AnimatedCard(
+          direction: AnimatedCardDirection.right,
+          child: ListTile(
+            dense: true,
+            visualDensity: VisualDensity(vertical: -2, horizontal: 0),
+            contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
+            title: const Text(
+              'Gerenciar cartões',
+              style: TextStyles.black8716w500Roboto,
+            ),
+            onTap: () {},
+          ),
+        ),
+        AnimatedCard(
+          direction: AnimatedCardDirection.right,
+          child: ListTile(
+            dense: true,
+            visualDensity: VisualDensity(vertical: -2, horizontal: 0),
+            contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
+            title: const Text(
+              'Investimentos',
+              style: TextStyles.black8716w500Roboto,
+            ),
+            onTap: () {},
+          ),
+        ),
+        AnimatedCard(
+          direction: AnimatedCardDirection.right,
+          child: Divider(
+            height: 20,
+            thickness: 2,
+            color: AppColors.grey88,
+          ),
+        ),
+        AnimatedCard(
+          direction: AnimatedCardDirection.right,
+          child: ListTile(
+            dense: true,
+            visualDensity: VisualDensity(vertical: -2, horizontal: 0),
+            contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
+            title: const Text(
+              'Segurança',
+              style: TextStyles.black5414w500Roboto,
+            ),
+          ),
+        ),
+        AnimatedCard(
+          direction: AnimatedCardDirection.right,
+          child: ListTile(
+            dense: true,
+            visualDensity: VisualDensity(vertical: -2, horizontal: 0),
+            contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
+            title: const Text(
+              'Alterar senha',
+              style: TextStyles.black8716w500Roboto,
+            ),
+            onTap: () {},
+          ),
+        ),
+        AnimatedCard(
+          direction: AnimatedCardDirection.right,
+          child: Divider(
+            height: 20,
+            thickness: 2,
+            color: AppColors.grey88,
+          ),
+        ),
+        AnimatedCard(
+          direction: AnimatedCardDirection.right,
+          child: ListTile(
+            contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
+            dense: true,
+            visualDensity: VisualDensity(vertical: -2, horizontal: 0),
+            title: const Text(
+              'Ajuda',
+              style: TextStyles.black8716w500Roboto,
+            ),
+            onTap: () {},
+          ),
+        ),
+        AnimatedCard(
+          direction: AnimatedCardDirection.right,
+          child: Divider(
+            color: AppColors.white,
+            height: MediaQuery.of(context).size.height / 3,
+          ),
+        ),
+        AnimatedCard(
+          direction: AnimatedCardDirection.right,
+          child: Divider(
+            height: 20,
+            thickness: 2,
+            color: AppColors.grey88,
+          ),
+        ),
+        AnimatedCard(
+          direction: AnimatedCardDirection.right,
+          child: ListTile(
+            dense: true,
+            visualDensity: VisualDensity(vertical: -4, horizontal: 0),
+            title: Container(
+              alignment: Alignment.center,
+              child: const Text(
+                'Sair',
+                style: TextStyles.chambray16w400Roboto,
               ),
             ),
+            onTap: widget.logoutOnTap,
           ),
-          AnimatedCard(
-            direction: AnimatedCardDirection.right,
-            child: ListTile(
-              dense: true,
-              visualDensity: VisualDensity(vertical: -2, horizontal: 0),
-              contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
-              title: const Text(
-                'Cadastro',
-                style: TextStyles.black8716w500Roboto,
-              ),
-              onTap: () {},
-            ),
-          ),
-          AnimatedCard(
-            child: Divider(
-              height: 20,
-              thickness: 2,
-              color: AppColors.grey88,
-            ),
-          ),
-          AnimatedCard(
-            direction: AnimatedCardDirection.right,
-            child: ListTile(
-              dense: true,
-              visualDensity: VisualDensity(vertical: -4, horizontal: 0),
-              contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
-              title: const Text(
-                'Conta',
-                style: TextStyles.black5414w500Roboto,
-              ),
-            ),
-          ),
-          AnimatedCard(
-            direction: AnimatedCardDirection.right,
-            child: ListTile(
-              dense: true,
-              visualDensity: VisualDensity(vertical: -2, horizontal: 0),
-              contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
-              title: const Text(
-                'Gerenciar cartões',
-                style: TextStyles.black8716w500Roboto,
-              ),
-              onTap: () {},
-            ),
-          ),
-          AnimatedCard(
-            direction: AnimatedCardDirection.right,
-            child: ListTile(
-              dense: true,
-              visualDensity: VisualDensity(vertical: -2, horizontal: 0),
-              contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
-              title: const Text(
-                'Investimentos',
-                style: TextStyles.black8716w500Roboto,
-              ),
-              onTap: () {},
-            ),
-          ),
-          AnimatedCard(
-            direction: AnimatedCardDirection.right,
-            child: Divider(
-              height: 20,
-              thickness: 2,
-              color: AppColors.grey88,
-            ),
-          ),
-          AnimatedCard(
-            direction: AnimatedCardDirection.right,
-            child: ListTile(
-              dense: true,
-              visualDensity: VisualDensity(vertical: -2, horizontal: 0),
-              contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
-              title: const Text(
-                'Segurança',
-                style: TextStyles.black5414w500Roboto,
-              ),
-            ),
-          ),
-          AnimatedCard(
-            direction: AnimatedCardDirection.right,
-            child: ListTile(
-              dense: true,
-              visualDensity: VisualDensity(vertical: -2, horizontal: 0),
-              contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
-              title: const Text(
-                'Alterar senha',
-                style: TextStyles.black8716w500Roboto,
-              ),
-              onTap: () {},
-            ),
-          ),
-          AnimatedCard(
-            direction: AnimatedCardDirection.right,
-            child: Divider(
-              height: 20,
-              thickness: 2,
-              color: AppColors.grey88,
-            ),
-          ),
-          AnimatedCard(
-            direction: AnimatedCardDirection.right,
-            child: ListTile(
-              contentPadding: EdgeInsets.fromLTRB(24, 0, 0, 0),
-              dense: true,
-              visualDensity: VisualDensity(vertical: -2, horizontal: 0),
-              title: const Text(
-                'Ajuda',
-                style: TextStyles.black8716w500Roboto,
-              ),
-              onTap: () {},
-            ),
-          ),
-          AnimatedCard(
-            direction: AnimatedCardDirection.right,
-            child: Divider(
-              color: AppColors.white,
-              height: MediaQuery.of(context).size.height / 3,
-            ),
-          ),
-          AnimatedCard(
-            direction: AnimatedCardDirection.right,
-            child: Divider(
-              height: 20,
-              thickness: 2,
-              color: AppColors.grey88,
-            ),
-          ),
-          AnimatedCard(
-            direction: AnimatedCardDirection.right,
-            child: ListTile(
-              dense: true,
-              visualDensity: VisualDensity(vertical: -4, horizontal: 0),
-              title: Container(
-                alignment: Alignment.center,
-                child: const Text(
-                  'Sair',
-                  style: TextStyles.chambray16w400Roboto,
-                ),
-              ),
-              onTap: () {
-                Modular.get<AuthController>().userLogout();
-              },
-            ),
-          ),
-        ],
-      ),
-    );
+        )
+      ],
+    ));
   }
 }

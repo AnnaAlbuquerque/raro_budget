@@ -65,8 +65,8 @@ abstract class CreateAccountBase with Store {
 
     repository.addUser(savedUser);
 
-    print("USER CREATED!");
     print(savedUser);
+    print("USER CREATED!");
   }
 
   @action

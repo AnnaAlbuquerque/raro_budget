@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/shared/models/transaction_model.dart';
@@ -7,6 +6,7 @@ import '../../../shared/constants/app_colors.dart';
 import '../../../shared/widgets/custom_appbar/custom_appbar.dart';
 import '../../../shared/widgets/custom_button_logged/custom_button_logged_widget.dart';
 import '../../../shared/widgets/custom_text_form_field/custom_text_form_field_widget.dart';
+import '../home_repository.dart';
 import './widgets/custom_dropdownform/custom_dropdownbuttonform_widget.dart';
 import './home_in_page_controller.dart';
 
@@ -18,6 +18,8 @@ class HomeInPage extends StatefulWidget {
 }
 
 class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
+  final repository = Modular.get<HomeRepository>();
+
   DropdownMenuItemData? item;
 
   List<DropdownMenuItemData> items = [
@@ -94,6 +96,7 @@ class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    //TODO: ADICIONAR MASCARA , .
                     CustomTextFormField(
                       name: 'Valor em R\$',
                       textInputType: TextInputType.number,
@@ -101,6 +104,7 @@ class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
                     ),
                     const SizedBox(height: 24.0),
                     CustomDropdownButtonForm(
+                      label: 'Tipo de entrada',
                       value: item,
                       onChanged: (value) {
                         setState(() {
@@ -158,13 +162,23 @@ class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
         text: 'INSERIR',
         useIconAdd: true,
         onTap: () {
-          controller.firebaseModel.insertNewInput(TransactionModel(
+          controller.homeRepository.insertNewInput(TransactionModel(
             name: controller.nameController.text,
             type: 'entrada',
             category: item!.category,
             value: double.parse(controller.valueController.text) * 100,
-            date:
-                Timestamp.fromDate(controller.calendarController.selectedDate),
+            day: controller.calendarController.selectedDate.day,
+            month: controller.calendarController.selectedDate.month,
+            year: controller.calendarController.selectedDate.year,
+          ));
+          repository.newMonthTotal(TransactionModel(
+            name: controller.nameController.text,
+            type: 'entrada',
+            category: item!.category,
+            value: double.parse(controller.valueController.text) * 100,
+            day: controller.calendarController.selectedDate.day,
+            month: controller.calendarController.selectedDate.month,
+            year: controller.calendarController.selectedDate.year,
           ));
           Modular.to.navigate('/home/homefilled');
         },

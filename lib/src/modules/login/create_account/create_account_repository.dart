@@ -4,7 +4,6 @@ import 'package:raro_budget/src/shared/models/user_model.dart';
 
 abstract class CreateAccountRepository {
   Future<void> addUser(UserModel user);
-  // bool checkUserLogin();
 }
 
 class CreateAccountRepositoryImpl implements CreateAccountRepository {
