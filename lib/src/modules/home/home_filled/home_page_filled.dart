@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:raro_budget/src/modules/home/widgets/custom_drawer/custom_drawer_widget.dart';
 import 'package:raro_budget/src/modules/home/widgets/custom_transaction_item/custom_transaction_item_widget.dart';
 import 'package:raro_budget/src/modules/home/widgets/custom_transaction_item/modal_widget.dart';
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
@@ -35,6 +34,7 @@ class _HomePageFilledState
     dateFormatterInitializer();
     currentMonth = int.parse(DateFormat.M('pt_BR').format(DateTime.now()));
     controller.getCurrentMonth(currentMonth);
+
     super.initState();
   }
 
@@ -70,7 +70,12 @@ class _HomePageFilledState
             },
           ),
         ),
-        title: 'title',
+        balanceWidget: Observer(
+          builder: (context) => Text(
+            '${controller.getBalance}',
+            style: TextStyles.white26w700Roboto,
+          ),
+        ),
         prefSize: 145,
         button1: 'Entradas',
         button2: 'Saidas',
@@ -212,7 +217,7 @@ class _HomePageFilledState
                               style: TextStyles.purple16w500Roboto,
                             ),
                             Observer(builder: (_) {
-                              return Text(controller.value.toString(),
+                              return Text(controller.valueIn.toString(),
                                   style: TextStyles.green14w500Roboto);
                             }),
                           ],
@@ -344,7 +349,7 @@ class _HomePageFilledState
                               style: TextStyles.purple16w500Roboto,
                             ),
                             Observer(builder: (_) {
-                              return Text(controller.value.toString(),
+                              return Text(controller.valueOut.toString(),
                                   style: TextStyles.green14w500Roboto);
                             }),
                           ],
@@ -470,10 +475,10 @@ class _HomePageFilledState
                               "Total",
                               style: TextStyles.purple16w500Roboto,
                             ),
-                            Observer(builder: (_) {
-                              return Text(controller.value.toString(),
-                                  style: TextStyles.green14w500Roboto);
-                            }),
+                            Observer(
+                                builder: (_) => Text(
+                                    controller.getBalance.toString(),
+                                    style: TextStyles.green14w500Roboto)),
                           ],
                         ),
                       ],
@@ -486,15 +491,6 @@ class _HomePageFilledState
             return Container();
           }
         }),
-      ),
-      drawer: CustomDrawer(
-        userName: '${'controller.userName'}',
-        registrationOnTap: () async => {
-          await Modular.to.pushNamed('/home/homeregistration'),
-        },
-        logoutOnTap: () async {
-          await controller.logout();
-        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Observer(builder: (_) {

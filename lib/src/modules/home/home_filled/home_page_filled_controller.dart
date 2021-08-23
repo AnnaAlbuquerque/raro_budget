@@ -116,6 +116,12 @@ abstract class _HomePageFilledControllerBase with Store {
   num value = 0;
 
   @observable
+  num valueIn = 0;
+
+  @observable
+  num valueOut = 0;
+
+  @observable
   ObservableList<TransactionModel> listAll = ObservableList<TransactionModel>();
 
   @observable
@@ -138,12 +144,13 @@ abstract class _HomePageFilledControllerBase with Store {
             await homeRepository.getTransactionsDocsWithType(transactionsType);
 
         if (responseList.isNotEmpty) {
-          value = 0;
+          valueIn = 0;
           listAllIn.clear();
           responseList.forEach((element) {
             listAllIn.add(element);
-            value += element.value;
+            valueIn += element.value;
           });
+
           return listAllIn;
         }
       } else {
@@ -153,13 +160,16 @@ abstract class _HomePageFilledControllerBase with Store {
                 transactionsType, currentMonthInt as int);
 
         if (responseList.isNotEmpty) {
-          value = 0;
+          valueIn = 0;
           listAllIn.clear();
           responseList.forEach((element) {
             listAllIn.add(element);
-            value += element.value;
+            valueIn += element.value;
           });
+
           return listAllIn;
+        } else {
+          valueIn = 0.00;
         }
       }
     }
@@ -169,12 +179,13 @@ abstract class _HomePageFilledControllerBase with Store {
         List<TransactionModel> responseList =
             await homeRepository.getTransactionsDocsWithType(transactionsType);
         if (responseList.isNotEmpty) {
-          value = 0;
+          valueOut = 0;
           listAllOut.clear();
           responseList.forEach((element) {
             listAllOut.add(element);
-            value += element.value;
+            valueOut += element.value;
           });
+
           return listAllOut;
         }
       } else {
@@ -184,13 +195,16 @@ abstract class _HomePageFilledControllerBase with Store {
                 transactionsType, currentMonthInt as int);
 
         if (responseList.isNotEmpty) {
-          value = 0;
+          valueOut = 0;
           listAllOut.clear();
           responseList.forEach((element) {
             listAllOut.add(element);
-            value += element.value;
+            valueOut += element.value;
           });
+
           return listAllOut;
+        } else {
+          valueOut = 0.00;
         }
       }
     }
@@ -206,6 +220,7 @@ abstract class _HomePageFilledControllerBase with Store {
             listAll.add(element);
             value += element.value;
           });
+
           return listAll;
         }
       } else {
@@ -220,11 +235,17 @@ abstract class _HomePageFilledControllerBase with Store {
             listAll.add(element);
             value += element.value;
           });
+
           return listAll;
+        } else {
+          value = 0.00;
         }
       }
     }
   }
+
+  @computed
+  num get getBalance => valueIn - valueOut;
 
   @observable
   late TransactionModel transactionModel;

@@ -9,6 +9,14 @@ part of 'home_page_filled_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
+  Computed<num>? _$getBalanceComputed;
+
+  @override
+  num get getBalance =>
+      (_$getBalanceComputed ??= Computed<num>(() => super.getBalance,
+              name: '_HomePageFilledControllerBase.getBalance'))
+          .value;
+
   final _$button1Atom = Atom(name: '_HomePageFilledControllerBase.button1');
 
   @override
@@ -82,6 +90,36 @@ mixin _$HomePageFilledController on _HomePageFilledControllerBase, Store {
   set value(num value) {
     _$valueAtom.reportWrite(value, super.value, () {
       super.value = value;
+    });
+  }
+
+  final _$valueInAtom = Atom(name: '_HomePageFilledControllerBase.valueIn');
+
+  @override
+  num get valueIn {
+    _$valueInAtom.reportRead();
+    return super.valueIn;
+  }
+
+  @override
+  set valueIn(num value) {
+    _$valueInAtom.reportWrite(value, super.valueIn, () {
+      super.valueIn = value;
+    });
+  }
+
+  final _$valueOutAtom = Atom(name: '_HomePageFilledControllerBase.valueOut');
+
+  @override
+  num get valueOut {
+    _$valueOutAtom.reportRead();
+    return super.valueOut;
+  }
+
+  @override
+  set valueOut(num value) {
+    _$valueOutAtom.reportWrite(value, super.valueOut, () {
+      super.valueOut = value;
     });
   }
 
@@ -210,10 +248,13 @@ button2: ${button2},
 button3: ${button3},
 currentMonthString: ${currentMonthString},
 value: ${value},
+valueIn: ${valueIn},
+valueOut: ${valueOut},
 listAll: ${listAll},
 listAllIn: ${listAllIn},
 listAllOut: ${listAllOut},
-transactionModel: ${transactionModel}
+transactionModel: ${transactionModel},
+getBalance: ${getBalance}
     ''';
   }
 }

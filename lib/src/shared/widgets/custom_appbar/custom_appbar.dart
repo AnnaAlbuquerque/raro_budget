@@ -4,7 +4,8 @@ import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 import 'package:raro_budget/src/shared/widgets/custom_drop_down_button/custom_drop_down.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  final String title;
+  final String? title;
+  final Widget? balanceWidget;
   final double prefSize;
   final IconData? iconDataLeft;
 
@@ -21,7 +22,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   const CustomAppBar({
     Key? key,
-    required this.title,
+    this.title,
     required this.prefSize,
     this.iconDataLeft,
     this.button1,
@@ -33,6 +34,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     this.iconButtonOnPressed,
     this.currentMonth,
     this.dropDown,
+    this.balanceWidget,
   }) : super(key: key);
 
   @override
@@ -58,7 +60,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                         margin: EdgeInsets.fromLTRB(24, 45, 24, 24),
                         alignment: Alignment.center,
                         child: Text(
-                          title,
+                          title as String,
                           style: TextStyles.white26w700Roboto,
                         ),
                       )
@@ -84,10 +86,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                           ),
                           Container(
                             margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            child: Text(
-                              title,
-                              style: TextStyles.white26w700Roboto,
-                            ),
+                            child: balanceWidget,
                           ),
                         ],
                       )
@@ -109,7 +108,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                             Expanded(
                               flex: 5,
                               child: Text(
-                                title,
+                                title as String,
                                 textAlign: TextAlign.center,
                                 style: TextStyles.white24w400Roboto,
                               ),
@@ -139,7 +138,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                             Container(
                               alignment: Alignment.center,
                               child: Text(
-                                title,
+                                title as String,
                                 style: TextStyles.white26w700Roboto,
                               ),
                             ),
