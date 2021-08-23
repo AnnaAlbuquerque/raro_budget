@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:raro_budget/src/modules/home/home_main/widgets/custom_card_dia_a_dia/custom_progress_bar.dart';
-
 import 'package:raro_budget/src/shared/constants/app_colors.dart';
 import 'package:raro_budget/src/shared/constants/app_text_styles.dart';
 import 'package:raro_budget/src/shared/widgets/custom_drop_down_button/custom_drop_down.dart';
@@ -14,17 +13,19 @@ class CustomCard extends StatefulWidget {
   final double total;
   final Widget progressBarIn;
   final Widget progressBarOut;
+  final Widget dropDown;
 
-  CustomCard(
-      {Key? key,
-      this.animationController,
-      this.onTape,
-      required this.progressBarIn,
-      required this.progressBarOut,
-      required this.totalIn,
-      required this.totalOut,
-      required this.total})
-      : super(key: key);
+  CustomCard({
+    Key? key,
+    this.animationController,
+    this.onTape,
+    required this.progressBarIn,
+    required this.progressBarOut,
+    required this.totalIn,
+    required this.totalOut,
+    required this.total,
+    required this.dropDown,
+  }) : super(key: key);
 
   @override
   _CustomCardState createState() => _CustomCardState();
@@ -33,13 +34,6 @@ class CustomCard extends StatefulWidget {
 class _CustomCardState extends State<CustomCard> {
   @override
   Widget build(BuildContext context) {
-    List<String> items = [
-      'FEVEREIRO',
-      'AGOSTO',
-      'JANEIRO',
-      'ABRIL',
-    ];
-    String? selectedItem = 'FEVEREIRO';
     return InkResponse(
       onTap: () {
         Modular.to.navigate("homefilled");
@@ -79,27 +73,7 @@ class _CustomCardState extends State<CustomCard> {
                   "Saldo geral",
                   style: TextStyles.purple20w500Roboto,
                 ),
-                CustomDropDownButton(
-                  isTransparent: false,
-                  iconData: Icons.keyboard_arrow_down_rounded,
-                  value: selectedItem,
-                  items: items
-                      .map(
-                        (month) => DropdownMenuItem(
-                          child: Text(
-                            month,
-                            style: TextStyles.white14w500Roboto,
-                          ),
-                          value: month,
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (String? value) {
-                    setState(() {
-                      selectedItem = value;
-                    });
-                  },
-                ),
+                widget.dropDown,
               ],
             ),
             Column(

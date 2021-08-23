@@ -63,7 +63,7 @@ class _HomeOutPageState
           Modular.to.navigate('/home/homefilled');
         },
         title: 'Saída',
-        prefSize: 120.0,
+        prefSize: 145.0,
       ),
       body: Padding(
         padding: const EdgeInsets.only(

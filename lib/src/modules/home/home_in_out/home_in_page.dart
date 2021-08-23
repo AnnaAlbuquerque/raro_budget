@@ -57,7 +57,7 @@ class _HomeInPageState extends ModularState<HomeInPage, HomeInPageController> {
           Modular.to.navigate('/home/homefilled');
         },
         title: 'Entrada',
-        prefSize: 120.0,
+        prefSize: 145.0,
       ),
       body: Padding(
         padding: const EdgeInsets.only(
