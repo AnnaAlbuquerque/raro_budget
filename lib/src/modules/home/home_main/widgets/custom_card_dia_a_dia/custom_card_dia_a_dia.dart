@@ -71,7 +71,7 @@ class _CustomCardState extends State<CustomCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Saldo geral",
+                  "Dia a dia",
                   style: TextStyles.purple20w500Roboto,
                 ),
                 widget.dropDown,
